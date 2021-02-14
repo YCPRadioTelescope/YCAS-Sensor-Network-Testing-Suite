@@ -26,13 +26,19 @@ namespace EmbeddedSystemsTest
             return true;
         }
 
-        public static bool clientIpValid(string s)
+        public static bool ipValid(string s)
         {
             IPAddress i;
             if (!IPAddress.TryParse(s, out i)) return false;
+            return true;
+        }
+
+        public static bool clientIpExists(string ip, int port)
+        {
+            TcpClient c = new TcpClient();
             try
             {
-                TcpClient c = new TcpClient(i.ToString(), 2000);
+                c.Connect(ip, port);
             }
             catch
             {

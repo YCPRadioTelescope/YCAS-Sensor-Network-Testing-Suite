@@ -56,8 +56,9 @@ namespace EmbeddedSystemsTest
         private void btnStartClient_Click(object sender, EventArgs e)
         {
             string errorStr = "";
-            if (!Validator.clientIpValid(txtClientIp.Text)) errorStr += "Client IP address is invalid or a connection could not be made\n";
+            if (!Validator.ipValid(txtClientIp.Text)) errorStr += "Client IP address is invalid\n";
             if (!Validator.isPort(txtClientPort.Text)) errorStr += "Client port is invalid\n";
+            if (errorStr.Equals("") && !Validator.clientIpExists(txtClientIp.Text, int.Parse(txtClientPort.Text))) errorStr += $"Could not find server at {txtClientIp.Text}:{txtClientPort.Text}\n";
             if (txtClientData.Text.Equals("")) errorStr += "No data is present\n";
             if (errorStr.Equals(""))
             {
@@ -66,7 +67,7 @@ namespace EmbeddedSystemsTest
                                                                 Encoding.ASCII.GetBytes(txtClientData.Text)));
                 clientThread.Start();
             }
-            else MessageBox.Show(errorStr, "Errors");
+            else MessageBox.Show(errorStr, "Error");
         }
 
         private void clientProcess(string addr, int port, byte[] data) {

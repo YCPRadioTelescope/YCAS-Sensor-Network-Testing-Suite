@@ -99,8 +99,6 @@ namespace EmbeddedSystemsTest
         }
 
         private void listenerProcess(IPAddress addr, int port) {
-
-
             server = new TcpListener(addr, port);
             server.Start();
             runListenerThread = true;

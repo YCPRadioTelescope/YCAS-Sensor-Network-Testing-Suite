@@ -10,19 +10,9 @@ namespace EmbeddedSystemsTest
 {
     public class Validator
     {
-        public static bool serverIpValid(string s)
+        public static bool serverIpExists(string ip, int port)
         {
-            IPAddress i;
-            if(!IPAddress.TryParse(s, out i)) return false;
-            try
-            {
-                TcpListener t = new TcpListener(i, 2000);
-                t.Start();
-            }
-            catch
-            {
-                return false;
-            }
+            // TODO: find a way to validate if a server IP exists
             return true;
         }
 

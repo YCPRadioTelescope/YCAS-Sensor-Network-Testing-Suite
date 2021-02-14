@@ -37,9 +37,10 @@ namespace EmbeddedSystemsTest
         private void lblStartListen_Click(object sender, EventArgs e)
         {
             string errorStr = "";
-            if (!Validator.serverIpValid(txtListenIp.Text)) errorStr += "Listener IP address is invalid\n";
+            if (!Validator.ipValid(txtListenIp.Text)) errorStr += "Listener IP address is invalid\n";
             if (!Validator.isPort(txtListenPort.Text)) errorStr += "Listener port is invalid\n";
-            if(errorStr.Equals(""))
+            if (errorStr.Equals("") && !Validator.serverIpExists(txtListenIp.Text, int.Parse(txtListenPort.Text))) errorStr += $"Could not start server at {txtListenIp.Text}:{txtListenPort.Text}\n";
+            if (errorStr.Equals(""))
             {
                 lblListenRunning.Text = "Running.";
                 lblListenConnected.Text = "Waiting for data.";

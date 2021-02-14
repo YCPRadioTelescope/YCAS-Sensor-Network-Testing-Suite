@@ -16,10 +16,10 @@ namespace EmbeddedSystemsTest
             return true;
         }
 
-        public static bool ipValid(string s)
+        public static bool ipValid(string ip)
         {
             IPAddress i;
-            if (!IPAddress.TryParse(s, out i)) return false;
+            if (!IPAddress.TryParse(ip, out i)) return false;
             return true;
         }
 
@@ -37,14 +37,14 @@ namespace EmbeddedSystemsTest
             return true;
         }
 
-        public static bool isPort(string s)
+        public static bool isPort(string portStr)
         {
-            if (!isNumeric(s)) return false;
+            if (!isNumeric(portStr)) return false;
 
-            int port;
-            if(!int.TryParse(s, out port)) return false;
+            int portInt;
+            if(!int.TryParse(portStr, out portInt)) return false;
 
-            if (port > 0 && port < 65535) return true;
+            if (portInt > 0 && portInt < 65535) return true;
             else return false;
         }
 

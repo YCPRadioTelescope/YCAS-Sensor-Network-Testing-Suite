@@ -25,16 +25,19 @@ namespace EmbeddedSystemsTest
 
         public static bool clientIpExists(string ip, int port)
         {
+            bool success = false;
             TcpClient c = new TcpClient();
             try
             {
                 c.Connect(ip, port);
+                success = true;
             }
-            catch
-            {
-                return false;
-            }
-            return true;
+            catch { success = false; }
+
+            c.Close();
+            c.Dispose();
+
+            return success;
         }
 
         public static bool isPort(string portStr)

@@ -56,7 +56,7 @@ namespace EmbeddedSystemsTest
             // btnStartListen
             // 
             this.btnStartListen.Location = new System.Drawing.Point(11, 53);
-            this.btnStartListen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnStartListen.Margin = new System.Windows.Forms.Padding(2);
             this.btnStartListen.Name = "btnStartListen";
             this.btnStartListen.Size = new System.Drawing.Size(104, 21);
             this.btnStartListen.TabIndex = 2;
@@ -68,7 +68,7 @@ namespace EmbeddedSystemsTest
             // 
             this.btnKillListen.Enabled = false;
             this.btnKillListen.Location = new System.Drawing.Point(120, 53);
-            this.btnKillListen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnKillListen.Margin = new System.Windows.Forms.Padding(2);
             this.btnKillListen.Name = "btnKillListen";
             this.btnKillListen.Size = new System.Drawing.Size(104, 21);
             this.btnKillListen.TabIndex = 9;
@@ -79,7 +79,7 @@ namespace EmbeddedSystemsTest
             // txtListenIp
             // 
             this.txtListenIp.Location = new System.Drawing.Point(124, 5);
-            this.txtListenIp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtListenIp.Margin = new System.Windows.Forms.Padding(2);
             this.txtListenIp.Name = "txtListenIp";
             this.txtListenIp.Size = new System.Drawing.Size(101, 20);
             this.txtListenIp.TabIndex = 0;
@@ -117,7 +117,7 @@ namespace EmbeddedSystemsTest
             // txtListenPort
             // 
             this.txtListenPort.Location = new System.Drawing.Point(124, 27);
-            this.txtListenPort.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtListenPort.Margin = new System.Windows.Forms.Padding(2);
             this.txtListenPort.Name = "txtListenPort";
             this.txtListenPort.Size = new System.Drawing.Size(101, 20);
             this.txtListenPort.TabIndex = 1;
@@ -125,7 +125,7 @@ namespace EmbeddedSystemsTest
             // txtClientPort
             // 
             this.txtClientPort.Location = new System.Drawing.Point(362, 27);
-            this.txtClientPort.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtClientPort.Margin = new System.Windows.Forms.Padding(2);
             this.txtClientPort.Name = "txtClientPort";
             this.txtClientPort.Size = new System.Drawing.Size(101, 20);
             this.txtClientPort.TabIndex = 4;
@@ -163,7 +163,7 @@ namespace EmbeddedSystemsTest
             // txtClientIp
             // 
             this.txtClientIp.Location = new System.Drawing.Point(362, 5);
-            this.txtClientIp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtClientIp.Margin = new System.Windows.Forms.Padding(2);
             this.txtClientIp.Name = "txtClientIp";
             this.txtClientIp.Size = new System.Drawing.Size(101, 20);
             this.txtClientIp.TabIndex = 3;
@@ -171,7 +171,7 @@ namespace EmbeddedSystemsTest
             // btnStartClient
             // 
             this.btnStartClient.Location = new System.Drawing.Point(362, 72);
-            this.btnStartClient.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnStartClient.Margin = new System.Windows.Forms.Padding(2);
             this.btnStartClient.Name = "btnStartClient";
             this.btnStartClient.Size = new System.Drawing.Size(100, 21);
             this.btnStartClient.TabIndex = 6;
@@ -192,7 +192,7 @@ namespace EmbeddedSystemsTest
             // txtClientData
             // 
             this.txtClientData.Location = new System.Drawing.Point(362, 49);
-            this.txtClientData.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtClientData.Margin = new System.Windows.Forms.Padding(2);
             this.txtClientData.Name = "txtClientData";
             this.txtClientData.Size = new System.Drawing.Size(101, 20);
             this.txtClientData.TabIndex = 5;
@@ -210,7 +210,7 @@ namespace EmbeddedSystemsTest
             // txtResponse
             // 
             this.txtResponse.Location = new System.Drawing.Point(249, 114);
-            this.txtResponse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtResponse.Margin = new System.Windows.Forms.Padding(2);
             this.txtResponse.Multiline = true;
             this.txtResponse.Name = "txtResponse";
             this.txtResponse.ReadOnly = true;
@@ -221,7 +221,7 @@ namespace EmbeddedSystemsTest
             // txtReceived
             // 
             this.txtReceived.Location = new System.Drawing.Point(16, 114);
-            this.txtReceived.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtReceived.Margin = new System.Windows.Forms.Padding(2);
             this.txtReceived.Multiline = true;
             this.txtReceived.Name = "txtReceived";
             this.txtReceived.ReadOnly = true;
@@ -242,7 +242,7 @@ namespace EmbeddedSystemsTest
             // btnClear
             // 
             this.btnClear.Location = new System.Drawing.Point(16, 215);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(104, 21);
             this.btnClear.TabIndex = 7;
@@ -253,7 +253,7 @@ namespace EmbeddedSystemsTest
             // btnClearAllResponses
             // 
             this.btnClearAllResponses.Location = new System.Drawing.Point(249, 216);
-            this.btnClearAllResponses.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnClearAllResponses.Margin = new System.Windows.Forms.Padding(2);
             this.btnClearAllResponses.Name = "btnClearAllResponses";
             this.btnClearAllResponses.Size = new System.Drawing.Size(104, 21);
             this.btnClearAllResponses.TabIndex = 8;
@@ -265,7 +265,7 @@ namespace EmbeddedSystemsTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 244);
+            this.ClientSize = new System.Drawing.Size(472, 256);
             this.Controls.Add(this.btnClearAllResponses);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.txtReceived);
@@ -289,7 +289,7 @@ namespace EmbeddedSystemsTest
             this.Controls.Add(this.btnStartListen);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "frmTcpTest";
             this.Text = "TCP Server/Client Test";

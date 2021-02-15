@@ -81,16 +81,7 @@ namespace EmbeddedSystemsTest
             int bytes = stream.Read(data, 0, data.Length);
             string response = Encoding.ASCII.GetString(data, 0, bytes);
 
-            if (this.InvokeRequired)
-            {
-                IAsyncResult result = BeginInvoke(new MethodInvoker(delegate ()
-                {
-                    txtResponse.Text = txtResponse.Text + response + "\r\n";
-                }));
-            }
-            else if (this.IsHandleCreated) {
-                txtResponse.Text = txtResponse.Text + response + "\r\n";
-            }
+            Utilities.writeToTextFromThread(this, txtResponse, response, true);
 
             stream.Close();
             stream.Dispose();
@@ -113,20 +104,7 @@ namespace EmbeddedSystemsTest
                 try { 
                     
                     localClient = server.AcceptTcpClient();
-
-                    if (this.InvokeRequired)
-                    {
-                        IAsyncResult result = BeginInvoke(new MethodInvoker(delegate ()
-                        {
-                            lblListenConnected.Text = "Received data.";
-                        }));
-                        EndInvoke(result);
-                    }
-                    else if (this.IsHandleCreated)
-                    {
-                        lblListenConnected.Text = "Received data.";
-                    }
-
+                    Utilities.writeToLabelFromThread(this, lblListenConnected, "Received data.");
                     stream = localClient.GetStream();
 
                     int i;
@@ -134,18 +112,7 @@ namespace EmbeddedSystemsTest
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                     {
                         stream.Write(bytes, 0, bytes.Length);
-                        if (this.InvokeRequired)
-                        {
-                            IAsyncResult result = BeginInvoke(new MethodInvoker(delegate ()
-                            {
-                                txtReceived.Text = txtReceived.Text + Encoding.ASCII.GetString(bytes, 0, i) + "\r\n";
-                            }));
-                        }
-                        else if (this.IsHandleCreated)
-                        {
-                            txtReceived.Text = txtReceived.Text + Encoding.ASCII.GetString(bytes, 0, i) + "\r\n";
-                        }
-
+                        Utilities.writeToTextFromThread(this, txtReceived, Encoding.ASCII.GetString(bytes, 0, i), true);
                     }
 
                     localClient.Close();

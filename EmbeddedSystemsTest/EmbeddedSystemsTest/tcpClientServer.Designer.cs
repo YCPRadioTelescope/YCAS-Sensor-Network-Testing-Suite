@@ -51,6 +51,7 @@ namespace EmbeddedSystemsTest
             this.lblReceived = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnClearAllResponses = new System.Windows.Forms.Button();
+            this.lblDate = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnStartListen
@@ -261,11 +262,21 @@ namespace EmbeddedSystemsTest
             this.btnClearAllResponses.UseVisualStyleBackColor = true;
             this.btnClearAllResponses.Click += new System.EventHandler(this.btnClearAllResponses_Click);
             // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Location = new System.Drawing.Point(14, 238);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(142, 13);
+            this.lblDate.TabIndex = 21;
+            this.lblDate.Text = "Last received packet: Never";
+            // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(472, 256);
+            this.Controls.Add(this.lblDate);
             this.Controls.Add(this.btnClearAllResponses);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.txtReceived);
@@ -322,6 +333,7 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.Label lblReceived;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnClearAllResponses;
+        private System.Windows.Forms.Label lblDate;
     }
 }
 

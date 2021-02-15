@@ -113,6 +113,7 @@ namespace EmbeddedSystemsTest
                     {
                         stream.Write(bytes, 0, bytes.Length);
                         Utilities.writeToTextFromThread(this, txtReceived, Encoding.ASCII.GetString(bytes, 0, i), true);
+                        Utilities.writeToLabelFromThread(this, lblDate, "Last received: " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss"));
                     }
 
                     localClient.Close();

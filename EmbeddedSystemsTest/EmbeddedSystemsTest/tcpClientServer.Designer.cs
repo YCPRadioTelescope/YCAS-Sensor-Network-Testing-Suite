@@ -269,9 +269,9 @@ namespace EmbeddedSystemsTest
             this.lblDate.AutoSize = true;
             this.lblDate.Location = new System.Drawing.Point(14, 238);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(142, 13);
+            this.lblDate.Size = new System.Drawing.Size(106, 13);
             this.lblDate.TabIndex = 21;
-            this.lblDate.Text = "Last received packet: Never";
+            this.lblDate.Text = "Last received: Never";
             // 
             // chkAccumulateServer
             // 

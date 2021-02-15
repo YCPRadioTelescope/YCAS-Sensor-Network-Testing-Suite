@@ -81,7 +81,7 @@ namespace EmbeddedSystemsTest
             int bytes = stream.Read(data, 0, data.Length);
             string response = Encoding.ASCII.GetString(data, 0, bytes);
 
-            Utilities.writeToTextFromThread(this, txtResponse, response, chkAccumulateServer.Checked);
+            Utilities.writeToTextFromThread(this, txtResponse, response, chkAccumulateClient.Checked);
 
             stream.Close();
             stream.Dispose();

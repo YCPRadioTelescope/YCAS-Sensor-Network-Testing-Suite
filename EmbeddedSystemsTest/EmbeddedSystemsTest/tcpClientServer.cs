@@ -81,7 +81,7 @@ namespace EmbeddedSystemsTest
             int bytes = stream.Read(data, 0, data.Length);
             string response = Encoding.ASCII.GetString(data, 0, bytes);
 
-            Utilities.writeToTextFromThread(this, txtResponse, response, true);
+            Utilities.writeToTextFromThread(this, txtResponse, response, chkAccumulateServer.Checked);
 
             stream.Close();
             stream.Dispose();
@@ -112,7 +112,7 @@ namespace EmbeddedSystemsTest
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                     {
                         stream.Write(bytes, 0, bytes.Length);
-                        Utilities.writeToTextFromThread(this, txtReceived, Encoding.ASCII.GetString(bytes, 0, i), true);
+                        Utilities.writeToTextFromThread(this, txtReceived, Encoding.ASCII.GetString(bytes, 0, i), chkAccumulateServer.Checked);
                         Utilities.writeToLabelFromThread(this, lblDate, "Last received: " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss"));
                     }
 

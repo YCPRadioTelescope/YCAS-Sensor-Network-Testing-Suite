@@ -52,6 +52,8 @@ namespace EmbeddedSystemsTest
             this.btnClear = new System.Windows.Forms.Button();
             this.btnClearAllResponses = new System.Windows.Forms.Button();
             this.lblDate = new System.Windows.Forms.Label();
+            this.chkAccumulateServer = new System.Windows.Forms.CheckBox();
+            this.chkAccumulateClient = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // btnStartListen
@@ -271,11 +273,37 @@ namespace EmbeddedSystemsTest
             this.lblDate.TabIndex = 21;
             this.lblDate.Text = "Last received packet: Never";
             // 
+            // chkAccumulateServer
+            // 
+            this.chkAccumulateServer.AutoSize = true;
+            this.chkAccumulateServer.Checked = true;
+            this.chkAccumulateServer.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAccumulateServer.Location = new System.Drawing.Point(125, 218);
+            this.chkAccumulateServer.Name = "chkAccumulateServer";
+            this.chkAccumulateServer.Size = new System.Drawing.Size(106, 17);
+            this.chkAccumulateServer.TabIndex = 22;
+            this.chkAccumulateServer.Text = "Accumulate data";
+            this.chkAccumulateServer.UseVisualStyleBackColor = true;
+            // 
+            // chkAccumulateClient
+            // 
+            this.chkAccumulateClient.AutoSize = true;
+            this.chkAccumulateClient.Checked = true;
+            this.chkAccumulateClient.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAccumulateClient.Location = new System.Drawing.Point(358, 219);
+            this.chkAccumulateClient.Name = "chkAccumulateClient";
+            this.chkAccumulateClient.Size = new System.Drawing.Size(106, 17);
+            this.chkAccumulateClient.TabIndex = 23;
+            this.chkAccumulateClient.Text = "Accumulate data";
+            this.chkAccumulateClient.UseVisualStyleBackColor = true;
+            // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(472, 256);
+            this.Controls.Add(this.chkAccumulateClient);
+            this.Controls.Add(this.chkAccumulateServer);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.btnClearAllResponses);
             this.Controls.Add(this.btnClear);
@@ -334,6 +362,8 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnClearAllResponses;
         private System.Windows.Forms.Label lblDate;
+        private System.Windows.Forms.CheckBox chkAccumulateServer;
+        private System.Windows.Forms.CheckBox chkAccumulateClient;
     }
 }
 

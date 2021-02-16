@@ -94,7 +94,6 @@ namespace EmbeddedSystemsTest
             server.Start();
             runListenerThread = true;
 
-            byte[] bytes = new byte[256];
 
             while(runListenerThread)
             {
@@ -107,12 +106,26 @@ namespace EmbeddedSystemsTest
                     Utilities.writeToLabelFromThread(this, lblListenConnected, "Received data.");
                     stream = localClient.GetStream();
 
+                    // Reads NetworkStream into a byte buffer.
+                    byte[] bytes = new byte[localClient.ReceiveBufferSize];
+
                     int i;
 
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                     {
-                        stream.Write(bytes, 0, bytes.Length);
-                        Utilities.writeToTextFromThread(this, txtReceived, Encoding.ASCII.GetString(bytes, 0, i), chkAccumulateServer.Checked);
+                        StringBuilder displayText = new StringBuilder();
+                        //stream.Write(bytes, 0, bytes.Length);
+                        string transmitID = bytes[0].ToString();
+                        UInt32 dataSize = (UInt32)(bytes[1] << 24 | bytes[2] << 16 | bytes[3] << 8 | bytes[4]);
+                        UInt16 elAdxlSize = (UInt16)(bytes[5] << 8 | bytes[6]);
+                        UInt16 azAdxlSize = (UInt16)(bytes[7] << 8 | bytes[8]);
+                        UInt16 cbAdxlSize = (UInt16)(bytes[9] << 8 | bytes[10]);
+                        UInt16 elTempSensorSize = (UInt16)(bytes[11] << 8 | bytes[12]);
+                        UInt16 azTempSensorSize = (UInt16)(bytes[13] << 8 | bytes[14]);
+                        UInt16 elEncoderSize = (UInt16)(bytes[15] << 8 | bytes[16]);
+                        UInt16 azEncoderSize = (UInt16)(bytes[17] << 8 | bytes[18]);
+
+                        Utilities.writeToTextFromThread(this, txtReceived, transmitID, chkAccumulateServer.Checked);
                         Utilities.writeToLabelFromThread(this, lblDate, "Last received: " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss"));
                     }
 
@@ -121,7 +134,10 @@ namespace EmbeddedSystemsTest
                     stream.Close();
                     stream.Dispose();
                 }
-                catch { }
+                catch(Exception ex) {
+
+                    Console.WriteLine(ex.Message);
+                }
             }
         }
 

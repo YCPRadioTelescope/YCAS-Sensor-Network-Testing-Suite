@@ -136,7 +136,7 @@ namespace EmbeddedSystemsTest
                             lastPacketGap = stopWatch.ElapsedMilliseconds;
 
                             if (lastPacketGap < lowPacketGap) lowPacketGap = lastPacketGap;
-                            else if (lastPacketGap > highPacketGap) highPacketGap = lastPacketGap;
+                            if (lastPacketGap > highPacketGap) highPacketGap = lastPacketGap;
 
                             avgPacketGap = totalPacketGap / totalPackets;
 
@@ -192,6 +192,16 @@ namespace EmbeddedSystemsTest
         private void btnClearAllResponses_Click(object sender, EventArgs e)
         {
             txtResponse.Text = "";
+        }
+
+        private void frmTcpTest_Paint(object sender, PaintEventArgs e)
+        {
+            Pen pen = new Pen(Color.DarkGray, 1);
+
+            PointF p1 = new PointF(470, 10);
+            PointF p2 = new PointF(470, this.Size.Height - 50);
+
+            e.Graphics.DrawLine(pen, p1, p2);
         }
     }
 }

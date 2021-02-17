@@ -61,6 +61,7 @@ namespace EmbeddedSystemsTest
             this.lblLowGap = new System.Windows.Forms.Label();
             this.lblTotalReceived = new System.Windows.Forms.Label();
             this.lblFirstReceived = new System.Windows.Forms.Label();
+            this.lblSensorData = new System.Windows.Forms.Label();
             this.grpStats.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -382,11 +383,22 @@ namespace EmbeddedSystemsTest
             this.lblFirstReceived.TabIndex = 22;
             this.lblFirstReceived.Text = " First received: N/A";
             // 
+            // lblSensorData
+            // 
+            this.lblSensorData.AutoSize = true;
+            this.lblSensorData.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSensorData.Location = new System.Drawing.Point(629, 5);
+            this.lblSensorData.Name = "lblSensorData";
+            this.lblSensorData.Size = new System.Drawing.Size(165, 31);
+            this.lblSensorData.TabIndex = 25;
+            this.lblSensorData.Text = "Sensor Data";
+            // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 371);
+            this.ClientSize = new System.Drawing.Size(950, 371);
+            this.Controls.Add(this.lblSensorData);
             this.Controls.Add(this.grpStats);
             this.Controls.Add(this.chkAccumulateClient);
             this.Controls.Add(this.chkAccumulateServer);
@@ -418,6 +430,7 @@ namespace EmbeddedSystemsTest
             this.Name = "frmTcpTest";
             this.Text = "TCP Server/Client Test";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmTcpTest_Paint);
             this.grpStats.ResumeLayout(false);
             this.grpStats.PerformLayout();
             this.ResumeLayout(false);
@@ -458,6 +471,7 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.Label lblTotalReceived;
         private System.Windows.Forms.Label lblFirstReceived;
         private System.Windows.Forms.Label lblLastGap;
+        private System.Windows.Forms.Label lblSensorData;
     }
 }
 

@@ -125,6 +125,71 @@ namespace EmbeddedSystemsTest
                         UInt16 elEncoderSize = (UInt16)(bytes[15] << 8 | bytes[16]);
                         UInt16 azEncoderSize = (UInt16)(bytes[17] << 8 | bytes[18]);
 
+                        int k = 19;
+                        AdxlData[] elAdxlData = new AdxlData[elAdxlSize];
+                        for (int j = 0; j < elAdxlSize; j++)
+                        {
+                            elAdxlData[j] = new AdxlData() { 
+                                xAxis = (bytes[k++] << 8 | bytes[k++]),
+                                yAxis = (bytes[k++] << 8 | bytes[k++]),
+                                zAxis = (bytes[k++] << 8 | bytes[k++])
+                            };
+
+                        }
+
+                        AdxlData[] azAdxlData = new AdxlData[azAdxlSize];
+                        for (int j = 0; j < azAdxlSize; j++)
+                        {
+                            azAdxlData[j] = new AdxlData()
+                            {
+                                xAxis = (bytes[k++] << 8 | bytes[k++]),
+                                yAxis = (bytes[k++] << 8 | bytes[k++]),
+                                zAxis = (bytes[k++] << 8 | bytes[k++])
+                            };
+
+                        }
+
+                        AdxlData[] cbAdxlData = new AdxlData[cbAdxlSize];
+                        for (int j = 0; j < cbAdxlSize; j++)
+                        {
+                            cbAdxlData[j] = new AdxlData()
+                            {
+                                xAxis = (bytes[k++] << 8 | bytes[k++]),
+                                yAxis = (bytes[k++] << 8 | bytes[k++]),
+                                zAxis = (bytes[k++] << 8 | bytes[k++])
+                            };
+
+                        }
+
+                        int[] elTempData = new int[elTempSensorSize];
+                        for (int j = 0; j < elTempSensorSize; j++)
+                        {
+                            elTempData[j] = (bytes[k++] << 8 | bytes[k++]);
+
+                        }
+
+                        int[] azTempData = new int[azTempSensorSize];
+                        for (int j = 0; j < azTempSensorSize; j++)
+                        {
+                            azTempData[j] = (bytes[k++] << 8 | bytes[k++]);
+
+                        }
+
+                        int[] elEncoderData = new int[elEncoderSize];
+                        for (int j = 0; j < azTempSensorSize; j++)
+                        {
+                            elEncoderData[j] = (bytes[k++] << 8 | bytes[k++]);
+
+                        }
+
+                        int[] azEncoderData = new int[azEncoderSize];
+                        for (int j = 0; j < azTempSensorSize; j++)
+                        {
+                            azEncoderData[j] = (bytes[k++] << 8 | bytes[k++]);
+
+                        }
+
+
                         Utilities.writeToTextFromThread(this, txtReceived, transmitID, chkAccumulateServer.Checked);
                         Utilities.writeToLabelFromThread(this, lblDate, "Last received: " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss"));
                     }
@@ -161,5 +226,12 @@ namespace EmbeddedSystemsTest
         {
             txtResponse.Text = "";
         }
+    }
+    public class AdxlData
+    {
+        public int xAxis { get; set; }
+        public int yAxis { get; set; }
+        public int zAxis { get; set; }
+
     }
 }

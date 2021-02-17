@@ -155,7 +155,7 @@ namespace EmbeddedSystemsTest
                             lblTotalReceived.Text = " Total received: " + totalPackets;
 
                             if (totalPackets > 1)
-                            {
+                            { // TODO: Convert these to hours, minutes, seconds, milliseconds instead of just ms
                                 lblLowGap.Text = " Low packet gap: " + lowPacketGap;
                                 lblAvgGap.Text = "Avg. packet gap: " + avgPacketGap;
                                 lblHighPacketGap.Text = "High packet gap: " + highPacketGap;

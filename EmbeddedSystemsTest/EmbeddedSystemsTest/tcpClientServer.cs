@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net;
@@ -18,8 +19,6 @@ namespace EmbeddedSystemsTest
         bool runListenerThread;
         Thread listenerThread;
         TcpListener server;
-        int totalPackets;
-        private static System.Timers.Timer timer;
 
         Thread clientThread;
         TcpClient client;
@@ -29,7 +28,6 @@ namespace EmbeddedSystemsTest
             InitializeComponent();
 
             runListenerThread = false;
-            totalPackets = 0;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -101,8 +99,16 @@ namespace EmbeddedSystemsTest
             runListenerThread = true;
 
             byte[] bytes = new byte[256];
+            int totalPackets = 0;
+            Stopwatch stopWatch = new Stopwatch();
 
-            while(runListenerThread)
+            long lastPacketGap = 0;
+            long lowPacketGap = long.MaxValue;
+            long avgPacketGap = 0;
+            long highPacketGap = 0;
+            long totalPacketGap = 0;
+
+            while (runListenerThread)
             {
                 TcpClient localClient;
                 NetworkStream stream;
@@ -121,15 +127,40 @@ namespace EmbeddedSystemsTest
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                     {
                         totalPackets++;
-                        stream.Write(bytes, 0, bytes.Length);
 
+                        // If this code is reached, then it means another packet came through and we can calculate the gap
+                        if (stopWatch.IsRunning)
+                        {
+                            stopWatch.Stop();
+                            totalPacketGap += lastPacketGap;
+                            lastPacketGap = stopWatch.ElapsedMilliseconds;
+
+                            if (lastPacketGap < lowPacketGap) lowPacketGap = lastPacketGap;
+                            else if (lastPacketGap > highPacketGap) highPacketGap = lastPacketGap;
+
+                            avgPacketGap = totalPacketGap / totalPackets;
+
+                            stopWatch.Reset();
+                        }
+                        stopWatch.Start();
+
+                        stream.Write(bytes, 0, bytes.Length);
+                                            
                         Utilities.WriteToGUIFromThread(this, () =>
                         {
                             if (chkAccumulateServer.Checked) txtReceived.Text = txtReceived.Text + Encoding.ASCII.GetString(bytes, 0, i) + "\r\n";
                             else txtReceived.Text = Encoding.ASCII.GetString(bytes, 0, i);
-                            if (totalPackets == 1) lblFirstReceived.Text = "First received: " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss");
-                            lblDate.Text = "Last received:   " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss");
-                            lblTotalReceived.Text = "Total received:  " + totalPackets;
+                            if (totalPackets == 1) lblFirstReceived.Text = " First received: " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss");
+                            lblDate.Text = "  Last received: " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss");
+                            lblTotalReceived.Text = " Total received: " + totalPackets;
+
+                            if (totalPackets > 1)
+                            {
+                                lblLowGap.Text = " Low packet gap: " + lowPacketGap;
+                                lblAvgGap.Text = "Avg. packet gap: " + avgPacketGap;
+                                lblHighPacketGap.Text = "High packet gap: " + highPacketGap;
+                                lblLastGap.Text = "Last packet gap: " + lastPacketGap;
+                            }
                         });
                     }
 
@@ -151,7 +182,6 @@ namespace EmbeddedSystemsTest
             lblListenConnected.Text = "Not connected.";
             btnStartListen.Enabled = true;
             btnKillListen.Enabled = false;
-            totalPackets = 0;
         }
 
         private void btnClear_Click(object sender, EventArgs e)

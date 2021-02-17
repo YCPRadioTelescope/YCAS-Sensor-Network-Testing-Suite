@@ -60,6 +60,7 @@ namespace EmbeddedSystemsTest
             this.lblLowGap = new System.Windows.Forms.Label();
             this.lblAvgGap = new System.Windows.Forms.Label();
             this.lblHighPacketGap = new System.Windows.Forms.Label();
+            this.lblLastGap = new System.Windows.Forms.Label();
             this.grpStats.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -307,6 +308,7 @@ namespace EmbeddedSystemsTest
             // 
             // grpStats
             // 
+            this.grpStats.Controls.Add(this.lblLastGap);
             this.grpStats.Controls.Add(this.lblHighPacketGap);
             this.grpStats.Controls.Add(this.lblAvgGap);
             this.grpStats.Controls.Add(this.lblLowGap);
@@ -315,7 +317,7 @@ namespace EmbeddedSystemsTest
             this.grpStats.Controls.Add(this.lblDate);
             this.grpStats.Location = new System.Drawing.Point(16, 241);
             this.grpStats.Name = "grpStats";
-            this.grpStats.Size = new System.Drawing.Size(446, 105);
+            this.grpStats.Size = new System.Drawing.Size(446, 120);
             this.grpStats.TabIndex = 24;
             this.grpStats.TabStop = false;
             this.grpStats.Text = "Statistics";
@@ -370,11 +372,21 @@ namespace EmbeddedSystemsTest
             this.lblHighPacketGap.TabIndex = 26;
             this.lblHighPacketGap.Text = "High packet gap: N/A";
             // 
+            // lblLastGap
+            // 
+            this.lblLastGap.AutoSize = true;
+            this.lblLastGap.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLastGap.Location = new System.Drawing.Point(6, 97);
+            this.lblLastGap.Name = "lblLastGap";
+            this.lblLastGap.Size = new System.Drawing.Size(145, 11);
+            this.lblLastGap.TabIndex = 27;
+            this.lblLastGap.Text = "Last packet gap: N/A";
+            // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 356);
+            this.ClientSize = new System.Drawing.Size(472, 394);
             this.Controls.Add(this.grpStats);
             this.Controls.Add(this.chkAccumulateClient);
             this.Controls.Add(this.chkAccumulateServer);
@@ -445,6 +457,7 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.Label lblLowGap;
         private System.Windows.Forms.Label lblTotalReceived;
         private System.Windows.Forms.Label lblFirstReceived;
+        private System.Windows.Forms.Label lblLastGap;
     }
 }
 

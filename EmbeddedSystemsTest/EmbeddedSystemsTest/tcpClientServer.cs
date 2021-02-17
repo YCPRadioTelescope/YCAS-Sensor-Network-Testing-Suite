@@ -19,6 +19,7 @@ namespace EmbeddedSystemsTest
         Thread listenerThread;
         TcpListener server;
         int totalPackets;
+        private static System.Timers.Timer timer;
 
         Thread clientThread;
         TcpClient client;

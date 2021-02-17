@@ -82,8 +82,12 @@ namespace EmbeddedSystemsTest
 
             int bytes = stream.Read(data, 0, data.Length);
             string response = Encoding.ASCII.GetString(data, 0, bytes);
-
-            Utilities.writeToTextFromThread(this, txtResponse, response, chkAccumulateClient.Checked);
+            // txtResponse, response, chkAccumulateClient.Checked
+            Utilities.WriteToGUIFromThread(this, () =>
+            {
+                if (chkAccumulateClient.Checked) txtResponse.Text = txtResponse.Text + response;
+                else txtResponse.Text = response;
+            });
 
             stream.Close();
             stream.Dispose();
@@ -106,7 +110,10 @@ namespace EmbeddedSystemsTest
                 try { 
                     
                     localClient = server.AcceptTcpClient();
-                    Utilities.writeToLabelFromThread(this, lblListenConnected, "Received data.");
+                    Utilities.WriteToGUIFromThread(this, () => 
+                    {
+                        lblListenConnected.Text = "Received data.";
+                    });
                     stream = localClient.GetStream();
 
                     int i;
@@ -115,10 +122,15 @@ namespace EmbeddedSystemsTest
                     {
                         totalPackets++;
                         stream.Write(bytes, 0, bytes.Length);
-                        Utilities.writeToTextFromThread(this, txtReceived, Encoding.ASCII.GetString(bytes, 0, i), chkAccumulateServer.Checked);
-                        if (totalPackets == 1) Utilities.writeToLabelFromThread(this, lblFirstReceived, "First received:  " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss"));
-                        Utilities.writeToLabelFromThread(this, lblDate, "Last received:   " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss"));
-                        Utilities.writeToLabelFromThread(this, lblTotalReceived, "Total received:  " + totalPackets);
+
+                        Utilities.WriteToGUIFromThread(this, () =>
+                        {
+                            if (chkAccumulateServer.Checked) txtReceived.Text = txtReceived.Text + Encoding.ASCII.GetString(bytes, 0, i);
+                            else txtReceived.Text = Encoding.ASCII.GetString(bytes, 0, i);
+                            if (totalPackets == 1) lblFirstReceived.Text = "First received: " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss");
+                            lblDate.Text = "Last received:   " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss");
+                            lblTotalReceived.Text = "Total received:  " + totalPackets;
+                        });
                     }
 
                     localClient.Close();

@@ -18,6 +18,7 @@ namespace EmbeddedSystemsTest
         bool runListenerThread;
         Thread listenerThread;
         TcpListener server;
+        int totalPackets;
 
         Thread clientThread;
         TcpClient client;
@@ -27,6 +28,7 @@ namespace EmbeddedSystemsTest
             InitializeComponent();
 
             runListenerThread = false;
+            totalPackets = 0;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -111,9 +113,12 @@ namespace EmbeddedSystemsTest
 
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                     {
+                        totalPackets++;
                         stream.Write(bytes, 0, bytes.Length);
                         Utilities.writeToTextFromThread(this, txtReceived, Encoding.ASCII.GetString(bytes, 0, i), chkAccumulateServer.Checked);
-                        Utilities.writeToLabelFromThread(this, lblDate, "Last received: " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss"));
+                        if (totalPackets == 1) Utilities.writeToLabelFromThread(this, lblFirstReceived, "First received:  " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss"));
+                        Utilities.writeToLabelFromThread(this, lblDate, "Last received:   " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss"));
+                        Utilities.writeToLabelFromThread(this, lblTotalReceived, "Total received:  " + totalPackets);
                     }
 
                     localClient.Close();
@@ -121,7 +126,7 @@ namespace EmbeddedSystemsTest
                     stream.Close();
                     stream.Dispose();
                 }
-                catch { }
+                catch (Exception e) { /*Console.WriteLine(e);*/ }
             }
         }
 
@@ -134,6 +139,7 @@ namespace EmbeddedSystemsTest
             lblListenConnected.Text = "Not connected.";
             btnStartListen.Enabled = true;
             btnKillListen.Enabled = false;
+            totalPackets = 0;
         }
 
         private void btnClear_Click(object sender, EventArgs e)

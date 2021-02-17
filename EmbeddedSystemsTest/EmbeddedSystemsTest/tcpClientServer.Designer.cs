@@ -54,6 +54,13 @@ namespace EmbeddedSystemsTest
             this.lblDate = new System.Windows.Forms.Label();
             this.chkAccumulateServer = new System.Windows.Forms.CheckBox();
             this.chkAccumulateClient = new System.Windows.Forms.CheckBox();
+            this.grpStats = new System.Windows.Forms.GroupBox();
+            this.lblFirstReceived = new System.Windows.Forms.Label();
+            this.lblTotalReceived = new System.Windows.Forms.Label();
+            this.lblLowGap = new System.Windows.Forms.Label();
+            this.lblAvgGap = new System.Windows.Forms.Label();
+            this.lblHighPacketGap = new System.Windows.Forms.Label();
+            this.grpStats.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnStartListen
@@ -267,11 +274,12 @@ namespace EmbeddedSystemsTest
             // lblDate
             // 
             this.lblDate.AutoSize = true;
-            this.lblDate.Location = new System.Drawing.Point(14, 238);
+            this.lblDate.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDate.Location = new System.Drawing.Point(6, 33);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(106, 13);
+            this.lblDate.Size = new System.Drawing.Size(145, 11);
             this.lblDate.TabIndex = 21;
-            this.lblDate.Text = "Last received: Never";
+            this.lblDate.Text = "Last received:   N/A";
             // 
             // chkAccumulateServer
             // 
@@ -297,14 +305,79 @@ namespace EmbeddedSystemsTest
             this.chkAccumulateClient.Text = "Accumulate data";
             this.chkAccumulateClient.UseVisualStyleBackColor = true;
             // 
+            // grpStats
+            // 
+            this.grpStats.Controls.Add(this.lblHighPacketGap);
+            this.grpStats.Controls.Add(this.lblAvgGap);
+            this.grpStats.Controls.Add(this.lblLowGap);
+            this.grpStats.Controls.Add(this.lblTotalReceived);
+            this.grpStats.Controls.Add(this.lblFirstReceived);
+            this.grpStats.Controls.Add(this.lblDate);
+            this.grpStats.Location = new System.Drawing.Point(16, 241);
+            this.grpStats.Name = "grpStats";
+            this.grpStats.Size = new System.Drawing.Size(446, 105);
+            this.grpStats.TabIndex = 24;
+            this.grpStats.TabStop = false;
+            this.grpStats.Text = "Statistics";
+            // 
+            // lblFirstReceived
+            // 
+            this.lblFirstReceived.AutoSize = true;
+            this.lblFirstReceived.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFirstReceived.Location = new System.Drawing.Point(6, 22);
+            this.lblFirstReceived.Name = "lblFirstReceived";
+            this.lblFirstReceived.Size = new System.Drawing.Size(145, 11);
+            this.lblFirstReceived.TabIndex = 22;
+            this.lblFirstReceived.Text = "First received:  N/A";
+            // 
+            // lblTotalReceived
+            // 
+            this.lblTotalReceived.AutoSize = true;
+            this.lblTotalReceived.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalReceived.Location = new System.Drawing.Point(6, 44);
+            this.lblTotalReceived.Name = "lblTotalReceived";
+            this.lblTotalReceived.Size = new System.Drawing.Size(145, 11);
+            this.lblTotalReceived.TabIndex = 23;
+            this.lblTotalReceived.Text = "Total received:  N/A";
+            // 
+            // lblLowGap
+            // 
+            this.lblLowGap.AutoSize = true;
+            this.lblLowGap.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLowGap.Location = new System.Drawing.Point(6, 64);
+            this.lblLowGap.Name = "lblLowGap";
+            this.lblLowGap.Size = new System.Drawing.Size(145, 11);
+            this.lblLowGap.TabIndex = 24;
+            this.lblLowGap.Text = "Low packet gap:  N/A";
+            // 
+            // lblAvgGap
+            // 
+            this.lblAvgGap.AutoSize = true;
+            this.lblAvgGap.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAvgGap.Location = new System.Drawing.Point(6, 75);
+            this.lblAvgGap.Name = "lblAvgGap";
+            this.lblAvgGap.Size = new System.Drawing.Size(145, 11);
+            this.lblAvgGap.TabIndex = 25;
+            this.lblAvgGap.Text = "Avg. packet gap: N/A";
+            // 
+            // lblHighPacketGap
+            // 
+            this.lblHighPacketGap.AutoSize = true;
+            this.lblHighPacketGap.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHighPacketGap.Location = new System.Drawing.Point(6, 86);
+            this.lblHighPacketGap.Name = "lblHighPacketGap";
+            this.lblHighPacketGap.Size = new System.Drawing.Size(145, 11);
+            this.lblHighPacketGap.TabIndex = 26;
+            this.lblHighPacketGap.Text = "High packet gap: N/A";
+            // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 256);
+            this.ClientSize = new System.Drawing.Size(472, 356);
+            this.Controls.Add(this.grpStats);
             this.Controls.Add(this.chkAccumulateClient);
             this.Controls.Add(this.chkAccumulateServer);
-            this.Controls.Add(this.lblDate);
             this.Controls.Add(this.btnClearAllResponses);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.txtReceived);
@@ -333,6 +406,8 @@ namespace EmbeddedSystemsTest
             this.Name = "frmTcpTest";
             this.Text = "TCP Server/Client Test";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.grpStats.ResumeLayout(false);
+            this.grpStats.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -364,6 +439,12 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.CheckBox chkAccumulateServer;
         private System.Windows.Forms.CheckBox chkAccumulateClient;
+        private System.Windows.Forms.GroupBox grpStats;
+        private System.Windows.Forms.Label lblHighPacketGap;
+        private System.Windows.Forms.Label lblAvgGap;
+        private System.Windows.Forms.Label lblLowGap;
+        private System.Windows.Forms.Label lblTotalReceived;
+        private System.Windows.Forms.Label lblFirstReceived;
     }
 }
 

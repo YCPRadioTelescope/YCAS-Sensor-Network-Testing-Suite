@@ -82,10 +82,9 @@ namespace EmbeddedSystemsTest
 
             int bytes = stream.Read(data, 0, data.Length);
             string response = Encoding.ASCII.GetString(data, 0, bytes);
-            // txtResponse, response, chkAccumulateClient.Checked
             Utilities.WriteToGUIFromThread(this, () =>
             {
-                if (chkAccumulateClient.Checked) txtResponse.Text = txtResponse.Text + response;
+                if (chkAccumulateClient.Checked) txtResponse.Text = txtResponse.Text + response + "\r\n";
                 else txtResponse.Text = response;
             });
 
@@ -125,7 +124,7 @@ namespace EmbeddedSystemsTest
 
                         Utilities.WriteToGUIFromThread(this, () =>
                         {
-                            if (chkAccumulateServer.Checked) txtReceived.Text = txtReceived.Text + Encoding.ASCII.GetString(bytes, 0, i);
+                            if (chkAccumulateServer.Checked) txtReceived.Text = txtReceived.Text + Encoding.ASCII.GetString(bytes, 0, i) + "\r\n";
                             else txtReceived.Text = Encoding.ASCII.GetString(bytes, 0, i);
                             if (totalPackets == 1) lblFirstReceived.Text = "First received: " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss");
                             lblDate.Text = "Last received:   " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss");

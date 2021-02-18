@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -113,6 +114,7 @@ namespace EmbeddedSystemsTest
 
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                     {
+
                         StringBuilder displayText = new StringBuilder();
                         //stream.Write(bytes, 0, bytes.Length);
                         string transmitID = bytes[0].ToString();
@@ -125,71 +127,90 @@ namespace EmbeddedSystemsTest
                         UInt16 elEncoderSize = (UInt16)(bytes[15] << 8 | bytes[16]);
                         UInt16 azEncoderSize = (UInt16)(bytes[17] << 8 | bytes[18]);
 
-                        int k = 19;
-                        AdxlData[] elAdxlData = new AdxlData[elAdxlSize];
-                        for (int j = 0; j < elAdxlSize; j++)
-                        {
-                            elAdxlData[j] = new AdxlData() { 
-                                xAxis = (bytes[k++] << 8 | bytes[k++]),
-                                yAxis = (bytes[k++] << 8 | bytes[k++]),
-                                zAxis = (bytes[k++] << 8 | bytes[k++])
-                            };
+                        /*
+                        int k = 0;
 
-                        }
-
-                        AdxlData[] azAdxlData = new AdxlData[azAdxlSize];
-                        for (int j = 0; j < azAdxlSize; j++)
+                        int test;
+                        for(int j = 0; j < dataSize; j++)
                         {
-                            azAdxlData[j] = new AdxlData()
+                            //test = (bytes[k++] << 8 | bytes[k++]);
+                            displayText.AppendFormat("{0:x2}",bytes[k++]);
+                            displayText.Append(" ");
+                            if (k % 10 == 0)
                             {
-                                xAxis = (bytes[k++] << 8 | bytes[k++]),
-                                yAxis = (bytes[k++] << 8 | bytes[k++]),
-                                zAxis = (bytes[k++] << 8 | bytes[k++])
-                            };
-
+                                displayText.AppendLine();
+                            }
                         }
-
-                        AdxlData[] cbAdxlData = new AdxlData[cbAdxlSize];
-                        for (int j = 0; j < cbAdxlSize; j++)
+                        File.WriteAllText("SensorData.txt",displayText.ToString());
+                        */
+                        if (i >= dataSize)
                         {
-                            cbAdxlData[j] = new AdxlData()
+                            int k = 19;
+                            AdxlData[] elAdxlData = new AdxlData[elAdxlSize];
+                            for (int j = 0; j < elAdxlSize; j++)
                             {
-                                xAxis = (bytes[k++] << 8 | bytes[k++]),
-                                yAxis = (bytes[k++] << 8 | bytes[k++]),
-                                zAxis = (bytes[k++] << 8 | bytes[k++])
-                            };
+                                elAdxlData[j] = new AdxlData()
+                                {
+                                    xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                                    yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                                    zAxis = (short)(bytes[k++] << 8 | bytes[k++])
+                                };
+
+                            }
+
+                            AdxlData[] azAdxlData = new AdxlData[azAdxlSize];
+                            for (int j = 0; j < azAdxlSize; j++)
+                            {
+                                azAdxlData[j] = new AdxlData()
+                                {
+                                    xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                                    yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                                    zAxis = (short)(bytes[k++] << 8 | bytes[k++])
+                                };
+
+                            }
+
+                            AdxlData[] cbAdxlData = new AdxlData[cbAdxlSize];
+                            for (int j = 0; j < cbAdxlSize; j++)
+                            {
+                                cbAdxlData[j] = new AdxlData()
+                                {
+                                    xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                                    yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                                    zAxis = (short)(bytes[k++] << 8 | bytes[k++])
+                                };
+
+                            }
+
+                            int[] elTempData = new int[elTempSensorSize];
+                            for (int j = 0; j < elTempSensorSize; j++)
+                            {
+                                elTempData[j] = (bytes[k++] << 8 | bytes[k++]);
+
+                            }
+
+                            int[] azTempData = new int[azTempSensorSize];
+                            for (int j = 0; j < azTempSensorSize; j++)
+                            {
+                                azTempData[j] = (bytes[k++] << 8 | bytes[k++]);
+
+                            }
+
+                            int[] elEncoderData = new int[elEncoderSize];
+                            for (int j = 0; j < azTempSensorSize; j++)
+                            {
+                                elEncoderData[j] = (bytes[k++] << 8 | bytes[k++]);
+
+                            }
+
+                            int[] azEncoderData = new int[azEncoderSize];
+                            for (int j = 0; j < azTempSensorSize; j++)
+                            {
+                                azEncoderData[j] = (bytes[k++] << 8 | bytes[k++]);
+
+                            }
 
                         }
-
-                        int[] elTempData = new int[elTempSensorSize];
-                        for (int j = 0; j < elTempSensorSize; j++)
-                        {
-                            elTempData[j] = (bytes[k++] << 8 | bytes[k++]);
-
-                        }
-
-                        int[] azTempData = new int[azTempSensorSize];
-                        for (int j = 0; j < azTempSensorSize; j++)
-                        {
-                            azTempData[j] = (bytes[k++] << 8 | bytes[k++]);
-
-                        }
-
-                        int[] elEncoderData = new int[elEncoderSize];
-                        for (int j = 0; j < azTempSensorSize; j++)
-                        {
-                            elEncoderData[j] = (bytes[k++] << 8 | bytes[k++]);
-
-                        }
-
-                        int[] azEncoderData = new int[azEncoderSize];
-                        for (int j = 0; j < azTempSensorSize; j++)
-                        {
-                            azEncoderData[j] = (bytes[k++] << 8 | bytes[k++]);
-
-                        }
-
-
                         Utilities.writeToTextFromThread(this, txtReceived, transmitID, chkAccumulateServer.Checked);
                         Utilities.writeToLabelFromThread(this, lblDate, "Last received: " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss"));
                     }
@@ -229,9 +250,9 @@ namespace EmbeddedSystemsTest
     }
     public class AdxlData
     {
-        public int xAxis { get; set; }
-        public int yAxis { get; set; }
-        public int zAxis { get; set; }
+        public short xAxis { get; set; }
+        public short yAxis { get; set; }
+        public short zAxis { get; set; }
 
     }
 }

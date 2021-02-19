@@ -62,6 +62,8 @@ namespace EmbeddedSystemsTest
             this.lblTotalReceived = new System.Windows.Forms.Label();
             this.lblFirstReceived = new System.Windows.Forms.Label();
             this.lblSensorData = new System.Windows.Forms.Label();
+            this.radTCPData = new System.Windows.Forms.RadioButton();
+            this.radSensorData = new System.Windows.Forms.RadioButton();
             this.grpStats.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -316,7 +318,7 @@ namespace EmbeddedSystemsTest
             this.grpStats.Controls.Add(this.lblTotalReceived);
             this.grpStats.Controls.Add(this.lblFirstReceived);
             this.grpStats.Controls.Add(this.lblDate);
-            this.grpStats.Location = new System.Drawing.Point(16, 241);
+            this.grpStats.Location = new System.Drawing.Point(16, 259);
             this.grpStats.Name = "grpStats";
             this.grpStats.Size = new System.Drawing.Size(446, 120);
             this.grpStats.TabIndex = 24;
@@ -393,11 +395,35 @@ namespace EmbeddedSystemsTest
             this.lblSensorData.TabIndex = 25;
             this.lblSensorData.Text = "Sensor Data";
             // 
+            // radTCPData
+            // 
+            this.radTCPData.AutoSize = true;
+            this.radTCPData.Location = new System.Drawing.Point(12, 241);
+            this.radTCPData.Name = "radTCPData";
+            this.radTCPData.Size = new System.Drawing.Size(105, 17);
+            this.radTCPData.TabIndex = 26;
+            this.radTCPData.Text = "Collect TCP data";
+            this.radTCPData.UseVisualStyleBackColor = true;
+            // 
+            // radSensorData
+            // 
+            this.radSensorData.AutoSize = true;
+            this.radSensorData.Checked = true;
+            this.radSensorData.Location = new System.Drawing.Point(124, 241);
+            this.radSensorData.Name = "radSensorData";
+            this.radSensorData.Size = new System.Drawing.Size(115, 17);
+            this.radSensorData.TabIndex = 27;
+            this.radSensorData.TabStop = true;
+            this.radSensorData.Text = "Collect sensor data";
+            this.radSensorData.UseVisualStyleBackColor = true;
+            // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 371);
+            this.ClientSize = new System.Drawing.Size(950, 390);
+            this.Controls.Add(this.radSensorData);
+            this.Controls.Add(this.radTCPData);
             this.Controls.Add(this.lblSensorData);
             this.Controls.Add(this.grpStats);
             this.Controls.Add(this.chkAccumulateClient);
@@ -472,6 +498,8 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.Label lblFirstReceived;
         private System.Windows.Forms.Label lblLastGap;
         private System.Windows.Forms.Label lblSensorData;
+        private System.Windows.Forms.RadioButton radTCPData;
+        private System.Windows.Forms.RadioButton radSensorData;
     }
 }
 

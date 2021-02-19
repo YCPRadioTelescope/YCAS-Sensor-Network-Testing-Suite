@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmbeddedSystemsTest.SensorNetwork;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,11 +24,14 @@ namespace EmbeddedSystemsTest
         Thread clientThread;
         TcpClient client;
 
+        SensorDataParser sensorNetwork;
+
         public frmTcpTest()
         {
             InitializeComponent();
 
             runListenerThread = false;
+            sensorNetwork = new SensorDataParser();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -48,6 +52,9 @@ namespace EmbeddedSystemsTest
 
                 btnKillListen.Enabled = true;
                 btnStartListen.Enabled = false;
+
+                radSensorData.Enabled = false;
+                radTCPData.Enabled = false;
 
                 listenerThread = new Thread(() => listenerProcess(IPAddress.Parse(txtListenIp.Text), int.Parse(txtListenPort.Text)));
                 listenerThread.Start();
@@ -148,8 +155,17 @@ namespace EmbeddedSystemsTest
                                             
                         Utilities.WriteToGUIFromThread(this, () =>
                         {
-                            if (chkAccumulateServer.Checked) txtReceived.Text = txtReceived.Text + Encoding.ASCII.GetString(bytes, 0, i) + "\r\n";
-                            else txtReceived.Text = Encoding.ASCII.GetString(bytes, 0, i);
+                            if (chkAccumulateServer.Checked)
+                            {
+                                if(!radSensorData.Checked) txtReceived.Text = txtReceived.Text + Encoding.ASCII.GetString(bytes, 0, i) + "\r\n";
+                                else txtReceived.Text = txtReceived.Text + sensorNetwork.getTransmitId();
+                            }
+                            else
+                            {
+                                if (!radSensorData.Checked) txtReceived.Text = Encoding.ASCII.GetString(bytes, 0, i);
+                                else txtReceived.Text = sensorNetwork.getTransmitId();
+                            }
+
                             if (totalPackets == 1) lblFirstReceived.Text = " First received: " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss");
                             lblDate.Text = "  Last received: " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss");
                             lblTotalReceived.Text = " Total received: " + totalPackets;
@@ -161,6 +177,8 @@ namespace EmbeddedSystemsTest
                                 lblHighPacketGap.Text = "High packet gap: " + highPacketGap;
                                 lblLastGap.Text = "Last packet gap: " + lastPacketGap;
                             }
+
+                            // TODO: Print the sensor data out on the UI
                         });
                     }
 
@@ -169,7 +187,9 @@ namespace EmbeddedSystemsTest
                     stream.Close();
                     stream.Dispose();
                 }
-                catch (Exception e) { /*Console.WriteLine(e);*/ }
+                catch (Exception e) {
+                    Console.WriteLine(e);
+                }
             }
         }
 
@@ -182,6 +202,8 @@ namespace EmbeddedSystemsTest
             lblListenConnected.Text = "Not connected.";
             btnStartListen.Enabled = true;
             btnKillListen.Enabled = false;
+            radSensorData.Enabled = true;
+            radTCPData.Enabled = true;
         }
 
         private void btnClear_Click(object sender, EventArgs e)

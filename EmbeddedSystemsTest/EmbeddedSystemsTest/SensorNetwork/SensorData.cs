@@ -15,10 +15,10 @@ namespace EmbeddedSystemsTest.SensorNetwork
 
     struct SensorData
     {
-        public int elTemp1 { get; set; }
-        public int elTemp2 { get; set; }
-        public int azTemp1 { get; set; }
-        public int azTemp2 { get; set; }
+        public double elTemp1 { get; set; }
+        public double elTemp2 { get; set; }
+        public double azTemp1 { get; set; }
+        public double azTemp2 { get; set; }
         public AdxlData elAdxlData { get; set; }
         public AdxlData azAdxlData { get; set; }
         public AdxlData cbAdxlData { get; set; }

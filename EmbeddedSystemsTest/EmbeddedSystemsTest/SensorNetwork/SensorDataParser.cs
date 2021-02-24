@@ -112,20 +112,39 @@ namespace EmbeddedSystemsTest.SensorNetwork
             return transmitId;
         }
 
-        public SensorData getLatestSensorData(TemperatureUnitEnum t)
+        public SensorData getLatestSensorData(TemperatureUnitEnum tempUnit)
         {
             SensorData s = new SensorData();
 
-            s.azTemp1 = azTemp1[azTemp1.Length - 1];
-            s.azTemp2 = 0;
-            s.elTemp1 = elTemp1[elTemp1.Length - 1];
-            s.elTemp2 = 0;
+            s.azTemp1 = ConvertRawTempToUnit(azTemp1[azTemp1.Length - 1], tempUnit);
+            s.azTemp2 = ConvertRawTempToUnit(0, tempUnit);
+            s.elTemp1 = ConvertRawTempToUnit(elTemp1[elTemp1.Length - 1], tempUnit);
+            s.elTemp2 = ConvertRawTempToUnit(0, tempUnit);
             s.azAdxlData = azAdxlData[azAdxlData.Length - 1];
             s.elAdxlData = elAdxlData[elAdxlData.Length - 1];
             s.cbAdxlData = cbAdxlData[cbAdxlData.Length - 1];
-            s.orientation = new Orientation(azEncoder[azEncoder.Length - 1], elEncoder[elEncoder.Length - 1]);
+            s.orientation = new Orientation(
+                ConvertAzPositionToDegrees(azEncoder[azEncoder.Length - 1]), 
+                ConvertElPositionToDegrees(elEncoder[elEncoder.Length - 1]));
 
             return s;
+        }
+
+        public double ConvertAzPositionToDegrees(int rawAzPosition)
+        {
+            return 360 / SensorConversionConstants.AZ_ENCODER_SCALING * rawAzPosition;
+        }
+
+        public double ConvertElPositionToDegrees(int rawElPosition)
+        {
+            return 0.25 * rawElPosition - 20.375;
+        }
+
+        public double ConvertRawTempToUnit(int rawTemp, TemperatureUnitEnum tempUnit)
+        {
+            if (tempUnit == TemperatureUnitEnum.CELSIUS) return rawTemp / 16.0;
+            else if (tempUnit == TemperatureUnitEnum.FAHRENHEIT) return rawTemp / 16.0 * 1.8 + 32.0;
+            else return rawTemp / 16.0 + 273.15;
         }
     }
 }

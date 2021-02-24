@@ -191,9 +191,7 @@ namespace EmbeddedSystemsTest
                                 sensorNetwork.ParseSensorData(bytes, i);
                                 SensorData sensorData = sensorNetwork.getLatestSensorData(tempUnit);
                                 lblEl1Temp.Text = $"Elevation Temperature 1: {sensorData.elTemp1} {tempUnitSym}";
-                                lblEl2Temp.Text = $"Elevation Temperature 2: {sensorData.elTemp2} {tempUnitSym}";
                                 lblAz1Temp.Text = $"Azimuth Temperature 1: {sensorData.azTemp1} {tempUnitSym}";
-                                lblAz2Temp.Text = $"Azimuth Temperature 2: {sensorData.azTemp2} {tempUnitSym}";
                                 lblAzAdxl.Text = "Azimuth accelerometer data:\n" +
                                                     $"     X: {sensorData.azAdxlData.xAxis}\n" +
                                                     $"     Y: {sensorData.azAdxlData.yAxis}\n" +

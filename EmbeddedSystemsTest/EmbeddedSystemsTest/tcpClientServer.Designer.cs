@@ -65,17 +65,15 @@ namespace EmbeddedSystemsTest
             this.radTCPData = new System.Windows.Forms.RadioButton();
             this.radSensorData = new System.Windows.Forms.RadioButton();
             this.lblEl1Temp = new System.Windows.Forms.Label();
-            this.lblEl2Temp = new System.Windows.Forms.Label();
             this.lblAz1Temp = new System.Windows.Forms.Label();
-            this.lblAz2Temp = new System.Windows.Forms.Label();
             this.lblAzAdxl = new System.Windows.Forms.Label();
             this.lblElAdxl = new System.Windows.Forms.Label();
             this.lblCbAdxl = new System.Windows.Forms.Label();
             this.lblCurrOrientation = new System.Windows.Forms.Label();
             this.grpTempUnit = new System.Windows.Forms.GroupBox();
-            this.radKelvin = new System.Windows.Forms.RadioButton();
-            this.radCelsius = new System.Windows.Forms.RadioButton();
             this.radFahrenheit = new System.Windows.Forms.RadioButton();
+            this.radCelsius = new System.Windows.Forms.RadioButton();
+            this.radKelvin = new System.Windows.Forms.RadioButton();
             this.grpStats.SuspendLayout();
             this.grpTempUnit.SuspendLayout();
             this.SuspendLayout();
@@ -441,15 +439,6 @@ namespace EmbeddedSystemsTest
             this.lblEl1Temp.TabIndex = 28;
             this.lblEl1Temp.Text = "Elevation Temperature 1:";
             // 
-            // lblEl2Temp
-            // 
-            this.lblEl2Temp.AutoSize = true;
-            this.lblEl2Temp.Location = new System.Drawing.Point(504, 72);
-            this.lblEl2Temp.Name = "lblEl2Temp";
-            this.lblEl2Temp.Size = new System.Drawing.Size(126, 13);
-            this.lblEl2Temp.TabIndex = 29;
-            this.lblEl2Temp.Text = "Elevation Temperature 2:";
-            // 
             // lblAz1Temp
             // 
             this.lblAz1Temp.AutoSize = true;
@@ -458,15 +447,6 @@ namespace EmbeddedSystemsTest
             this.lblAz1Temp.Size = new System.Drawing.Size(119, 13);
             this.lblAz1Temp.TabIndex = 30;
             this.lblAz1Temp.Text = "Azimuth Temperature 1:";
-            // 
-            // lblAz2Temp
-            // 
-            this.lblAz2Temp.AutoSize = true;
-            this.lblAz2Temp.Location = new System.Drawing.Point(504, 119);
-            this.lblAz2Temp.Name = "lblAz2Temp";
-            this.lblAz2Temp.Size = new System.Drawing.Size(119, 13);
-            this.lblAz2Temp.TabIndex = 31;
-            this.lblAz2Temp.Text = "Azimuth Temperature 2:";
             // 
             // lblAzAdxl
             // 
@@ -516,15 +496,15 @@ namespace EmbeddedSystemsTest
             this.grpTempUnit.TabStop = false;
             this.grpTempUnit.Text = "Temperature Unit";
             // 
-            // radKelvin
+            // radFahrenheit
             // 
-            this.radKelvin.AutoSize = true;
-            this.radKelvin.Location = new System.Drawing.Point(11, 19);
-            this.radKelvin.Name = "radKelvin";
-            this.radKelvin.Size = new System.Drawing.Size(54, 17);
-            this.radKelvin.TabIndex = 0;
-            this.radKelvin.Text = "Kelvin";
-            this.radKelvin.UseVisualStyleBackColor = true;
+            this.radFahrenheit.AutoSize = true;
+            this.radFahrenheit.Location = new System.Drawing.Point(11, 70);
+            this.radFahrenheit.Name = "radFahrenheit";
+            this.radFahrenheit.Size = new System.Drawing.Size(75, 17);
+            this.radFahrenheit.TabIndex = 2;
+            this.radFahrenheit.Text = "Fahrenheit";
+            this.radFahrenheit.UseVisualStyleBackColor = true;
             // 
             // radCelsius
             // 
@@ -538,15 +518,15 @@ namespace EmbeddedSystemsTest
             this.radCelsius.Text = "Celsius";
             this.radCelsius.UseVisualStyleBackColor = true;
             // 
-            // radFahrenheit
+            // radKelvin
             // 
-            this.radFahrenheit.AutoSize = true;
-            this.radFahrenheit.Location = new System.Drawing.Point(11, 70);
-            this.radFahrenheit.Name = "radFahrenheit";
-            this.radFahrenheit.Size = new System.Drawing.Size(75, 17);
-            this.radFahrenheit.TabIndex = 2;
-            this.radFahrenheit.Text = "Fahrenheit";
-            this.radFahrenheit.UseVisualStyleBackColor = true;
+            this.radKelvin.AutoSize = true;
+            this.radKelvin.Location = new System.Drawing.Point(11, 19);
+            this.radKelvin.Name = "radKelvin";
+            this.radKelvin.Size = new System.Drawing.Size(54, 17);
+            this.radKelvin.TabIndex = 0;
+            this.radKelvin.Text = "Kelvin";
+            this.radKelvin.UseVisualStyleBackColor = true;
             // 
             // frmTcpTest
             // 
@@ -558,9 +538,7 @@ namespace EmbeddedSystemsTest
             this.Controls.Add(this.lblCbAdxl);
             this.Controls.Add(this.lblElAdxl);
             this.Controls.Add(this.lblAzAdxl);
-            this.Controls.Add(this.lblAz2Temp);
             this.Controls.Add(this.lblAz1Temp);
-            this.Controls.Add(this.lblEl2Temp);
             this.Controls.Add(this.lblEl1Temp);
             this.Controls.Add(this.radSensorData);
             this.Controls.Add(this.radTCPData);
@@ -643,9 +621,7 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.RadioButton radTCPData;
         private System.Windows.Forms.RadioButton radSensorData;
         private System.Windows.Forms.Label lblEl1Temp;
-        private System.Windows.Forms.Label lblEl2Temp;
         private System.Windows.Forms.Label lblAz1Temp;
-        private System.Windows.Forms.Label lblAz2Temp;
         private System.Windows.Forms.Label lblAzAdxl;
         private System.Windows.Forms.Label lblElAdxl;
         private System.Windows.Forms.Label lblCbAdxl;

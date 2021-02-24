@@ -181,13 +181,19 @@ namespace EmbeddedSystemsTest
                             // Print the sensor data out on the UI
                             if(radSensorData.Checked)
                             {
-                                sensorNetwork.ParseSensorData(bytes, i);
-                                SensorData sensorData = sensorNetwork.getLatestSensorData(TemperatureUnitEnum.CELSIUS);
+                                // Check the temp unit
+                                TemperatureUnitEnum tempUnit = TemperatureUnitEnum.NONE;
+                                if (radCelsius.Checked) tempUnit = TemperatureUnitEnum.CELSIUS;
+                                else if (radFahrenheit.Checked) tempUnit = TemperatureUnitEnum.FAHRENHEIT;
+                                else if (radKelvin.Checked) tempUnit = TemperatureUnitEnum.KELVIN;
+                                string tempUnitSym = $"\u00B0{tempUnit.ToString().ToCharArray()[0]}";
 
-                                lblEl1Temp.Text = "Elevation Temperature 1: " + sensorData.elTemp1;
-                                lblEl2Temp.Text = "Elevation Temperature 2: " + sensorData.elTemp2;
-                                lblAz1Temp.Text = "Azimuth Temperature 1: " + sensorData.azTemp1;
-                                lblAz2Temp.Text = "Azimuth Temperature 2: " + sensorData.azTemp2;
+                                sensorNetwork.ParseSensorData(bytes, i);
+                                SensorData sensorData = sensorNetwork.getLatestSensorData(tempUnit);
+                                lblEl1Temp.Text = $"Elevation Temperature 1: {sensorData.elTemp1} {tempUnitSym}";
+                                lblEl2Temp.Text = $"Elevation Temperature 2: {sensorData.elTemp2} {tempUnitSym}";
+                                lblAz1Temp.Text = $"Azimuth Temperature 1: {sensorData.azTemp1} {tempUnitSym}";
+                                lblAz2Temp.Text = $"Azimuth Temperature 2: {sensorData.azTemp2} {tempUnitSym}";
                                 lblAzAdxl.Text = "Azimuth accelerometer data:\n" +
                                                     $"     X: {sensorData.azAdxlData.xAxis}\n" +
                                                     $"     Y: {sensorData.azAdxlData.yAxis}\n" +

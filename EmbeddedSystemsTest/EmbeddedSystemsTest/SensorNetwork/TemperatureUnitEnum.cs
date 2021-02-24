@@ -11,6 +11,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
         // Temperature units
         CELSIUS,
         FAHRENHEIT,
-        KELVIN
+        KELVIN,
+        NONE
     }
 }

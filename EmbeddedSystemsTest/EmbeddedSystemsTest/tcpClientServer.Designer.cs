@@ -72,7 +72,12 @@ namespace EmbeddedSystemsTest
             this.lblElAdxl = new System.Windows.Forms.Label();
             this.lblCbAdxl = new System.Windows.Forms.Label();
             this.lblCurrOrientation = new System.Windows.Forms.Label();
+            this.grpTempUnit = new System.Windows.Forms.GroupBox();
+            this.radKelvin = new System.Windows.Forms.RadioButton();
+            this.radCelsius = new System.Windows.Forms.RadioButton();
+            this.radFahrenheit = new System.Windows.Forms.RadioButton();
             this.grpStats.SuspendLayout();
+            this.grpTempUnit.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnStartListen
@@ -499,11 +504,56 @@ namespace EmbeddedSystemsTest
             this.lblCurrOrientation.TabIndex = 35;
             this.lblCurrOrientation.Text = "Current orientation (AZ, EL): ";
             // 
+            // grpTempUnit
+            // 
+            this.grpTempUnit.Controls.Add(this.radFahrenheit);
+            this.grpTempUnit.Controls.Add(this.radCelsius);
+            this.grpTempUnit.Controls.Add(this.radKelvin);
+            this.grpTempUnit.Location = new System.Drawing.Point(738, 49);
+            this.grpTempUnit.Name = "grpTempUnit";
+            this.grpTempUnit.Size = new System.Drawing.Size(200, 100);
+            this.grpTempUnit.TabIndex = 36;
+            this.grpTempUnit.TabStop = false;
+            this.grpTempUnit.Text = "Temperature Unit";
+            // 
+            // radKelvin
+            // 
+            this.radKelvin.AutoSize = true;
+            this.radKelvin.Location = new System.Drawing.Point(11, 19);
+            this.radKelvin.Name = "radKelvin";
+            this.radKelvin.Size = new System.Drawing.Size(54, 17);
+            this.radKelvin.TabIndex = 0;
+            this.radKelvin.Text = "Kelvin";
+            this.radKelvin.UseVisualStyleBackColor = true;
+            // 
+            // radCelsius
+            // 
+            this.radCelsius.AutoSize = true;
+            this.radCelsius.Checked = true;
+            this.radCelsius.Location = new System.Drawing.Point(11, 45);
+            this.radCelsius.Name = "radCelsius";
+            this.radCelsius.Size = new System.Drawing.Size(58, 17);
+            this.radCelsius.TabIndex = 1;
+            this.radCelsius.TabStop = true;
+            this.radCelsius.Text = "Celsius";
+            this.radCelsius.UseVisualStyleBackColor = true;
+            // 
+            // radFahrenheit
+            // 
+            this.radFahrenheit.AutoSize = true;
+            this.radFahrenheit.Location = new System.Drawing.Point(11, 70);
+            this.radFahrenheit.Name = "radFahrenheit";
+            this.radFahrenheit.Size = new System.Drawing.Size(75, 17);
+            this.radFahrenheit.TabIndex = 2;
+            this.radFahrenheit.Text = "Fahrenheit";
+            this.radFahrenheit.UseVisualStyleBackColor = true;
+            // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 390);
+            this.Controls.Add(this.grpTempUnit);
             this.Controls.Add(this.lblCurrOrientation);
             this.Controls.Add(this.lblCbAdxl);
             this.Controls.Add(this.lblElAdxl);
@@ -549,6 +599,8 @@ namespace EmbeddedSystemsTest
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmTcpTest_Paint);
             this.grpStats.ResumeLayout(false);
             this.grpStats.PerformLayout();
+            this.grpTempUnit.ResumeLayout(false);
+            this.grpTempUnit.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -598,6 +650,10 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.Label lblElAdxl;
         private System.Windows.Forms.Label lblCbAdxl;
         private System.Windows.Forms.Label lblCurrOrientation;
+        private System.Windows.Forms.GroupBox grpTempUnit;
+        private System.Windows.Forms.RadioButton radFahrenheit;
+        private System.Windows.Forms.RadioButton radCelsius;
+        private System.Windows.Forms.RadioButton radKelvin;
     }
 }
 

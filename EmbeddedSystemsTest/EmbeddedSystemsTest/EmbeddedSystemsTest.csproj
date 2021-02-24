@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SensorNetwork\Orientation.cs" />
+    <Compile Include="SensorNetwork\SensorConversionConstants.cs" />
     <Compile Include="SensorNetwork\TemperatureUnitEnum.cs" />
     <Compile Include="SensorNetwork\SensorData.cs" />
     <Compile Include="SensorNetwork\SensorDataParser.cs" />

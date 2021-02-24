@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace EmbeddedSystemsTest.SensorNetwork
 {
-    struct AdxlData
+    public enum TemperatureUnitEnum
     {
-        public short xAxis { get; set; }
-        public short yAxis { get; set; }
-        public short zAxis { get; set; }
+        // Temperature units
+        CELSIUS,
+        FAHRENHEIT,
+        KELVIN
     }
 }

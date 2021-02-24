@@ -112,14 +112,20 @@ namespace EmbeddedSystemsTest.SensorNetwork
             return transmitId;
         }
 
-        public double getCurrentElTemp1Average()
+        public SensorData getLatestSensorData(TemperatureUnitEnum t)
         {
-            return (double)elTemp1.Sum() / elTemp1.Length;
-        }
+            SensorData s = new SensorData();
 
-        public double getCurrentAzTemp1Average()
-        {
-            return (double)azTemp1.Sum() / azTemp1.Length;
+            s.azTemp1 = azTemp1[azTemp1.Length - 1];
+            s.azTemp2 = 0;
+            s.elTemp1 = elTemp1[elTemp1.Length - 1];
+            s.elTemp2 = 0;
+            s.azAdxlData = azAdxlData[azAdxlData.Length - 1];
+            s.elAdxlData = elAdxlData[elAdxlData.Length - 1];
+            s.cbAdxlData = cbAdxlData[cbAdxlData.Length - 1];
+            s.orientation = new Orientation(azEncoder[azEncoder.Length - 1], elEncoder[elEncoder.Length - 1]);
+
+            return s;
         }
     }
 }

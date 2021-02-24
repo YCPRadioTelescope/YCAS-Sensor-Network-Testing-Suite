@@ -178,7 +178,30 @@ namespace EmbeddedSystemsTest
                                 lblLastGap.Text = "Last packet gap: " + lastPacketGap;
                             }
 
-                            // TODO: Print the sensor data out on the UI
+                            // Print the sensor data out on the UI
+                            if(radSensorData.Checked)
+                            {
+                                sensorNetwork.ParseSensorData(bytes, i);
+                                SensorData sensorData = sensorNetwork.getLatestSensorData(TemperatureUnitEnum.CELSIUS);
+
+                                lblEl1Temp.Text = "Elevation Temperature 1: " + sensorData.elTemp1;
+                                lblEl2Temp.Text = "Elevation Temperature 2: " + sensorData.elTemp2;
+                                lblAz1Temp.Text = "Azimuth Temperature 1: " + sensorData.azTemp1;
+                                lblAz2Temp.Text = "Azimuth Temperature 2: " + sensorData.azTemp2;
+                                lblAzAdxl.Text = "Azimuth accelerometer data:\n" +
+                                                    $"     X: {sensorData.azAdxlData.xAxis}\n" +
+                                                    $"     Y: {sensorData.azAdxlData.yAxis}\n" +
+                                                    $"     Z: {sensorData.azAdxlData.zAxis}";
+                                lblElAdxl.Text = "Elevation accelerometer data:\n" +
+                                                    $"     X: {sensorData.elAdxlData.xAxis}\n" +
+                                                    $"     Y: {sensorData.elAdxlData.yAxis}\n" +
+                                                    $"     Z: {sensorData.elAdxlData.zAxis}";
+                                lblCbAdxl.Text = "Counterbalance accelerometer data:\n" +
+                                                    $"     X: {sensorData.cbAdxlData.xAxis}\n" +
+                                                    $"     Y: {sensorData.cbAdxlData.yAxis}\n" +
+                                                    $"     Z: {sensorData.cbAdxlData.zAxis}";
+                                lblCurrOrientation.Text = $"Current orientation (AZ, EL): ({sensorData.orientation.Azimuth}, {sensorData.orientation.Elevation})";
+                            }
                         });
                     }
 
@@ -224,6 +247,16 @@ namespace EmbeddedSystemsTest
             PointF p2 = new PointF(470, this.Size.Height - 50);
 
             e.Graphics.DrawLine(pen, p1, p2);
+        }
+
+        private void radTCPData_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radTCPData.Checked) this.Size = new Size(493, this.Size.Height);
+        }
+
+        private void radSensorData_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radSensorData.Checked) this.Size = new Size(970, this.Size.Height);
         }
     }
 }

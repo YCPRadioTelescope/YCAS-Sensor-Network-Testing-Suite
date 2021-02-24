@@ -50,8 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SensorNetwork\AdxlData.cs" />
+    <Compile Include="SensorNetwork\TemperatureUnitEnum.cs" />
+    <Compile Include="SensorNetwork\SensorData.cs" />
     <Compile Include="SensorNetwork\SensorDataParser.cs" />
+    <Compile Include="SensorNetwork\SensorItemEnum.cs" />
     <Compile Include="tcpClientServer.cs">
       <SubType>Form</SubType>
     </Compile>

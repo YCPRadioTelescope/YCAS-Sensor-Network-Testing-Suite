@@ -64,6 +64,14 @@ namespace EmbeddedSystemsTest
             this.lblSensorData = new System.Windows.Forms.Label();
             this.radTCPData = new System.Windows.Forms.RadioButton();
             this.radSensorData = new System.Windows.Forms.RadioButton();
+            this.lblEl1Temp = new System.Windows.Forms.Label();
+            this.lblEl2Temp = new System.Windows.Forms.Label();
+            this.lblAz1Temp = new System.Windows.Forms.Label();
+            this.lblAz2Temp = new System.Windows.Forms.Label();
+            this.lblAzAdxl = new System.Windows.Forms.Label();
+            this.lblElAdxl = new System.Windows.Forms.Label();
+            this.lblCbAdxl = new System.Windows.Forms.Label();
+            this.lblCurrOrientation = new System.Windows.Forms.Label();
             this.grpStats.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -404,6 +412,7 @@ namespace EmbeddedSystemsTest
             this.radTCPData.TabIndex = 26;
             this.radTCPData.Text = "Collect TCP data";
             this.radTCPData.UseVisualStyleBackColor = true;
+            this.radTCPData.CheckedChanged += new System.EventHandler(this.radTCPData_CheckedChanged);
             // 
             // radSensorData
             // 
@@ -416,12 +425,93 @@ namespace EmbeddedSystemsTest
             this.radSensorData.TabStop = true;
             this.radSensorData.Text = "Collect sensor data";
             this.radSensorData.UseVisualStyleBackColor = true;
+            this.radSensorData.CheckedChanged += new System.EventHandler(this.radSensorData_CheckedChanged);
+            // 
+            // lblEl1Temp
+            // 
+            this.lblEl1Temp.AutoSize = true;
+            this.lblEl1Temp.Location = new System.Drawing.Point(504, 49);
+            this.lblEl1Temp.Name = "lblEl1Temp";
+            this.lblEl1Temp.Size = new System.Drawing.Size(126, 13);
+            this.lblEl1Temp.TabIndex = 28;
+            this.lblEl1Temp.Text = "Elevation Temperature 1:";
+            // 
+            // lblEl2Temp
+            // 
+            this.lblEl2Temp.AutoSize = true;
+            this.lblEl2Temp.Location = new System.Drawing.Point(504, 72);
+            this.lblEl2Temp.Name = "lblEl2Temp";
+            this.lblEl2Temp.Size = new System.Drawing.Size(126, 13);
+            this.lblEl2Temp.TabIndex = 29;
+            this.lblEl2Temp.Text = "Elevation Temperature 2:";
+            // 
+            // lblAz1Temp
+            // 
+            this.lblAz1Temp.AutoSize = true;
+            this.lblAz1Temp.Location = new System.Drawing.Point(504, 96);
+            this.lblAz1Temp.Name = "lblAz1Temp";
+            this.lblAz1Temp.Size = new System.Drawing.Size(119, 13);
+            this.lblAz1Temp.TabIndex = 30;
+            this.lblAz1Temp.Text = "Azimuth Temperature 1:";
+            // 
+            // lblAz2Temp
+            // 
+            this.lblAz2Temp.AutoSize = true;
+            this.lblAz2Temp.Location = new System.Drawing.Point(504, 119);
+            this.lblAz2Temp.Name = "lblAz2Temp";
+            this.lblAz2Temp.Size = new System.Drawing.Size(119, 13);
+            this.lblAz2Temp.TabIndex = 31;
+            this.lblAz2Temp.Text = "Azimuth Temperature 2:";
+            // 
+            // lblAzAdxl
+            // 
+            this.lblAzAdxl.AutoSize = true;
+            this.lblAzAdxl.Location = new System.Drawing.Point(504, 141);
+            this.lblAzAdxl.Name = "lblAzAdxl";
+            this.lblAzAdxl.Size = new System.Drawing.Size(141, 52);
+            this.lblAzAdxl.TabIndex = 32;
+            this.lblAzAdxl.Text = "Azimuth accelerometer data:\r\n     X:\r\n     Y: \r\n     Z:";
+            // 
+            // lblElAdxl
+            // 
+            this.lblElAdxl.AutoSize = true;
+            this.lblElAdxl.Location = new System.Drawing.Point(504, 206);
+            this.lblElAdxl.Name = "lblElAdxl";
+            this.lblElAdxl.Size = new System.Drawing.Size(148, 52);
+            this.lblElAdxl.TabIndex = 33;
+            this.lblElAdxl.Text = "Elevation accelerometer data:\r\n     X:\r\n     Y: \r\n     Z:";
+            // 
+            // lblCbAdxl
+            // 
+            this.lblCbAdxl.AutoSize = true;
+            this.lblCbAdxl.Location = new System.Drawing.Point(504, 268);
+            this.lblCbAdxl.Name = "lblCbAdxl";
+            this.lblCbAdxl.Size = new System.Drawing.Size(179, 52);
+            this.lblCbAdxl.TabIndex = 34;
+            this.lblCbAdxl.Text = "Counterbalance accelerometer data:\r\n     X:\r\n     Y: \r\n     Z:";
+            // 
+            // lblCurrOrientation
+            // 
+            this.lblCurrOrientation.AutoSize = true;
+            this.lblCurrOrientation.Location = new System.Drawing.Point(504, 339);
+            this.lblCurrOrientation.Name = "lblCurrOrientation";
+            this.lblCurrOrientation.Size = new System.Drawing.Size(141, 13);
+            this.lblCurrOrientation.TabIndex = 35;
+            this.lblCurrOrientation.Text = "Current orientation (AZ, EL): ";
             // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 390);
+            this.Controls.Add(this.lblCurrOrientation);
+            this.Controls.Add(this.lblCbAdxl);
+            this.Controls.Add(this.lblElAdxl);
+            this.Controls.Add(this.lblAzAdxl);
+            this.Controls.Add(this.lblAz2Temp);
+            this.Controls.Add(this.lblAz1Temp);
+            this.Controls.Add(this.lblEl2Temp);
+            this.Controls.Add(this.lblEl1Temp);
             this.Controls.Add(this.radSensorData);
             this.Controls.Add(this.radTCPData);
             this.Controls.Add(this.lblSensorData);
@@ -500,6 +590,14 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.Label lblSensorData;
         private System.Windows.Forms.RadioButton radTCPData;
         private System.Windows.Forms.RadioButton radSensorData;
+        private System.Windows.Forms.Label lblEl1Temp;
+        private System.Windows.Forms.Label lblEl2Temp;
+        private System.Windows.Forms.Label lblAz1Temp;
+        private System.Windows.Forms.Label lblAz2Temp;
+        private System.Windows.Forms.Label lblAzAdxl;
+        private System.Windows.Forms.Label lblElAdxl;
+        private System.Windows.Forms.Label lblCbAdxl;
+        private System.Windows.Forms.Label lblCurrOrientation;
     }
 }
 

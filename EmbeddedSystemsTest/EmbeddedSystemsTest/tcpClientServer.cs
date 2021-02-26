@@ -32,11 +32,18 @@ namespace EmbeddedSystemsTest
 
             runListenerThread = false;
             sensorNetwork = new SensorDataParser();
+
+            //Set default values
+            txtListenIp.Text = "192.168.0.10";
+            txtListenPort.Text = "1600";
+            txtClientIp.Text = "192.168.0.197";
+            txtClientPort.Text = "1680";
+            txtClientData.Text = "100000111";
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void lblStartListen_Click(object sender, EventArgs e)
@@ -69,17 +76,19 @@ namespace EmbeddedSystemsTest
             if (!Validator.isPort(txtClientPort.Text)) errorStr += "Client port is invalid\n";
             if (errorStr.Equals("") && !Validator.clientIpExists(txtClientIp.Text, int.Parse(txtClientPort.Text))) errorStr += $"Could not find server at {txtClientIp.Text}:{txtClientPort.Text}\n";
             if (txtClientData.Text.Equals("")) errorStr += "No data is present\n";
+            byte[] test = new byte[9] { 1, 0, 0, 0, 0, 0, 1, 1, 1 };
             if (errorStr.Equals(""))
             {
-                clientThread = new Thread(() => clientProcess(txtClientIp.Text, 
-                                                                int.Parse(txtClientPort.Text), 
-                                                                Encoding.ASCII.GetBytes(txtClientData.Text)));
+                clientThread = new Thread(() => clientProcess(txtClientIp.Text,
+                                                                int.Parse(txtClientPort.Text),
+                                                                test));
                 clientThread.Start();
             }
             else MessageBox.Show(errorStr, "Error");
         }
 
-        private void clientProcess(string addr, int port, byte[] data) {
+        private void clientProcess(string addr, int port, byte[] data)
+        {
             client = new TcpClient(addr, port);
 
             NetworkStream stream = client.GetStream();
@@ -100,10 +109,14 @@ namespace EmbeddedSystemsTest
             client.Dispose();
         }
 
-        private void listenerProcess(IPAddress addr, int port) {
+        private void listenerProcess(IPAddress addr, int port)
+        {
             server = new TcpListener(addr, port);
             server.Start();
             runListenerThread = true;
+
+            TcpClient localClient;
+            NetworkStream stream;
 
             byte[] bytes = new byte[2048];
             int totalPackets = 0;
@@ -115,19 +128,27 @@ namespace EmbeddedSystemsTest
             long highPacketGap = 0;
             long totalPacketGap = 0;
 
+            //Verify connection
+            localClient = server.AcceptTcpClient();
+            Utilities.WriteToGUIFromThread(this, () =>
+            {
+                lblListenConnected.Text = "Received data.";
+            });
+            stream = localClient.GetStream();
+
+            int count = stream.Read(bytes, 0, bytes.Length);
+            string response = Encoding.ASCII.GetString(bytes, 0, count);
+            Utilities.WriteToGUIFromThread(this, () =>
+            {
+                txtReceived.Text = response;
+            });
+
             while (runListenerThread)
             {
-                TcpClient localClient;
-                NetworkStream stream;
 
-                try { 
-                    
-                    localClient = server.AcceptTcpClient();
-                    Utilities.WriteToGUIFromThread(this, () => 
-                    {
-                        lblListenConnected.Text = "Received data.";
-                    });
-                    stream = localClient.GetStream();
+
+                try
+                {
 
                     int i;
 
@@ -152,12 +173,12 @@ namespace EmbeddedSystemsTest
                         stopWatch.Start();
 
                         stream.Write(bytes, 0, bytes.Length);
-                                            
+
                         Utilities.WriteToGUIFromThread(this, () =>
                         {
                             if (chkAccumulateServer.Checked)
                             {
-                                if(!radSensorData.Checked) txtReceived.Text = txtReceived.Text + Encoding.ASCII.GetString(bytes, 0, i) + "\r\n";
+                                if (!radSensorData.Checked) txtReceived.Text = txtReceived.Text + Encoding.ASCII.GetString(bytes, 0, i) + "\r\n";
                                 else txtReceived.Text = txtReceived.Text + sensorNetwork.getTransmitId();
                             }
                             else
@@ -179,7 +200,7 @@ namespace EmbeddedSystemsTest
                             }
 
                             // Print the sensor data out on the UI
-                            if(radSensorData.Checked)
+                            if (radSensorData.Checked)
                             {
                                 // Check the temp unit
                                 TemperatureUnitEnum tempUnit = TemperatureUnitEnum.NONE;
@@ -190,7 +211,10 @@ namespace EmbeddedSystemsTest
 
                                 sensorNetwork.ParseSensorData(bytes, i);
                                 SensorData sensorData = sensorNetwork.getLatestSensorData(tempUnit);
+
                                 lblEl1Temp.Text = $"Elevation Temperature 1: {sensorData.elTemp1} {tempUnitSym}";
+
+
                                 lblAz1Temp.Text = $"Azimuth Temperature 1: {sensorData.azTemp1} {tempUnitSym}";
                                 lblAzAdxl.Text = "Azimuth accelerometer data:\n" +
                                                     $"     X: {sensorData.azAdxlData.xAxis}\n" +
@@ -204,7 +228,12 @@ namespace EmbeddedSystemsTest
                                                     $"     X: {sensorData.cbAdxlData.xAxis}\n" +
                                                     $"     Y: {sensorData.cbAdxlData.yAxis}\n" +
                                                     $"     Z: {sensorData.cbAdxlData.zAxis}";
-                                lblCurrOrientation.Text = $"Current orientation (AZ, EL): ({sensorData.orientation.Azimuth}, {sensorData.orientation.Elevation})";
+                                if (sensorData.orientation != null)
+                                {
+                                    lblCurrOrientation.Text = $"Current orientation (AZ, EL): ({sensorData.orientation.Azimuth}, {sensorData.orientation.Elevation})";
+
+                                }
+
                             }
                         });
                     }
@@ -214,7 +243,8 @@ namespace EmbeddedSystemsTest
                     stream.Close();
                     stream.Dispose();
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     Console.WriteLine(e);
                 }
             }

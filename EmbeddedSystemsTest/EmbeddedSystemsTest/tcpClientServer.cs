@@ -68,7 +68,7 @@ namespace EmbeddedSystemsTest
             string errorStr = "";
             if (!Validator.ipValid(txtClientIp.Text)) errorStr += "Client IP address is invalid\n";
             if (!Validator.isPort(txtClientPort.Text)) errorStr += "Client port is invalid\n";
-            if (errorStr.Equals("") && !Validator.clientIpExists(txtClientIp.Text, int.Parse(txtClientPort.Text))) errorStr += $"Could not find server at {txtClientIp.Text}:{txtClientPort.Text}\n";
+            //if (errorStr.Equals("") && !Validator.clientIpExists(txtClientIp.Text, int.Parse(txtClientPort.Text))) errorStr += $"Could not find server at {txtClientIp.Text}:{txtClientPort.Text}\n";
             if (txtClientData.Text.Equals("")) errorStr += "No data is present\n";
             if (errorStr.Equals(""))
             {

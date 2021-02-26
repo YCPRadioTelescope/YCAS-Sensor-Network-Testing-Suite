@@ -28,6 +28,14 @@ namespace EmbeddedSystemsTest
             InitializeComponent();
 
             runListenerThread = false;
+
+            //Set default values
+            txtListenIp.Text = "192.168.0.10";
+            txtListenPort.Text = "1600";
+            txtClientIp.Text = "192.168.0.197";
+            txtClientPort.Text = "1680";
+            txtClientData.Text = "Test";
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -60,7 +68,7 @@ namespace EmbeddedSystemsTest
             string errorStr = "";
             if (!Validator.ipValid(txtClientIp.Text)) errorStr += "Client IP address is invalid\n";
             if (!Validator.isPort(txtClientPort.Text)) errorStr += "Client port is invalid\n";
-            if (errorStr.Equals("") && !Validator.clientIpExists(txtClientIp.Text, int.Parse(txtClientPort.Text))) errorStr += $"Could not find server at {txtClientIp.Text}:{txtClientPort.Text}\n";
+            //if (errorStr.Equals("") && !Validator.clientIpExists(txtClientIp.Text, int.Parse(txtClientPort.Text))) errorStr += $"Could not find server at {txtClientIp.Text}:{txtClientPort.Text}\n";
             if (txtClientData.Text.Equals("")) errorStr += "No data is present\n";
             if (errorStr.Equals(""))
             {

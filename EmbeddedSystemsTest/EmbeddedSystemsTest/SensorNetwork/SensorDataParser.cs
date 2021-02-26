@@ -32,7 +32,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
             UInt16 elEncoderSize = (UInt16)(bytes[15] << 8 | bytes[16]);
             UInt16 azEncoderSize = (UInt16)(bytes[17] << 8 | bytes[18]);
 
-            if(buffer >= dataSize)
+            if (buffer >= dataSize)
             {
                 int k = 19;
 
@@ -116,16 +116,46 @@ namespace EmbeddedSystemsTest.SensorNetwork
         {
             SensorData s = new SensorData();
 
-            s.azTemp1 = ConvertRawTempToUnit(azTemp1[azTemp1.Length - 1], tempUnit);
-            s.azTemp2 = ConvertRawTempToUnit(0, tempUnit);
-            s.elTemp1 = ConvertRawTempToUnit(elTemp1[elTemp1.Length - 1], tempUnit);
-            s.elTemp2 = ConvertRawTempToUnit(0, tempUnit);
-            s.azAdxlData = azAdxlData[azAdxlData.Length - 1];
-            s.elAdxlData = elAdxlData[elAdxlData.Length - 1];
-            s.cbAdxlData = cbAdxlData[cbAdxlData.Length - 1];
-            s.orientation = new Orientation(
-                ConvertAzPositionToDegrees(azEncoder[azEncoder.Length - 1]), 
-                ConvertElPositionToDegrees(elEncoder[elEncoder.Length - 1]));
+            if (azTemp1 != null && azTemp1.Length != 0)
+            {
+                s.azTemp1 = ConvertRawTempToUnit(azTemp1[azTemp1.Length - 1], tempUnit);
+
+            }
+            if (azTemp2 != null && azTemp2.Length != 0)
+            {
+                s.azTemp2 = ConvertRawTempToUnit(0, tempUnit);
+
+            }
+            if (elTemp1 != null && elTemp1.Length != 0)
+            {
+                s.elTemp1 = ConvertRawTempToUnit(elTemp1[elTemp1.Length - 1], tempUnit);
+
+            }
+            if (elTemp2 != null && elTemp2.Length != 0)
+            {
+                s.elTemp2 = ConvertRawTempToUnit(0, tempUnit);
+
+            }
+            if (azAdxlData != null && azAdxlData.Length != 0)
+            {
+                s.azAdxlData = azAdxlData[azAdxlData.Length - 1];
+
+            }
+            if (elAdxlData != null && elAdxlData.Length != 0)
+            {
+                s.elAdxlData = elAdxlData[elAdxlData.Length - 1];
+
+            }
+            if (cbAdxlData != null && cbAdxlData.Length != 0)
+            {
+                s.cbAdxlData = cbAdxlData[cbAdxlData.Length - 1];
+
+            }
+
+            if (azEncoder != null && azEncoder.Length != 0 && elEncoder != null && elEncoder.Length != 0)
+                s.orientation = new Orientation(
+                    ConvertAzPositionToDegrees(azEncoder[azEncoder.Length - 1]),
+                    ConvertElPositionToDegrees(elEncoder[elEncoder.Length - 1]));
 
             return s;
         }

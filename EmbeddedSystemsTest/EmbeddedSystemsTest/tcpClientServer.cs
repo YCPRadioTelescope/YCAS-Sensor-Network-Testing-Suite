@@ -105,7 +105,7 @@ namespace EmbeddedSystemsTest
             server.Start();
             runListenerThread = true;
 
-            byte[] bytes = new byte[256];
+            byte[] bytes = new byte[2048];
             int totalPackets = 0;
             Stopwatch stopWatch = new Stopwatch();
 

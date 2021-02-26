@@ -1,9 +1,10 @@
-﻿using System;
+﻿using EmbeddedSystemsTest.SensorNetwork;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -23,11 +24,14 @@ namespace EmbeddedSystemsTest
         Thread clientThread;
         TcpClient client;
 
+        SensorDataParser sensorNetwork;
+
         public frmTcpTest()
         {
             InitializeComponent();
 
             runListenerThread = false;
+            sensorNetwork = new SensorDataParser();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -48,6 +52,9 @@ namespace EmbeddedSystemsTest
 
                 btnKillListen.Enabled = true;
                 btnStartListen.Enabled = false;
+
+                radSensorData.Enabled = false;
+                radTCPData.Enabled = false;
 
                 listenerThread = new Thread(() => listenerProcess(IPAddress.Parse(txtListenIp.Text), int.Parse(txtListenPort.Text)));
                 listenerThread.Start();
@@ -81,8 +88,11 @@ namespace EmbeddedSystemsTest
 
             int bytes = stream.Read(data, 0, data.Length);
             string response = Encoding.ASCII.GetString(data, 0, bytes);
-
-            Utilities.writeToTextFromThread(this, txtResponse, response, chkAccumulateClient.Checked);
+            Utilities.WriteToGUIFromThread(this, () =>
+            {
+                if (chkAccumulateClient.Checked) txtResponse.Text = txtResponse.Text + response + "\r\n";
+                else txtResponse.Text = response;
+            });
 
             stream.Close();
             stream.Dispose();
@@ -95,8 +105,17 @@ namespace EmbeddedSystemsTest
             server.Start();
             runListenerThread = true;
 
+            byte[] bytes = new byte[256];
+            int totalPackets = 0;
+            Stopwatch stopWatch = new Stopwatch();
 
-            while(runListenerThread)
+            long lastPacketGap = 0;
+            long lowPacketGap = long.MaxValue;
+            long avgPacketGap = 0;
+            long highPacketGap = 0;
+            long totalPacketGap = 0;
+
+            while (runListenerThread)
             {
                 TcpClient localClient;
                 NetworkStream stream;
@@ -104,115 +123,90 @@ namespace EmbeddedSystemsTest
                 try { 
                     
                     localClient = server.AcceptTcpClient();
-                    Utilities.writeToLabelFromThread(this, lblListenConnected, "Received data.");
+                    Utilities.WriteToGUIFromThread(this, () => 
+                    {
+                        lblListenConnected.Text = "Received data.";
+                    });
                     stream = localClient.GetStream();
-
-                    // Reads NetworkStream into a byte buffer.
-                    byte[] bytes = new byte[localClient.ReceiveBufferSize];
 
                     int i;
 
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                     {
+                        totalPackets++;
 
-                        StringBuilder displayText = new StringBuilder();
-                        //stream.Write(bytes, 0, bytes.Length);
-                        string transmitID = bytes[0].ToString();
-                        UInt32 dataSize = (UInt32)(bytes[1] << 24 | bytes[2] << 16 | bytes[3] << 8 | bytes[4]);
-                        UInt16 elAdxlSize = (UInt16)(bytes[5] << 8 | bytes[6]);
-                        UInt16 azAdxlSize = (UInt16)(bytes[7] << 8 | bytes[8]);
-                        UInt16 cbAdxlSize = (UInt16)(bytes[9] << 8 | bytes[10]);
-                        UInt16 elTempSensorSize = (UInt16)(bytes[11] << 8 | bytes[12]);
-                        UInt16 azTempSensorSize = (UInt16)(bytes[13] << 8 | bytes[14]);
-                        UInt16 elEncoderSize = (UInt16)(bytes[15] << 8 | bytes[16]);
-                        UInt16 azEncoderSize = (UInt16)(bytes[17] << 8 | bytes[18]);
-
-                        /*
-                        int k = 0;
-
-                        int test;
-                        for(int j = 0; j < dataSize; j++)
+                        // If this code is reached, then it means another packet came through and we can calculate the gap
+                        if (stopWatch.IsRunning)
                         {
-                            //test = (bytes[k++] << 8 | bytes[k++]);
-                            displayText.AppendFormat("{0:x2}",bytes[k++]);
-                            displayText.Append(" ");
-                            if (k % 10 == 0)
-                            {
-                                displayText.AppendLine();
-                            }
+                            stopWatch.Stop();
+                            totalPacketGap += lastPacketGap;
+                            lastPacketGap = stopWatch.ElapsedMilliseconds;
+
+                            if (lastPacketGap < lowPacketGap) lowPacketGap = lastPacketGap;
+                            if (lastPacketGap > highPacketGap) highPacketGap = lastPacketGap;
+
+                            avgPacketGap = totalPacketGap / totalPackets;
+
+                            stopWatch.Reset();
                         }
-                        File.WriteAllText("SensorData.txt",displayText.ToString());
-                        */
-                        if (i >= dataSize)
+                        stopWatch.Start();
+
+                        stream.Write(bytes, 0, bytes.Length);
+                                            
+                        Utilities.WriteToGUIFromThread(this, () =>
                         {
-                            int k = 19;
-                            AdxlData[] elAdxlData = new AdxlData[elAdxlSize];
-                            for (int j = 0; j < elAdxlSize; j++)
+                            if (chkAccumulateServer.Checked)
                             {
-                                elAdxlData[j] = new AdxlData()
-                                {
-                                    xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                                    yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                                    zAxis = (short)(bytes[k++] << 8 | bytes[k++])
-                                };
-
+                                if(!radSensorData.Checked) txtReceived.Text = txtReceived.Text + Encoding.ASCII.GetString(bytes, 0, i) + "\r\n";
+                                else txtReceived.Text = txtReceived.Text + sensorNetwork.getTransmitId();
+                            }
+                            else
+                            {
+                                if (!radSensorData.Checked) txtReceived.Text = Encoding.ASCII.GetString(bytes, 0, i);
+                                else txtReceived.Text = sensorNetwork.getTransmitId();
                             }
 
-                            AdxlData[] azAdxlData = new AdxlData[azAdxlSize];
-                            for (int j = 0; j < azAdxlSize; j++)
-                            {
-                                azAdxlData[j] = new AdxlData()
-                                {
-                                    xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                                    yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                                    zAxis = (short)(bytes[k++] << 8 | bytes[k++])
-                                };
+                            if (totalPackets == 1) lblFirstReceived.Text = " First received: " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss");
+                            lblDate.Text = "  Last received: " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss");
+                            lblTotalReceived.Text = " Total received: " + totalPackets;
 
+                            if (totalPackets > 1)
+                            { // TODO: Convert these to hours, minutes, seconds, milliseconds instead of just ms
+                                lblLowGap.Text = " Low packet gap: " + lowPacketGap;
+                                lblAvgGap.Text = "Avg. packet gap: " + avgPacketGap;
+                                lblHighPacketGap.Text = "High packet gap: " + highPacketGap;
+                                lblLastGap.Text = "Last packet gap: " + lastPacketGap;
                             }
 
-                            AdxlData[] cbAdxlData = new AdxlData[cbAdxlSize];
-                            for (int j = 0; j < cbAdxlSize; j++)
+                            // Print the sensor data out on the UI
+                            if(radSensorData.Checked)
                             {
-                                cbAdxlData[j] = new AdxlData()
-                                {
-                                    xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                                    yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                                    zAxis = (short)(bytes[k++] << 8 | bytes[k++])
-                                };
+                                // Check the temp unit
+                                TemperatureUnitEnum tempUnit = TemperatureUnitEnum.NONE;
+                                if (radCelsius.Checked) tempUnit = TemperatureUnitEnum.CELSIUS;
+                                else if (radFahrenheit.Checked) tempUnit = TemperatureUnitEnum.FAHRENHEIT;
+                                else if (radKelvin.Checked) tempUnit = TemperatureUnitEnum.KELVIN;
+                                string tempUnitSym = $"\u00B0{tempUnit.ToString().ToCharArray()[0]}";
 
+                                sensorNetwork.ParseSensorData(bytes, i);
+                                SensorData sensorData = sensorNetwork.getLatestSensorData(tempUnit);
+                                lblEl1Temp.Text = $"Elevation Temperature 1: {sensorData.elTemp1} {tempUnitSym}";
+                                lblAz1Temp.Text = $"Azimuth Temperature 1: {sensorData.azTemp1} {tempUnitSym}";
+                                lblAzAdxl.Text = "Azimuth accelerometer data:\n" +
+                                                    $"     X: {sensorData.azAdxlData.xAxis}\n" +
+                                                    $"     Y: {sensorData.azAdxlData.yAxis}\n" +
+                                                    $"     Z: {sensorData.azAdxlData.zAxis}";
+                                lblElAdxl.Text = "Elevation accelerometer data:\n" +
+                                                    $"     X: {sensorData.elAdxlData.xAxis}\n" +
+                                                    $"     Y: {sensorData.elAdxlData.yAxis}\n" +
+                                                    $"     Z: {sensorData.elAdxlData.zAxis}";
+                                lblCbAdxl.Text = "Counterbalance accelerometer data:\n" +
+                                                    $"     X: {sensorData.cbAdxlData.xAxis}\n" +
+                                                    $"     Y: {sensorData.cbAdxlData.yAxis}\n" +
+                                                    $"     Z: {sensorData.cbAdxlData.zAxis}";
+                                lblCurrOrientation.Text = $"Current orientation (AZ, EL): ({sensorData.orientation.Azimuth}, {sensorData.orientation.Elevation})";
                             }
-
-                            int[] elTempData = new int[elTempSensorSize];
-                            for (int j = 0; j < elTempSensorSize; j++)
-                            {
-                                elTempData[j] = (bytes[k++] << 8 | bytes[k++]);
-
-                            }
-
-                            int[] azTempData = new int[azTempSensorSize];
-                            for (int j = 0; j < azTempSensorSize; j++)
-                            {
-                                azTempData[j] = (bytes[k++] << 8 | bytes[k++]);
-
-                            }
-
-                            int[] elEncoderData = new int[elEncoderSize];
-                            for (int j = 0; j < azTempSensorSize; j++)
-                            {
-                                elEncoderData[j] = (bytes[k++] << 8 | bytes[k++]);
-
-                            }
-
-                            int[] azEncoderData = new int[azEncoderSize];
-                            for (int j = 0; j < azTempSensorSize; j++)
-                            {
-                                azEncoderData[j] = (bytes[k++] << 8 | bytes[k++]);
-
-                            }
-
-                        }
-                        Utilities.writeToTextFromThread(this, txtReceived, transmitID, chkAccumulateServer.Checked);
-                        Utilities.writeToLabelFromThread(this, lblDate, "Last received: " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss"));
+                        });
                     }
 
                     localClient.Close();
@@ -220,9 +214,8 @@ namespace EmbeddedSystemsTest
                     stream.Close();
                     stream.Dispose();
                 }
-                catch(Exception ex) {
-
-                    Console.WriteLine(ex.Message);
+                catch (Exception e) {
+                    Console.WriteLine(e);
                 }
             }
         }
@@ -236,6 +229,8 @@ namespace EmbeddedSystemsTest
             lblListenConnected.Text = "Not connected.";
             btnStartListen.Enabled = true;
             btnKillListen.Enabled = false;
+            radSensorData.Enabled = true;
+            radTCPData.Enabled = true;
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -247,12 +242,25 @@ namespace EmbeddedSystemsTest
         {
             txtResponse.Text = "";
         }
-    }
-    public class AdxlData
-    {
-        public short xAxis { get; set; }
-        public short yAxis { get; set; }
-        public short zAxis { get; set; }
 
+        private void frmTcpTest_Paint(object sender, PaintEventArgs e)
+        {
+            Pen pen = new Pen(Color.DarkGray, 1);
+
+            PointF p1 = new PointF(470, 10);
+            PointF p2 = new PointF(470, this.Size.Height - 50);
+
+            e.Graphics.DrawLine(pen, p1, p2);
+        }
+
+        private void radTCPData_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radTCPData.Checked) this.Size = new Size(493, this.Size.Height);
+        }
+
+        private void radSensorData_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radSensorData.Checked) this.Size = new Size(970, this.Size.Height);
+        }
     }
 }

@@ -204,6 +204,7 @@ namespace EmbeddedSystemsTest
             // 
             // btnStartClient
             // 
+            this.btnStartClient.Enabled = false;
             this.btnStartClient.Location = new System.Drawing.Point(354, 72);
             this.btnStartClient.Margin = new System.Windows.Forms.Padding(2);
             this.btnStartClient.Name = "btnStartClient";

@@ -297,6 +297,7 @@ namespace EmbeddedSystemsTest
             if (radTCPData.Checked)
             {
                 this.Size = new Size(493, this.Size.Height);
+                btnStartClient.Enabled = true;
                 btnStartClient.Text = "Send Data";
                 txtClientData.Enabled = true;
                 txtClientIp.Enabled = true;

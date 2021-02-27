@@ -43,17 +43,12 @@ namespace EmbeddedSystemsTest
             this.lblClientIp = new System.Windows.Forms.Label();
             this.txtClientIp = new System.Windows.Forms.TextBox();
             this.btnStartClient = new System.Windows.Forms.Button();
-            this.lblListenConnected = new System.Windows.Forms.Label();
             this.txtClientData = new System.Windows.Forms.TextBox();
-            this.lblResponse = new System.Windows.Forms.Label();
-            this.txtResponse = new System.Windows.Forms.TextBox();
             this.txtReceived = new System.Windows.Forms.TextBox();
             this.lblReceived = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
-            this.btnClearAllResponses = new System.Windows.Forms.Button();
             this.lblDate = new System.Windows.Forms.Label();
             this.chkAccumulateServer = new System.Windows.Forms.CheckBox();
-            this.chkAccumulateClient = new System.Windows.Forms.CheckBox();
             this.grpStats = new System.Windows.Forms.GroupBox();
             this.lblLastGap = new System.Windows.Forms.Label();
             this.lblHighPacketGap = new System.Windows.Forms.Label();
@@ -74,8 +69,20 @@ namespace EmbeddedSystemsTest
             this.radFahrenheit = new System.Windows.Forms.RadioButton();
             this.radCelsius = new System.Windows.Forms.RadioButton();
             this.radKelvin = new System.Windows.Forms.RadioButton();
+            this.grpSensorInit = new System.Windows.Forms.GroupBox();
+            this.chkElTemp1Init = new System.Windows.Forms.CheckBox();
+            this.chkElTemp2Init = new System.Windows.Forms.CheckBox();
+            this.chkAzTemp1Init = new System.Windows.Forms.CheckBox();
+            this.chkAzTemp2Init = new System.Windows.Forms.CheckBox();
+            this.chkElAdxlInit = new System.Windows.Forms.CheckBox();
+            this.chkAzAdxlInit = new System.Windows.Forms.CheckBox();
+            this.chkCbAdxlInit = new System.Windows.Forms.CheckBox();
+            this.chkElEncInit = new System.Windows.Forms.CheckBox();
+            this.chkAzEncInit = new System.Windows.Forms.CheckBox();
+            this.lblListenConnected = new System.Windows.Forms.Label();
             this.grpStats.SuspendLayout();
             this.grpTempUnit.SuspendLayout();
+            this.grpSensorInit.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnStartListen
@@ -195,53 +202,23 @@ namespace EmbeddedSystemsTest
             // 
             // btnStartClient
             // 
-            this.btnStartClient.Location = new System.Drawing.Point(362, 72);
+            this.btnStartClient.Location = new System.Drawing.Point(354, 72);
             this.btnStartClient.Margin = new System.Windows.Forms.Padding(2);
             this.btnStartClient.Name = "btnStartClient";
-            this.btnStartClient.Size = new System.Drawing.Size(100, 21);
+            this.btnStartClient.Size = new System.Drawing.Size(108, 21);
             this.btnStartClient.TabIndex = 6;
-            this.btnStartClient.Text = "Send Data";
+            this.btnStartClient.Text = "Update Sensor Init";
             this.btnStartClient.UseVisualStyleBackColor = true;
             this.btnStartClient.Click += new System.EventHandler(this.btnStartClient_Click);
             // 
-            // lblListenConnected
-            // 
-            this.lblListenConnected.AutoSize = true;
-            this.lblListenConnected.Location = new System.Drawing.Point(122, 74);
-            this.lblListenConnected.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblListenConnected.Name = "lblListenConnected";
-            this.lblListenConnected.Size = new System.Drawing.Size(81, 13);
-            this.lblListenConnected.TabIndex = 15;
-            this.lblListenConnected.Text = "Not connected.";
-            // 
             // txtClientData
             // 
+            this.txtClientData.Enabled = false;
             this.txtClientData.Location = new System.Drawing.Point(362, 49);
             this.txtClientData.Margin = new System.Windows.Forms.Padding(2);
             this.txtClientData.Name = "txtClientData";
             this.txtClientData.Size = new System.Drawing.Size(101, 20);
             this.txtClientData.TabIndex = 5;
-            // 
-            // lblResponse
-            // 
-            this.lblResponse.AutoSize = true;
-            this.lblResponse.Location = new System.Drawing.Point(247, 98);
-            this.lblResponse.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblResponse.Name = "lblResponse";
-            this.lblResponse.Size = new System.Drawing.Size(118, 13);
-            this.lblResponse.TabIndex = 17;
-            this.lblResponse.Text = "Responses from server:";
-            // 
-            // txtResponse
-            // 
-            this.txtResponse.Location = new System.Drawing.Point(249, 114);
-            this.txtResponse.Margin = new System.Windows.Forms.Padding(2);
-            this.txtResponse.Multiline = true;
-            this.txtResponse.Name = "txtResponse";
-            this.txtResponse.ReadOnly = true;
-            this.txtResponse.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtResponse.Size = new System.Drawing.Size(214, 98);
-            this.txtResponse.TabIndex = 18;
             // 
             // txtReceived
             // 
@@ -251,7 +228,7 @@ namespace EmbeddedSystemsTest
             this.txtReceived.Name = "txtReceived";
             this.txtReceived.ReadOnly = true;
             this.txtReceived.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtReceived.Size = new System.Drawing.Size(214, 98);
+            this.txtReceived.Size = new System.Drawing.Size(446, 98);
             this.txtReceived.TabIndex = 20;
             // 
             // lblReceived
@@ -260,9 +237,9 @@ namespace EmbeddedSystemsTest
             this.lblReceived.Location = new System.Drawing.Point(14, 98);
             this.lblReceived.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblReceived.Name = "lblReceived";
-            this.lblReceived.Size = new System.Drawing.Size(107, 13);
+            this.lblReceived.Size = new System.Drawing.Size(55, 13);
             this.lblReceived.TabIndex = 19;
-            this.lblReceived.Text = "Received from client:";
+            this.lblReceived.Text = "Event log:";
             // 
             // btnClear
             // 
@@ -271,20 +248,9 @@ namespace EmbeddedSystemsTest
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(104, 21);
             this.btnClear.TabIndex = 7;
-            this.btnClear.Text = "Clear data";
+            this.btnClear.Text = "Clear log";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
-            // 
-            // btnClearAllResponses
-            // 
-            this.btnClearAllResponses.Location = new System.Drawing.Point(249, 216);
-            this.btnClearAllResponses.Margin = new System.Windows.Forms.Padding(2);
-            this.btnClearAllResponses.Name = "btnClearAllResponses";
-            this.btnClearAllResponses.Size = new System.Drawing.Size(104, 21);
-            this.btnClearAllResponses.TabIndex = 8;
-            this.btnClearAllResponses.Text = "Clear responses";
-            this.btnClearAllResponses.UseVisualStyleBackColor = true;
-            this.btnClearAllResponses.Click += new System.EventHandler(this.btnClearAllResponses_Click);
             // 
             // lblDate
             // 
@@ -307,18 +273,6 @@ namespace EmbeddedSystemsTest
             this.chkAccumulateServer.TabIndex = 22;
             this.chkAccumulateServer.Text = "Accumulate data";
             this.chkAccumulateServer.UseVisualStyleBackColor = true;
-            // 
-            // chkAccumulateClient
-            // 
-            this.chkAccumulateClient.AutoSize = true;
-            this.chkAccumulateClient.Checked = true;
-            this.chkAccumulateClient.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAccumulateClient.Location = new System.Drawing.Point(358, 219);
-            this.chkAccumulateClient.Name = "chkAccumulateClient";
-            this.chkAccumulateClient.Size = new System.Drawing.Size(106, 17);
-            this.chkAccumulateClient.TabIndex = 23;
-            this.chkAccumulateClient.Text = "Accumulate data";
-            this.chkAccumulateClient.UseVisualStyleBackColor = true;
             // 
             // grpStats
             // 
@@ -528,11 +482,148 @@ namespace EmbeddedSystemsTest
             this.radKelvin.Text = "Kelvin";
             this.radKelvin.UseVisualStyleBackColor = true;
             // 
+            // grpSensorInit
+            // 
+            this.grpSensorInit.Controls.Add(this.chkAzEncInit);
+            this.grpSensorInit.Controls.Add(this.chkElEncInit);
+            this.grpSensorInit.Controls.Add(this.chkCbAdxlInit);
+            this.grpSensorInit.Controls.Add(this.chkAzAdxlInit);
+            this.grpSensorInit.Controls.Add(this.chkElAdxlInit);
+            this.grpSensorInit.Controls.Add(this.chkAzTemp2Init);
+            this.grpSensorInit.Controls.Add(this.chkAzTemp1Init);
+            this.grpSensorInit.Controls.Add(this.chkElTemp2Init);
+            this.grpSensorInit.Controls.Add(this.chkElTemp1Init);
+            this.grpSensorInit.Location = new System.Drawing.Point(738, 158);
+            this.grpSensorInit.Name = "grpSensorInit";
+            this.grpSensorInit.Size = new System.Drawing.Size(200, 194);
+            this.grpSensorInit.TabIndex = 3;
+            this.grpSensorInit.TabStop = false;
+            this.grpSensorInit.Text = "Sensor Initialization";
+            // 
+            // chkElTemp1Init
+            // 
+            this.chkElTemp1Init.AutoSize = true;
+            this.chkElTemp1Init.Checked = true;
+            this.chkElTemp1Init.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkElTemp1Init.Location = new System.Drawing.Point(11, 19);
+            this.chkElTemp1Init.Name = "chkElTemp1Init";
+            this.chkElTemp1Init.Size = new System.Drawing.Size(142, 17);
+            this.chkElTemp1Init.TabIndex = 0;
+            this.chkElTemp1Init.Text = "Elevation Temperature 1";
+            this.chkElTemp1Init.UseVisualStyleBackColor = true;
+            // 
+            // chkElTemp2Init
+            // 
+            this.chkElTemp2Init.AutoSize = true;
+            this.chkElTemp2Init.Checked = true;
+            this.chkElTemp2Init.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkElTemp2Init.Location = new System.Drawing.Point(11, 37);
+            this.chkElTemp2Init.Name = "chkElTemp2Init";
+            this.chkElTemp2Init.Size = new System.Drawing.Size(142, 17);
+            this.chkElTemp2Init.TabIndex = 1;
+            this.chkElTemp2Init.Text = "Elevation Temperature 2";
+            this.chkElTemp2Init.UseVisualStyleBackColor = true;
+            // 
+            // chkAzTemp1Init
+            // 
+            this.chkAzTemp1Init.AutoSize = true;
+            this.chkAzTemp1Init.Checked = true;
+            this.chkAzTemp1Init.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAzTemp1Init.Location = new System.Drawing.Point(11, 55);
+            this.chkAzTemp1Init.Name = "chkAzTemp1Init";
+            this.chkAzTemp1Init.Size = new System.Drawing.Size(135, 17);
+            this.chkAzTemp1Init.TabIndex = 2;
+            this.chkAzTemp1Init.Text = "Azimuth Temperature 1";
+            this.chkAzTemp1Init.UseVisualStyleBackColor = true;
+            // 
+            // chkAzTemp2Init
+            // 
+            this.chkAzTemp2Init.AutoSize = true;
+            this.chkAzTemp2Init.Checked = true;
+            this.chkAzTemp2Init.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAzTemp2Init.Location = new System.Drawing.Point(11, 72);
+            this.chkAzTemp2Init.Name = "chkAzTemp2Init";
+            this.chkAzTemp2Init.Size = new System.Drawing.Size(135, 17);
+            this.chkAzTemp2Init.TabIndex = 3;
+            this.chkAzTemp2Init.Text = "Azimuth Temperature 2";
+            this.chkAzTemp2Init.UseVisualStyleBackColor = true;
+            // 
+            // chkElAdxlInit
+            // 
+            this.chkElAdxlInit.AutoSize = true;
+            this.chkElAdxlInit.Checked = true;
+            this.chkElAdxlInit.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkElAdxlInit.Location = new System.Drawing.Point(11, 90);
+            this.chkElAdxlInit.Name = "chkElAdxlInit";
+            this.chkElAdxlInit.Size = new System.Drawing.Size(141, 17);
+            this.chkElAdxlInit.TabIndex = 4;
+            this.chkElAdxlInit.Text = "Elevation Accelerometer";
+            this.chkElAdxlInit.UseVisualStyleBackColor = true;
+            // 
+            // chkAzAdxlInit
+            // 
+            this.chkAzAdxlInit.AutoSize = true;
+            this.chkAzAdxlInit.Checked = true;
+            this.chkAzAdxlInit.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAzAdxlInit.Location = new System.Drawing.Point(11, 108);
+            this.chkAzAdxlInit.Name = "chkAzAdxlInit";
+            this.chkAzAdxlInit.Size = new System.Drawing.Size(134, 17);
+            this.chkAzAdxlInit.TabIndex = 5;
+            this.chkAzAdxlInit.Text = "Azimuth Accelerometer";
+            this.chkAzAdxlInit.UseVisualStyleBackColor = true;
+            // 
+            // chkCbAdxlInit
+            // 
+            this.chkCbAdxlInit.AutoSize = true;
+            this.chkCbAdxlInit.Checked = true;
+            this.chkCbAdxlInit.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCbAdxlInit.Location = new System.Drawing.Point(11, 126);
+            this.chkCbAdxlInit.Name = "chkCbAdxlInit";
+            this.chkCbAdxlInit.Size = new System.Drawing.Size(172, 17);
+            this.chkCbAdxlInit.TabIndex = 6;
+            this.chkCbAdxlInit.Text = "Counterbalance Accelerometer";
+            this.chkCbAdxlInit.UseVisualStyleBackColor = true;
+            // 
+            // chkElEncInit
+            // 
+            this.chkElEncInit.AutoSize = true;
+            this.chkElEncInit.Checked = true;
+            this.chkElEncInit.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkElEncInit.Location = new System.Drawing.Point(11, 145);
+            this.chkElEncInit.Name = "chkElEncInit";
+            this.chkElEncInit.Size = new System.Drawing.Size(113, 17);
+            this.chkElEncInit.TabIndex = 7;
+            this.chkElEncInit.Text = "Elevation Encoder";
+            this.chkElEncInit.UseVisualStyleBackColor = true;
+            // 
+            // chkAzEncInit
+            // 
+            this.chkAzEncInit.AutoSize = true;
+            this.chkAzEncInit.Checked = true;
+            this.chkAzEncInit.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAzEncInit.Location = new System.Drawing.Point(11, 163);
+            this.chkAzEncInit.Name = "chkAzEncInit";
+            this.chkAzEncInit.Size = new System.Drawing.Size(106, 17);
+            this.chkAzEncInit.TabIndex = 8;
+            this.chkAzEncInit.Text = "Azimuth Encoder";
+            this.chkAzEncInit.UseVisualStyleBackColor = true;
+            // 
+            // lblListenConnected
+            // 
+            this.lblListenConnected.AutoSize = true;
+            this.lblListenConnected.Location = new System.Drawing.Point(122, 74);
+            this.lblListenConnected.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblListenConnected.Name = "lblListenConnected";
+            this.lblListenConnected.Size = new System.Drawing.Size(81, 13);
+            this.lblListenConnected.TabIndex = 15;
+            this.lblListenConnected.Text = "Not connected.";
+            // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 390);
+            this.Controls.Add(this.grpSensorInit);
             this.Controls.Add(this.grpTempUnit);
             this.Controls.Add(this.lblCurrOrientation);
             this.Controls.Add(this.lblCbAdxl);
@@ -544,14 +635,10 @@ namespace EmbeddedSystemsTest
             this.Controls.Add(this.radTCPData);
             this.Controls.Add(this.lblSensorData);
             this.Controls.Add(this.grpStats);
-            this.Controls.Add(this.chkAccumulateClient);
             this.Controls.Add(this.chkAccumulateServer);
-            this.Controls.Add(this.btnClearAllResponses);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.txtReceived);
             this.Controls.Add(this.lblReceived);
-            this.Controls.Add(this.txtResponse);
-            this.Controls.Add(this.lblResponse);
             this.Controls.Add(this.txtClientData);
             this.Controls.Add(this.lblListenConnected);
             this.Controls.Add(this.txtClientPort);
@@ -579,6 +666,8 @@ namespace EmbeddedSystemsTest
             this.grpStats.PerformLayout();
             this.grpTempUnit.ResumeLayout(false);
             this.grpTempUnit.PerformLayout();
+            this.grpSensorInit.ResumeLayout(false);
+            this.grpSensorInit.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -599,17 +688,12 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.Label lblClientIp;
         private System.Windows.Forms.TextBox txtClientIp;
         private System.Windows.Forms.Button btnStartClient;
-        private System.Windows.Forms.Label lblListenConnected;
         private System.Windows.Forms.TextBox txtClientData;
-        private System.Windows.Forms.Label lblResponse;
-        private System.Windows.Forms.TextBox txtResponse;
         private System.Windows.Forms.TextBox txtReceived;
         private System.Windows.Forms.Label lblReceived;
         private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnClearAllResponses;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.CheckBox chkAccumulateServer;
-        private System.Windows.Forms.CheckBox chkAccumulateClient;
         private System.Windows.Forms.GroupBox grpStats;
         private System.Windows.Forms.Label lblHighPacketGap;
         private System.Windows.Forms.Label lblAvgGap;
@@ -630,6 +714,17 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.RadioButton radFahrenheit;
         private System.Windows.Forms.RadioButton radCelsius;
         private System.Windows.Forms.RadioButton radKelvin;
+        private System.Windows.Forms.GroupBox grpSensorInit;
+        private System.Windows.Forms.CheckBox chkAzEncInit;
+        private System.Windows.Forms.CheckBox chkElEncInit;
+        private System.Windows.Forms.CheckBox chkCbAdxlInit;
+        private System.Windows.Forms.CheckBox chkAzAdxlInit;
+        private System.Windows.Forms.CheckBox chkElAdxlInit;
+        private System.Windows.Forms.CheckBox chkAzTemp2Init;
+        private System.Windows.Forms.CheckBox chkAzTemp1Init;
+        private System.Windows.Forms.CheckBox chkElTemp2Init;
+        private System.Windows.Forms.CheckBox chkElTemp1Init;
+        private System.Windows.Forms.Label lblListenConnected;
     }
 }
 

@@ -64,19 +64,29 @@ namespace EmbeddedSystemsTest
 
         private void btnStartClient_Click(object sender, EventArgs e)
         {
-            string errorStr = "";
-            if (!Validator.ipValid(txtClientIp.Text)) errorStr += "Client IP address is invalid\n";
-            if (!Validator.isPort(txtClientPort.Text)) errorStr += "Client port is invalid\n";
-            if (errorStr.Equals("") && !Validator.clientIpExists(txtClientIp.Text, int.Parse(txtClientPort.Text))) errorStr += $"Could not find server at {txtClientIp.Text}:{txtClientPort.Text}\n";
-            if (txtClientData.Text.Equals("")) errorStr += "No data is present\n";
-            if (errorStr.Equals(""))
+            if (!radSensorData.Checked)
             {
-                clientThread = new Thread(() => clientProcess(txtClientIp.Text, 
-                                                                int.Parse(txtClientPort.Text), 
-                                                                Encoding.ASCII.GetBytes(txtClientData.Text)));
-                clientThread.Start();
+                string errorStr = "";
+                if (!Validator.ipValid(txtClientIp.Text)) errorStr += "Client IP address is invalid\n";
+                if (!Validator.isPort(txtClientPort.Text)) errorStr += "Client port is invalid\n";
+                if (errorStr.Equals("") && !Validator.clientIpExists(txtClientIp.Text, int.Parse(txtClientPort.Text))) errorStr += $"Could not find server at {txtClientIp.Text}:{txtClientPort.Text}\n";
+                if (txtClientData.Text.Equals("")) errorStr += "No data is present\n";
+                if (errorStr.Equals(""))
+                {
+                    if (!radSensorData.Checked) txtReceived.Text += Utilities.getCurrDate() + " - Sent to server: " + txtClientData.Text + "\r\n";
+                    else txtReceived.Text += Utilities.getCurrDate() + " - Sent to Teensy: Sensor initialization \r\n";
+
+                    clientThread = new Thread(() => clientProcess(txtClientIp.Text,
+                                                                    int.Parse(txtClientPort.Text),
+                                                                    Encoding.ASCII.GetBytes(txtClientData.Text)));
+                    clientThread.Start();
+                }
+                else MessageBox.Show(errorStr, "Error");
             }
-            else MessageBox.Show(errorStr, "Error");
+            else
+            {
+                // TODO: Implement way to update the Teensy's sensor init after first init
+            }
         }
 
         private void clientProcess(string addr, int port, byte[] data) {
@@ -90,8 +100,8 @@ namespace EmbeddedSystemsTest
             string response = Encoding.ASCII.GetString(data, 0, bytes);
             Utilities.WriteToGUIFromThread(this, () =>
             {
-                if (chkAccumulateClient.Checked) txtResponse.Text = txtResponse.Text + response + "\r\n";
-                else txtResponse.Text = response;
+                //if (!radSensorData.Checked) txtReceived.Text += Utilities.getCurrDate() + " - Received from server: " + response + "\r\n";
+                //else txtReceived.Text += Utilities.getCurrDate() + " - Received from Teensy: " + response + "\r\n";
             });
 
             stream.Close();
@@ -104,6 +114,9 @@ namespace EmbeddedSystemsTest
             server = new TcpListener(addr, port);
             server.Start();
             runListenerThread = true;
+            
+            TcpClient localClient;
+            NetworkStream stream;
 
             byte[] bytes = new byte[2048];
             int totalPackets = 0;
@@ -117,8 +130,6 @@ namespace EmbeddedSystemsTest
 
             while (runListenerThread)
             {
-                TcpClient localClient;
-                NetworkStream stream;
 
                 try { 
                     
@@ -126,6 +137,7 @@ namespace EmbeddedSystemsTest
                     Utilities.WriteToGUIFromThread(this, () => 
                     {
                         lblListenConnected.Text = "Received data.";
+                        txtReceived.Text += Utilities.getCurrDate() + " - Client connected to server\r\n";
                     });
                     stream = localClient.GetStream();
 
@@ -133,6 +145,26 @@ namespace EmbeddedSystemsTest
 
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                     {
+                        if(Encoding.ASCII.GetString(bytes, 0, i).Equals("Send Sensor Configuration") && radSensorData.Checked)
+                        {
+                            // Convert all sensor init checkboxes into byte array to send to the Teensy
+                            byte[] sensorInit = new byte[9];
+                            sensorInit[0] = chkElTemp1Init.Checked ? (byte)1 : (byte)0;
+                            sensorInit[1] = chkElTemp2Init.Checked ? (byte)1 : (byte)0;
+                            sensorInit[2] = chkAzTemp1Init.Checked ? (byte)1 : (byte)0;
+                            sensorInit[3] = chkAzTemp2Init.Checked ? (byte)1 : (byte)0;
+                            sensorInit[4] = chkElEncInit.Checked ? (byte)1 : (byte)0;
+                            sensorInit[5] = chkAzEncInit.Checked ? (byte)1 : (byte)0;
+                            sensorInit[6] = chkAzAdxlInit.Checked ? (byte)1 : (byte)0;
+                            sensorInit[7] = chkElAdxlInit.Checked ? (byte)1 : (byte)0;
+                            sensorInit[8] = chkCbAdxlInit.Checked ? (byte)1 : (byte)0;
+
+                            // now that initial data has been sent, we can allow the user to update the configuration
+                            btnStartClient.Enabled = true;
+
+                            txtReceived.Text += Utilities.getCurrDate() + " - Sent sensor configuration to Teensy\r\n";
+                        }
+
                         totalPackets++;
 
                         // If this code is reached, then it means another packet came through and we can calculate the gap
@@ -152,22 +184,23 @@ namespace EmbeddedSystemsTest
                         stopWatch.Start();
 
                         stream.Write(bytes, 0, bytes.Length);
-                                            
+
+                        // Write all the information to the GUI                                            
                         Utilities.WriteToGUIFromThread(this, () =>
                         {
                             if (chkAccumulateServer.Checked)
                             {
-                                if(!radSensorData.Checked) txtReceived.Text = txtReceived.Text + Encoding.ASCII.GetString(bytes, 0, i) + "\r\n";
-                                else txtReceived.Text = txtReceived.Text + sensorNetwork.getTransmitId();
+                                if(!radSensorData.Checked) txtReceived.Text += Utilities.getCurrDate() + " - Received TCP data from client: " + Encoding.ASCII.GetString(bytes, 0, i) + "\r\n";
+                                else txtReceived.Text += Utilities.getCurrDate() + " - Received sensor data from Teensy with transmit ID: " + sensorNetwork.getTransmitId();
                             }
                             else
                             {
-                                if (!radSensorData.Checked) txtReceived.Text = Encoding.ASCII.GetString(bytes, 0, i);
-                                else txtReceived.Text = sensorNetwork.getTransmitId();
+                                if (!radSensorData.Checked) txtReceived.Text = Utilities.getCurrDate() + " - Received TCP data from client: " + Encoding.ASCII.GetString(bytes, 0, i);
+                                else txtReceived.Text = Utilities.getCurrDate() + " - Received sensor data from Teensy with transmit ID: " + sensorNetwork.getTransmitId();
                             }
 
-                            if (totalPackets == 1) lblFirstReceived.Text = " First received: " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss");
-                            lblDate.Text = "  Last received: " + DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss");
+                            if (totalPackets == 1) lblFirstReceived.Text = " First received: " + Utilities.getCurrDate();
+                            lblDate.Text = "  Last received: " + Utilities.getCurrDate();
                             lblTotalReceived.Text = " Total received: " + totalPackets;
 
                             if (totalPackets > 1)
@@ -204,7 +237,11 @@ namespace EmbeddedSystemsTest
                                                     $"     X: {sensorData.cbAdxlData.xAxis}\n" +
                                                     $"     Y: {sensorData.cbAdxlData.yAxis}\n" +
                                                     $"     Z: {sensorData.cbAdxlData.zAxis}";
-                                lblCurrOrientation.Text = $"Current orientation (AZ, EL): ({sensorData.orientation.Azimuth}, {sensorData.orientation.Elevation})";
+
+                                if (sensorData.orientation != null)
+                                {
+                                    lblCurrOrientation.Text = $"Current orientation (AZ, EL): ({sensorData.orientation.Azimuth}, {sensorData.orientation.Elevation})";
+                                }
                             }
                         });
                     }
@@ -238,11 +275,6 @@ namespace EmbeddedSystemsTest
             txtReceived.Text = "";
         }
 
-        private void btnClearAllResponses_Click(object sender, EventArgs e)
-        {
-            txtResponse.Text = "";
-        }
-
         private void frmTcpTest_Paint(object sender, PaintEventArgs e)
         {
             Pen pen = new Pen(Color.DarkGray, 1);
@@ -255,12 +287,23 @@ namespace EmbeddedSystemsTest
 
         private void radTCPData_CheckedChanged(object sender, EventArgs e)
         {
-            if (radTCPData.Checked) this.Size = new Size(493, this.Size.Height);
+            if (radTCPData.Checked)
+            {
+                this.Size = new Size(493, this.Size.Height);
+                btnStartClient.Text = "Send Data";
+                txtClientData.Enabled = true;
+            }
         }
 
         private void radSensorData_CheckedChanged(object sender, EventArgs e)
         {
-            if (radSensorData.Checked) this.Size = new Size(970, this.Size.Height);
+            if (radSensorData.Checked)
+            {
+                this.Size = new Size(970, this.Size.Height);
+                btnStartClient.Enabled = false;
+                btnStartClient.Text = "Update Init Settings";
+                txtClientData.Enabled = false;
+            }
         }
     }
 }

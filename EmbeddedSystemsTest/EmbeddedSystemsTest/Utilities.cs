@@ -9,8 +9,6 @@ namespace EmbeddedSystemsTest
 {
     public class Utilities
     {
-        public delegate object CodeBlock();
-
         public static void WriteToGUIFromThread(frmTcpTest writeTo, Action codeBlock)
         {
             if (writeTo.InvokeRequired)
@@ -24,6 +22,11 @@ namespace EmbeddedSystemsTest
             {
                 codeBlock();
             }
+        }
+
+        public static string getCurrDate()
+        {
+            return DateTime.Now.ToString("dd MMMM yyyy; hh:mm:ss");
         }
     }
 }

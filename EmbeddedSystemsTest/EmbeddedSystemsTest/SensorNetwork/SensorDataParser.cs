@@ -35,72 +35,93 @@ namespace EmbeddedSystemsTest.SensorNetwork
                 int k = 19;
 
                 // Accelerometer 1 (elevation)
-                elAdxlData = new AdxlData[elAdxlSize];
-                for (int j = 0; j < elAdxlSize; j++)
+                if (elAdxlSize > 0)
                 {
-                    elAdxlData[j] = new AdxlData()
+                    elAdxlData = new AdxlData[elAdxlSize];
+                    for (int j = 0; j < elAdxlSize; j++)
                     {
-                        xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                        yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                        zAxis = (short)(bytes[k++] << 8 | bytes[k++])
-                    };
+                        elAdxlData[j] = new AdxlData()
+                        {
+                            xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                            yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                            zAxis = (short)(bytes[k++] << 8 | bytes[k++])
+                        };
+                    }
                 }
 
                 // Accelerometer 2 (azimuth)
-                azAdxlData = new AdxlData[azAdxlSize];
-                for (int j = 0; j < azAdxlSize; j++)
+                if (azAdxlSize > 0)
                 {
-                    azAdxlData[j] = new AdxlData()
+                    azAdxlData = new AdxlData[azAdxlSize];
+                    for (int j = 0; j < azAdxlSize; j++)
                     {
-                        xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                        yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                        zAxis = (short)(bytes[k++] << 8 | bytes[k++])
-                    };
+                        azAdxlData[j] = new AdxlData()
+                        {
+                            xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                            yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                            zAxis = (short)(bytes[k++] << 8 | bytes[k++])
+                        };
+                    }
                 }
 
                 // Accelerometer 3
-                cbAdxlData = new AdxlData[cbAdxlSize];
-                for (int j = 0; j < cbAdxlSize; j++)
+                if (cbAdxlSize > 0)
                 {
-                    cbAdxlData[j] = new AdxlData()
+                    cbAdxlData = new AdxlData[cbAdxlSize];
+                    for (int j = 0; j < cbAdxlSize; j++)
                     {
-                        xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                        yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                        zAxis = (short)(bytes[k++] << 8 | bytes[k++])
-                    };
+                        cbAdxlData[j] = new AdxlData()
+                        {
+                            xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                            yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                            zAxis = (short)(bytes[k++] << 8 | bytes[k++])
+                        };
+                    }
                 }
 
                 // Elevation temperature 1
-                elTemp1 = new int[elTempSensorSize];
-                for (int j = 0; j < elTempSensorSize; j++)
+                if (elTempSensorSize > 0)
                 {
-                    elTemp1[j] = (bytes[k++] << 8 | bytes[k++]);
+                    elTemp1 = new int[elTempSensorSize];
+                    for (int j = 0; j < elTempSensorSize; j++)
+                    {
+                        elTemp1[j] = (bytes[k++] << 8 | bytes[k++]);
+                    }
                 }
 
                 // Elevation temperature 2
 
                 // Azimuth temperature 1
-                azTemp1 = new int[azTempSensorSize];
-                for (int j = 0; j < azTempSensorSize; j++)
+                if (azTempSensorSize > 0)
                 {
-                    azTemp1[j] = (bytes[k++] << 8 | bytes[k++]);
+                    azTemp1 = new int[azTempSensorSize];
+                    for (int j = 0; j < azTempSensorSize; j++)
+                    {
+                        azTemp1[j] = (bytes[k++] << 8 | bytes[k++]);
+                    }
                 }
 
                 // Azimuth temperature 2
 
                 // Elevation encoder
-                elEncoder = new int[elEncoderSize];
-                for (int j = 0; j < azTempSensorSize; j++)
+                if (elEncoderSize > 0)
                 {
-                    elEncoder[j] = (bytes[k++] << 8 | bytes[k++]);
+                    elEncoder = new int[elEncoderSize];
+                    for (int j = 0; j < azTempSensorSize; j++)
+                    {
+                        elEncoder[j] = (bytes[k++] << 8 | bytes[k++]);
+                    }
                 }
 
                 // Azimuth encoder
-                azEncoder = new int[azEncoderSize];
-                for (int j = 0; j < azTempSensorSize; j++)
+                if (azEncoderSize > 0)
                 {
-                    azEncoder[j] = (bytes[k++] << 8 | bytes[k++]);
+                    azEncoder = new int[azEncoderSize];
+                    for (int j = 0; j < azTempSensorSize; j++)
+                    {
+                        azEncoder[j] = (bytes[k++] << 8 | bytes[k++]);
 
+                    }
                 }
             }
         }

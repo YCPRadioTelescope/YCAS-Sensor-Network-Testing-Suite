@@ -156,6 +156,7 @@ namespace EmbeddedSystemsTest
             // 
             // txtClientPort
             // 
+            this.txtClientPort.Enabled = false;
             this.txtClientPort.Location = new System.Drawing.Point(362, 27);
             this.txtClientPort.Margin = new System.Windows.Forms.Padding(2);
             this.txtClientPort.Name = "txtClientPort";
@@ -194,6 +195,7 @@ namespace EmbeddedSystemsTest
             // 
             // txtClientIp
             // 
+            this.txtClientIp.Enabled = false;
             this.txtClientIp.Location = new System.Drawing.Point(362, 5);
             this.txtClientIp.Margin = new System.Windows.Forms.Padding(2);
             this.txtClientIp.Name = "txtClientIp";

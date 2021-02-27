@@ -96,13 +96,17 @@ namespace EmbeddedSystemsTest
 
             stream.Write(data, 0, data.Length);
 
-            int bytes = stream.Read(data, 0, data.Length);
-            string response = Encoding.ASCII.GetString(data, 0, bytes);
-            Utilities.WriteToGUIFromThread(this, () =>
+            // We only want to do this if we're not collecting sensor data
+            if (!radSensorData.Checked)
             {
-                //if (!radSensorData.Checked) txtReceived.Text += Utilities.getCurrDate() + " - Received from server: " + response + "\r\n";
-                //else txtReceived.Text += Utilities.getCurrDate() + " - Received from Teensy: " + response + "\r\n";
-            });
+                int bytes = stream.Read(data, 0, data.Length);
+                string response = Encoding.ASCII.GetString(data, 0, bytes);
+                Utilities.WriteToGUIFromThread(this, () =>
+                {
+                    if (!radSensorData.Checked) txtReceived.Text += Utilities.getCurrDate() + " - Received from server: " + response + "\r\n";
+                    else txtReceived.Text += Utilities.getCurrDate() + " - Received from Teensy: " + response + "\r\n";
+                });
+            }
 
             stream.Close();
             stream.Dispose();
@@ -147,7 +151,7 @@ namespace EmbeddedSystemsTest
                     {
                         if(Encoding.ASCII.GetString(bytes, 0, i).Equals("Send Sensor Configuration") && radSensorData.Checked)
                         {
-                            // Convert all sensor init checkboxes into byte array to send to the Teensy
+                            // Convert all sensor init checkboxes into byte array
                             byte[] sensorInit = new byte[9];
                             sensorInit[0] = chkElTemp1Init.Checked ? (byte)1 : (byte)0;
                             sensorInit[1] = chkElTemp2Init.Checked ? (byte)1 : (byte)0;
@@ -158,6 +162,9 @@ namespace EmbeddedSystemsTest
                             sensorInit[6] = chkAzAdxlInit.Checked ? (byte)1 : (byte)0;
                             sensorInit[7] = chkElAdxlInit.Checked ? (byte)1 : (byte)0;
                             sensorInit[8] = chkCbAdxlInit.Checked ? (byte)1 : (byte)0;
+
+                            // Send data to the Teensy
+                            clientProcess(addr.ToString(), port + 80, sensorInit);
 
                             // now that initial data has been sent, we can allow the user to update the configuration
                             btnStartClient.Enabled = true;
@@ -292,6 +299,8 @@ namespace EmbeddedSystemsTest
                 this.Size = new Size(493, this.Size.Height);
                 btnStartClient.Text = "Send Data";
                 txtClientData.Enabled = true;
+                txtClientIp.Enabled = true;
+                txtClientPort.Enabled = true;
             }
         }
 
@@ -303,6 +312,8 @@ namespace EmbeddedSystemsTest
                 btnStartClient.Enabled = false;
                 btnStartClient.Text = "Update Init Settings";
                 txtClientData.Enabled = false;
+                txtClientIp.Enabled = false;
+                txtClientPort.Enabled = false;
             }
         }
     }

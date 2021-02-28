@@ -108,6 +108,7 @@ namespace EmbeddedSystemsTest
             else
             {
                 // TODO: Implement way to update the Teensy's sensor init after first init
+                MessageBox.Show("This is not yet implemented! This will reset the Teensy so it can take a new configuration.");
             }
         }
 
@@ -217,12 +218,12 @@ namespace EmbeddedSystemsTest
                                 if (chkAccumulateServer.Checked)
                                 {
                                     if (!radSensorData.Checked) txtReceived.Text += Utilities.getCurrDate() + " - Received TCP data from client: " + Encoding.ASCII.GetString(bytes, 0, i) + "\r\n";
-                                    else txtReceived.Text += Utilities.getCurrDate() + " - Received sensor data from Teensy with transmit ID: " + sensorNetwork.getTransmitId();
+                                    else txtReceived.Text += Utilities.getCurrDate() + " - Received sensor data from Teensy with transmit ID: " + sensorNetwork.getTransmitId() + "\r\n";
                                 }
                                 else
                                 {
-                                    if (!radSensorData.Checked) txtReceived.Text = Utilities.getCurrDate() + " - Received TCP data from client: " + Encoding.ASCII.GetString(bytes, 0, i);
-                                    else txtReceived.Text = Utilities.getCurrDate() + " - Received sensor data from Teensy with transmit ID: " + sensorNetwork.getTransmitId();
+                                    if (!radSensorData.Checked) txtReceived.Text = Utilities.getCurrDate() + " - Received TCP data from client: " + Encoding.ASCII.GetString(bytes, 0, i) + "\r\n";
+                                    else txtReceived.Text = Utilities.getCurrDate() + " - Received sensor data from Teensy with transmit ID: " + sensorNetwork.getTransmitId() + "\r\n";
                                 }
 
                                 if (totalPackets == 1) lblFirstReceived.Text = " First received: " + Utilities.getCurrDate();

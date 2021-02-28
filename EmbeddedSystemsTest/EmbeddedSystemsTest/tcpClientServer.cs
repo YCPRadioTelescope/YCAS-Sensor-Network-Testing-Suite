@@ -26,16 +26,38 @@ namespace EmbeddedSystemsTest
 
         SensorDataParser sensorNetwork;
 
+        // Statistics
+        long lastPacketGap;
+        long lowPacketGap;
+        long avgPacketGap;
+        long highPacketGap;
+        long totalPacketGap;
+        int totalPackets;
+        Stopwatch stopWatch;
+
         public frmTcpTest()
         {
             InitializeComponent();
 
             runListenerThread = false;
             sensorNetwork = new SensorDataParser();
+
+            // Init the statistics
+            lastPacketGap = 0;
+            lowPacketGap = long.MaxValue;
+            avgPacketGap = 0;
+            highPacketGap = 0;
+            totalPacketGap = 0;
+            totalPackets = 0;
+            stopWatch = new Stopwatch();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // FOR TESTING PURPOSES ONLY!!!
+            // This is so we don't have to keep typing stuff in
+            txtListenIp.Text = "192.168.0.10";
+            txtListenPort.Text = "1600";
             
         }
 
@@ -123,14 +145,6 @@ namespace EmbeddedSystemsTest
             NetworkStream stream;
 
             byte[] bytes = new byte[2048];
-            int totalPackets = 0;
-            Stopwatch stopWatch = new Stopwatch();
-
-            long lastPacketGap = 0;
-            long lowPacketGap = long.MaxValue;
-            long avgPacketGap = 0;
-            long highPacketGap = 0;
-            long totalPacketGap = 0;
 
             while (runListenerThread)
             {
@@ -149,7 +163,7 @@ namespace EmbeddedSystemsTest
 
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                     {
-                        if(Encoding.ASCII.GetString(bytes, 0, i).Equals("Send Sensor Configuration") && radSensorData.Checked)
+                        if (Encoding.ASCII.GetString(bytes, 0, i).Equals("Send Sensor Configuration") && radSensorData.Checked)
                         {
                             // Convert all sensor init checkboxes into byte array
                             byte[] sensorInit = new byte[9];
@@ -164,93 +178,99 @@ namespace EmbeddedSystemsTest
                             sensorInit[8] = chkCbAdxlInit.Checked ? (byte)1 : (byte)0;
 
                             // Send data to the Teensy
-                            clientProcess(addr.ToString(), port + 80, sensorInit);
+                            clientProcess("192.168.0.197", port + 80, sensorInit);
 
-                            // now that initial data has been sent, we can allow the user to update the configuration
-                            btnStartClient.Enabled = true;
 
-                            txtReceived.Text += Utilities.getCurrDate() + " - Sent sensor configuration to Teensy\r\n";
-                        }
-
-                        totalPackets++;
-
-                        // If this code is reached, then it means another packet came through and we can calculate the gap
-                        if (stopWatch.IsRunning)
-                        {
-                            stopWatch.Stop();
-                            totalPacketGap += lastPacketGap;
-                            lastPacketGap = stopWatch.ElapsedMilliseconds;
-
-                            if (lastPacketGap < lowPacketGap) lowPacketGap = lastPacketGap;
-                            if (lastPacketGap > highPacketGap) highPacketGap = lastPacketGap;
-
-                            avgPacketGap = totalPacketGap / totalPackets;
-
-                            stopWatch.Reset();
-                        }
-                        stopWatch.Start();
-
-                        stream.Write(bytes, 0, bytes.Length);
-
-                        // Write all the information to the GUI                                            
-                        Utilities.WriteToGUIFromThread(this, () =>
-                        {
-                            if (chkAccumulateServer.Checked)
+                            Utilities.WriteToGUIFromThread(this, () =>
                             {
-                                if(!radSensorData.Checked) txtReceived.Text += Utilities.getCurrDate() + " - Received TCP data from client: " + Encoding.ASCII.GetString(bytes, 0, i) + "\r\n";
-                                else txtReceived.Text += Utilities.getCurrDate() + " - Received sensor data from Teensy with transmit ID: " + sensorNetwork.getTransmitId();
-                            }
-                            else
+                                // now that initial data has been sent, we can allow the user to update the configuration
+                                btnStartClient.Enabled = true;
+
+                                txtReceived.Text += Utilities.getCurrDate() + " - Sent sensor configuration to Teensy\r\n";
+                            });
+                        }
+                        else
+                        {
+                            totalPackets++;
+
+                            // If this code is reached, then it means another packet came through and we can calculate the gap
+                            if (stopWatch.IsRunning)
                             {
-                                if (!radSensorData.Checked) txtReceived.Text = Utilities.getCurrDate() + " - Received TCP data from client: " + Encoding.ASCII.GetString(bytes, 0, i);
-                                else txtReceived.Text = Utilities.getCurrDate() + " - Received sensor data from Teensy with transmit ID: " + sensorNetwork.getTransmitId();
+                                stopWatch.Stop();
+                                totalPacketGap += lastPacketGap;
+                                lastPacketGap = stopWatch.ElapsedMilliseconds;
+
+                                if (lastPacketGap < lowPacketGap) lowPacketGap = lastPacketGap;
+                                if (lastPacketGap > highPacketGap) highPacketGap = lastPacketGap;
+
+                                avgPacketGap = totalPacketGap / totalPackets;
+
+                                stopWatch.Reset();
                             }
+                            stopWatch.Start();
 
-                            if (totalPackets == 1) lblFirstReceived.Text = " First received: " + Utilities.getCurrDate();
-                            lblDate.Text = "  Last received: " + Utilities.getCurrDate();
-                            lblTotalReceived.Text = " Total received: " + totalPackets;
+                            stream.Write(bytes, 0, bytes.Length);
 
-                            if (totalPackets > 1)
-                            { // TODO: Convert these to hours, minutes, seconds, milliseconds instead of just ms
+                            // Write all the information to the GUI                                            
+                            Utilities.WriteToGUIFromThread(this, () =>
+                            {
+                                if (chkAccumulateServer.Checked)
+                                {
+                                    if (!radSensorData.Checked) txtReceived.Text += Utilities.getCurrDate() + " - Received TCP data from client: " + Encoding.ASCII.GetString(bytes, 0, i) + "\r\n";
+                                    else txtReceived.Text += Utilities.getCurrDate() + " - Received sensor data from Teensy with transmit ID: " + sensorNetwork.getTransmitId();
+                                }
+                                else
+                                {
+                                    if (!radSensorData.Checked) txtReceived.Text = Utilities.getCurrDate() + " - Received TCP data from client: " + Encoding.ASCII.GetString(bytes, 0, i);
+                                    else txtReceived.Text = Utilities.getCurrDate() + " - Received sensor data from Teensy with transmit ID: " + sensorNetwork.getTransmitId();
+                                }
+
+                                if (totalPackets == 1) lblFirstReceived.Text = " First received: " + Utilities.getCurrDate();
+                                lblDate.Text = "  Last received: " + Utilities.getCurrDate();
+                                lblTotalReceived.Text = " Total received: " + totalPackets;
+
+                                if (totalPackets > 1)
+                                { // TODO: Convert these to hours, minutes, seconds, milliseconds instead of just ms
                                 lblLowGap.Text = " Low packet gap: " + lowPacketGap;
-                                lblAvgGap.Text = "Avg. packet gap: " + avgPacketGap;
-                                lblHighPacketGap.Text = "High packet gap: " + highPacketGap;
-                                lblLastGap.Text = "Last packet gap: " + lastPacketGap;
-                            }
+                                    lblAvgGap.Text = "Avg. packet gap: " + avgPacketGap;
+                                    lblHighPacketGap.Text = "High packet gap: " + highPacketGap;
+                                    lblLastGap.Text = "Last packet gap: " + lastPacketGap;
+                                }
 
                             // Print the sensor data out on the UI
-                            if(radSensorData.Checked)
-                            {
+                            if (radSensorData.Checked)
+                                {
                                 // Check the temp unit
                                 TemperatureUnitEnum tempUnit = TemperatureUnitEnum.NONE;
-                                if (radCelsius.Checked) tempUnit = TemperatureUnitEnum.CELSIUS;
-                                else if (radFahrenheit.Checked) tempUnit = TemperatureUnitEnum.FAHRENHEIT;
-                                else if (radKelvin.Checked) tempUnit = TemperatureUnitEnum.KELVIN;
-                                string tempUnitSym = $"\u00B0{tempUnit.ToString().ToCharArray()[0]}";
+                                    if (radCelsius.Checked) tempUnit = TemperatureUnitEnum.CELSIUS;
+                                    else if (radFahrenheit.Checked) tempUnit = TemperatureUnitEnum.FAHRENHEIT;
+                                    else if (radKelvin.Checked) tempUnit = TemperatureUnitEnum.KELVIN;
+                                    string tempUnitSym = $"\u00B0{tempUnit.ToString().ToCharArray()[0]}";
 
-                                sensorNetwork.ParseSensorData(bytes, i);
-                                SensorData sensorData = sensorNetwork.getLatestSensorData(tempUnit);
-                                lblEl1Temp.Text = $"Elevation Temperature 1: {sensorData.elTemp1} {tempUnitSym}";
-                                lblAz1Temp.Text = $"Azimuth Temperature 1: {sensorData.azTemp1} {tempUnitSym}";
-                                lblAzAdxl.Text = "Azimuth accelerometer data:\n" +
-                                                    $"     X: {sensorData.azAdxlData.xAxis}\n" +
-                                                    $"     Y: {sensorData.azAdxlData.yAxis}\n" +
-                                                    $"     Z: {sensorData.azAdxlData.zAxis}";
-                                lblElAdxl.Text = "Elevation accelerometer data:\n" +
-                                                    $"     X: {sensorData.elAdxlData.xAxis}\n" +
-                                                    $"     Y: {sensorData.elAdxlData.yAxis}\n" +
-                                                    $"     Z: {sensorData.elAdxlData.zAxis}";
-                                lblCbAdxl.Text = "Counterbalance accelerometer data:\n" +
-                                                    $"     X: {sensorData.cbAdxlData.xAxis}\n" +
-                                                    $"     Y: {sensorData.cbAdxlData.yAxis}\n" +
-                                                    $"     Z: {sensorData.cbAdxlData.zAxis}";
+                                    sensorNetwork.ParseSensorData(bytes, i);
+                                    SensorData sensorData = sensorNetwork.getLatestSensorData(tempUnit);
+                                    lblEl1Temp.Text = $"Elevation Temperature 1: {sensorData.elTemp1} {tempUnitSym}";
+                                    lblAz1Temp.Text = $"Azimuth Temperature 1: {sensorData.azTemp1} {tempUnitSym}";
+                                    lblAzAdxl.Text = "Azimuth accelerometer data:\n" +
+                                                        $"     X: {sensorData.azAdxlData.xAxis}\n" +
+                                                        $"     Y: {sensorData.azAdxlData.yAxis}\n" +
+                                                        $"     Z: {sensorData.azAdxlData.zAxis}";
+                                    lblElAdxl.Text = "Elevation accelerometer data:\n" +
+                                                        $"     X: {sensorData.elAdxlData.xAxis}\n" +
+                                                        $"     Y: {sensorData.elAdxlData.yAxis}\n" +
+                                                        $"     Z: {sensorData.elAdxlData.zAxis}";
+                                    lblCbAdxl.Text = "Counterbalance accelerometer data:\n" +
+                                                        $"     X: {sensorData.cbAdxlData.xAxis}\n" +
+                                                        $"     Y: {sensorData.cbAdxlData.yAxis}\n" +
+                                                        $"     Z: {sensorData.cbAdxlData.zAxis}";
 
-                                if (sensorData.orientation != null)
-                                {
-                                    lblCurrOrientation.Text = $"Current orientation (AZ, EL): ({sensorData.orientation.Azimuth}, {sensorData.orientation.Elevation})";
+                                    if (sensorData.orientation != null)
+                                    {
+                                        lblCurrOrientation.Text = $"Current orientation (AZ, EL): ({sensorData.orientation.Azimuth}, {sensorData.orientation.Elevation})";
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
 
                     localClient.Close();
@@ -279,7 +299,44 @@ namespace EmbeddedSystemsTest
 
         private void btnClear_Click(object sender, EventArgs e)
         {
+            // Numeric statistics
+            lastPacketGap = 0;
+            lowPacketGap = long.MaxValue;
+            avgPacketGap = 0;
+            highPacketGap = 0;
+            totalPacketGap = 0;
+            totalPackets = 0;
+
+            // UI statistics
+            lblFirstReceived.Text = " First received: N/A";
+            lblDate.Text = "  Last received: N/A";
+            lblTotalReceived.Text = " Total received: N/A";
+            lblLowGap.Text = " Low packet gap: N/A";
+            lblAvgGap.Text = "Avg. packet gap: N/A";
+            lblHighPacketGap.Text = "High packet gap: N/A";
+            lblLastGap.Text = "Last packet gap: N/A";
             txtReceived.Text = "";
+
+            // Data
+            lblEl1Temp.Text = $"Elevation Temperature 1: N/A";
+            lblAz1Temp.Text = $"Azimuth Temperature 1: N/A";
+            lblAzAdxl.Text = "Azimuth accelerometer data:\n" +
+                                                        $"     X: N/A\n" +
+                                                        $"     Y: N/A\n" +
+                                                        $"     Z: N/A";
+            lblElAdxl.Text = "Elevation accelerometer data:\n" +
+                                                        $"     X: N/A\n" +
+                                                        $"     Y: N/A\n" +
+                                                        $"     Z: N/A";
+            lblCbAdxl.Text = "Counterbalance accelerometer data:\n" +
+                                                        $"     X: N/A\n" +
+                                                        $"     Y: N/A\n" +
+                                                        $"     Z: N/A";
+            lblCurrOrientation.Text = $"Current orientation (AZ, EL): (N/A, N/A)";
+
+            // Stopwatch
+            if (stopWatch.IsRunning) stopWatch.Stop();
+            stopWatch.Reset();
         }
 
         private void frmTcpTest_Paint(object sender, PaintEventArgs e)

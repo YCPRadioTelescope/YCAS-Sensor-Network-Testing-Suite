@@ -70,15 +70,15 @@ namespace EmbeddedSystemsTest
             this.radCelsius = new System.Windows.Forms.RadioButton();
             this.radKelvin = new System.Windows.Forms.RadioButton();
             this.grpSensorInit = new System.Windows.Forms.GroupBox();
-            this.chkElTemp1Init = new System.Windows.Forms.CheckBox();
-            this.chkElTemp2Init = new System.Windows.Forms.CheckBox();
-            this.chkAzTemp1Init = new System.Windows.Forms.CheckBox();
-            this.chkAzTemp2Init = new System.Windows.Forms.CheckBox();
-            this.chkElAdxlInit = new System.Windows.Forms.CheckBox();
-            this.chkAzAdxlInit = new System.Windows.Forms.CheckBox();
-            this.chkCbAdxlInit = new System.Windows.Forms.CheckBox();
-            this.chkElEncInit = new System.Windows.Forms.CheckBox();
             this.chkAzEncInit = new System.Windows.Forms.CheckBox();
+            this.chkElEncInit = new System.Windows.Forms.CheckBox();
+            this.chkCbAdxlInit = new System.Windows.Forms.CheckBox();
+            this.chkAzAdxlInit = new System.Windows.Forms.CheckBox();
+            this.chkElAdxlInit = new System.Windows.Forms.CheckBox();
+            this.chkAzTemp2Init = new System.Windows.Forms.CheckBox();
+            this.chkAzTemp1Init = new System.Windows.Forms.CheckBox();
+            this.chkElTemp2Init = new System.Windows.Forms.CheckBox();
+            this.chkElTemp1Init = new System.Windows.Forms.CheckBox();
             this.lblListenConnected = new System.Windows.Forms.Label();
             this.grpStats.SuspendLayout();
             this.grpTempUnit.SuspendLayout();
@@ -251,7 +251,7 @@ namespace EmbeddedSystemsTest
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(104, 21);
             this.btnClear.TabIndex = 7;
-            this.btnClear.Text = "Clear log";
+            this.btnClear.Text = "Clear log/Stats";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
@@ -392,18 +392,18 @@ namespace EmbeddedSystemsTest
             this.lblEl1Temp.AutoSize = true;
             this.lblEl1Temp.Location = new System.Drawing.Point(504, 49);
             this.lblEl1Temp.Name = "lblEl1Temp";
-            this.lblEl1Temp.Size = new System.Drawing.Size(126, 13);
+            this.lblEl1Temp.Size = new System.Drawing.Size(149, 13);
             this.lblEl1Temp.TabIndex = 28;
-            this.lblEl1Temp.Text = "Elevation Temperature 1:";
+            this.lblEl1Temp.Text = "Elevation Temperature 1: N/A\r\n";
             // 
             // lblAz1Temp
             // 
             this.lblAz1Temp.AutoSize = true;
             this.lblAz1Temp.Location = new System.Drawing.Point(504, 96);
             this.lblAz1Temp.Name = "lblAz1Temp";
-            this.lblAz1Temp.Size = new System.Drawing.Size(119, 13);
+            this.lblAz1Temp.Size = new System.Drawing.Size(142, 13);
             this.lblAz1Temp.TabIndex = 30;
-            this.lblAz1Temp.Text = "Azimuth Temperature 1:";
+            this.lblAz1Temp.Text = "Azimuth Temperature 1: N/A";
             // 
             // lblAzAdxl
             // 
@@ -412,7 +412,7 @@ namespace EmbeddedSystemsTest
             this.lblAzAdxl.Name = "lblAzAdxl";
             this.lblAzAdxl.Size = new System.Drawing.Size(141, 52);
             this.lblAzAdxl.TabIndex = 32;
-            this.lblAzAdxl.Text = "Azimuth accelerometer data:\r\n     X:\r\n     Y: \r\n     Z:";
+            this.lblAzAdxl.Text = "Azimuth accelerometer data:\r\n     X: N/A\r\n     Y: N/A\r\n     Z: N/A";
             // 
             // lblElAdxl
             // 
@@ -421,7 +421,7 @@ namespace EmbeddedSystemsTest
             this.lblElAdxl.Name = "lblElAdxl";
             this.lblElAdxl.Size = new System.Drawing.Size(148, 52);
             this.lblElAdxl.TabIndex = 33;
-            this.lblElAdxl.Text = "Elevation accelerometer data:\r\n     X:\r\n     Y: \r\n     Z:";
+            this.lblElAdxl.Text = "Elevation accelerometer data:\r\n     X: N/A\r\n     Y: N/A\r\n     Z: N/A";
             // 
             // lblCbAdxl
             // 
@@ -430,16 +430,16 @@ namespace EmbeddedSystemsTest
             this.lblCbAdxl.Name = "lblCbAdxl";
             this.lblCbAdxl.Size = new System.Drawing.Size(179, 52);
             this.lblCbAdxl.TabIndex = 34;
-            this.lblCbAdxl.Text = "Counterbalance accelerometer data:\r\n     X:\r\n     Y: \r\n     Z:";
+            this.lblCbAdxl.Text = "Counterbalance accelerometer data:\r\n     X: N/A\r\n     Y: N/A\r\n     Z: N/A";
             // 
             // lblCurrOrientation
             // 
             this.lblCurrOrientation.AutoSize = true;
             this.lblCurrOrientation.Location = new System.Drawing.Point(504, 339);
             this.lblCurrOrientation.Name = "lblCurrOrientation";
-            this.lblCurrOrientation.Size = new System.Drawing.Size(141, 13);
+            this.lblCurrOrientation.Size = new System.Drawing.Size(193, 13);
             this.lblCurrOrientation.TabIndex = 35;
-            this.lblCurrOrientation.Text = "Current orientation (AZ, EL): ";
+            this.lblCurrOrientation.Text = "Current orientation (AZ, EL): (N/A, N/A)";
             // 
             // grpTempUnit
             // 
@@ -503,89 +503,17 @@ namespace EmbeddedSystemsTest
             this.grpSensorInit.TabStop = false;
             this.grpSensorInit.Text = "Sensor Initialization";
             // 
-            // chkElTemp1Init
+            // chkAzEncInit
             // 
-            this.chkElTemp1Init.AutoSize = true;
-            this.chkElTemp1Init.Checked = true;
-            this.chkElTemp1Init.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkElTemp1Init.Location = new System.Drawing.Point(11, 19);
-            this.chkElTemp1Init.Name = "chkElTemp1Init";
-            this.chkElTemp1Init.Size = new System.Drawing.Size(142, 17);
-            this.chkElTemp1Init.TabIndex = 0;
-            this.chkElTemp1Init.Text = "Elevation Temperature 1";
-            this.chkElTemp1Init.UseVisualStyleBackColor = true;
-            // 
-            // chkElTemp2Init
-            // 
-            this.chkElTemp2Init.AutoSize = true;
-            this.chkElTemp2Init.Checked = true;
-            this.chkElTemp2Init.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkElTemp2Init.Location = new System.Drawing.Point(11, 37);
-            this.chkElTemp2Init.Name = "chkElTemp2Init";
-            this.chkElTemp2Init.Size = new System.Drawing.Size(142, 17);
-            this.chkElTemp2Init.TabIndex = 1;
-            this.chkElTemp2Init.Text = "Elevation Temperature 2";
-            this.chkElTemp2Init.UseVisualStyleBackColor = true;
-            // 
-            // chkAzTemp1Init
-            // 
-            this.chkAzTemp1Init.AutoSize = true;
-            this.chkAzTemp1Init.Checked = true;
-            this.chkAzTemp1Init.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAzTemp1Init.Location = new System.Drawing.Point(11, 55);
-            this.chkAzTemp1Init.Name = "chkAzTemp1Init";
-            this.chkAzTemp1Init.Size = new System.Drawing.Size(135, 17);
-            this.chkAzTemp1Init.TabIndex = 2;
-            this.chkAzTemp1Init.Text = "Azimuth Temperature 1";
-            this.chkAzTemp1Init.UseVisualStyleBackColor = true;
-            // 
-            // chkAzTemp2Init
-            // 
-            this.chkAzTemp2Init.AutoSize = true;
-            this.chkAzTemp2Init.Checked = true;
-            this.chkAzTemp2Init.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAzTemp2Init.Location = new System.Drawing.Point(11, 72);
-            this.chkAzTemp2Init.Name = "chkAzTemp2Init";
-            this.chkAzTemp2Init.Size = new System.Drawing.Size(135, 17);
-            this.chkAzTemp2Init.TabIndex = 3;
-            this.chkAzTemp2Init.Text = "Azimuth Temperature 2";
-            this.chkAzTemp2Init.UseVisualStyleBackColor = true;
-            // 
-            // chkElAdxlInit
-            // 
-            this.chkElAdxlInit.AutoSize = true;
-            this.chkElAdxlInit.Checked = true;
-            this.chkElAdxlInit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkElAdxlInit.Location = new System.Drawing.Point(11, 90);
-            this.chkElAdxlInit.Name = "chkElAdxlInit";
-            this.chkElAdxlInit.Size = new System.Drawing.Size(141, 17);
-            this.chkElAdxlInit.TabIndex = 4;
-            this.chkElAdxlInit.Text = "Elevation Accelerometer";
-            this.chkElAdxlInit.UseVisualStyleBackColor = true;
-            // 
-            // chkAzAdxlInit
-            // 
-            this.chkAzAdxlInit.AutoSize = true;
-            this.chkAzAdxlInit.Checked = true;
-            this.chkAzAdxlInit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAzAdxlInit.Location = new System.Drawing.Point(11, 108);
-            this.chkAzAdxlInit.Name = "chkAzAdxlInit";
-            this.chkAzAdxlInit.Size = new System.Drawing.Size(134, 17);
-            this.chkAzAdxlInit.TabIndex = 5;
-            this.chkAzAdxlInit.Text = "Azimuth Accelerometer";
-            this.chkAzAdxlInit.UseVisualStyleBackColor = true;
-            // 
-            // chkCbAdxlInit
-            // 
-            this.chkCbAdxlInit.AutoSize = true;
-            this.chkCbAdxlInit.Checked = true;
-            this.chkCbAdxlInit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkCbAdxlInit.Location = new System.Drawing.Point(11, 126);
-            this.chkCbAdxlInit.Name = "chkCbAdxlInit";
-            this.chkCbAdxlInit.Size = new System.Drawing.Size(172, 17);
-            this.chkCbAdxlInit.TabIndex = 6;
-            this.chkCbAdxlInit.Text = "Counterbalance Accelerometer";
-            this.chkCbAdxlInit.UseVisualStyleBackColor = true;
+            this.chkAzEncInit.AutoSize = true;
+            this.chkAzEncInit.Checked = true;
+            this.chkAzEncInit.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAzEncInit.Location = new System.Drawing.Point(11, 163);
+            this.chkAzEncInit.Name = "chkAzEncInit";
+            this.chkAzEncInit.Size = new System.Drawing.Size(106, 17);
+            this.chkAzEncInit.TabIndex = 8;
+            this.chkAzEncInit.Text = "Azimuth Encoder";
+            this.chkAzEncInit.UseVisualStyleBackColor = true;
             // 
             // chkElEncInit
             // 
@@ -599,17 +527,89 @@ namespace EmbeddedSystemsTest
             this.chkElEncInit.Text = "Elevation Encoder";
             this.chkElEncInit.UseVisualStyleBackColor = true;
             // 
-            // chkAzEncInit
+            // chkCbAdxlInit
             // 
-            this.chkAzEncInit.AutoSize = true;
-            this.chkAzEncInit.Checked = true;
-            this.chkAzEncInit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAzEncInit.Location = new System.Drawing.Point(11, 163);
-            this.chkAzEncInit.Name = "chkAzEncInit";
-            this.chkAzEncInit.Size = new System.Drawing.Size(106, 17);
-            this.chkAzEncInit.TabIndex = 8;
-            this.chkAzEncInit.Text = "Azimuth Encoder";
-            this.chkAzEncInit.UseVisualStyleBackColor = true;
+            this.chkCbAdxlInit.AutoSize = true;
+            this.chkCbAdxlInit.Checked = true;
+            this.chkCbAdxlInit.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCbAdxlInit.Location = new System.Drawing.Point(11, 126);
+            this.chkCbAdxlInit.Name = "chkCbAdxlInit";
+            this.chkCbAdxlInit.Size = new System.Drawing.Size(172, 17);
+            this.chkCbAdxlInit.TabIndex = 6;
+            this.chkCbAdxlInit.Text = "Counterbalance Accelerometer";
+            this.chkCbAdxlInit.UseVisualStyleBackColor = true;
+            // 
+            // chkAzAdxlInit
+            // 
+            this.chkAzAdxlInit.AutoSize = true;
+            this.chkAzAdxlInit.Checked = true;
+            this.chkAzAdxlInit.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAzAdxlInit.Location = new System.Drawing.Point(11, 108);
+            this.chkAzAdxlInit.Name = "chkAzAdxlInit";
+            this.chkAzAdxlInit.Size = new System.Drawing.Size(134, 17);
+            this.chkAzAdxlInit.TabIndex = 5;
+            this.chkAzAdxlInit.Text = "Azimuth Accelerometer";
+            this.chkAzAdxlInit.UseVisualStyleBackColor = true;
+            // 
+            // chkElAdxlInit
+            // 
+            this.chkElAdxlInit.AutoSize = true;
+            this.chkElAdxlInit.Checked = true;
+            this.chkElAdxlInit.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkElAdxlInit.Location = new System.Drawing.Point(11, 90);
+            this.chkElAdxlInit.Name = "chkElAdxlInit";
+            this.chkElAdxlInit.Size = new System.Drawing.Size(141, 17);
+            this.chkElAdxlInit.TabIndex = 4;
+            this.chkElAdxlInit.Text = "Elevation Accelerometer";
+            this.chkElAdxlInit.UseVisualStyleBackColor = true;
+            // 
+            // chkAzTemp2Init
+            // 
+            this.chkAzTemp2Init.AutoSize = true;
+            this.chkAzTemp2Init.Checked = true;
+            this.chkAzTemp2Init.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAzTemp2Init.Location = new System.Drawing.Point(11, 72);
+            this.chkAzTemp2Init.Name = "chkAzTemp2Init";
+            this.chkAzTemp2Init.Size = new System.Drawing.Size(135, 17);
+            this.chkAzTemp2Init.TabIndex = 3;
+            this.chkAzTemp2Init.Text = "Azimuth Temperature 2";
+            this.chkAzTemp2Init.UseVisualStyleBackColor = true;
+            // 
+            // chkAzTemp1Init
+            // 
+            this.chkAzTemp1Init.AutoSize = true;
+            this.chkAzTemp1Init.Checked = true;
+            this.chkAzTemp1Init.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAzTemp1Init.Location = new System.Drawing.Point(11, 55);
+            this.chkAzTemp1Init.Name = "chkAzTemp1Init";
+            this.chkAzTemp1Init.Size = new System.Drawing.Size(135, 17);
+            this.chkAzTemp1Init.TabIndex = 2;
+            this.chkAzTemp1Init.Text = "Azimuth Temperature 1";
+            this.chkAzTemp1Init.UseVisualStyleBackColor = true;
+            // 
+            // chkElTemp2Init
+            // 
+            this.chkElTemp2Init.AutoSize = true;
+            this.chkElTemp2Init.Checked = true;
+            this.chkElTemp2Init.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkElTemp2Init.Location = new System.Drawing.Point(11, 37);
+            this.chkElTemp2Init.Name = "chkElTemp2Init";
+            this.chkElTemp2Init.Size = new System.Drawing.Size(142, 17);
+            this.chkElTemp2Init.TabIndex = 1;
+            this.chkElTemp2Init.Text = "Elevation Temperature 2";
+            this.chkElTemp2Init.UseVisualStyleBackColor = true;
+            // 
+            // chkElTemp1Init
+            // 
+            this.chkElTemp1Init.AutoSize = true;
+            this.chkElTemp1Init.Checked = true;
+            this.chkElTemp1Init.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkElTemp1Init.Location = new System.Drawing.Point(11, 19);
+            this.chkElTemp1Init.Name = "chkElTemp1Init";
+            this.chkElTemp1Init.Size = new System.Drawing.Size(142, 17);
+            this.chkElTemp1Init.TabIndex = 0;
+            this.chkElTemp1Init.Text = "Elevation Temperature 1";
+            this.chkElTemp1Init.UseVisualStyleBackColor = true;
             // 
             // lblListenConnected
             // 

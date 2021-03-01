@@ -198,6 +198,7 @@ namespace EmbeddedSystemsTest
 
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                     {
+                        Console.WriteLine(i);
                         if (Encoding.ASCII.GetString(bytes, 0, i).Equals("Send Sensor Configuration") && radSensorData.Checked)
                         {
                             // Convert all sensor init checkboxes into byte array
@@ -242,8 +243,6 @@ namespace EmbeddedSystemsTest
                                 stopWatch.Reset();
                             }
                             stopWatch.Start();
-
-                            stream.Write(bytes, 0, bytes.Length);
 
                             // Write all the information to the GUI                                            
                             Utilities.WriteToGUIFromThread(this, () =>

@@ -58,6 +58,8 @@ namespace EmbeddedSystemsTest
             // This is so we don't have to keep typing stuff in
             txtListenIp.Text = "192.168.0.10";
             txtListenPort.Text = "1600";
+            txtClientIp.Text = "192.168.0.197";
+            txtClientPort.Text = "1680";
             
         }
 
@@ -67,6 +69,14 @@ namespace EmbeddedSystemsTest
             if (!Validator.ipValid(txtListenIp.Text)) errorStr += "Listener IP address is invalid\n";
             if (!Validator.isPort(txtListenPort.Text)) errorStr += "Listener port is invalid\n";
             if (errorStr.Equals("") && !Validator.serverIpExists(txtListenIp.Text, int.Parse(txtListenPort.Text))) errorStr += $"Could not start server at {txtListenIp.Text}:{txtListenPort.Text}\n";
+            
+            // Validation for the client only if we are collecting sensor data
+            if(radSensorData.Checked)
+            {
+                if (!Validator.ipValid(txtClientIp.Text)) errorStr += "Client IP address is invalid\n";
+                if (!Validator.isPort(txtClientPort.Text)) errorStr += "Client port is invalid\n";
+            }
+
             if (errorStr.Equals(""))
             {
                 lblListenRunning.Text = "Running.";
@@ -77,6 +87,15 @@ namespace EmbeddedSystemsTest
 
                 radSensorData.Enabled = false;
                 radTCPData.Enabled = false;
+
+                txtListenIp.Enabled = false;
+                txtListenPort.Enabled = false;
+
+                if(radSensorData.Checked)
+                {
+                    txtClientIp.Enabled = false;
+                    txtClientPort.Enabled = false;
+                }
 
                 listenerThread = new Thread(() => listenerProcess(IPAddress.Parse(txtListenIp.Text), int.Parse(txtListenPort.Text)));
                 listenerThread.Start();
@@ -179,7 +198,7 @@ namespace EmbeddedSystemsTest
                             sensorInit[8] = chkCbAdxlInit.Checked ? (byte)1 : (byte)0;
 
                             // Send data to the Teensy
-                            clientProcess("192.168.0.197", port + 80, sensorInit);
+                            clientProcess(txtClientIp.Text, int.Parse(txtClientPort.Text), sensorInit);
 
 
                             Utilities.WriteToGUIFromThread(this, () =>
@@ -296,6 +315,15 @@ namespace EmbeddedSystemsTest
             btnKillListen.Enabled = false;
             radSensorData.Enabled = true;
             radTCPData.Enabled = true;
+
+            txtListenIp.Enabled = true;
+            txtListenPort.Enabled = true;
+
+            if (radSensorData.Checked)
+            {
+                txtClientIp.Enabled = true;
+                txtClientPort.Enabled = true;
+            }
         }
 
         private void btnClear_Click(object sender, EventArgs e)
@@ -358,8 +386,6 @@ namespace EmbeddedSystemsTest
                 btnStartClient.Enabled = true;
                 btnStartClient.Text = "Send Data";
                 txtClientData.Enabled = true;
-                txtClientIp.Enabled = true;
-                txtClientPort.Enabled = true;
             }
         }
 
@@ -371,8 +397,6 @@ namespace EmbeddedSystemsTest
                 btnStartClient.Enabled = false;
                 btnStartClient.Text = "Update Init Settings";
                 txtClientData.Enabled = false;
-                txtClientIp.Enabled = false;
-                txtClientPort.Enabled = false;
             }
         }
     }

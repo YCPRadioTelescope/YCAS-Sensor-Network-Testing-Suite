@@ -221,6 +221,9 @@ namespace EmbeddedSystemsTest
                                 btnStartClient.Enabled = true;
 
                                 addToUiConsole("Sent sensor configuration to Teensy");
+
+                                // Since we uploaded the sensor init, remove message telling user to update it
+                                lblSensorInitChanged.Text = "";
                             });
                         }
                         else
@@ -331,10 +334,12 @@ namespace EmbeddedSystemsTest
             txtListenIp.Enabled = true;
             txtListenPort.Enabled = true;
 
+
             if (radSensorData.Checked)
             {
                 txtClientIp.Enabled = true;
                 txtClientPort.Enabled = true;
+                btnStartClient.Enabled = false;
             }
         }
 

@@ -137,12 +137,12 @@ namespace EmbeddedSystemsTest.SensorNetwork
 
             if (azTemp1 != null && azTemp1.Length != 0)
             {
-                s.azTemp1 = ConvertRawTempToUnit(azTemp1[azTemp1.Length - 1], tempUnit);
+                s.azTemp1 = Math.Round(ConvertRawTempToUnit(azTemp1[azTemp1.Length - 1], tempUnit), 2);
 
             }
             if (elTemp1 != null && elTemp1.Length != 0)
             {
-                s.elTemp1 = ConvertRawTempToUnit(elTemp1[elTemp1.Length - 1], tempUnit);
+                s.elTemp1 = Math.Round(ConvertRawTempToUnit(elTemp1[elTemp1.Length - 1], tempUnit), 2);
 
             }
             if (azAdxlData != null && azAdxlData.Length != 0)
@@ -163,8 +163,8 @@ namespace EmbeddedSystemsTest.SensorNetwork
 
             if (azEncoder != null && azEncoder.Length != 0 && elEncoder != null && elEncoder.Length != 0)
                 s.orientation = new Orientation(
-                    ConvertAzPositionToDegrees(azEncoder[azEncoder.Length - 1]),
-                    ConvertElPositionToDegrees(elEncoder[elEncoder.Length - 1]));
+                    Math.Round(ConvertAzPositionToDegrees(azEncoder[azEncoder.Length - 1]), 2),
+                    Math.Round(ConvertElPositionToDegrees(elEncoder[elEncoder.Length - 1]), 2));
 
             return s;
         }

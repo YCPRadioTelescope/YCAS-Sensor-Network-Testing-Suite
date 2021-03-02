@@ -129,8 +129,8 @@ namespace EmbeddedSystemsTest
                 if (txtClientData.Text.Equals("")) errorStr += "No data is present\n";
                 if (errorStr.Equals(""))
                 {
-                    if (!radSensorData.Checked) txtReceived.Text += Utilities.getCurrDate() + " - Sent to server: " + txtClientData.Text + "\r\n";
-                    else txtReceived.Text += Utilities.getCurrDate() + " - Sent to Teensy: Sensor initialization \r\n";
+                    if (!radSensorData.Checked) addToUiConsole("Sent to server: " + txtClientData.Text);
+                    else addToUiConsole("Sent to Teensy: Sensor initialization");
 
                     clientThread = new Thread(() => clientProcess(txtClientIp.Text,
                                                                     int.Parse(txtClientPort.Text),
@@ -160,8 +160,7 @@ namespace EmbeddedSystemsTest
                 string response = Encoding.ASCII.GetString(data, 0, bytes);
                 Utilities.WriteToGUIFromThread(this, () =>
                 {
-                    if (!radSensorData.Checked) txtReceived.Text += Utilities.getCurrDate() + " - Received from server: " + response + "\r\n";
-                    else txtReceived.Text += Utilities.getCurrDate() + " - Received from Teensy: " + response + "\r\n";
+                    addToUiConsole("Received from server: " + response);
                 });
             }
 
@@ -190,13 +189,13 @@ namespace EmbeddedSystemsTest
                     Utilities.WriteToGUIFromThread(this, () => 
                     {
                         lblListenConnected.Text = "Received data.";
-                        txtReceived.Text += Utilities.getCurrDate() + " - Client connected to server\r\n";
+                        addToUiConsole("Client connected to server");
                     });
                     stream = localClient.GetStream();
 
                     int i;
 
-                    while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+                    while ((i = stream.Read(bytes, 0, bytes.Length)) != 0 && runListenerThread)
                     {
                         Console.WriteLine(i);
                         if (Encoding.ASCII.GetString(bytes, 0, i).Equals("Send Sensor Configuration") && radSensorData.Checked)
@@ -221,7 +220,7 @@ namespace EmbeddedSystemsTest
                                 // now that initial data has been sent, we can allow the user to update the configuration
                                 btnStartClient.Enabled = true;
 
-                                txtReceived.Text += Utilities.getCurrDate() + " - Sent sensor configuration to Teensy\r\n";
+                                addToUiConsole("Sent sensor configuration to Teensy");
                             });
                         }
                         else
@@ -249,8 +248,8 @@ namespace EmbeddedSystemsTest
                             {
                                 if (chkAccumulateServer.Checked)
                                 {
-                                    if (!radSensorData.Checked) txtReceived.Text += Utilities.getCurrDate() + " - Received TCP data from client: " + Encoding.ASCII.GetString(bytes, 0, i) + "\r\n";
-                                    else txtReceived.Text += Utilities.getCurrDate() + " - Received sensor data from Teensy with transmit ID: " + sensorNetwork.getTransmitId() + "\r\n";
+                                    if (!radSensorData.Checked) addToUiConsole("Received TCP data from client: " + Encoding.ASCII.GetString(bytes, 0, i));
+                                    else addToUiConsole("Received sensor data from Teensy with transmit ID: " + sensorNetwork.getTransmitId());
                                 }
                                 else
                                 {
@@ -264,7 +263,7 @@ namespace EmbeddedSystemsTest
 
                                 if (totalPackets > 1)
                                 { // TODO: Convert these to hours, minutes, seconds, milliseconds instead of just ms
-                                lblLowGap.Text = " Low packet gap: " + lowPacketGap;
+                                    lblLowGap.Text = " Low packet gap: " + lowPacketGap;
                                     lblAvgGap.Text = "Avg. packet gap: " + avgPacketGap;
                                     lblHighPacketGap.Text = "High packet gap: " + highPacketGap;
                                     lblLastGap.Text = "Last packet gap: " + lastPacketGap;
@@ -480,6 +479,11 @@ namespace EmbeddedSystemsTest
         private void chkAzEncInit_CheckedChanged(object sender, EventArgs e)
         {
             CheckIfSensorInitHasChanged();
+        }
+
+        private void addToUiConsole(string text)
+        {
+            txtReceived.AppendText(Utilities.getCurrDate() + "; " + text + "\r\n");
         }
     }
 }

@@ -107,7 +107,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
                 if (elEncoderSize > 0)
                 {
                     elEncoder = new int[elEncoderSize];
-                    for (int j = 0; j < azTempSensorSize; j++)
+                    for (int j = 0; j < elEncoderSize; j++)
                     {
                         elEncoder[j] = (bytes[k++] << 8 | bytes[k++]);
                     }
@@ -117,7 +117,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
                 if (azEncoderSize > 0)
                 {
                     azEncoder = new int[azEncoderSize];
-                    for (int j = 0; j < azTempSensorSize; j++)
+                    for (int j = 0; j < azEncoderSize; j++)
                     {
                         azEncoder[j] = (bytes[k++] << 8 | bytes[k++]);
 

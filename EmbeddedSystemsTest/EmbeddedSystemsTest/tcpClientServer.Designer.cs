@@ -80,6 +80,7 @@ namespace EmbeddedSystemsTest
             this.chkElTemp2Init = new System.Windows.Forms.CheckBox();
             this.chkElTemp1Init = new System.Windows.Forms.CheckBox();
             this.lblListenConnected = new System.Windows.Forms.Label();
+            this.lblSensorInitChanged = new System.Windows.Forms.Label();
             this.grpStats.SuspendLayout();
             this.grpTempUnit.SuspendLayout();
             this.grpSensorInit.SuspendLayout();
@@ -512,6 +513,7 @@ namespace EmbeddedSystemsTest
             this.chkAzEncInit.TabIndex = 8;
             this.chkAzEncInit.Text = "Azimuth Encoder";
             this.chkAzEncInit.UseVisualStyleBackColor = true;
+            this.chkAzEncInit.CheckedChanged += new System.EventHandler(this.chkAzEncInit_CheckedChanged);
             // 
             // chkElEncInit
             // 
@@ -524,6 +526,7 @@ namespace EmbeddedSystemsTest
             this.chkElEncInit.TabIndex = 7;
             this.chkElEncInit.Text = "Elevation Encoder";
             this.chkElEncInit.UseVisualStyleBackColor = true;
+            this.chkElEncInit.CheckedChanged += new System.EventHandler(this.chkElEncInit_CheckedChanged);
             // 
             // chkCbAdxlInit
             // 
@@ -536,6 +539,7 @@ namespace EmbeddedSystemsTest
             this.chkCbAdxlInit.TabIndex = 6;
             this.chkCbAdxlInit.Text = "Counterbalance Accelerometer";
             this.chkCbAdxlInit.UseVisualStyleBackColor = true;
+            this.chkCbAdxlInit.CheckedChanged += new System.EventHandler(this.chkCbAdxlInit_CheckedChanged);
             // 
             // chkAzAdxlInit
             // 
@@ -548,6 +552,7 @@ namespace EmbeddedSystemsTest
             this.chkAzAdxlInit.TabIndex = 5;
             this.chkAzAdxlInit.Text = "Azimuth Accelerometer";
             this.chkAzAdxlInit.UseVisualStyleBackColor = true;
+            this.chkAzAdxlInit.CheckedChanged += new System.EventHandler(this.chkAzAdxlInit_CheckedChanged);
             // 
             // chkElAdxlInit
             // 
@@ -560,6 +565,7 @@ namespace EmbeddedSystemsTest
             this.chkElAdxlInit.TabIndex = 4;
             this.chkElAdxlInit.Text = "Elevation Accelerometer";
             this.chkElAdxlInit.UseVisualStyleBackColor = true;
+            this.chkElAdxlInit.CheckedChanged += new System.EventHandler(this.chkElAdxlInit_CheckedChanged);
             // 
             // chkAzTemp2Init
             // 
@@ -572,6 +578,7 @@ namespace EmbeddedSystemsTest
             this.chkAzTemp2Init.TabIndex = 3;
             this.chkAzTemp2Init.Text = "Azimuth Temperature 2";
             this.chkAzTemp2Init.UseVisualStyleBackColor = true;
+            this.chkAzTemp2Init.CheckedChanged += new System.EventHandler(this.chkAzTemp2Init_CheckedChanged);
             // 
             // chkAzTemp1Init
             // 
@@ -584,6 +591,7 @@ namespace EmbeddedSystemsTest
             this.chkAzTemp1Init.TabIndex = 2;
             this.chkAzTemp1Init.Text = "Azimuth Temperature 1";
             this.chkAzTemp1Init.UseVisualStyleBackColor = true;
+            this.chkAzTemp1Init.CheckedChanged += new System.EventHandler(this.chkAzTemp1Init_CheckedChanged);
             // 
             // chkElTemp2Init
             // 
@@ -596,6 +604,7 @@ namespace EmbeddedSystemsTest
             this.chkElTemp2Init.TabIndex = 1;
             this.chkElTemp2Init.Text = "Elevation Temperature 2";
             this.chkElTemp2Init.UseVisualStyleBackColor = true;
+            this.chkElTemp2Init.CheckedChanged += new System.EventHandler(this.chkElTemp2Init_CheckedChanged);
             // 
             // chkElTemp1Init
             // 
@@ -608,6 +617,7 @@ namespace EmbeddedSystemsTest
             this.chkElTemp1Init.TabIndex = 0;
             this.chkElTemp1Init.Text = "Elevation Temperature 1";
             this.chkElTemp1Init.UseVisualStyleBackColor = true;
+            this.chkElTemp1Init.CheckedChanged += new System.EventHandler(this.chkElTemp1Init_CheckedChanged);
             // 
             // lblListenConnected
             // 
@@ -619,11 +629,21 @@ namespace EmbeddedSystemsTest
             this.lblListenConnected.TabIndex = 15;
             this.lblListenConnected.Text = "Not connected.";
             // 
+            // lblSensorInitChanged
+            // 
+            this.lblSensorInitChanged.AutoSize = true;
+            this.lblSensorInitChanged.ForeColor = System.Drawing.Color.Red;
+            this.lblSensorInitChanged.Location = new System.Drawing.Point(735, 355);
+            this.lblSensorInitChanged.Name = "lblSensorInitChanged";
+            this.lblSensorInitChanged.Size = new System.Drawing.Size(0, 13);
+            this.lblSensorInitChanged.TabIndex = 37;
+            // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 390);
+            this.Controls.Add(this.lblSensorInitChanged);
             this.Controls.Add(this.grpSensorInit);
             this.Controls.Add(this.grpTempUnit);
             this.Controls.Add(this.lblCurrOrientation);
@@ -726,6 +746,7 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.CheckBox chkElTemp2Init;
         private System.Windows.Forms.CheckBox chkElTemp1Init;
         private System.Windows.Forms.Label lblListenConnected;
+        private System.Windows.Forms.Label lblSensorInitChanged;
     }
 }
 

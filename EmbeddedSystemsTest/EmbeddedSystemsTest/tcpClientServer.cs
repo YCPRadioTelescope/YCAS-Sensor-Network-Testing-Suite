@@ -35,6 +35,9 @@ namespace EmbeddedSystemsTest
         int totalPackets;
         Stopwatch stopWatch;
 
+        // Sensor initialization
+        byte[] sensorInit;
+
         public frmTcpTest()
         {
             InitializeComponent();
@@ -50,6 +53,18 @@ namespace EmbeddedSystemsTest
             totalPacketGap = 0;
             totalPackets = 0;
             stopWatch = new Stopwatch();
+
+            // Init the sensor initialization w/ checkboxes
+            sensorInit = new byte[9];
+            sensorInit[0] = chkElTemp1Init.Checked ? (byte)1 : (byte)0;
+            sensorInit[1] = chkElTemp2Init.Checked ? (byte)1 : (byte)0;
+            sensorInit[2] = chkAzTemp1Init.Checked ? (byte)1 : (byte)0;
+            sensorInit[3] = chkAzTemp2Init.Checked ? (byte)1 : (byte)0;
+            sensorInit[4] = chkElEncInit.Checked ? (byte)1 : (byte)0;
+            sensorInit[5] = chkAzEncInit.Checked ? (byte)1 : (byte)0;
+            sensorInit[6] = chkAzAdxlInit.Checked ? (byte)1 : (byte)0;
+            sensorInit[7] = chkElAdxlInit.Checked ? (byte)1 : (byte)0;
+            sensorInit[8] = chkCbAdxlInit.Checked ? (byte)1 : (byte)0;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -186,7 +201,6 @@ namespace EmbeddedSystemsTest
                         if (Encoding.ASCII.GetString(bytes, 0, i).Equals("Send Sensor Configuration") && radSensorData.Checked)
                         {
                             // Convert all sensor init checkboxes into byte array
-                            byte[] sensorInit = new byte[9];
                             sensorInit[0] = chkElTemp1Init.Checked ? (byte)1 : (byte)0;
                             sensorInit[1] = chkElTemp2Init.Checked ? (byte)1 : (byte)0;
                             sensorInit[2] = chkAzTemp1Init.Checked ? (byte)1 : (byte)0;
@@ -398,6 +412,75 @@ namespace EmbeddedSystemsTest
                 btnStartClient.Text = "Update Init Settings";
                 txtClientData.Enabled = false;
             }
+        }
+
+        private bool CheckIfSensorInitHasChanged()
+        {
+            // If the sensorInit byte array is equal to the checkboxes, the sensor init has not changed
+            if (Convert.ToBoolean(sensorInit[0]) == chkElTemp1Init.Checked &&
+                    Convert.ToBoolean(sensorInit[1]) == chkElTemp2Init.Checked &&
+                    Convert.ToBoolean(sensorInit[2]) == chkAzTemp1Init.Checked &&
+                    Convert.ToBoolean(sensorInit[3]) == chkAzTemp2Init.Checked &&
+                    Convert.ToBoolean(sensorInit[4]) == chkElEncInit.Checked &&
+                    Convert.ToBoolean(sensorInit[5]) == chkAzEncInit.Checked &&
+                    Convert.ToBoolean(sensorInit[6]) == chkAzAdxlInit.Checked &&
+                    Convert.ToBoolean(sensorInit[7]) == chkElAdxlInit.Checked &&
+                    Convert.ToBoolean(sensorInit[8]) == chkCbAdxlInit.Checked)
+            {
+                lblSensorInitChanged.Text = "";
+                return false;
+            }
+
+            lblSensorInitChanged.Text = "Sensor initialization changed.\n";
+            if (runListenerThread) lblSensorInitChanged.Text += "Please click \"Update Sensor Init\" to update.";
+            else lblSensorInitChanged.Text += "Connect to the Teensy to update.";
+            return true;
+            
+        }
+
+        private void chkElTemp1Init_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckIfSensorInitHasChanged();
+        }
+
+        private void chkElTemp2Init_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckIfSensorInitHasChanged();
+        }
+
+        private void chkAzTemp1Init_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckIfSensorInitHasChanged();
+        }
+
+        private void chkAzTemp2Init_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckIfSensorInitHasChanged();
+        }
+
+        private void chkElAdxlInit_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckIfSensorInitHasChanged();
+        }
+
+        private void chkAzAdxlInit_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckIfSensorInitHasChanged();
+        }
+
+        private void chkCbAdxlInit_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckIfSensorInitHasChanged();
+        }
+
+        private void chkElEncInit_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckIfSensorInitHasChanged();
+        }
+
+        private void chkAzEncInit_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckIfSensorInitHasChanged();
         }
     }
 }

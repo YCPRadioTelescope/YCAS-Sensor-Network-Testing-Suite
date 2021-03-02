@@ -284,25 +284,23 @@ namespace EmbeddedSystemsTest
 
                                     sensorNetwork.ParseSensorData(bytes, i);
                                     SensorData sensorData = sensorNetwork.getLatestSensorData(tempUnit);
-                                    lblEl1Temp.Text = $"Elevation Temperature 1: {sensorData.elTemp1} {tempUnitSym}";
-                                    lblAz1Temp.Text = $"Azimuth Temperature 1: {sensorData.azTemp1} {tempUnitSym}";
-                                    lblAzAdxl.Text = "Azimuth accelerometer data:\n" +
+                                    if(chkElTemp1Init.Checked) lblEl1Temp.Text = $"Elevation Temperature 1: {sensorData.elTemp1} {tempUnitSym}";
+                                    if(chkAzTemp1Init.Checked) lblAz1Temp.Text = $"Azimuth Temperature 1: {sensorData.azTemp1} {tempUnitSym}";
+                                    if(chkAzAdxlInit.Checked) lblAzAdxl.Text = "Azimuth accelerometer data:\n" +
                                                         $"     X: {sensorData.azAdxlData.xAxis}\n" +
                                                         $"     Y: {sensorData.azAdxlData.yAxis}\n" +
                                                         $"     Z: {sensorData.azAdxlData.zAxis}";
-                                    lblElAdxl.Text = "Elevation accelerometer data:\n" +
+                                    if(chkElAdxlInit.Checked) lblElAdxl.Text = "Elevation accelerometer data:\n" +
                                                         $"     X: {sensorData.elAdxlData.xAxis}\n" +
                                                         $"     Y: {sensorData.elAdxlData.yAxis}\n" +
                                                         $"     Z: {sensorData.elAdxlData.zAxis}";
-                                    lblCbAdxl.Text = "Counterbalance accelerometer data:\n" +
+                                    if(chkCbAdxlInit.Checked) lblCbAdxl.Text = "Counterbalance accelerometer data:\n" +
                                                         $"     X: {sensorData.cbAdxlData.xAxis}\n" +
                                                         $"     Y: {sensorData.cbAdxlData.yAxis}\n" +
                                                         $"     Z: {sensorData.cbAdxlData.zAxis}";
 
-                                    if (sensorData.orientation != null)
-                                    {
-                                        lblCurrOrientation.Text = $"Current orientation (AZ, EL): ({sensorData.orientation.Azimuth}, {sensorData.orientation.Elevation})";
-                                    }
+                                    if(chkAzEncInit.Checked) lblCurrAz.Text = $"Current azimuth position: {sensorData.orientation.Azimuth}";
+                                    if(chkElEncInit.Checked) lblCurrEl.Text = $"Current elevation position: {sensorData.orientation.Elevation}";
                                 }
                             });
                         }
@@ -378,7 +376,9 @@ namespace EmbeddedSystemsTest
                                                         $"     X: N/A\n" +
                                                         $"     Y: N/A\n" +
                                                         $"     Z: N/A";
-            lblCurrOrientation.Text = $"Current orientation (AZ, EL): (N/A, N/A)";
+
+            lblCurrAz.Text = $"Current azimuth position: N/A";
+            lblCurrEl.Text = $"Current elevation position: N/A";
 
             // Stopwatch
             if (stopWatch.IsRunning) stopWatch.Stop();

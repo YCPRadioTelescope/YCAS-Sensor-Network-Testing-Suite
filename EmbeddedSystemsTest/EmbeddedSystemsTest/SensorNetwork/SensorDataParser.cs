@@ -160,11 +160,12 @@ namespace EmbeddedSystemsTest.SensorNetwork
                 s.cbAdxlData = cbAdxlData[cbAdxlData.Length - 1];
 
             }
-
-            if (azEncoder != null && azEncoder.Length != 0 && elEncoder != null && elEncoder.Length != 0)
-                s.orientation = new Orientation(
-                    Math.Round(ConvertAzPositionToDegrees(azEncoder[azEncoder.Length - 1]), 2),
-                    Math.Round(ConvertElPositionToDegrees(elEncoder[elEncoder.Length - 1]), 2));
+            
+            double az = 0;
+            double el = 0;
+            if (azEncoder != null) Math.Round(ConvertAzPositionToDegrees(azEncoder[azEncoder.Length - 1]), 2);
+            if (elEncoder != null) Math.Round(ConvertElPositionToDegrees(elEncoder[elEncoder.Length - 1]), 2);
+           s.orientation = new Orientation(az, el);
 
             return s;
         }

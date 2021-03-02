@@ -64,7 +64,7 @@ namespace EmbeddedSystemsTest
             this.lblAzAdxl = new System.Windows.Forms.Label();
             this.lblElAdxl = new System.Windows.Forms.Label();
             this.lblCbAdxl = new System.Windows.Forms.Label();
-            this.lblCurrOrientation = new System.Windows.Forms.Label();
+            this.lblCurrAz = new System.Windows.Forms.Label();
             this.grpTempUnit = new System.Windows.Forms.GroupBox();
             this.radFahrenheit = new System.Windows.Forms.RadioButton();
             this.radCelsius = new System.Windows.Forms.RadioButton();
@@ -81,6 +81,7 @@ namespace EmbeddedSystemsTest
             this.chkElTemp1Init = new System.Windows.Forms.CheckBox();
             this.lblListenConnected = new System.Windows.Forms.Label();
             this.lblSensorInitChanged = new System.Windows.Forms.Label();
+            this.lblCurrEl = new System.Windows.Forms.Label();
             this.grpStats.SuspendLayout();
             this.grpTempUnit.SuspendLayout();
             this.grpSensorInit.SuspendLayout();
@@ -431,14 +432,14 @@ namespace EmbeddedSystemsTest
             this.lblCbAdxl.TabIndex = 34;
             this.lblCbAdxl.Text = "Counterbalance accelerometer data:\r\n     X: N/A\r\n     Y: N/A\r\n     Z: N/A";
             // 
-            // lblCurrOrientation
+            // lblCurrAz
             // 
-            this.lblCurrOrientation.AutoSize = true;
-            this.lblCurrOrientation.Location = new System.Drawing.Point(504, 339);
-            this.lblCurrOrientation.Name = "lblCurrOrientation";
-            this.lblCurrOrientation.Size = new System.Drawing.Size(193, 13);
-            this.lblCurrOrientation.TabIndex = 35;
-            this.lblCurrOrientation.Text = "Current orientation (AZ, EL): (N/A, N/A)";
+            this.lblCurrAz.AutoSize = true;
+            this.lblCurrAz.Location = new System.Drawing.Point(504, 339);
+            this.lblCurrAz.Name = "lblCurrAz";
+            this.lblCurrAz.Size = new System.Drawing.Size(145, 13);
+            this.lblCurrAz.TabIndex = 35;
+            this.lblCurrAz.Text = "Current azimuth position: N/A";
             // 
             // grpTempUnit
             // 
@@ -638,15 +639,25 @@ namespace EmbeddedSystemsTest
             this.lblSensorInitChanged.Size = new System.Drawing.Size(0, 13);
             this.lblSensorInitChanged.TabIndex = 37;
             // 
+            // lblCurrEl
+            // 
+            this.lblCurrEl.AutoSize = true;
+            this.lblCurrEl.Location = new System.Drawing.Point(504, 361);
+            this.lblCurrEl.Name = "lblCurrEl";
+            this.lblCurrEl.Size = new System.Drawing.Size(152, 13);
+            this.lblCurrEl.TabIndex = 38;
+            this.lblCurrEl.Text = "Current elevation position: N/A";
+            // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 390);
+            this.Controls.Add(this.lblCurrEl);
             this.Controls.Add(this.lblSensorInitChanged);
             this.Controls.Add(this.grpSensorInit);
             this.Controls.Add(this.grpTempUnit);
-            this.Controls.Add(this.lblCurrOrientation);
+            this.Controls.Add(this.lblCurrAz);
             this.Controls.Add(this.lblCbAdxl);
             this.Controls.Add(this.lblElAdxl);
             this.Controls.Add(this.lblAzAdxl);
@@ -730,7 +741,7 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.Label lblAzAdxl;
         private System.Windows.Forms.Label lblElAdxl;
         private System.Windows.Forms.Label lblCbAdxl;
-        private System.Windows.Forms.Label lblCurrOrientation;
+        private System.Windows.Forms.Label lblCurrAz;
         private System.Windows.Forms.GroupBox grpTempUnit;
         private System.Windows.Forms.RadioButton radFahrenheit;
         private System.Windows.Forms.RadioButton radCelsius;
@@ -747,6 +758,7 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.CheckBox chkElTemp1Init;
         private System.Windows.Forms.Label lblListenConnected;
         private System.Windows.Forms.Label lblSensorInitChanged;
+        private System.Windows.Forms.Label lblCurrEl;
     }
 }
 

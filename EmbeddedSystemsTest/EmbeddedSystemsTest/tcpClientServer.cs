@@ -197,7 +197,8 @@ namespace EmbeddedSystemsTest
 
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0 && runListenerThread)
                     {
-                        Console.WriteLine(i);
+                        if(!radSensorData.Checked) stream.Write(bytes, 0, bytes.Length);
+
                         if (Encoding.ASCII.GetString(bytes, 0, i).Equals("Send Sensor Configuration") && radSensorData.Checked)
                         {
                             // Convert all sensor init checkboxes into byte array
@@ -272,11 +273,11 @@ namespace EmbeddedSystemsTest
                                     lblLastGap.Text = "Last packet gap: " + lastPacketGap;
                                 }
 
-                            // Print the sensor data out on the UI
-                            if (radSensorData.Checked)
+                                // Print the sensor data out on the UI
+                                if (radSensorData.Checked)
                                 {
-                                // Check the temp unit
-                                TemperatureUnitEnum tempUnit = TemperatureUnitEnum.NONE;
+                                    // Check the temp unit
+                                    TemperatureUnitEnum tempUnit = TemperatureUnitEnum.NONE;
                                     if (radCelsius.Checked) tempUnit = TemperatureUnitEnum.CELSIUS;
                                     else if (radFahrenheit.Checked) tempUnit = TemperatureUnitEnum.FAHRENHEIT;
                                     else if (radKelvin.Checked) tempUnit = TemperatureUnitEnum.KELVIN;

@@ -82,6 +82,8 @@ namespace EmbeddedSystemsTest
             this.lblListenConnected = new System.Windows.Forms.Label();
             this.lblSensorInitChanged = new System.Windows.Forms.Label();
             this.lblCurrEl = new System.Windows.Forms.Label();
+            this.lblEl2Temp = new System.Windows.Forms.Label();
+            this.lblAz2Temp = new System.Windows.Forms.Label();
             this.grpStats.SuspendLayout();
             this.grpTempUnit.SuspendLayout();
             this.grpSensorInit.SuspendLayout();
@@ -648,11 +650,31 @@ namespace EmbeddedSystemsTest
             this.lblCurrEl.TabIndex = 38;
             this.lblCurrEl.Text = "Current elevation position: N/A";
             // 
+            // lblEl2Temp
+            // 
+            this.lblEl2Temp.AutoSize = true;
+            this.lblEl2Temp.Location = new System.Drawing.Point(504, 74);
+            this.lblEl2Temp.Name = "lblEl2Temp";
+            this.lblEl2Temp.Size = new System.Drawing.Size(149, 13);
+            this.lblEl2Temp.TabIndex = 39;
+            this.lblEl2Temp.Text = "Elevation Temperature 2: N/A\r\n";
+            // 
+            // lblAz2Temp
+            // 
+            this.lblAz2Temp.AutoSize = true;
+            this.lblAz2Temp.Location = new System.Drawing.Point(504, 118);
+            this.lblAz2Temp.Name = "lblAz2Temp";
+            this.lblAz2Temp.Size = new System.Drawing.Size(142, 13);
+            this.lblAz2Temp.TabIndex = 40;
+            this.lblAz2Temp.Text = "Azimuth Temperature 2: N/A";
+            // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 390);
+            this.Controls.Add(this.lblAz2Temp);
+            this.Controls.Add(this.lblEl2Temp);
             this.Controls.Add(this.lblCurrEl);
             this.Controls.Add(this.lblSensorInitChanged);
             this.Controls.Add(this.grpSensorInit);
@@ -759,6 +781,8 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.Label lblListenConnected;
         private System.Windows.Forms.Label lblSensorInitChanged;
         private System.Windows.Forms.Label lblCurrEl;
+        private System.Windows.Forms.Label lblEl2Temp;
+        private System.Windows.Forms.Label lblAz2Temp;
     }
 }
 

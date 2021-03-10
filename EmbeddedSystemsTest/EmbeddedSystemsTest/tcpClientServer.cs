@@ -286,7 +286,9 @@ namespace EmbeddedSystemsTest
                                     sensorNetwork.ParseSensorData(bytes, i);
                                     SensorData sensorData = sensorNetwork.getLatestSensorData(tempUnit);
                                     if(chkElTemp1Init.Checked) lblEl1Temp.Text = $"Elevation Temperature 1: {sensorData.elTemp1} {tempUnitSym}";
+                                    if(chkElTemp2Init.Checked) lblEl2Temp.Text = $"Elevation Temperature 2: {sensorData.elTemp2} {tempUnitSym}";
                                     if(chkAzTemp1Init.Checked) lblAz1Temp.Text = $"Azimuth Temperature 1: {sensorData.azTemp1} {tempUnitSym}";
+                                    if(chkAzTemp2Init.Checked) lblAz2Temp.Text = $"Azimuth Temperature 2: {sensorData.azTemp2} {tempUnitSym}";
                                     if(chkAzAdxlInit.Checked) lblAzAdxl.Text = "Azimuth accelerometer data:\n" +
                                                         $"     X: {sensorData.azAdxlData.xAxis}\n" +
                                                         $"     Y: {sensorData.azAdxlData.yAxis}\n" +
@@ -364,7 +366,9 @@ namespace EmbeddedSystemsTest
 
             // Data
             lblEl1Temp.Text = $"Elevation Temperature 1: N/A";
+            lblEl2Temp.Text = $"Elevation Temperature 2: N/A";
             lblAz1Temp.Text = $"Azimuth Temperature 1: N/A";
+            lblAz2Temp.Text = $"Azimuth Temperature 2: N/A";
             lblAzAdxl.Text = "Azimuth accelerometer data:\n" +
                                                         $"     X: N/A\n" +
                                                         $"     Y: N/A\n" +

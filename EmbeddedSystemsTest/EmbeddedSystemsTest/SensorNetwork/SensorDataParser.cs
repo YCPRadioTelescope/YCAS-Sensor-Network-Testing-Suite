@@ -12,7 +12,9 @@ namespace EmbeddedSystemsTest.SensorNetwork
         private AdxlData[] azAdxlData { get; set; }
         private AdxlData[] cbAdxlData { get; set; }
         private int[] elTemp1 { get; set; }
+        private int[] elTemp2 { get; set; }
         private int[] azTemp1 { get; set; }
+        private int[] azTemp2 { get; set; }
         private int[] elEncoder { get; set; }
         private int[] azEncoder { get; set; }
         private string transmitId { get; set; }
@@ -138,27 +140,30 @@ namespace EmbeddedSystemsTest.SensorNetwork
             if (azTemp1 != null && azTemp1.Length != 0)
             {
                 s.azTemp1 = Math.Round(ConvertRawTempToUnit(azTemp1[azTemp1.Length - 1], tempUnit), 2);
-
+            }
+            if (azTemp2 != null && azTemp2.Length != 0)
+            {
+                s.azTemp2 = Math.Round(ConvertRawTempToUnit(azTemp2[azTemp2.Length - 1], tempUnit), 2);
             }
             if (elTemp1 != null && elTemp1.Length != 0)
             {
                 s.elTemp1 = Math.Round(ConvertRawTempToUnit(elTemp1[elTemp1.Length - 1], tempUnit), 2);
-
+            }
+            if (elTemp2 != null && elTemp2.Length != 0)
+            {
+                s.elTemp2 = Math.Round(ConvertRawTempToUnit(elTemp2[elTemp2.Length - 1], tempUnit), 2);
             }
             if (azAdxlData != null && azAdxlData.Length != 0)
             {
                 s.azAdxlData = azAdxlData[azAdxlData.Length - 1];
-
             }
             if (elAdxlData != null && elAdxlData.Length != 0)
             {
                 s.elAdxlData = elAdxlData[elAdxlData.Length - 1];
-
             }
             if (cbAdxlData != null && cbAdxlData.Length != 0)
             {
                 s.cbAdxlData = cbAdxlData[cbAdxlData.Length - 1];
-
             }
             
             double az = 0;

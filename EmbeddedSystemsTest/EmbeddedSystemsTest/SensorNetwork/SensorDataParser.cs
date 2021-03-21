@@ -168,8 +168,8 @@ namespace EmbeddedSystemsTest.SensorNetwork
             
             double az = 0;
             double el = 0;
-            if (azEncoder != null) Math.Round(ConvertAzPositionToDegrees(azEncoder[azEncoder.Length - 1]), 2);
-            if (elEncoder != null) Math.Round(ConvertElPositionToDegrees(elEncoder[elEncoder.Length - 1]), 2);
+            if (azEncoder != null) az = Math.Round(ConvertAzPositionToDegrees(azEncoder[azEncoder.Length - 1]), 2);
+            if (elEncoder != null) el = Math.Round(ConvertElPositionToDegrees(elEncoder[elEncoder.Length - 1]), 2);
            s.orientation = new Orientation(az, el);
 
             return s;

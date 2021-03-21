@@ -84,13 +84,6 @@ namespace EmbeddedSystemsTest
             if (!Validator.ipValid(txtListenIp.Text)) errorStr += "Listener IP address is invalid\n";
             if (!Validator.isPort(txtListenPort.Text)) errorStr += "Listener port is invalid\n";
             if (errorStr.Equals("") && !Validator.serverIpExists(txtListenIp.Text, int.Parse(txtListenPort.Text))) errorStr += $"Could not start server at {txtListenIp.Text}:{txtListenPort.Text}\n";
-            
-            // Validation for the client only if we are collecting sensor data
-            if(radSensorData.Checked)
-            {
-                if (!Validator.ipValid(txtClientIp.Text)) errorStr += "Client IP address is invalid\n";
-                if (!Validator.isPort(txtClientPort.Text)) errorStr += "Client port is invalid\n";
-            }
 
             if (errorStr.Equals(""))
             {
@@ -247,6 +240,9 @@ namespace EmbeddedSystemsTest
                             }
                             stopWatch.Start();
 
+                            // Interpret received data
+                            sensorNetwork.ParseSensorData(bytes, i);
+
                             // Write all the information to the GUI                                            
                             Utilities.WriteToGUIFromThread(this, () =>
                             {
@@ -283,7 +279,6 @@ namespace EmbeddedSystemsTest
                                     else if (radKelvin.Checked) tempUnit = TemperatureUnitEnum.KELVIN;
                                     string tempUnitSym = $"\u00B0{tempUnit.ToString().ToCharArray()[0]}";
 
-                                    sensorNetwork.ParseSensorData(bytes, i);
                                     SensorData sensorData = sensorNetwork.getLatestSensorData(tempUnit);
                                     if(chkElTemp1Init.Checked) lblEl1Temp.Text = $"Elevation Temperature 1: {sensorData.elTemp1} {tempUnitSym}";
                                     if(chkElTemp2Init.Checked) lblEl2Temp.Text = $"Elevation Temperature 2: {sensorData.elTemp2} {tempUnitSym}";
@@ -494,6 +489,14 @@ namespace EmbeddedSystemsTest
         private void addToUiConsole(string text)
         {
             txtReceived.AppendText(Utilities.getCurrDate() + "; " + text + "\r\n");
+        }
+
+        private void btnCustPacket_Click(object sender, EventArgs e)
+        {
+            frmCustomPacket customPacketWindow = new frmCustomPacket(txtListenIp.Text, int.Parse(txtListenPort.Text));
+            Thread newFormThread = new Thread(() => { customPacketWindow.ShowDialog(); });
+            newFormThread.Start();
+            btnCustPacket.Enabled = false;
         }
     }
 }

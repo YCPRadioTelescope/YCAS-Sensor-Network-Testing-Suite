@@ -10,5 +10,8 @@ namespace EmbeddedSystemsTest.SensorNetwork
     {
         public const double AZ_ENCODER_SCALING = 2047;
 
+
+        // This is the transmit ID we are using for successful data transfer with no errors
+        public const int DataTransmitId = 129;
     }
 }

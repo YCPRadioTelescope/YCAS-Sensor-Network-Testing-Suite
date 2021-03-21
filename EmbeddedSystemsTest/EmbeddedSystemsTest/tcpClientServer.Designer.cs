@@ -84,6 +84,7 @@ namespace EmbeddedSystemsTest
             this.lblCurrEl = new System.Windows.Forms.Label();
             this.lblEl2Temp = new System.Windows.Forms.Label();
             this.lblAz2Temp = new System.Windows.Forms.Label();
+            this.btnCustPacket = new System.Windows.Forms.Button();
             this.grpStats.SuspendLayout();
             this.grpTempUnit.SuspendLayout();
             this.grpSensorInit.SuspendLayout();
@@ -668,11 +669,22 @@ namespace EmbeddedSystemsTest
             this.lblAz2Temp.TabIndex = 40;
             this.lblAz2Temp.Text = "Azimuth Temperature 2: N/A";
             // 
+            // btnCustPacket
+            // 
+            this.btnCustPacket.Location = new System.Drawing.Point(738, 363);
+            this.btnCustPacket.Name = "btnCustPacket";
+            this.btnCustPacket.Size = new System.Drawing.Size(200, 23);
+            this.btnCustPacket.TabIndex = 41;
+            this.btnCustPacket.Text = "Open Custom Packet Form";
+            this.btnCustPacket.UseVisualStyleBackColor = true;
+            this.btnCustPacket.Click += new System.EventHandler(this.btnCustPacket_Click);
+            // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 390);
+            this.Controls.Add(this.btnCustPacket);
             this.Controls.Add(this.lblAz2Temp);
             this.Controls.Add(this.lblEl2Temp);
             this.Controls.Add(this.lblCurrEl);
@@ -783,6 +795,7 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.Label lblCurrEl;
         private System.Windows.Forms.Label lblEl2Temp;
         private System.Windows.Forms.Label lblAz2Temp;
+        private System.Windows.Forms.Button btnCustPacket;
     }
 }
 

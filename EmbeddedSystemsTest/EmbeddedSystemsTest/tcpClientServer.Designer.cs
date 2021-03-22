@@ -95,7 +95,7 @@ namespace EmbeddedSystemsTest
             this.btnStartListen.Margin = new System.Windows.Forms.Padding(2);
             this.btnStartListen.Name = "btnStartListen";
             this.btnStartListen.Size = new System.Drawing.Size(104, 21);
-            this.btnStartListen.TabIndex = 2;
+            this.btnStartListen.TabIndex = 5;
             this.btnStartListen.Text = "Start Listening";
             this.btnStartListen.UseVisualStyleBackColor = true;
             this.btnStartListen.Click += new System.EventHandler(this.lblStartListen_Click);
@@ -164,7 +164,7 @@ namespace EmbeddedSystemsTest
             this.txtClientPort.Margin = new System.Windows.Forms.Padding(2);
             this.txtClientPort.Name = "txtClientPort";
             this.txtClientPort.Size = new System.Drawing.Size(101, 20);
-            this.txtClientPort.TabIndex = 4;
+            this.txtClientPort.TabIndex = 3;
             // 
             // lblClientPort
             // 
@@ -202,7 +202,7 @@ namespace EmbeddedSystemsTest
             this.txtClientIp.Margin = new System.Windows.Forms.Padding(2);
             this.txtClientIp.Name = "txtClientIp";
             this.txtClientIp.Size = new System.Drawing.Size(101, 20);
-            this.txtClientIp.TabIndex = 3;
+            this.txtClientIp.TabIndex = 2;
             // 
             // btnStartClient
             // 
@@ -211,7 +211,7 @@ namespace EmbeddedSystemsTest
             this.btnStartClient.Margin = new System.Windows.Forms.Padding(2);
             this.btnStartClient.Name = "btnStartClient";
             this.btnStartClient.Size = new System.Drawing.Size(108, 21);
-            this.btnStartClient.TabIndex = 6;
+            this.btnStartClient.TabIndex = 19;
             this.btnStartClient.Text = "Update Sensor Init";
             this.btnStartClient.UseVisualStyleBackColor = true;
             this.btnStartClient.Click += new System.EventHandler(this.btnStartClient_Click);
@@ -223,7 +223,7 @@ namespace EmbeddedSystemsTest
             this.txtClientData.Margin = new System.Windows.Forms.Padding(2);
             this.txtClientData.Name = "txtClientData";
             this.txtClientData.Size = new System.Drawing.Size(101, 20);
-            this.txtClientData.TabIndex = 5;
+            this.txtClientData.TabIndex = 4;
             // 
             // txtReceived
             // 
@@ -234,7 +234,7 @@ namespace EmbeddedSystemsTest
             this.txtReceived.ReadOnly = true;
             this.txtReceived.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtReceived.Size = new System.Drawing.Size(446, 98);
-            this.txtReceived.TabIndex = 20;
+            this.txtReceived.TabIndex = 25;
             // 
             // lblReceived
             // 
@@ -252,7 +252,7 @@ namespace EmbeddedSystemsTest
             this.btnClear.Margin = new System.Windows.Forms.Padding(2);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(104, 21);
-            this.btnClear.TabIndex = 7;
+            this.btnClear.TabIndex = 15;
             this.btnClear.Text = "Clear log/Stats";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -275,7 +275,7 @@ namespace EmbeddedSystemsTest
             this.chkAccumulateServer.Location = new System.Drawing.Point(125, 218);
             this.chkAccumulateServer.Name = "chkAccumulateServer";
             this.chkAccumulateServer.Size = new System.Drawing.Size(106, 17);
-            this.chkAccumulateServer.TabIndex = 22;
+            this.chkAccumulateServer.TabIndex = 16;
             this.chkAccumulateServer.Text = "Accumulate data";
             this.chkAccumulateServer.UseVisualStyleBackColor = true;
             // 
@@ -371,7 +371,7 @@ namespace EmbeddedSystemsTest
             this.radTCPData.Location = new System.Drawing.Point(12, 241);
             this.radTCPData.Name = "radTCPData";
             this.radTCPData.Size = new System.Drawing.Size(105, 17);
-            this.radTCPData.TabIndex = 26;
+            this.radTCPData.TabIndex = 17;
             this.radTCPData.Text = "Collect TCP data";
             this.radTCPData.UseVisualStyleBackColor = true;
             this.radTCPData.CheckedChanged += new System.EventHandler(this.radTCPData_CheckedChanged);
@@ -383,7 +383,7 @@ namespace EmbeddedSystemsTest
             this.radSensorData.Location = new System.Drawing.Point(124, 241);
             this.radSensorData.Name = "radSensorData";
             this.radSensorData.Size = new System.Drawing.Size(115, 17);
-            this.radSensorData.TabIndex = 27;
+            this.radSensorData.TabIndex = 18;
             this.radSensorData.TabStop = true;
             this.radSensorData.Text = "Collect sensor data";
             this.radSensorData.UseVisualStyleBackColor = true;
@@ -451,7 +451,7 @@ namespace EmbeddedSystemsTest
             this.grpTempUnit.Location = new System.Drawing.Point(738, 49);
             this.grpTempUnit.Name = "grpTempUnit";
             this.grpTempUnit.Size = new System.Drawing.Size(200, 100);
-            this.grpTempUnit.TabIndex = 36;
+            this.grpTempUnit.TabIndex = 20;
             this.grpTempUnit.TabStop = false;
             this.grpTempUnit.Text = "Temperature Unit";
             // 
@@ -461,7 +461,7 @@ namespace EmbeddedSystemsTest
             this.radFahrenheit.Location = new System.Drawing.Point(11, 70);
             this.radFahrenheit.Name = "radFahrenheit";
             this.radFahrenheit.Size = new System.Drawing.Size(75, 17);
-            this.radFahrenheit.TabIndex = 2;
+            this.radFahrenheit.TabIndex = 22;
             this.radFahrenheit.Text = "Fahrenheit";
             this.radFahrenheit.UseVisualStyleBackColor = true;
             // 
@@ -472,7 +472,7 @@ namespace EmbeddedSystemsTest
             this.radCelsius.Location = new System.Drawing.Point(11, 45);
             this.radCelsius.Name = "radCelsius";
             this.radCelsius.Size = new System.Drawing.Size(58, 17);
-            this.radCelsius.TabIndex = 1;
+            this.radCelsius.TabIndex = 21;
             this.radCelsius.TabStop = true;
             this.radCelsius.Text = "Celsius";
             this.radCelsius.UseVisualStyleBackColor = true;
@@ -483,7 +483,7 @@ namespace EmbeddedSystemsTest
             this.radKelvin.Location = new System.Drawing.Point(11, 19);
             this.radKelvin.Name = "radKelvin";
             this.radKelvin.Size = new System.Drawing.Size(54, 17);
-            this.radKelvin.TabIndex = 0;
+            this.radKelvin.TabIndex = 20;
             this.radKelvin.Text = "Kelvin";
             this.radKelvin.UseVisualStyleBackColor = true;
             // 
@@ -501,7 +501,7 @@ namespace EmbeddedSystemsTest
             this.grpSensorInit.Location = new System.Drawing.Point(738, 158);
             this.grpSensorInit.Name = "grpSensorInit";
             this.grpSensorInit.Size = new System.Drawing.Size(200, 194);
-            this.grpSensorInit.TabIndex = 3;
+            this.grpSensorInit.TabIndex = 6;
             this.grpSensorInit.TabStop = false;
             this.grpSensorInit.Text = "Sensor Initialization";
             // 
@@ -513,7 +513,7 @@ namespace EmbeddedSystemsTest
             this.chkAzEncInit.Location = new System.Drawing.Point(11, 163);
             this.chkAzEncInit.Name = "chkAzEncInit";
             this.chkAzEncInit.Size = new System.Drawing.Size(106, 17);
-            this.chkAzEncInit.TabIndex = 8;
+            this.chkAzEncInit.TabIndex = 14;
             this.chkAzEncInit.Text = "Azimuth Encoder";
             this.chkAzEncInit.UseVisualStyleBackColor = true;
             this.chkAzEncInit.CheckedChanged += new System.EventHandler(this.chkAzEncInit_CheckedChanged);
@@ -526,7 +526,7 @@ namespace EmbeddedSystemsTest
             this.chkElEncInit.Location = new System.Drawing.Point(11, 145);
             this.chkElEncInit.Name = "chkElEncInit";
             this.chkElEncInit.Size = new System.Drawing.Size(113, 17);
-            this.chkElEncInit.TabIndex = 7;
+            this.chkElEncInit.TabIndex = 13;
             this.chkElEncInit.Text = "Elevation Encoder";
             this.chkElEncInit.UseVisualStyleBackColor = true;
             this.chkElEncInit.CheckedChanged += new System.EventHandler(this.chkElEncInit_CheckedChanged);
@@ -539,7 +539,7 @@ namespace EmbeddedSystemsTest
             this.chkCbAdxlInit.Location = new System.Drawing.Point(11, 126);
             this.chkCbAdxlInit.Name = "chkCbAdxlInit";
             this.chkCbAdxlInit.Size = new System.Drawing.Size(172, 17);
-            this.chkCbAdxlInit.TabIndex = 6;
+            this.chkCbAdxlInit.TabIndex = 12;
             this.chkCbAdxlInit.Text = "Counterbalance Accelerometer";
             this.chkCbAdxlInit.UseVisualStyleBackColor = true;
             this.chkCbAdxlInit.CheckedChanged += new System.EventHandler(this.chkCbAdxlInit_CheckedChanged);
@@ -552,7 +552,7 @@ namespace EmbeddedSystemsTest
             this.chkAzAdxlInit.Location = new System.Drawing.Point(11, 108);
             this.chkAzAdxlInit.Name = "chkAzAdxlInit";
             this.chkAzAdxlInit.Size = new System.Drawing.Size(134, 17);
-            this.chkAzAdxlInit.TabIndex = 5;
+            this.chkAzAdxlInit.TabIndex = 11;
             this.chkAzAdxlInit.Text = "Azimuth Accelerometer";
             this.chkAzAdxlInit.UseVisualStyleBackColor = true;
             this.chkAzAdxlInit.CheckedChanged += new System.EventHandler(this.chkAzAdxlInit_CheckedChanged);
@@ -565,7 +565,7 @@ namespace EmbeddedSystemsTest
             this.chkElAdxlInit.Location = new System.Drawing.Point(11, 90);
             this.chkElAdxlInit.Name = "chkElAdxlInit";
             this.chkElAdxlInit.Size = new System.Drawing.Size(141, 17);
-            this.chkElAdxlInit.TabIndex = 4;
+            this.chkElAdxlInit.TabIndex = 10;
             this.chkElAdxlInit.Text = "Elevation Accelerometer";
             this.chkElAdxlInit.UseVisualStyleBackColor = true;
             this.chkElAdxlInit.CheckedChanged += new System.EventHandler(this.chkElAdxlInit_CheckedChanged);
@@ -578,7 +578,7 @@ namespace EmbeddedSystemsTest
             this.chkAzTemp2Init.Location = new System.Drawing.Point(11, 72);
             this.chkAzTemp2Init.Name = "chkAzTemp2Init";
             this.chkAzTemp2Init.Size = new System.Drawing.Size(135, 17);
-            this.chkAzTemp2Init.TabIndex = 3;
+            this.chkAzTemp2Init.TabIndex = 9;
             this.chkAzTemp2Init.Text = "Azimuth Temperature 2";
             this.chkAzTemp2Init.UseVisualStyleBackColor = true;
             this.chkAzTemp2Init.CheckedChanged += new System.EventHandler(this.chkAzTemp2Init_CheckedChanged);
@@ -591,7 +591,7 @@ namespace EmbeddedSystemsTest
             this.chkAzTemp1Init.Location = new System.Drawing.Point(11, 55);
             this.chkAzTemp1Init.Name = "chkAzTemp1Init";
             this.chkAzTemp1Init.Size = new System.Drawing.Size(135, 17);
-            this.chkAzTemp1Init.TabIndex = 2;
+            this.chkAzTemp1Init.TabIndex = 8;
             this.chkAzTemp1Init.Text = "Azimuth Temperature 1";
             this.chkAzTemp1Init.UseVisualStyleBackColor = true;
             this.chkAzTemp1Init.CheckedChanged += new System.EventHandler(this.chkAzTemp1Init_CheckedChanged);
@@ -604,7 +604,7 @@ namespace EmbeddedSystemsTest
             this.chkElTemp2Init.Location = new System.Drawing.Point(11, 37);
             this.chkElTemp2Init.Name = "chkElTemp2Init";
             this.chkElTemp2Init.Size = new System.Drawing.Size(142, 17);
-            this.chkElTemp2Init.TabIndex = 1;
+            this.chkElTemp2Init.TabIndex = 7;
             this.chkElTemp2Init.Text = "Elevation Temperature 2";
             this.chkElTemp2Init.UseVisualStyleBackColor = true;
             this.chkElTemp2Init.CheckedChanged += new System.EventHandler(this.chkElTemp2Init_CheckedChanged);
@@ -617,7 +617,7 @@ namespace EmbeddedSystemsTest
             this.chkElTemp1Init.Location = new System.Drawing.Point(11, 19);
             this.chkElTemp1Init.Name = "chkElTemp1Init";
             this.chkElTemp1Init.Size = new System.Drawing.Size(142, 17);
-            this.chkElTemp1Init.TabIndex = 0;
+            this.chkElTemp1Init.TabIndex = 6;
             this.chkElTemp1Init.Text = "Elevation Temperature 1";
             this.chkElTemp1Init.UseVisualStyleBackColor = true;
             this.chkElTemp1Init.CheckedChanged += new System.EventHandler(this.chkElTemp1Init_CheckedChanged);
@@ -655,7 +655,7 @@ namespace EmbeddedSystemsTest
             this.btnCustPacket.Location = new System.Drawing.Point(818, 371);
             this.btnCustPacket.Name = "btnCustPacket";
             this.btnCustPacket.Size = new System.Drawing.Size(120, 23);
-            this.btnCustPacket.TabIndex = 41;
+            this.btnCustPacket.TabIndex = 24;
             this.btnCustPacket.Text = "Custom Packet Form";
             this.btnCustPacket.UseVisualStyleBackColor = true;
             this.btnCustPacket.Click += new System.EventHandler(this.btnCustPacket_Click);
@@ -665,7 +665,7 @@ namespace EmbeddedSystemsTest
             this.btnCsvDrawing.Location = new System.Drawing.Point(692, 371);
             this.btnCsvDrawing.Name = "btnCsvDrawing";
             this.btnCsvDrawing.Size = new System.Drawing.Size(120, 23);
-            this.btnCsvDrawing.TabIndex = 42;
+            this.btnCsvDrawing.TabIndex = 23;
             this.btnCsvDrawing.Text = "Data Drawing Form";
             this.btnCsvDrawing.UseVisualStyleBackColor = true;
             this.btnCsvDrawing.Click += new System.EventHandler(this.btnCsvDrawing_Click);

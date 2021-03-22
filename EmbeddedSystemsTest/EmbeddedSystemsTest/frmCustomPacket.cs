@@ -206,76 +206,10 @@ namespace EmbeddedSystemsTest
             return data;
         }
 
-        private byte[] ConvertDataArraysToBytes()
+        private byte[] ConvertDataArraysToBytes(RawAccelerometerData[] elAccl, RawAccelerometerData[] azAccl, RawAccelerometerData[] cbAccl, short[] elTemps, short[] azTemps, short[] elEnc, short[] azEnc)
         {
-            // Reset fields in case they have data in them from before
-            short[] elTemps = new short[0];
-            short[] azTemps = new short[0];
-            short[] elEnc = new short[0];
-            short[] azEnc = new short[0];
-            RawAccelerometerData[] elAccl = new RawAccelerometerData[0];
-            RawAccelerometerData[] azAccl = new RawAccelerometerData[0];
-            RawAccelerometerData[] cbAccl = new RawAccelerometerData[0];
-
-            // get temp lists
-            if (chkElTempInit.Checked) elTemps = txtElTemps.Text.Split(',').Select(short.Parse).ToArray();
-            if (chkAzTempInit.Checked) azTemps = txtAzTemps.Text.Split(',').Select(short.Parse).ToArray();
-
-            // get encoder lists
-            if (chkElEncInit.Checked) elEnc = txtElPositions.Text.Split(',').Select(short.Parse).ToArray();
-            if (chkAzEncInit.Checked) azEnc = txtAzPositions.Text.Split(',').Select(short.Parse).ToArray();
-
-            // get elevation accelerometer lists
-            if (chkElAdxlInit.Checked)
-            {
-                var elX = txtElX.Text.Split(',').Select(short.Parse).ToList();
-                var elY = txtElY.Text.Split(',').Select(short.Parse).ToList();
-                var elZ = txtElZ.Text.Split(',').Select(short.Parse).ToList();
-
-                elAccl = new RawAccelerometerData[elX.Count];
-                for (int i = 0; i < elX.Count; i++)
-                {
-                    elAccl[i].X = elX[i];
-                    elAccl[i].Y = elY[i];
-                    elAccl[i].Z = elZ[i];
-                }
-            }
-
-            // get azimuth accelerometer lists
-            if (chkAzAdxlInit.Checked)
-            {
-                var azX = txtAzX.Text.Split(',').Select(short.Parse).ToList();
-                var azY = txtAzY.Text.Split(',').Select(short.Parse).ToList();
-                var azZ = txtAzZ.Text.Split(',').Select(short.Parse).ToList();
-
-                azAccl = new RawAccelerometerData[azX.Count];
-                for (int i = 0; i < azX.Count; i++)
-                {
-                    azAccl[i].X = azX[i];
-                    azAccl[i].Y = azY[i];
-                    azAccl[i].Z = azZ[i];
-                }
-            }
-
-            // get counterbalance accelerometer lists
-            if (chkCbAdxlInit.Checked)
-            {
-                var cbX = txtCbX.Text.Split(',').Select(short.Parse).ToList();
-                var cbY = txtCbY.Text.Split(',').Select(short.Parse).ToList();
-                var cbZ = txtCbZ.Text.Split(',').Select(short.Parse).ToList();
-
-                cbAccl = new RawAccelerometerData[cbX.Count];
-                for (int i = 0; i < cbX.Count; i++)
-                {
-                    cbAccl[i].X = cbX[i];
-                    cbAccl[i].Y = cbY[i];
-                    cbAccl[i].Z = cbZ[i];
-                }
-            }
-
-            // Calculate size of the data
             uint dataSize = CalcDataSize((short)elAccl.Length, (short)azAccl.Length, (short)cbAccl.Length, (short)elTemps.Length, (short)azTemps.Length, (short)elEnc.Length, (short)azEnc.Length);
-
+            
             return EncodeData(dataSize, elAccl, azAccl, cbAccl, elTemps, azTemps, elEnc, azEnc);
         }
 
@@ -307,8 +241,8 @@ namespace EmbeddedSystemsTest
             byte[] dataToSend = new byte[0];
             if (errorStr.Equals(""))
             {
-                // This function will eventually be used to read the arrays gotten from the CSV files
-                dataToSend = ConvertDataArraysToBytes();
+                // This function will eventually be used to convert the arrays gotten from the CSV files
+                dataToSend = ConvertDataArraysToBytes(elAccl, azAccl, cbAccl, elTemp, azTemp, elEnc, azEnc);
                 lblPacketSize.Text = "Packet size (in bytes): " + dataToSend.Length;
             }
             

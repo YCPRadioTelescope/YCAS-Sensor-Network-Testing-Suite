@@ -208,7 +208,6 @@
             this.txtElTemps.Name = "txtElTemps";
             this.txtElTemps.Size = new System.Drawing.Size(222, 20);
             this.txtElTemps.TabIndex = 33;
-            this.txtElTemps.TextChanged += new System.EventHandler(this.txtElTemps_TextChanged);
             // 
             // txtAzTemps
             // 
@@ -234,20 +233,20 @@
             // lblAzEncoderData
             // 
             this.lblAzEncoderData.AutoSize = true;
-            this.lblAzEncoderData.Location = new System.Drawing.Point(15, 120);
+            this.lblAzEncoderData.Location = new System.Drawing.Point(6, 120);
             this.lblAzEncoderData.Name = "lblAzEncoderData";
-            this.lblAzEncoderData.Size = new System.Drawing.Size(135, 13);
+            this.lblAzEncoderData.Size = new System.Drawing.Size(144, 13);
             this.lblAzEncoderData.TabIndex = 36;
-            this.lblAzEncoderData.Text = "Azimuth Encoder Positions:";
+            this.lblAzEncoderData.Text = "Azimuth Encoder Orientation:";
             // 
             // lblElEncoderData
             // 
             this.lblElEncoderData.AutoSize = true;
-            this.lblElEncoderData.Location = new System.Drawing.Point(8, 84);
+            this.lblElEncoderData.Location = new System.Drawing.Point(-1, 84);
             this.lblElEncoderData.Name = "lblElEncoderData";
-            this.lblElEncoderData.Size = new System.Drawing.Size(142, 13);
+            this.lblElEncoderData.Size = new System.Drawing.Size(151, 13);
             this.lblElEncoderData.TabIndex = 35;
-            this.lblElEncoderData.Text = "Elevation Encoder Positions:";
+            this.lblElEncoderData.Text = "Elevation Encoder Orientation:";
             // 
             // grpElAcclData
             // 

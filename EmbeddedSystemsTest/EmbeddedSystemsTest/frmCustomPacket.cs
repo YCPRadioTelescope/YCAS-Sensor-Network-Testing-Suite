@@ -80,11 +80,6 @@ namespace EmbeddedSystemsTest
             }
         }
 
-        private void txtElTemps_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnSendOverTcp_Click(object sender, EventArgs e)
         {
             byte[] dataToSend = CheckAndProcessAllTextboxes();
@@ -108,32 +103,32 @@ namespace EmbeddedSystemsTest
         private byte[] CheckAndProcessAllTextboxes()
         {
             string errorStr = "";
-            short[] elTemp = new short[0];
-            short[] azTemp = new short[0];
-            short[] elEnc = new short[0];
-            short[] azEnc = new short[0];
+            double[] elTemp = new double[0];
+            double[] azTemp = new double[0];
+            double[] elEnc = new double[0];
+            double[] azEnc = new double[0];
             RawAccelerometerData[] elAccl = new RawAccelerometerData[0];
             RawAccelerometerData[] azAccl = new RawAccelerometerData[0];
             RawAccelerometerData[] cbAccl = new RawAccelerometerData[0];
 
             // Motor temp validating
-            if (chkElTempInit.Checked && (elTemp = PacketEncodingTools.ConvertStringToShortArray(txtElTemps.Text)) == null)
+            if (chkElTempInit.Checked && (elTemp = PacketEncodingTools.ConvertStringToDoubleArray(txtElTemps.Text)) == null)
             {
                 errorStr += "Error in elevation data.\n";
             }
 
-            if (chkAzTempInit.Checked && (azTemp = PacketEncodingTools.ConvertStringToShortArray(txtAzTemps.Text)) == null)
+            if (chkAzTempInit.Checked && (azTemp = PacketEncodingTools.ConvertStringToDoubleArray(txtAzTemps.Text)) == null)
             {
                 errorStr += "Error in azimuth data.\n";
             }
 
             // Encoder validating
-            if (chkElEncInit.Checked && (elEnc = PacketEncodingTools.ConvertStringToShortArray(txtElPositions.Text)) == null)
+            if (chkElEncInit.Checked && (elEnc = PacketEncodingTools.ConvertStringToDoubleArray(txtElPositions.Text)) == null)
             {
                 errorStr += "Error in elevation encoder data.\n";
             }
 
-            if (chkAzEncInit.Checked && (azEnc = PacketEncodingTools.ConvertStringToShortArray(txtAzPositions.Text)) == null)
+            if (chkAzEncInit.Checked && (azEnc = PacketEncodingTools.ConvertStringToDoubleArray(txtAzPositions.Text)) == null)
             {
                 errorStr += "Error in azimuth encoder data.\n";
             }

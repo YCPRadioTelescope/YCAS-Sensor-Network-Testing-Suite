@@ -11,13 +11,42 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
     {
         // This is important for the simulation. This will convert the data arrays we get from CSV files
         // to bytes that we can send to the SensorNetworkServer
-        public static byte[] ConvertDataArraysToBytes(RawAccelerometerData[] elAccl, RawAccelerometerData[] azAccl, RawAccelerometerData[] cbAccl, short[] elTemps, short[] azTemps, short[] elEnc, short[] azEnc)
+        public static byte[] ConvertDataArraysToBytes(RawAccelerometerData[] elAccl, RawAccelerometerData[] azAccl, RawAccelerometerData[] cbAccl, double[] elTemps, double[] azTemps, double[] elEnc, double[] azEnc)
         {
             int dataSize = CalcDataSize(elAccl.Length, azAccl.Length, cbAccl.Length, elTemps.Length, azTemps.Length, elEnc.Length, azEnc.Length);
 
-            return EncodeData(dataSize, elAccl, azAccl, cbAccl, elTemps, azTemps, elEnc, azEnc);
+            // Convert elevation temperature to raw data
+            short[] rawElTemps = new short[elTemps.Length];
+            for (int i = 0; i < elEnc.Length; i++)
+            {
+                rawElTemps[i] = ConvertTempCToRawData(elTemps[i]);
+            }
+
+            // Convert azimuth temperature to raw data
+            short[] rawAzTemps = new short[azTemps.Length];
+            for (int i = 0; i < elEnc.Length; i++)
+            {
+                rawAzTemps[i] = ConvertTempCToRawData(azTemps[i]);
+            }
+
+            // Convert elevation position to raw data
+            short[] rawElEnc = new short[elEnc.Length];
+            for(int i = 0; i < elEnc.Length; i++)
+            {
+                rawElEnc[i] = ConvertDegreesToRawElData(elEnc[i]);
+            }
+
+            // Convert azimuth position to raw data
+            short[] rawAzEnc = new short[azEnc.Length];
+            for (int i = 0; i < azEnc.Length; i++)
+            {
+                rawAzEnc[i] = ConvertDegreesToRawAzData(azEnc[i]);
+            }
+
+            return EncodeData(dataSize, elAccl, azAccl, cbAccl, rawElTemps, rawAzTemps, rawElEnc, rawAzEnc);
         }
 
+        // This will take the size and actually encode all the data arrays into a byte array that we can send
         public static byte[] EncodeData(int dataSize, RawAccelerometerData[] elAcclData, RawAccelerometerData[] azAcclData, RawAccelerometerData[] cbAcclData, short[] elTemp, short[] azTemp, short[] elEnc, short[] azEnc)
         {
             byte[] data = new byte[dataSize];
@@ -147,15 +176,35 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
             return length;
         }
 
+        // This is so we can give the simulation "real" data, where it will be converted to raw
+        // before being encoded. This is approximate, and may not be exact.
+        public static short ConvertDegreesToRawElData(double dataToConvert)
+        {
+            return (short)Math.Round((dataToConvert + 20.375) / 0.25);
+        }
+
+        // This is so we can give the simulation "real" data, where it will be converted to raw
+        // before being encoded. This is approximate, and may not be exact.
+        public static short ConvertDegreesToRawAzData(double dataToConvert)
+        {
+            return (short)((SensorConversionConstants.AZ_ENCODER_SCALING * dataToConvert) / 360);
+        }
+
+        // This converts the degrees from celsius into raw data. This is approximate.
+        public static short ConvertTempCToRawData(double dataToConvert)
+        {
+            return (short)(dataToConvert * 16);
+        }
+
         // This also handles if the numbers are invalid, and will return null if so
         // This should not be needed in the simulation, because we should be getting short arrays from CSVs.
-        public static short[] ConvertStringToShortArray(string text)
+        public static double[] ConvertStringToDoubleArray(string text)
         {
-            short[] s;
+            double[] s;
 
             try
             {
-                s = text.Split(',').Select(short.Parse).ToArray();
+                s = text.Split(',').Select(double.Parse).ToArray();
             }
             catch
             {

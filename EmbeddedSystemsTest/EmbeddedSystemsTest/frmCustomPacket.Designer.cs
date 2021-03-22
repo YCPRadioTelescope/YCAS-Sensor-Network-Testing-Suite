@@ -468,16 +468,16 @@
             // lblFilename
             // 
             this.lblFilename.AutoSize = true;
-            this.lblFilename.Location = new System.Drawing.Point(384, 527);
+            this.lblFilename.Location = new System.Drawing.Point(392, 527);
             this.lblFilename.Name = "lblFilename";
-            this.lblFilename.Size = new System.Drawing.Size(183, 13);
+            this.lblFilename.Size = new System.Drawing.Size(177, 13);
             this.lblFilename.TabIndex = 45;
-            this.lblFilename.Text = "File name:                                    .snp";
+            this.lblFilename.Text = "File name:                                  .snp";
             // 
             // lblPacketSize
             // 
             this.lblPacketSize.AutoSize = true;
-            this.lblPacketSize.Location = new System.Drawing.Point(329, 510);
+            this.lblPacketSize.Location = new System.Drawing.Point(337, 510);
             this.lblPacketSize.Name = "lblPacketSize";
             this.lblPacketSize.Size = new System.Drawing.Size(110, 13);
             this.lblPacketSize.TabIndex = 46;

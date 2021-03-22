@@ -17,14 +17,14 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
 
             // Convert elevation temperature to raw data
             short[] rawElTemps = new short[elTemps.Length];
-            for (int i = 0; i < elEnc.Length; i++)
+            for (int i = 0; i < elTemps.Length; i++)
             {
                 rawElTemps[i] = ConvertTempCToRawData(elTemps[i]);
             }
 
             // Convert azimuth temperature to raw data
             short[] rawAzTemps = new short[azTemps.Length];
-            for (int i = 0; i < elEnc.Length; i++)
+            for (int i = 0; i < azTemps.Length; i++)
             {
                 rawAzTemps[i] = ConvertTempCToRawData(azTemps[i]);
             }

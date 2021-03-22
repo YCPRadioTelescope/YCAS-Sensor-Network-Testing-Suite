@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
@@ -76,7 +77,7 @@ namespace EmbeddedSystemsTest
 
             if(dataToSave != null)
             {
-
+                File.WriteAllBytes(txtFilename.Text + ".snp", dataToSave);
             }
         }
 

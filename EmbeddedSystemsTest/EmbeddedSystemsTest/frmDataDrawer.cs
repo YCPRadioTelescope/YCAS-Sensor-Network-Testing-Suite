@@ -71,12 +71,14 @@ namespace EmbeddedSystemsTest
                 lblCurrValue.Text = "Current Value: " + (e.Y - 460) * -1;
             }
 
-            // if the mouse is down on the canvas, then...
-            if (drawing == true)
+            if (radDrawPoints.Checked)
             {
-                // draws the point at the cursor's location
-                DrawPoint(e.X, e.Y, true);
-
+                // if the mouse is down on the canvas, then...
+                if (drawing == true)
+                {
+                    // draws the point at the cursor's location
+                    DrawPoint(e.X, e.Y, true);
+                }
             }
         }
 

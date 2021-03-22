@@ -83,6 +83,7 @@ namespace EmbeddedSystemsTest
             this.lblSensorInitChanged = new System.Windows.Forms.Label();
             this.lblCurrEl = new System.Windows.Forms.Label();
             this.btnCustPacket = new System.Windows.Forms.Button();
+            this.btnCsvDrawing = new System.Windows.Forms.Button();
             this.grpStats.SuspendLayout();
             this.grpTempUnit.SuspendLayout();
             this.grpSensorInit.SuspendLayout();
@@ -651,19 +652,30 @@ namespace EmbeddedSystemsTest
             // 
             // btnCustPacket
             // 
-            this.btnCustPacket.Location = new System.Drawing.Point(738, 363);
+            this.btnCustPacket.Location = new System.Drawing.Point(818, 371);
             this.btnCustPacket.Name = "btnCustPacket";
-            this.btnCustPacket.Size = new System.Drawing.Size(200, 23);
+            this.btnCustPacket.Size = new System.Drawing.Size(120, 23);
             this.btnCustPacket.TabIndex = 41;
-            this.btnCustPacket.Text = "Open Custom Packet Form";
+            this.btnCustPacket.Text = "Custom Packet Form";
             this.btnCustPacket.UseVisualStyleBackColor = true;
             this.btnCustPacket.Click += new System.EventHandler(this.btnCustPacket_Click);
+            // 
+            // btnCsvDrawing
+            // 
+            this.btnCsvDrawing.Location = new System.Drawing.Point(692, 371);
+            this.btnCsvDrawing.Name = "btnCsvDrawing";
+            this.btnCsvDrawing.Size = new System.Drawing.Size(120, 23);
+            this.btnCsvDrawing.TabIndex = 42;
+            this.btnCsvDrawing.Text = "Data Drawing Form";
+            this.btnCsvDrawing.UseVisualStyleBackColor = true;
+            this.btnCsvDrawing.Click += new System.EventHandler(this.btnCsvDrawing_Click);
             // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 390);
+            this.ClientSize = new System.Drawing.Size(950, 406);
+            this.Controls.Add(this.btnCsvDrawing);
             this.Controls.Add(this.btnCustPacket);
             this.Controls.Add(this.lblCurrEl);
             this.Controls.Add(this.lblSensorInitChanged);
@@ -772,6 +784,7 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.Label lblSensorInitChanged;
         private System.Windows.Forms.Label lblCurrEl;
         private System.Windows.Forms.Button btnCustPacket;
+        private System.Windows.Forms.Button btnCsvDrawing;
     }
 }
 

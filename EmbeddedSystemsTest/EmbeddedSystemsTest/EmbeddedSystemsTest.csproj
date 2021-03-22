@@ -56,6 +56,12 @@
     <Compile Include="frmCustomPacket.Designer.cs">
       <DependentUpon>frmCustomPacket.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmDataDrawer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataDrawer.Designer.cs">
+      <DependentUpon>frmDataDrawer.cs</DependentUpon>
+    </Compile>
     <Compile Include="SensorNetworkSimulation\PacketEncodingTools.cs" />
     <Compile Include="SensorNetwork\Orientation.cs" />
     <Compile Include="SensorNetwork\RawAccelerometerData.cs" />
@@ -76,6 +82,9 @@
     <Compile Include="Validator.cs" />
     <EmbeddedResource Include="frmCustomPacket.resx">
       <DependentUpon>frmCustomPacket.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataDrawer.resx">
+      <DependentUpon>frmDataDrawer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="tcpClientServer.resx">
       <DependentUpon>tcpClientServer.cs</DependentUpon>

@@ -492,7 +492,13 @@ namespace EmbeddedSystemsTest
             frmCustomPacket customPacketWindow = new frmCustomPacket(txtListenIp.Text, int.Parse(txtListenPort.Text));
             Thread newFormThread = new Thread(() => { customPacketWindow.ShowDialog(); });
             newFormThread.Start();
-            btnCustPacket.Enabled = false;
+        }
+
+        private void btnCsvDrawing_Click(object sender, EventArgs e)
+        {
+            frmDataDrawer dataDrawerWindow = new frmDataDrawer();
+            Thread newFormThread = new Thread(() => { dataDrawerWindow.ShowDialog(); });
+            newFormThread.Start();
         }
     }
 }

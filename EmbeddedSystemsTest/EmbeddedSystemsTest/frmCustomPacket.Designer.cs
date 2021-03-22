@@ -45,12 +45,12 @@
             this.lblAzEncoderData = new System.Windows.Forms.Label();
             this.lblElEncoderData = new System.Windows.Forms.Label();
             this.grpElAcclData = new System.Windows.Forms.GroupBox();
-            this.lblElX = new System.Windows.Forms.Label();
-            this.txtElX = new System.Windows.Forms.TextBox();
-            this.txtElY = new System.Windows.Forms.TextBox();
-            this.lblElY = new System.Windows.Forms.Label();
             this.txtElZ = new System.Windows.Forms.TextBox();
             this.lblElZ = new System.Windows.Forms.Label();
+            this.txtElY = new System.Windows.Forms.TextBox();
+            this.lblElY = new System.Windows.Forms.Label();
+            this.txtElX = new System.Windows.Forms.TextBox();
+            this.lblElX = new System.Windows.Forms.Label();
             this.grpAzAcclData = new System.Windows.Forms.GroupBox();
             this.txtAzZ = new System.Windows.Forms.TextBox();
             this.lblAzZ = new System.Windows.Forms.Label();
@@ -71,7 +71,6 @@
             this.lblFilename = new System.Windows.Forms.Label();
             this.lblPacketSize = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnCreateBytes = new System.Windows.Forms.Button();
             this.grpSensorInit.SuspendLayout();
             this.grpElAcclData.SuspendLayout();
             this.grpAzAcclData.SuspendLayout();
@@ -258,44 +257,12 @@
             this.grpElAcclData.Controls.Add(this.lblElY);
             this.grpElAcclData.Controls.Add(this.txtElX);
             this.grpElAcclData.Controls.Add(this.lblElX);
-            this.grpElAcclData.Location = new System.Drawing.Point(3, 159);
+            this.grpElAcclData.Location = new System.Drawing.Point(3, 268);
             this.grpElAcclData.Name = "grpElAcclData";
             this.grpElAcclData.Size = new System.Drawing.Size(571, 108);
             this.grpElAcclData.TabIndex = 39;
             this.grpElAcclData.TabStop = false;
             this.grpElAcclData.Text = "Elevation Accelerometer Data";
-            // 
-            // lblElX
-            // 
-            this.lblElX.AutoSize = true;
-            this.lblElX.Location = new System.Drawing.Point(16, 22);
-            this.lblElX.Name = "lblElX";
-            this.lblElX.Size = new System.Drawing.Size(17, 13);
-            this.lblElX.TabIndex = 0;
-            this.lblElX.Text = "X:";
-            // 
-            // txtElX
-            // 
-            this.txtElX.Location = new System.Drawing.Point(39, 19);
-            this.txtElX.Name = "txtElX";
-            this.txtElX.Size = new System.Drawing.Size(520, 20);
-            this.txtElX.TabIndex = 1;
-            // 
-            // txtElY
-            // 
-            this.txtElY.Location = new System.Drawing.Point(39, 45);
-            this.txtElY.Name = "txtElY";
-            this.txtElY.Size = new System.Drawing.Size(520, 20);
-            this.txtElY.TabIndex = 3;
-            // 
-            // lblElY
-            // 
-            this.lblElY.AutoSize = true;
-            this.lblElY.Location = new System.Drawing.Point(16, 48);
-            this.lblElY.Name = "lblElY";
-            this.lblElY.Size = new System.Drawing.Size(17, 13);
-            this.lblElY.TabIndex = 2;
-            this.lblElY.Text = "Y:";
             // 
             // txtElZ
             // 
@@ -313,6 +280,38 @@
             this.lblElZ.TabIndex = 4;
             this.lblElZ.Text = "Z:";
             // 
+            // txtElY
+            // 
+            this.txtElY.Location = new System.Drawing.Point(39, 45);
+            this.txtElY.Name = "txtElY";
+            this.txtElY.Size = new System.Drawing.Size(520, 20);
+            this.txtElY.TabIndex = 3;
+            // 
+            // lblElY
+            // 
+            this.lblElY.AutoSize = true;
+            this.lblElY.Location = new System.Drawing.Point(16, 48);
+            this.lblElY.Name = "lblElY";
+            this.lblElY.Size = new System.Drawing.Size(17, 13);
+            this.lblElY.TabIndex = 2;
+            this.lblElY.Text = "Y:";
+            // 
+            // txtElX
+            // 
+            this.txtElX.Location = new System.Drawing.Point(39, 19);
+            this.txtElX.Name = "txtElX";
+            this.txtElX.Size = new System.Drawing.Size(520, 20);
+            this.txtElX.TabIndex = 1;
+            // 
+            // lblElX
+            // 
+            this.lblElX.AutoSize = true;
+            this.lblElX.Location = new System.Drawing.Point(16, 22);
+            this.lblElX.Name = "lblElX";
+            this.lblElX.Size = new System.Drawing.Size(17, 13);
+            this.lblElX.TabIndex = 0;
+            this.lblElX.Text = "X:";
+            // 
             // grpAzAcclData
             // 
             this.grpAzAcclData.Controls.Add(this.txtAzZ);
@@ -321,7 +320,7 @@
             this.grpAzAcclData.Controls.Add(this.lblAzY);
             this.grpAzAcclData.Controls.Add(this.txtAzX);
             this.grpAzAcclData.Controls.Add(this.lblAzX);
-            this.grpAzAcclData.Location = new System.Drawing.Point(3, 268);
+            this.grpAzAcclData.Location = new System.Drawing.Point(3, 158);
             this.grpAzAcclData.Name = "grpAzAcclData";
             this.grpAzAcclData.Size = new System.Drawing.Size(571, 108);
             this.grpAzAcclData.TabIndex = 40;
@@ -441,8 +440,7 @@
             // 
             // btnSaveToFile
             // 
-            this.btnSaveToFile.Enabled = false;
-            this.btnSaveToFile.Location = new System.Drawing.Point(412, 550);
+            this.btnSaveToFile.Location = new System.Drawing.Point(501, 550);
             this.btnSaveToFile.Name = "btnSaveToFile";
             this.btnSaveToFile.Size = new System.Drawing.Size(74, 23);
             this.btnSaveToFile.TabIndex = 42;
@@ -452,8 +450,7 @@
             // 
             // btnSendOverTcp
             // 
-            this.btnSendOverTcp.Enabled = false;
-            this.btnSendOverTcp.Location = new System.Drawing.Point(305, 550);
+            this.btnSendOverTcp.Location = new System.Drawing.Point(394, 550);
             this.btnSendOverTcp.Name = "btnSendOverTcp";
             this.btnSendOverTcp.Size = new System.Drawing.Size(101, 23);
             this.btnSendOverTcp.TabIndex = 43;
@@ -497,22 +494,11 @@
             this.label1.Text = "Type data in separated by comma. Ex: (1, 2, 3, 4)\r\nThe maximum packet size is 204" +
     "8 bytes.";
             // 
-            // btnCreateBytes
-            // 
-            this.btnCreateBytes.Location = new System.Drawing.Point(492, 550);
-            this.btnCreateBytes.Name = "btnCreateBytes";
-            this.btnCreateBytes.Size = new System.Drawing.Size(85, 23);
-            this.btnCreateBytes.TabIndex = 47;
-            this.btnCreateBytes.Text = "Create Packet";
-            this.btnCreateBytes.UseVisualStyleBackColor = true;
-            this.btnCreateBytes.Click += new System.EventHandler(this.btnCreateBytes_Click);
-            // 
             // frmCustomPacket
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(586, 582);
-            this.Controls.Add(this.btnCreateBytes);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lblPacketSize);
             this.Controls.Add(this.txtFilename);
@@ -534,7 +520,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
             this.Name = "frmCustomPacket";
-            this.Text = "Custom Packet Creation";
+            this.Text = "Custom Packet Form";
             this.grpSensorInit.ResumeLayout(false);
             this.grpSensorInit.PerformLayout();
             this.grpElAcclData.ResumeLayout(false);
@@ -593,6 +579,5 @@
         private System.Windows.Forms.Label lblFilename;
         private System.Windows.Forms.Label lblPacketSize;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnCreateBytes;
     }
 }

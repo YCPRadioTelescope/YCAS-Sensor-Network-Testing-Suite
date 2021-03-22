@@ -55,5 +55,11 @@ namespace EmbeddedSystemsTest
         {
             return s.All(char.IsNumber);
         }
+
+        public static bool isBetween(int val, int low, int high)
+        {
+            if (val > high || val < low) return false;
+            return true;
+        }
     }
 }

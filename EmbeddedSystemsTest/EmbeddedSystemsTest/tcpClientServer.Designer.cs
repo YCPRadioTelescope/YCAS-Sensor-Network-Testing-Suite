@@ -82,8 +82,6 @@ namespace EmbeddedSystemsTest
             this.lblListenConnected = new System.Windows.Forms.Label();
             this.lblSensorInitChanged = new System.Windows.Forms.Label();
             this.lblCurrEl = new System.Windows.Forms.Label();
-            this.lblEl2Temp = new System.Windows.Forms.Label();
-            this.lblAz2Temp = new System.Windows.Forms.Label();
             this.btnCustPacket = new System.Windows.Forms.Button();
             this.grpStats.SuspendLayout();
             this.grpTempUnit.SuspendLayout();
@@ -395,18 +393,18 @@ namespace EmbeddedSystemsTest
             this.lblEl1Temp.AutoSize = true;
             this.lblEl1Temp.Location = new System.Drawing.Point(504, 49);
             this.lblEl1Temp.Name = "lblEl1Temp";
-            this.lblEl1Temp.Size = new System.Drawing.Size(149, 13);
+            this.lblEl1Temp.Size = new System.Drawing.Size(140, 13);
             this.lblEl1Temp.TabIndex = 28;
-            this.lblEl1Temp.Text = "Elevation Temperature 1: N/A\r\n";
+            this.lblEl1Temp.Text = "Elevation Temperature: N/A\r\n";
             // 
             // lblAz1Temp
             // 
             this.lblAz1Temp.AutoSize = true;
             this.lblAz1Temp.Location = new System.Drawing.Point(504, 96);
             this.lblAz1Temp.Name = "lblAz1Temp";
-            this.lblAz1Temp.Size = new System.Drawing.Size(142, 13);
+            this.lblAz1Temp.Size = new System.Drawing.Size(133, 13);
             this.lblAz1Temp.TabIndex = 30;
-            this.lblAz1Temp.Text = "Azimuth Temperature 1: N/A";
+            this.lblAz1Temp.Text = "Azimuth Temperature: N/A";
             // 
             // lblAzAdxl
             // 
@@ -651,24 +649,6 @@ namespace EmbeddedSystemsTest
             this.lblCurrEl.TabIndex = 38;
             this.lblCurrEl.Text = "Current elevation position: N/A";
             // 
-            // lblEl2Temp
-            // 
-            this.lblEl2Temp.AutoSize = true;
-            this.lblEl2Temp.Location = new System.Drawing.Point(504, 74);
-            this.lblEl2Temp.Name = "lblEl2Temp";
-            this.lblEl2Temp.Size = new System.Drawing.Size(149, 13);
-            this.lblEl2Temp.TabIndex = 39;
-            this.lblEl2Temp.Text = "Elevation Temperature 2: N/A\r\n";
-            // 
-            // lblAz2Temp
-            // 
-            this.lblAz2Temp.AutoSize = true;
-            this.lblAz2Temp.Location = new System.Drawing.Point(504, 118);
-            this.lblAz2Temp.Name = "lblAz2Temp";
-            this.lblAz2Temp.Size = new System.Drawing.Size(142, 13);
-            this.lblAz2Temp.TabIndex = 40;
-            this.lblAz2Temp.Text = "Azimuth Temperature 2: N/A";
-            // 
             // btnCustPacket
             // 
             this.btnCustPacket.Location = new System.Drawing.Point(738, 363);
@@ -685,8 +665,6 @@ namespace EmbeddedSystemsTest
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 390);
             this.Controls.Add(this.btnCustPacket);
-            this.Controls.Add(this.lblAz2Temp);
-            this.Controls.Add(this.lblEl2Temp);
             this.Controls.Add(this.lblCurrEl);
             this.Controls.Add(this.lblSensorInitChanged);
             this.Controls.Add(this.grpSensorInit);
@@ -793,8 +771,6 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.Label lblListenConnected;
         private System.Windows.Forms.Label lblSensorInitChanged;
         private System.Windows.Forms.Label lblCurrEl;
-        private System.Windows.Forms.Label lblEl2Temp;
-        private System.Windows.Forms.Label lblAz2Temp;
         private System.Windows.Forms.Button btnCustPacket;
     }
 }

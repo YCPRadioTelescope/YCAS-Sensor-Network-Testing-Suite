@@ -89,7 +89,7 @@
             this.grpSensorInit.Location = new System.Drawing.Point(379, 9);
             this.grpSensorInit.Name = "grpSensorInit";
             this.grpSensorInit.Size = new System.Drawing.Size(195, 150);
-            this.grpSensorInit.TabIndex = 4;
+            this.grpSensorInit.TabIndex = 20;
             this.grpSensorInit.TabStop = false;
             this.grpSensorInit.Text = "Sensor Initialization";
             // 
@@ -101,7 +101,7 @@
             this.chkAzEncInit.Location = new System.Drawing.Point(11, 70);
             this.chkAzEncInit.Name = "chkAzEncInit";
             this.chkAzEncInit.Size = new System.Drawing.Size(106, 17);
-            this.chkAzEncInit.TabIndex = 8;
+            this.chkAzEncInit.TabIndex = 24;
             this.chkAzEncInit.Text = "Azimuth Encoder";
             this.chkAzEncInit.UseVisualStyleBackColor = true;
             this.chkAzEncInit.CheckedChanged += new System.EventHandler(this.chkAzEncInit_CheckedChanged);
@@ -114,7 +114,7 @@
             this.chkElEncInit.Location = new System.Drawing.Point(11, 53);
             this.chkElEncInit.Name = "chkElEncInit";
             this.chkElEncInit.Size = new System.Drawing.Size(113, 17);
-            this.chkElEncInit.TabIndex = 7;
+            this.chkElEncInit.TabIndex = 23;
             this.chkElEncInit.Text = "Elevation Encoder";
             this.chkElEncInit.UseVisualStyleBackColor = true;
             this.chkElEncInit.CheckedChanged += new System.EventHandler(this.chkElEncInit_CheckedChanged);
@@ -127,7 +127,7 @@
             this.chkCbAdxlInit.Location = new System.Drawing.Point(11, 123);
             this.chkCbAdxlInit.Name = "chkCbAdxlInit";
             this.chkCbAdxlInit.Size = new System.Drawing.Size(172, 17);
-            this.chkCbAdxlInit.TabIndex = 6;
+            this.chkCbAdxlInit.TabIndex = 27;
             this.chkCbAdxlInit.Text = "Counterbalance Accelerometer";
             this.chkCbAdxlInit.UseVisualStyleBackColor = true;
             this.chkCbAdxlInit.CheckedChanged += new System.EventHandler(this.chkCbAdxlInit_CheckedChanged);
@@ -140,7 +140,7 @@
             this.chkAzAdxlInit.Location = new System.Drawing.Point(11, 105);
             this.chkAzAdxlInit.Name = "chkAzAdxlInit";
             this.chkAzAdxlInit.Size = new System.Drawing.Size(134, 17);
-            this.chkAzAdxlInit.TabIndex = 5;
+            this.chkAzAdxlInit.TabIndex = 26;
             this.chkAzAdxlInit.Text = "Azimuth Accelerometer";
             this.chkAzAdxlInit.UseVisualStyleBackColor = true;
             this.chkAzAdxlInit.CheckedChanged += new System.EventHandler(this.chkAzAdxlInit_CheckedChanged);
@@ -153,7 +153,7 @@
             this.chkElAdxlInit.Location = new System.Drawing.Point(11, 87);
             this.chkElAdxlInit.Name = "chkElAdxlInit";
             this.chkElAdxlInit.Size = new System.Drawing.Size(141, 17);
-            this.chkElAdxlInit.TabIndex = 4;
+            this.chkElAdxlInit.TabIndex = 25;
             this.chkElAdxlInit.Text = "Elevation Accelerometer";
             this.chkElAdxlInit.UseVisualStyleBackColor = true;
             this.chkElAdxlInit.CheckedChanged += new System.EventHandler(this.chkElAdxlInit_CheckedChanged);
@@ -166,7 +166,7 @@
             this.chkAzTempInit.Location = new System.Drawing.Point(11, 36);
             this.chkAzTempInit.Name = "chkAzTempInit";
             this.chkAzTempInit.Size = new System.Drawing.Size(126, 17);
-            this.chkAzTempInit.TabIndex = 2;
+            this.chkAzTempInit.TabIndex = 22;
             this.chkAzTempInit.Text = "Azimuth Temperature";
             this.chkAzTempInit.UseVisualStyleBackColor = true;
             this.chkAzTempInit.CheckedChanged += new System.EventHandler(this.chkAzTempInit_CheckedChanged);
@@ -179,7 +179,7 @@
             this.chkElTempInit.Location = new System.Drawing.Point(11, 19);
             this.chkElTempInit.Name = "chkElTempInit";
             this.chkElTempInit.Size = new System.Drawing.Size(133, 17);
-            this.chkElTempInit.TabIndex = 0;
+            this.chkElTempInit.TabIndex = 21;
             this.chkElTempInit.Text = "Elevation Temperature";
             this.chkElTempInit.UseVisualStyleBackColor = true;
             this.chkElTempInit.CheckedChanged += new System.EventHandler(this.chkElTemp1Init_CheckedChanged);
@@ -207,28 +207,28 @@
             this.txtElTemps.Location = new System.Drawing.Point(151, 9);
             this.txtElTemps.Name = "txtElTemps";
             this.txtElTemps.Size = new System.Drawing.Size(222, 20);
-            this.txtElTemps.TabIndex = 33;
+            this.txtElTemps.TabIndex = 1;
             // 
             // txtAzTemps
             // 
             this.txtAzTemps.Location = new System.Drawing.Point(151, 45);
             this.txtAzTemps.Name = "txtAzTemps";
             this.txtAzTemps.Size = new System.Drawing.Size(222, 20);
-            this.txtAzTemps.TabIndex = 34;
+            this.txtAzTemps.TabIndex = 2;
             // 
             // txtAzPositions
             // 
             this.txtAzPositions.Location = new System.Drawing.Point(151, 117);
             this.txtAzPositions.Name = "txtAzPositions";
             this.txtAzPositions.Size = new System.Drawing.Size(222, 20);
-            this.txtAzPositions.TabIndex = 38;
+            this.txtAzPositions.TabIndex = 4;
             // 
             // txtElPositions
             // 
             this.txtElPositions.Location = new System.Drawing.Point(151, 81);
             this.txtElPositions.Name = "txtElPositions";
             this.txtElPositions.Size = new System.Drawing.Size(222, 20);
-            this.txtElPositions.TabIndex = 37;
+            this.txtElPositions.TabIndex = 3;
             // 
             // lblAzEncoderData
             // 
@@ -259,7 +259,7 @@
             this.grpElAcclData.Location = new System.Drawing.Point(3, 268);
             this.grpElAcclData.Name = "grpElAcclData";
             this.grpElAcclData.Size = new System.Drawing.Size(571, 108);
-            this.grpElAcclData.TabIndex = 39;
+            this.grpElAcclData.TabIndex = 9;
             this.grpElAcclData.TabStop = false;
             this.grpElAcclData.Text = "Elevation Accelerometer Data";
             // 
@@ -268,7 +268,7 @@
             this.txtElZ.Location = new System.Drawing.Point(39, 71);
             this.txtElZ.Name = "txtElZ";
             this.txtElZ.Size = new System.Drawing.Size(520, 20);
-            this.txtElZ.TabIndex = 5;
+            this.txtElZ.TabIndex = 12;
             // 
             // lblElZ
             // 
@@ -284,7 +284,7 @@
             this.txtElY.Location = new System.Drawing.Point(39, 45);
             this.txtElY.Name = "txtElY";
             this.txtElY.Size = new System.Drawing.Size(520, 20);
-            this.txtElY.TabIndex = 3;
+            this.txtElY.TabIndex = 11;
             // 
             // lblElY
             // 
@@ -300,7 +300,7 @@
             this.txtElX.Location = new System.Drawing.Point(39, 19);
             this.txtElX.Name = "txtElX";
             this.txtElX.Size = new System.Drawing.Size(520, 20);
-            this.txtElX.TabIndex = 1;
+            this.txtElX.TabIndex = 10;
             // 
             // lblElX
             // 
@@ -322,7 +322,7 @@
             this.grpAzAcclData.Location = new System.Drawing.Point(3, 158);
             this.grpAzAcclData.Name = "grpAzAcclData";
             this.grpAzAcclData.Size = new System.Drawing.Size(571, 108);
-            this.grpAzAcclData.TabIndex = 40;
+            this.grpAzAcclData.TabIndex = 5;
             this.grpAzAcclData.TabStop = false;
             this.grpAzAcclData.Text = "Azimuth Accelerometer Data";
             // 
@@ -331,7 +331,7 @@
             this.txtAzZ.Location = new System.Drawing.Point(39, 71);
             this.txtAzZ.Name = "txtAzZ";
             this.txtAzZ.Size = new System.Drawing.Size(520, 20);
-            this.txtAzZ.TabIndex = 5;
+            this.txtAzZ.TabIndex = 8;
             // 
             // lblAzZ
             // 
@@ -347,7 +347,7 @@
             this.txtAzY.Location = new System.Drawing.Point(39, 45);
             this.txtAzY.Name = "txtAzY";
             this.txtAzY.Size = new System.Drawing.Size(520, 20);
-            this.txtAzY.TabIndex = 3;
+            this.txtAzY.TabIndex = 7;
             // 
             // lblAzY
             // 
@@ -363,7 +363,7 @@
             this.txtAzX.Location = new System.Drawing.Point(39, 19);
             this.txtAzX.Name = "txtAzX";
             this.txtAzX.Size = new System.Drawing.Size(520, 20);
-            this.txtAzX.TabIndex = 1;
+            this.txtAzX.TabIndex = 6;
             // 
             // lblAzX
             // 
@@ -385,7 +385,7 @@
             this.grpCbAcclData.Location = new System.Drawing.Point(3, 378);
             this.grpCbAcclData.Name = "grpCbAcclData";
             this.grpCbAcclData.Size = new System.Drawing.Size(571, 108);
-            this.grpCbAcclData.TabIndex = 41;
+            this.grpCbAcclData.TabIndex = 13;
             this.grpCbAcclData.TabStop = false;
             this.grpCbAcclData.Text = "Counterbalance Accelerometer Data";
             // 
@@ -394,7 +394,7 @@
             this.txtCbZ.Location = new System.Drawing.Point(39, 71);
             this.txtCbZ.Name = "txtCbZ";
             this.txtCbZ.Size = new System.Drawing.Size(520, 20);
-            this.txtCbZ.TabIndex = 5;
+            this.txtCbZ.TabIndex = 16;
             // 
             // lblCbZ
             // 
@@ -410,7 +410,7 @@
             this.txtCbY.Location = new System.Drawing.Point(39, 45);
             this.txtCbY.Name = "txtCbY";
             this.txtCbY.Size = new System.Drawing.Size(520, 20);
-            this.txtCbY.TabIndex = 3;
+            this.txtCbY.TabIndex = 15;
             // 
             // lblCbY
             // 
@@ -426,7 +426,7 @@
             this.txtCbX.Location = new System.Drawing.Point(39, 19);
             this.txtCbX.Name = "txtCbX";
             this.txtCbX.Size = new System.Drawing.Size(520, 20);
-            this.txtCbX.TabIndex = 1;
+            this.txtCbX.TabIndex = 14;
             // 
             // lblCbX
             // 
@@ -442,7 +442,7 @@
             this.btnSaveToFile.Location = new System.Drawing.Point(501, 550);
             this.btnSaveToFile.Name = "btnSaveToFile";
             this.btnSaveToFile.Size = new System.Drawing.Size(74, 23);
-            this.btnSaveToFile.TabIndex = 42;
+            this.btnSaveToFile.TabIndex = 19;
             this.btnSaveToFile.Text = "Save to File";
             this.btnSaveToFile.UseVisualStyleBackColor = true;
             this.btnSaveToFile.Click += new System.EventHandler(this.btnSaveToFile_Click);
@@ -452,7 +452,7 @@
             this.btnSendOverTcp.Location = new System.Drawing.Point(394, 550);
             this.btnSendOverTcp.Name = "btnSendOverTcp";
             this.btnSendOverTcp.Size = new System.Drawing.Size(101, 23);
-            this.btnSendOverTcp.TabIndex = 43;
+            this.btnSendOverTcp.TabIndex = 17;
             this.btnSendOverTcp.Text = "Send Over TCP";
             this.btnSendOverTcp.UseVisualStyleBackColor = true;
             this.btnSendOverTcp.Click += new System.EventHandler(this.btnSendOverTcp_Click);
@@ -462,7 +462,7 @@
             this.txtFilename.Location = new System.Drawing.Point(445, 524);
             this.txtFilename.Name = "txtFilename";
             this.txtFilename.Size = new System.Drawing.Size(97, 20);
-            this.txtFilename.TabIndex = 44;
+            this.txtFilename.TabIndex = 18;
             this.txtFilename.Text = "newpacket";
             // 
             // lblFilename

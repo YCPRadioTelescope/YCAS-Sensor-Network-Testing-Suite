@@ -520,6 +520,8 @@
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.panDrawData);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
             this.Name = "frmDataDrawer";
             this.Text = "CSV Data Drawing";
             this.ResumeLayout(false);

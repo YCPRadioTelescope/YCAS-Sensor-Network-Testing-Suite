@@ -135,6 +135,7 @@ namespace EmbeddedSystemsTest
             else
             {
                 addToUiConsole("Restarting Sensor Network; temporarily stopping TCP server...");
+                btnStartClient.Enabled = false;
                 server.Stop();
                 runListenerThread = false;
                 listenerThread.Join();

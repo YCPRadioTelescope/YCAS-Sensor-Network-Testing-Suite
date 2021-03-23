@@ -134,8 +134,18 @@ namespace EmbeddedSystemsTest
             }
             else
             {
-                // TODO: Implement way to update the Teensy's sensor init after first init
-                MessageBox.Show("This is not yet implemented! This will reset the Teensy so it can take a new configuration.");
+                addToUiConsole("Restarting Sensor Network; temporarily stopping TCP server...");
+                server.Stop();
+                runListenerThread = false;
+                listenerThread.Join();
+
+                // Wait a few seconds for the Teensy's watchdog timer to time out. The timeout is about 1.5 seconds,
+                // so I added an additional 50 ms to really make sure it's out. This should be updated if the Teensy's
+                // timeout is changed
+                Thread.Sleep(1550);
+
+                // Restart the listening thread
+                listenerThread = new Thread(() => listenerProcess(IPAddress.Parse(txtListenIp.Text), int.Parse(txtListenPort.Text)));
             }
         }
 

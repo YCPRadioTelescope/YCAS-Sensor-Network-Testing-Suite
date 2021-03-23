@@ -15,6 +15,10 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
         {
             int dataSize = CalcDataSize(elAccl.Length, azAccl.Length, cbAccl.Length, elTemps.Length, azTemps.Length, elEnc.Length, azEnc.Length);
 
+            // If you want to input raw data instead, just comment out the next few loops.
+            // They exist so that we can input data into our CSV files that make sense to us, since
+            // raw data values are not very readable
+
             // Convert elevation temperature to raw data
             short[] rawElTemps = new short[elTemps.Length];
             for (int i = 0; i < elTemps.Length; i++)
@@ -140,10 +144,17 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
         // This value will be used to create the byte array
         public static int CalcDataSize(int Acc0Size, int Acc1Size, int Acc2Size, int Temp1Size, int Temp2Size, int ElEnSize, int AzEnSize)
         {
-            int length = 1 + 4 + 14;
+            // 1 for the transmit ID
+            // 4 for the total data size
+            // 14 for each sensor's data size (each sensor size is 2 bytes, with 7 sensors total)
+            int length = 1 + 4 + 14; // TODO: Use sensor number constant-2 for the redundant temp sensors
+
+            // Each accelerometer axis is 2 bytes each. With three axes, that's 6 bytes per accelerometer
             length += Acc0Size * 6;
             length += Acc1Size * 6;
             length += Acc2Size * 6;
+
+            // Each temp and encoder value is 2 bytes
             length += Temp1Size * 2;
             length += Temp2Size * 2;
             length += ElEnSize * 2;

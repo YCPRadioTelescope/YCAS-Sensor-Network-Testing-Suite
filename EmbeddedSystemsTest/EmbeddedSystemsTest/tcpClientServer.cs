@@ -136,6 +136,7 @@ namespace EmbeddedSystemsTest
             {
                 addToUiConsole("Restarting Sensor Network; temporarily stopping TCP server...");
                 btnStartClient.Enabled = false;
+                btnKillListen.Enabled = false;
                 server.Stop();
                 runListenerThread = false;
                 listenerThread.Join();
@@ -147,6 +148,8 @@ namespace EmbeddedSystemsTest
 
                 // Restart the listening thread
                 listenerThread = new Thread(() => listenerProcess(IPAddress.Parse(txtListenIp.Text), int.Parse(txtListenPort.Text)));
+                listenerThread.Start();
+                btnKillListen.Enabled = true;
             }
         }
 

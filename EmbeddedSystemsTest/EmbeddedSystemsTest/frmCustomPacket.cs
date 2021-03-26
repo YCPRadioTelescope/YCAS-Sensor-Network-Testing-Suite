@@ -19,14 +19,19 @@ namespace EmbeddedSystemsTest
 
         string IPAddress;
         int Port;
+        Button PreviousButton;
+        frmTcpTest PreviousForm;
 
-        public frmCustomPacket(string ipAddress, int port)
+        public frmCustomPacket(string ipAddress, int port, Button btnCustPacket, frmTcpTest previousForm)
         {
             InitializeComponent();
 
             // TCP client info
             IPAddress = ipAddress;
             Port = port;
+
+            PreviousButton = btnCustPacket;
+            PreviousForm = previousForm;
         }
 
         private void chkElTemp1Init_CheckedChanged(object sender, EventArgs e)
@@ -75,7 +80,7 @@ namespace EmbeddedSystemsTest
         {
             byte[] dataToSave = CheckAndProcessAllTextboxes();
 
-            if(dataToSave != null)
+            if (dataToSave != null)
             {
                 File.WriteAllBytes(txtFilename.Text + ".snp", dataToSave);
             }
@@ -84,7 +89,7 @@ namespace EmbeddedSystemsTest
         private void btnSendOverTcp_Click(object sender, EventArgs e)
         {
             byte[] dataToSend = CheckAndProcessAllTextboxes();
-            
+
             if (dataToSend != null)
             {
                 TcpClient client = new TcpClient(IPAddress, Port);
@@ -168,6 +173,14 @@ namespace EmbeddedSystemsTest
                 MessageBox.Show(errorStr, "Error");
                 return null;
             }
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            Utilities.WriteToGUIFromThread(PreviousForm, () =>
+            {
+                PreviousButton.Enabled = true;
+            });
         }
     }
 }

@@ -503,16 +503,18 @@ namespace EmbeddedSystemsTest
 
         private void btnCustPacket_Click(object sender, EventArgs e)
         {
-            frmCustomPacket customPacketWindow = new frmCustomPacket(txtListenIp.Text, int.Parse(txtListenPort.Text));
+            frmCustomPacket customPacketWindow = new frmCustomPacket(txtListenIp.Text, int.Parse(txtListenPort.Text), btnCustPacket, this);
             Thread newFormThread = new Thread(() => { customPacketWindow.ShowDialog(); });
             newFormThread.Start();
+            btnCustPacket.Enabled = false;
         }
 
         private void btnCsvDrawing_Click(object sender, EventArgs e)
         {
-            frmDataDrawer dataDrawerWindow = new frmDataDrawer();
+            frmDataDrawer dataDrawerWindow = new frmDataDrawer(btnCsvDrawing, this);
             Thread newFormThread = new Thread(() => { dataDrawerWindow.ShowDialog(); });
             newFormThread.Start();
+            btnCsvDrawing.Enabled = false;
         }
     }
 }

@@ -16,10 +16,16 @@ namespace EmbeddedSystemsTest
         List<Point> points;
         bool drawing;
 
-        public frmDataDrawer()
+        Button PreviousButton;
+        frmTcpTest PreviousForm;
+
+        public frmDataDrawer(Button previousButton, frmTcpTest previousForm)
         {
             InitializeComponent();
             points = new List<Point>();
+
+            PreviousButton = previousButton;
+            PreviousForm = previousForm;
         }
 
         private void panDrawData_Paint(object sender, PaintEventArgs e)
@@ -180,6 +186,14 @@ namespace EmbeddedSystemsTest
             }
 
             g.Dispose();
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            Utilities.WriteToGUIFromThread(PreviousForm, () =>
+            {
+                PreviousButton.Enabled = true;
+            });
         }
     }
 }

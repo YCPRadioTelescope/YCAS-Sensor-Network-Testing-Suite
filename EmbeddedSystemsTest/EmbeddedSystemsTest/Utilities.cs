@@ -9,7 +9,7 @@ namespace EmbeddedSystemsTest
 {
     public class Utilities
     {
-        public static void WriteToGUIFromThread(frmTcpTest writeTo, Action codeBlock)
+        public static void WriteToGUIFromThread<T>(T writeTo, Action codeBlock) where T : Form
         {
             if (writeTo.InvokeRequired)
             {

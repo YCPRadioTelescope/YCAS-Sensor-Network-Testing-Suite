@@ -38,6 +38,8 @@ namespace EmbeddedSystemsTest
         // Sensor initialization
         byte[] sensorInit;
 
+        bool logData = false;
+
         public frmTcpTest()
         {
             InitializeComponent();
@@ -66,6 +68,8 @@ namespace EmbeddedSystemsTest
             txtListenPort.Text = "1600";
             txtClientIp.Text = "192.168.0.197";
             txtClientPort.Text = "1680";
+
+            txtDataFileName.Text = "SensorData";
             
         }
 
@@ -238,7 +242,7 @@ namespace EmbeddedSystemsTest
                             stopWatch.Start();
 
                             // Interpret received data
-                            sensorNetwork.ParseSensorData(bytes, i);
+                            sensorNetwork.ParseSensorData(bytes, i, logData, txtDataFileName.Text);
 
                             // Write all the information to the GUI                                            
                             Utilities.WriteToGUIFromThread(this, () =>
@@ -246,7 +250,7 @@ namespace EmbeddedSystemsTest
                                 if (chkAccumulateServer.Checked)
                                 {
                                     if (!radSensorData.Checked) addToUiConsole("Received TCP data from client: " + Encoding.ASCII.GetString(bytes, 0, i));
-                                    else addToUiConsole("Received sensor data from Teensy with transmit ID: " + sensorNetwork.getTransmitId());
+                                    else if (totalPackets == 1) addToUiConsole("Currently receiving sensor data from Teensy with transmit ID: " + sensorNetwork.getTransmitId());
                                 }
                                 else
                                 {
@@ -513,6 +517,23 @@ namespace EmbeddedSystemsTest
             Thread newFormThread = new Thread(() => { dataDrawerWindow.ShowDialog(); });
             newFormThread.Start();
             btnCsvDrawing.Enabled = false;
+        }
+
+        private void btnStartDataLogging_Click(object sender, EventArgs e)
+        {
+            btnStartDataLogging.Enabled = false;
+            btnStopLogging.Enabled = true;
+            logData = true;
+            txtDataFileName.Enabled = false;
+        }
+
+        private void btnStopLogging_Click(object sender, EventArgs e)
+        {
+            btnStartDataLogging.Enabled = true;
+            btnStopLogging.Enabled = false;
+            logData = false;
+            txtDataFileName.Enabled = true;
+
         }
     }
 }

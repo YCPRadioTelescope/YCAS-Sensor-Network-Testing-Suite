@@ -82,9 +82,15 @@ namespace EmbeddedSystemsTest
             this.lblCurrEl = new System.Windows.Forms.Label();
             this.btnCustPacket = new System.Windows.Forms.Button();
             this.btnCsvDrawing = new System.Windows.Forms.Button();
+            this.gbDataLogging = new System.Windows.Forms.GroupBox();
+            this.txtDataFileName = new System.Windows.Forms.TextBox();
+            this.lblDataFileName = new System.Windows.Forms.Label();
+            this.btnStartDataLogging = new System.Windows.Forms.Button();
+            this.btnStopLogging = new System.Windows.Forms.Button();
             this.grpStats.SuspendLayout();
             this.grpTempUnit.SuspendLayout();
             this.grpSensorInit.SuspendLayout();
+            this.gbDataLogging.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnStartListen
@@ -640,11 +646,62 @@ namespace EmbeddedSystemsTest
             this.btnCsvDrawing.UseVisualStyleBackColor = true;
             this.btnCsvDrawing.Click += new System.EventHandler(this.btnCsvDrawing_Click);
             // 
+            // gbDataLogging
+            // 
+            this.gbDataLogging.Controls.Add(this.btnStopLogging);
+            this.gbDataLogging.Controls.Add(this.btnStartDataLogging);
+            this.gbDataLogging.Controls.Add(this.lblDataFileName);
+            this.gbDataLogging.Controls.Add(this.txtDataFileName);
+            this.gbDataLogging.Location = new System.Drawing.Point(17, 395);
+            this.gbDataLogging.Name = "gbDataLogging";
+            this.gbDataLogging.Size = new System.Drawing.Size(274, 100);
+            this.gbDataLogging.TabIndex = 39;
+            this.gbDataLogging.TabStop = false;
+            this.gbDataLogging.Text = "Data Logging";
+            // 
+            // txtDataFileName
+            // 
+            this.txtDataFileName.Location = new System.Drawing.Point(76, 30);
+            this.txtDataFileName.Name = "txtDataFileName";
+            this.txtDataFileName.Size = new System.Drawing.Size(131, 20);
+            this.txtDataFileName.TabIndex = 0;
+            // 
+            // lblDataFileName
+            // 
+            this.lblDataFileName.AutoSize = true;
+            this.lblDataFileName.Location = new System.Drawing.Point(15, 33);
+            this.lblDataFileName.Name = "lblDataFileName";
+            this.lblDataFileName.Size = new System.Drawing.Size(57, 13);
+            this.lblDataFileName.TabIndex = 1;
+            this.lblDataFileName.Text = "File Name:";
+            // 
+            // btnStartDataLogging
+            // 
+            this.btnStartDataLogging.Location = new System.Drawing.Point(18, 71);
+            this.btnStartDataLogging.Name = "btnStartDataLogging";
+            this.btnStartDataLogging.Size = new System.Drawing.Size(103, 23);
+            this.btnStartDataLogging.TabIndex = 2;
+            this.btnStartDataLogging.Text = "Start Logging";
+            this.btnStartDataLogging.UseVisualStyleBackColor = true;
+            this.btnStartDataLogging.Click += new System.EventHandler(this.btnStartDataLogging_Click);
+            // 
+            // btnStopLogging
+            // 
+            this.btnStopLogging.Enabled = false;
+            this.btnStopLogging.Location = new System.Drawing.Point(140, 71);
+            this.btnStopLogging.Name = "btnStopLogging";
+            this.btnStopLogging.Size = new System.Drawing.Size(103, 23);
+            this.btnStopLogging.TabIndex = 3;
+            this.btnStopLogging.Text = "Stop Logging";
+            this.btnStopLogging.UseVisualStyleBackColor = true;
+            this.btnStopLogging.Click += new System.EventHandler(this.btnStopLogging_Click);
+            // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 406);
+            this.ClientSize = new System.Drawing.Size(950, 507);
+            this.Controls.Add(this.gbDataLogging);
             this.Controls.Add(this.btnCsvDrawing);
             this.Controls.Add(this.btnCustPacket);
             this.Controls.Add(this.lblCurrEl);
@@ -694,6 +751,8 @@ namespace EmbeddedSystemsTest
             this.grpTempUnit.PerformLayout();
             this.grpSensorInit.ResumeLayout(false);
             this.grpSensorInit.PerformLayout();
+            this.gbDataLogging.ResumeLayout(false);
+            this.gbDataLogging.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -753,6 +812,11 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.Label lblCurrEl;
         private System.Windows.Forms.Button btnCustPacket;
         private System.Windows.Forms.Button btnCsvDrawing;
+        private System.Windows.Forms.GroupBox gbDataLogging;
+        private System.Windows.Forms.Button btnStopLogging;
+        private System.Windows.Forms.Button btnStartDataLogging;
+        private System.Windows.Forms.Label lblDataFileName;
+        private System.Windows.Forms.TextBox txtDataFileName;
     }
 }
 

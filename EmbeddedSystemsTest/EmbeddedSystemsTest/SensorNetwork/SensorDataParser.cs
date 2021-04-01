@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,8 +20,27 @@ namespace EmbeddedSystemsTest.SensorNetwork
         private int[] azEncoder { get; set; }
         private string transmitId { get; set; }
 
-        public void ParseSensorData(byte[] bytes, int buffer)
+        public void ParseSensorData(byte[] bytes, int buffer, bool logData, string fileName)
         {
+            StringBuilder adxlData = new StringBuilder();
+            StringBuilder tempData = new StringBuilder();
+            StringBuilder encoderData = new StringBuilder();
+            if (logData == true)
+            {
+                //Add headers if file doesn't exist
+                if (!File.Exists(fileName + "_AdxlData.csv"))
+                {
+                    adxlData.AppendLine("Date Time" + "," + "EL ADXL X Axis" + "," + "EL ADXL Y Axis" + "," + "EL ADXL Z Axis" + "," + "AZ ADXL X Axis" + "," + "AZ ADXL Y Axis" + "," + "AZ ADXL Z Axis" + "," + "CB ADXL X Axis" + "," + "CB ADXL Y Axis" + "," + "CB ADXL Z Axis");
+                }
+                if (!File.Exists(fileName + "_TempData.csv"))
+                {
+                    tempData.AppendLine("Date Time" + "," + "EL Temp °F" + "," + "AZ Temp °F");
+                }
+                if (!File.Exists(fileName + "_EncoderData.csv"))
+                {
+                    encoderData.AppendLine("Date Time" + "," + "EL Encoder" + "," + "AZ Encoder");
+                }
+            }
             // Get transmit ID and data sizes from byte array
             transmitId = bytes[0].ToString();
             UInt32 dataSize = (UInt32)(bytes[1] << 24 | bytes[2] << 16 | bytes[3] << 8 | bytes[4]);
@@ -121,6 +141,87 @@ namespace EmbeddedSystemsTest.SensorNetwork
 
                     }
                 }
+
+                if (logData)
+                {
+                    UInt16[] adxlDataSizes = new UInt16[3] { elAdxlSize, azAdxlSize, cbAdxlSize };
+                    int maxAdxlSize = adxlDataSizes.Max();
+                    for (int i = 0; i < maxAdxlSize; i++)
+                    {
+                        adxlData.Append(DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff") + ",");
+
+                        if (i < elAdxlSize)
+                        {
+                            adxlData.Append(elAdxlData[i].xAxis.ToString() + "," + elAdxlData[i].yAxis.ToString() + "," + elAdxlData[i].zAxis.ToString() + ",");
+                        }
+                        if (i < azAdxlSize)
+                        {
+                            adxlData.Append(azAdxlData[i].xAxis.ToString() + "," + azAdxlData[i].yAxis.ToString() + "," + azAdxlData[i].zAxis.ToString() + ",");
+                        }
+                        if (i < cbAdxlSize)
+                        {
+                            adxlData.Append(cbAdxlData[i].xAxis.ToString() + "," + cbAdxlData[i].yAxis.ToString() + "," + cbAdxlData[i].zAxis.ToString());
+                        }
+                        adxlData.AppendLine();
+
+                    }
+
+                    UInt16[] tempDataSizes = new UInt16[2] { elTempSensorSize, azTempSensorSize };
+                    int maxTempSize = tempDataSizes.Max();
+                    for (int i = 0; i < maxTempSize; i++)
+                    {
+                        tempData.Append(DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff") + ",");
+
+                        if (i < elTempSensorSize)
+                        {
+                            tempData.Append(ConvertRawTempToUnit(elTemp1[i], TemperatureUnitEnum.FAHRENHEIT).ToString() + ",");
+                        }
+                        if (i < azTempSensorSize)
+                        {
+                            tempData.Append(ConvertRawTempToUnit(azTemp1[i], TemperatureUnitEnum.FAHRENHEIT).ToString());
+                        }
+                        tempData.AppendLine();
+                    }
+                    UInt16[] encoderDataSizes = new UInt16[2] { elEncoderSize, azEncoderSize };
+                    int maxEncoderSize = encoderDataSizes.Max();
+                    for (int i = 0; i < maxEncoderSize; i++)
+                    {
+                        encoderData.Append(DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff") + ",");
+
+                        if (i < elEncoderSize)
+                        {
+                            encoderData.Append(ConvertElPositionToDegrees(elEncoder[i]).ToString() + ",");
+                        }
+                        if (i < azEncoderSize)
+                        {
+                            encoderData.Append(ConvertAzPositionToDegrees(azEncoder[i]).ToString());
+                        }
+                        encoderData.AppendLine();
+                    }
+
+                    if(adxlData.Length != 0)
+                    {
+                        using (StreamWriter sw = File.AppendText(fileName + "_AdxlData.csv"))
+                        {
+                            sw.Write(adxlData.ToString());
+                        }
+                    }
+                    if(tempData.Length != 0)
+                    {
+                        using (StreamWriter sw = File.AppendText(fileName + "_TempData.csv"))
+                        {
+                            sw.Write(tempData.ToString());
+                        }
+                    }
+                    if(encoderData.Length != 0)
+                    {
+                        using (StreamWriter sw = File.AppendText(fileName + "_EncoderData.csv"))
+                        {
+                            sw.Write(encoderData.ToString());
+                        }
+                    }
+
+                }
             }
         }
 
@@ -161,12 +262,12 @@ namespace EmbeddedSystemsTest.SensorNetwork
             {
                 s.cbAdxlData = cbAdxlData[cbAdxlData.Length - 1];
             }
-            
+
             double az = 0;
             double el = 0;
             if (azEncoder != null) az = Math.Round(ConvertAzPositionToDegrees(azEncoder[azEncoder.Length - 1]), 2);
             if (elEncoder != null) el = Math.Round(ConvertElPositionToDegrees(elEncoder[elEncoder.Length - 1]), 2);
-           s.orientation = new Orientation(az, el);
+            s.orientation = new Orientation(az, el);
 
             return s;
         }
@@ -178,7 +279,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
 
         public double ConvertElPositionToDegrees(int rawElPosition)
         {
-            return 0.25 * rawElPosition - 20.375;
+            return -0.25 * rawElPosition + 104.375;
         }
 
         public double ConvertRawTempToUnit(int rawTemp, TemperatureUnitEnum tempUnit)

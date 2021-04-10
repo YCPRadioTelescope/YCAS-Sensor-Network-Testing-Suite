@@ -75,9 +75,7 @@ namespace EmbeddedSystemsTest
             this.chkCbAdxlInit = new System.Windows.Forms.CheckBox();
             this.chkAzAdxlInit = new System.Windows.Forms.CheckBox();
             this.chkElAdxlInit = new System.Windows.Forms.CheckBox();
-            this.chkAzTemp2Init = new System.Windows.Forms.CheckBox();
             this.chkAzTemp1Init = new System.Windows.Forms.CheckBox();
-            this.chkElTemp2Init = new System.Windows.Forms.CheckBox();
             this.chkElTemp1Init = new System.Windows.Forms.CheckBox();
             this.lblListenConnected = new System.Windows.Forms.Label();
             this.lblSensorInitChanged = new System.Windows.Forms.Label();
@@ -494,13 +492,11 @@ namespace EmbeddedSystemsTest
             this.grpSensorInit.Controls.Add(this.chkCbAdxlInit);
             this.grpSensorInit.Controls.Add(this.chkAzAdxlInit);
             this.grpSensorInit.Controls.Add(this.chkElAdxlInit);
-            this.grpSensorInit.Controls.Add(this.chkAzTemp2Init);
             this.grpSensorInit.Controls.Add(this.chkAzTemp1Init);
-            this.grpSensorInit.Controls.Add(this.chkElTemp2Init);
             this.grpSensorInit.Controls.Add(this.chkElTemp1Init);
             this.grpSensorInit.Location = new System.Drawing.Point(738, 158);
             this.grpSensorInit.Name = "grpSensorInit";
-            this.grpSensorInit.Size = new System.Drawing.Size(200, 194);
+            this.grpSensorInit.Size = new System.Drawing.Size(200, 156);
             this.grpSensorInit.TabIndex = 6;
             this.grpSensorInit.TabStop = false;
             this.grpSensorInit.Text = "Sensor Initialization";
@@ -510,7 +506,7 @@ namespace EmbeddedSystemsTest
             this.chkAzEncInit.AutoSize = true;
             this.chkAzEncInit.Checked = true;
             this.chkAzEncInit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAzEncInit.Location = new System.Drawing.Point(11, 163);
+            this.chkAzEncInit.Location = new System.Drawing.Point(11, 126);
             this.chkAzEncInit.Name = "chkAzEncInit";
             this.chkAzEncInit.Size = new System.Drawing.Size(106, 17);
             this.chkAzEncInit.TabIndex = 14;
@@ -523,7 +519,7 @@ namespace EmbeddedSystemsTest
             this.chkElEncInit.AutoSize = true;
             this.chkElEncInit.Checked = true;
             this.chkElEncInit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkElEncInit.Location = new System.Drawing.Point(11, 145);
+            this.chkElEncInit.Location = new System.Drawing.Point(11, 108);
             this.chkElEncInit.Name = "chkElEncInit";
             this.chkElEncInit.Size = new System.Drawing.Size(113, 17);
             this.chkElEncInit.TabIndex = 13;
@@ -536,7 +532,7 @@ namespace EmbeddedSystemsTest
             this.chkCbAdxlInit.AutoSize = true;
             this.chkCbAdxlInit.Checked = true;
             this.chkCbAdxlInit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkCbAdxlInit.Location = new System.Drawing.Point(11, 126);
+            this.chkCbAdxlInit.Location = new System.Drawing.Point(11, 89);
             this.chkCbAdxlInit.Name = "chkCbAdxlInit";
             this.chkCbAdxlInit.Size = new System.Drawing.Size(172, 17);
             this.chkCbAdxlInit.TabIndex = 12;
@@ -549,7 +545,7 @@ namespace EmbeddedSystemsTest
             this.chkAzAdxlInit.AutoSize = true;
             this.chkAzAdxlInit.Checked = true;
             this.chkAzAdxlInit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAzAdxlInit.Location = new System.Drawing.Point(11, 108);
+            this.chkAzAdxlInit.Location = new System.Drawing.Point(11, 71);
             this.chkAzAdxlInit.Name = "chkAzAdxlInit";
             this.chkAzAdxlInit.Size = new System.Drawing.Size(134, 17);
             this.chkAzAdxlInit.TabIndex = 11;
@@ -562,7 +558,7 @@ namespace EmbeddedSystemsTest
             this.chkElAdxlInit.AutoSize = true;
             this.chkElAdxlInit.Checked = true;
             this.chkElAdxlInit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkElAdxlInit.Location = new System.Drawing.Point(11, 90);
+            this.chkElAdxlInit.Location = new System.Drawing.Point(11, 53);
             this.chkElAdxlInit.Name = "chkElAdxlInit";
             this.chkElAdxlInit.Size = new System.Drawing.Size(141, 17);
             this.chkElAdxlInit.TabIndex = 10;
@@ -570,44 +566,18 @@ namespace EmbeddedSystemsTest
             this.chkElAdxlInit.UseVisualStyleBackColor = true;
             this.chkElAdxlInit.CheckedChanged += new System.EventHandler(this.chkElAdxlInit_CheckedChanged);
             // 
-            // chkAzTemp2Init
-            // 
-            this.chkAzTemp2Init.AutoSize = true;
-            this.chkAzTemp2Init.Checked = true;
-            this.chkAzTemp2Init.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAzTemp2Init.Location = new System.Drawing.Point(11, 72);
-            this.chkAzTemp2Init.Name = "chkAzTemp2Init";
-            this.chkAzTemp2Init.Size = new System.Drawing.Size(135, 17);
-            this.chkAzTemp2Init.TabIndex = 9;
-            this.chkAzTemp2Init.Text = "Azimuth Temperature 2";
-            this.chkAzTemp2Init.UseVisualStyleBackColor = true;
-            this.chkAzTemp2Init.CheckedChanged += new System.EventHandler(this.chkAzTemp2Init_CheckedChanged);
-            // 
             // chkAzTemp1Init
             // 
             this.chkAzTemp1Init.AutoSize = true;
             this.chkAzTemp1Init.Checked = true;
             this.chkAzTemp1Init.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAzTemp1Init.Location = new System.Drawing.Point(11, 55);
+            this.chkAzTemp1Init.Location = new System.Drawing.Point(11, 36);
             this.chkAzTemp1Init.Name = "chkAzTemp1Init";
-            this.chkAzTemp1Init.Size = new System.Drawing.Size(135, 17);
+            this.chkAzTemp1Init.Size = new System.Drawing.Size(126, 17);
             this.chkAzTemp1Init.TabIndex = 8;
-            this.chkAzTemp1Init.Text = "Azimuth Temperature 1";
+            this.chkAzTemp1Init.Text = "Azimuth Temperature";
             this.chkAzTemp1Init.UseVisualStyleBackColor = true;
             this.chkAzTemp1Init.CheckedChanged += new System.EventHandler(this.chkAzTemp1Init_CheckedChanged);
-            // 
-            // chkElTemp2Init
-            // 
-            this.chkElTemp2Init.AutoSize = true;
-            this.chkElTemp2Init.Checked = true;
-            this.chkElTemp2Init.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkElTemp2Init.Location = new System.Drawing.Point(11, 37);
-            this.chkElTemp2Init.Name = "chkElTemp2Init";
-            this.chkElTemp2Init.Size = new System.Drawing.Size(142, 17);
-            this.chkElTemp2Init.TabIndex = 7;
-            this.chkElTemp2Init.Text = "Elevation Temperature 2";
-            this.chkElTemp2Init.UseVisualStyleBackColor = true;
-            this.chkElTemp2Init.CheckedChanged += new System.EventHandler(this.chkElTemp2Init_CheckedChanged);
             // 
             // chkElTemp1Init
             // 
@@ -616,9 +586,9 @@ namespace EmbeddedSystemsTest
             this.chkElTemp1Init.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkElTemp1Init.Location = new System.Drawing.Point(11, 19);
             this.chkElTemp1Init.Name = "chkElTemp1Init";
-            this.chkElTemp1Init.Size = new System.Drawing.Size(142, 17);
+            this.chkElTemp1Init.Size = new System.Drawing.Size(133, 17);
             this.chkElTemp1Init.TabIndex = 6;
-            this.chkElTemp1Init.Text = "Elevation Temperature 1";
+            this.chkElTemp1Init.Text = "Elevation Temperature";
             this.chkElTemp1Init.UseVisualStyleBackColor = true;
             this.chkElTemp1Init.CheckedChanged += new System.EventHandler(this.chkElTemp1Init_CheckedChanged);
             // 
@@ -636,7 +606,7 @@ namespace EmbeddedSystemsTest
             // 
             this.lblSensorInitChanged.AutoSize = true;
             this.lblSensorInitChanged.ForeColor = System.Drawing.Color.Red;
-            this.lblSensorInitChanged.Location = new System.Drawing.Point(735, 355);
+            this.lblSensorInitChanged.Location = new System.Drawing.Point(735, 323);
             this.lblSensorInitChanged.Name = "lblSensorInitChanged";
             this.lblSensorInitChanged.Size = new System.Drawing.Size(0, 13);
             this.lblSensorInitChanged.TabIndex = 37;
@@ -776,9 +746,7 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.CheckBox chkCbAdxlInit;
         private System.Windows.Forms.CheckBox chkAzAdxlInit;
         private System.Windows.Forms.CheckBox chkElAdxlInit;
-        private System.Windows.Forms.CheckBox chkAzTemp2Init;
         private System.Windows.Forms.CheckBox chkAzTemp1Init;
-        private System.Windows.Forms.CheckBox chkElTemp2Init;
         private System.Windows.Forms.CheckBox chkElTemp1Init;
         private System.Windows.Forms.Label lblListenConnected;
         private System.Windows.Forms.Label lblSensorInitChanged;

@@ -55,16 +55,7 @@ namespace EmbeddedSystemsTest
             stopWatch = new Stopwatch();
 
             // Init the sensor initialization w/ checkboxes
-            sensorInit = new byte[9];
-            sensorInit[0] = chkElTemp1Init.Checked ? (byte)1 : (byte)0;
-            sensorInit[1] = chkElTemp2Init.Checked ? (byte)1 : (byte)0;
-            sensorInit[2] = chkAzTemp1Init.Checked ? (byte)1 : (byte)0;
-            sensorInit[3] = chkAzTemp2Init.Checked ? (byte)1 : (byte)0;
-            sensorInit[4] = chkElEncInit.Checked ? (byte)1 : (byte)0;
-            sensorInit[5] = chkAzEncInit.Checked ? (byte)1 : (byte)0;
-            sensorInit[6] = chkAzAdxlInit.Checked ? (byte)1 : (byte)0;
-            sensorInit[7] = chkElAdxlInit.Checked ? (byte)1 : (byte)0;
-            sensorInit[8] = chkCbAdxlInit.Checked ? (byte)1 : (byte)0;
+            sensorInit = GetBytesFromInitCheckboxes();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -209,15 +200,7 @@ namespace EmbeddedSystemsTest
                         if (Encoding.ASCII.GetString(bytes, 0, i).Equals("Send Sensor Configuration") && radSensorData.Checked)
                         {
                             // Convert all sensor init checkboxes into byte array
-                            sensorInit[0] = chkElTemp1Init.Checked ? (byte)1 : (byte)0;
-                            sensorInit[1] = chkElTemp2Init.Checked ? (byte)1 : (byte)0;
-                            sensorInit[2] = chkAzTemp1Init.Checked ? (byte)1 : (byte)0;
-                            sensorInit[3] = chkAzTemp2Init.Checked ? (byte)1 : (byte)0;
-                            sensorInit[4] = chkElEncInit.Checked ? (byte)1 : (byte)0;
-                            sensorInit[5] = chkAzEncInit.Checked ? (byte)1 : (byte)0;
-                            sensorInit[6] = chkAzAdxlInit.Checked ? (byte)1 : (byte)0;
-                            sensorInit[7] = chkElAdxlInit.Checked ? (byte)1 : (byte)0;
-                            sensorInit[8] = chkCbAdxlInit.Checked ? (byte)1 : (byte)0;
+                            sensorInit = GetBytesFromInitCheckboxes();
 
                             // Send data to the Teensy
                             clientProcess(txtClientIp.Text, int.Parse(txtClientPort.Text), sensorInit);
@@ -430,15 +413,15 @@ namespace EmbeddedSystemsTest
         private bool CheckIfSensorInitHasChanged()
         {
             // If the sensorInit byte array is equal to the checkboxes, the sensor init has not changed
-            if (Convert.ToBoolean(sensorInit[0]) == chkElTemp1Init.Checked &&
-                    Convert.ToBoolean(sensorInit[1]) == chkElTemp2Init.Checked &&
-                    Convert.ToBoolean(sensorInit[2]) == chkAzTemp1Init.Checked &&
-                    Convert.ToBoolean(sensorInit[3]) == chkAzTemp2Init.Checked &&
-                    Convert.ToBoolean(sensorInit[4]) == chkElEncInit.Checked &&
-                    Convert.ToBoolean(sensorInit[5]) == chkAzEncInit.Checked &&
-                    Convert.ToBoolean(sensorInit[6]) == chkAzAdxlInit.Checked &&
-                    Convert.ToBoolean(sensorInit[7]) == chkElAdxlInit.Checked &&
-                    Convert.ToBoolean(sensorInit[8]) == chkCbAdxlInit.Checked)
+            if (
+                    Convert.ToBoolean(sensorInit[(int)SensorInitializationEnum.ElevationTemp]) == chkElTemp1Init.Checked &&
+                    Convert.ToBoolean(sensorInit[(int)SensorInitializationEnum.AzimuthTemp]) == chkAzTemp1Init.Checked &&
+                    Convert.ToBoolean(sensorInit[(int)SensorInitializationEnum.ElevationEncoder]) == chkElEncInit.Checked &&
+                    Convert.ToBoolean(sensorInit[(int)SensorInitializationEnum.AzimuthEncoder]) == chkAzEncInit.Checked &&
+                    Convert.ToBoolean(sensorInit[(int)SensorInitializationEnum.AzimuthAccelerometer]) == chkAzAdxlInit.Checked &&
+                    Convert.ToBoolean(sensorInit[(int)SensorInitializationEnum.ElevationAccelerometer]) == chkElAdxlInit.Checked &&
+                    Convert.ToBoolean(sensorInit[(int)SensorInitializationEnum.CounterbalanceAccelerometer]) == chkCbAdxlInit.Checked
+               )
             {
                 lblSensorInitChanged.Text = "";
                 return false;
@@ -449,6 +432,21 @@ namespace EmbeddedSystemsTest
             else lblSensorInitChanged.Text += "Connect to the Teensy to update.";
             return true;
             
+        }
+
+        private byte[] GetBytesFromInitCheckboxes()
+        {
+            byte[] init = new byte[] {
+                chkElTemp1Init.Checked ?    (byte)1 : (byte)0,
+                chkAzTemp1Init.Checked ?    (byte)1 : (byte)0,
+                chkElEncInit.Checked ?      (byte)1 : (byte)0,
+                chkAzEncInit.Checked ?      (byte)1 : (byte)0,
+                chkAzAdxlInit.Checked ?     (byte)1 : (byte)0,
+                chkElAdxlInit.Checked ?     (byte)1 : (byte)0,
+                chkCbAdxlInit.Checked ?     (byte)1 : (byte)0
+            };
+
+            return init;
         }
 
         private void chkElTemp1Init_CheckedChanged(object sender, EventArgs e)

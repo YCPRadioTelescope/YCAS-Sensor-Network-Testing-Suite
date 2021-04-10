@@ -91,8 +91,6 @@ namespace EmbeddedSystemsTest.SensorNetwork
                     }
                 }
 
-                // Elevation temperature 2
-
                 // Azimuth temperature 1
                 if (azTempSensorSize > 0)
                 {
@@ -102,8 +100,6 @@ namespace EmbeddedSystemsTest.SensorNetwork
                         azTemp1[j] = (bytes[k++] << 8 | bytes[k++]);
                     }
                 }
-
-                // Azimuth temperature 2
 
                 // Elevation encoder
                 if (elEncoderSize > 0)

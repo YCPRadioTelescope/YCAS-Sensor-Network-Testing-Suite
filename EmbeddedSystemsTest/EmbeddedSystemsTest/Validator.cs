@@ -12,8 +12,18 @@ namespace EmbeddedSystemsTest
     {
         public static bool serverIpExists(string ip, int port)
         {
-            // TODO: find a way to validate if a server IP exists
-            return true;
+            bool success = false;
+
+            TcpListener s = new TcpListener(IPAddress.Parse(ip), port);
+            try
+            {
+                s.Start();
+                success = true;
+                s.Stop();
+            }
+            catch { success = false; }
+
+            return success;
         }
 
         public static bool ipValid(string ip)

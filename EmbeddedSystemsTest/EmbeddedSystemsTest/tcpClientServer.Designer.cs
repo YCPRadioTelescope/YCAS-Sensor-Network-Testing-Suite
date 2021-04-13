@@ -83,10 +83,10 @@ namespace EmbeddedSystemsTest
             this.btnCustPacket = new System.Windows.Forms.Button();
             this.btnCsvDrawing = new System.Windows.Forms.Button();
             this.gbDataLogging = new System.Windows.Forms.GroupBox();
-            this.txtDataFileName = new System.Windows.Forms.TextBox();
-            this.lblDataFileName = new System.Windows.Forms.Label();
-            this.btnStartDataLogging = new System.Windows.Forms.Button();
             this.btnStopLogging = new System.Windows.Forms.Button();
+            this.btnStartDataLogging = new System.Windows.Forms.Button();
+            this.lblDataFileName = new System.Windows.Forms.Label();
+            this.txtDataFileName = new System.Windows.Forms.TextBox();
             this.grpStats.SuspendLayout();
             this.grpTempUnit.SuspendLayout();
             this.grpSensorInit.SuspendLayout();
@@ -396,7 +396,7 @@ namespace EmbeddedSystemsTest
             // lblEl1Temp
             // 
             this.lblEl1Temp.AutoSize = true;
-            this.lblEl1Temp.Location = new System.Drawing.Point(504, 49);
+            this.lblEl1Temp.Location = new System.Drawing.Point(505, 48);
             this.lblEl1Temp.Name = "lblEl1Temp";
             this.lblEl1Temp.Size = new System.Drawing.Size(140, 13);
             this.lblEl1Temp.TabIndex = 28;
@@ -405,7 +405,7 @@ namespace EmbeddedSystemsTest
             // lblAz1Temp
             // 
             this.lblAz1Temp.AutoSize = true;
-            this.lblAz1Temp.Location = new System.Drawing.Point(504, 96);
+            this.lblAz1Temp.Location = new System.Drawing.Point(512, 61);
             this.lblAz1Temp.Name = "lblAz1Temp";
             this.lblAz1Temp.Size = new System.Drawing.Size(133, 13);
             this.lblAz1Temp.TabIndex = 30;
@@ -414,7 +414,7 @@ namespace EmbeddedSystemsTest
             // lblAzAdxl
             // 
             this.lblAzAdxl.AutoSize = true;
-            this.lblAzAdxl.Location = new System.Drawing.Point(504, 141);
+            this.lblAzAdxl.Location = new System.Drawing.Point(504, 86);
             this.lblAzAdxl.Name = "lblAzAdxl";
             this.lblAzAdxl.Size = new System.Drawing.Size(141, 52);
             this.lblAzAdxl.TabIndex = 32;
@@ -423,7 +423,7 @@ namespace EmbeddedSystemsTest
             // lblElAdxl
             // 
             this.lblElAdxl.AutoSize = true;
-            this.lblElAdxl.Location = new System.Drawing.Point(504, 206);
+            this.lblElAdxl.Location = new System.Drawing.Point(505, 146);
             this.lblElAdxl.Name = "lblElAdxl";
             this.lblElAdxl.Size = new System.Drawing.Size(148, 52);
             this.lblElAdxl.TabIndex = 33;
@@ -432,7 +432,7 @@ namespace EmbeddedSystemsTest
             // lblCbAdxl
             // 
             this.lblCbAdxl.AutoSize = true;
-            this.lblCbAdxl.Location = new System.Drawing.Point(504, 268);
+            this.lblCbAdxl.Location = new System.Drawing.Point(505, 206);
             this.lblCbAdxl.Name = "lblCbAdxl";
             this.lblCbAdxl.Size = new System.Drawing.Size(179, 52);
             this.lblCbAdxl.TabIndex = 34;
@@ -441,7 +441,7 @@ namespace EmbeddedSystemsTest
             // lblCurrAz
             // 
             this.lblCurrAz.AutoSize = true;
-            this.lblCurrAz.Location = new System.Drawing.Point(504, 339);
+            this.lblCurrAz.Location = new System.Drawing.Point(500, 267);
             this.lblCurrAz.Name = "lblCurrAz";
             this.lblCurrAz.Size = new System.Drawing.Size(145, 13);
             this.lblCurrAz.TabIndex = 35;
@@ -620,7 +620,7 @@ namespace EmbeddedSystemsTest
             // lblCurrEl
             // 
             this.lblCurrEl.AutoSize = true;
-            this.lblCurrEl.Location = new System.Drawing.Point(504, 361);
+            this.lblCurrEl.Location = new System.Drawing.Point(493, 280);
             this.lblCurrEl.Name = "lblCurrEl";
             this.lblCurrEl.Size = new System.Drawing.Size(152, 13);
             this.lblCurrEl.TabIndex = 38;
@@ -628,7 +628,7 @@ namespace EmbeddedSystemsTest
             // 
             // btnCustPacket
             // 
-            this.btnCustPacket.Location = new System.Drawing.Point(818, 371);
+            this.btnCustPacket.Location = new System.Drawing.Point(308, 418);
             this.btnCustPacket.Name = "btnCustPacket";
             this.btnCustPacket.Size = new System.Drawing.Size(120, 23);
             this.btnCustPacket.TabIndex = 24;
@@ -638,7 +638,7 @@ namespace EmbeddedSystemsTest
             // 
             // btnCsvDrawing
             // 
-            this.btnCsvDrawing.Location = new System.Drawing.Point(692, 371);
+            this.btnCsvDrawing.Location = new System.Drawing.Point(308, 447);
             this.btnCsvDrawing.Name = "btnCsvDrawing";
             this.btnCsvDrawing.Size = new System.Drawing.Size(120, 23);
             this.btnCsvDrawing.TabIndex = 23;
@@ -659,21 +659,16 @@ namespace EmbeddedSystemsTest
             this.gbDataLogging.TabStop = false;
             this.gbDataLogging.Text = "Data Logging";
             // 
-            // txtDataFileName
+            // btnStopLogging
             // 
-            this.txtDataFileName.Location = new System.Drawing.Point(76, 30);
-            this.txtDataFileName.Name = "txtDataFileName";
-            this.txtDataFileName.Size = new System.Drawing.Size(131, 20);
-            this.txtDataFileName.TabIndex = 0;
-            // 
-            // lblDataFileName
-            // 
-            this.lblDataFileName.AutoSize = true;
-            this.lblDataFileName.Location = new System.Drawing.Point(15, 33);
-            this.lblDataFileName.Name = "lblDataFileName";
-            this.lblDataFileName.Size = new System.Drawing.Size(57, 13);
-            this.lblDataFileName.TabIndex = 1;
-            this.lblDataFileName.Text = "File Name:";
+            this.btnStopLogging.Enabled = false;
+            this.btnStopLogging.Location = new System.Drawing.Point(140, 71);
+            this.btnStopLogging.Name = "btnStopLogging";
+            this.btnStopLogging.Size = new System.Drawing.Size(103, 23);
+            this.btnStopLogging.TabIndex = 3;
+            this.btnStopLogging.Text = "Stop Logging";
+            this.btnStopLogging.UseVisualStyleBackColor = true;
+            this.btnStopLogging.Click += new System.EventHandler(this.btnStopLogging_Click);
             // 
             // btnStartDataLogging
             // 
@@ -685,16 +680,21 @@ namespace EmbeddedSystemsTest
             this.btnStartDataLogging.UseVisualStyleBackColor = true;
             this.btnStartDataLogging.Click += new System.EventHandler(this.btnStartDataLogging_Click);
             // 
-            // btnStopLogging
+            // lblDataFileName
             // 
-            this.btnStopLogging.Enabled = false;
-            this.btnStopLogging.Location = new System.Drawing.Point(140, 71);
-            this.btnStopLogging.Name = "btnStopLogging";
-            this.btnStopLogging.Size = new System.Drawing.Size(103, 23);
-            this.btnStopLogging.TabIndex = 3;
-            this.btnStopLogging.Text = "Stop Logging";
-            this.btnStopLogging.UseVisualStyleBackColor = true;
-            this.btnStopLogging.Click += new System.EventHandler(this.btnStopLogging_Click);
+            this.lblDataFileName.AutoSize = true;
+            this.lblDataFileName.Location = new System.Drawing.Point(15, 33);
+            this.lblDataFileName.Name = "lblDataFileName";
+            this.lblDataFileName.Size = new System.Drawing.Size(57, 13);
+            this.lblDataFileName.TabIndex = 1;
+            this.lblDataFileName.Text = "File Name:";
+            // 
+            // txtDataFileName
+            // 
+            this.txtDataFileName.Location = new System.Drawing.Point(76, 30);
+            this.txtDataFileName.Name = "txtDataFileName";
+            this.txtDataFileName.Size = new System.Drawing.Size(131, 20);
+            this.txtDataFileName.TabIndex = 0;
             // 
             // frmTcpTest
             // 

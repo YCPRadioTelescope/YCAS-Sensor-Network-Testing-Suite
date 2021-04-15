@@ -39,7 +39,7 @@ namespace EmbeddedSystemsTest
         byte[] sensorInit;
 
         bool logData = false;
-
+        bool logSelfTest = true;
         public frmTcpTest()
         {
             InitializeComponent();
@@ -70,7 +70,20 @@ namespace EmbeddedSystemsTest
             txtClientPort.Text = "1680";
 
             txtDataFileName.Text = "SensorData";
-            
+
+            lsbErrorLogging.Items.AddRange(new string[] {
+                "Elevation ADXL Self-Test:",
+                "Azimuth ADXL Self-Test:",
+                "Counterbalance ADXL Self-Test:",
+                "Elevation ADXL Error:",
+                "Azimuth ADXL Error:",
+                "Counterbalance ADXL Error:",
+                "Azimuth Encoder Error:",
+                "Elevation Temp1 Error:",
+                "Elevation Temp2 Error:",
+                "Azimuth Temp1 Error:",
+                "Azimuth Temp2 Error:"
+            });
         }
 
         private void lblStartListen_Click(object sender, EventArgs e)
@@ -94,7 +107,7 @@ namespace EmbeddedSystemsTest
                 txtListenIp.Enabled = false;
                 txtListenPort.Enabled = false;
 
-                if(radSensorData.Checked)
+                if (radSensorData.Checked)
                 {
                     txtClientIp.Enabled = false;
                     txtClientPort.Enabled = false;
@@ -148,7 +161,8 @@ namespace EmbeddedSystemsTest
             }
         }
 
-        private void clientProcess(string addr, int port, byte[] data) {
+        private void clientProcess(string addr, int port, byte[] data)
+        {
             client = new TcpClient(addr, port);
 
             NetworkStream stream = client.GetStream();
@@ -172,11 +186,12 @@ namespace EmbeddedSystemsTest
             client.Dispose();
         }
 
-        private void listenerProcess(IPAddress addr, int port) {
+        private void listenerProcess(IPAddress addr, int port)
+        {
             server = new TcpListener(addr, port);
             server.Start();
             runListenerThread = true;
-            
+
             TcpClient localClient;
             NetworkStream stream;
 
@@ -185,10 +200,11 @@ namespace EmbeddedSystemsTest
             while (runListenerThread)
             {
 
-                try { 
-                    
+                try
+                {
+
                     localClient = server.AcceptTcpClient();
-                    Utilities.WriteToGUIFromThread(this, () => 
+                    Utilities.WriteToGUIFromThread(this, () =>
                     {
                         lblListenConnected.Text = "Received data.";
                         addToUiConsole("Client connected to server");
@@ -199,10 +215,11 @@ namespace EmbeddedSystemsTest
 
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0 && runListenerThread)
                     {
-                        if(!radSensorData.Checked) stream.Write(bytes, 0, bytes.Length);
+                        if (!radSensorData.Checked) stream.Write(bytes, 0, bytes.Length);
 
                         if (Encoding.ASCII.GetString(bytes, 0, i).Equals("Send Sensor Configuration") && radSensorData.Checked)
                         {
+                            logSelfTest = true; // embeded system is initializing so we want to know the result of the self tests
                             // Convert all sensor init checkboxes into byte array
                             sensorInit = GetBytesFromInitCheckboxes();
 
@@ -281,23 +298,78 @@ namespace EmbeddedSystemsTest
                                     string tempUnitSym = $"\u00B0{tempUnit.ToString().ToCharArray()[0]}";
 
                                     SensorData sensorData = sensorNetwork.getLatestSensorData(tempUnit);
-                                    if(chkElTemp1Init.Checked) lblEl1Temp.Text = $"Elevation Temperature 1: {sensorData.elTemp1} {tempUnitSym}";
-                                    if(chkAzTemp1Init.Checked) lblAz1Temp.Text = $"Azimuth Temperature 1: {sensorData.azTemp1} {tempUnitSym}";
-                                    if(chkAzAdxlInit.Checked) lblAzAdxl.Text = "Azimuth accelerometer data:\n" +
+                                    if (chkElTemp1Init.Checked)
+                                    {
+                                        lblEl1Temp.Text = $"Elevation Temperature 1: {sensorData.elTemp1} {tempUnitSym}";
+                                        lblElTempSensor1Status.Text = $"Elevation Temperature 1: {sensorData.elTemp1Status}";
+                                        lblElTempSensor2Status.Text = $"Elevation Temperature 2: {sensorData.elTemp2Status}";
+                                    }
+                                    if (chkAzTemp1Init.Checked)
+                                    {
+                                        lblAz1Temp.Text = $"Azimuth Temperature 1: {sensorData.azTemp1} {tempUnitSym}";
+                                        lblAzTempSensor1Status.Text = $"Azimuth Temperature 1: {sensorData.azTemp1Status}";
+                                        lblAzTempSensor2Status.Text = $"Azimuth Temperature 1: {sensorData.azTemp2Status}";
+                                    }
+                                    if (chkAzAdxlInit.Checked)
+                                    {
+                                        lblAzAdxl.Text = "Azimuth accelerometer data:\n" +
                                                         $"     X: {sensorData.azAdxlData.xAxis}\n" +
                                                         $"     Y: {sensorData.azAdxlData.yAxis}\n" +
                                                         $"     Z: {sensorData.azAdxlData.zAxis}";
-                                    if(chkElAdxlInit.Checked) lblElAdxl.Text = "Elevation accelerometer data:\n" +
+                                        lblAzAccStatus.Text = $"Azimuth Accelerometer: {sensorData.azAdxlStatus}";
+                                    }
+                                    if (chkElAdxlInit.Checked)
+                                    {
+                                        lblElAdxl.Text = "Elevation accelerometer data:\n" +
                                                         $"     X: {sensorData.elAdxlData.xAxis}\n" +
                                                         $"     Y: {sensorData.elAdxlData.yAxis}\n" +
                                                         $"     Z: {sensorData.elAdxlData.zAxis}";
-                                    if(chkCbAdxlInit.Checked) lblCbAdxl.Text = "Counterbalance accelerometer data:\n" +
+                                        lblElAccStatus.Text = $"Elevation Accelerometer: {sensorData.elAdxlStatus}";
+                                    }
+                                    if (chkCbAdxlInit.Checked)
+                                    {
+                                        lblCbAdxl.Text = "Counterbalance accelerometer data:\n" +
                                                         $"     X: {sensorData.cbAdxlData.xAxis}\n" +
                                                         $"     Y: {sensorData.cbAdxlData.yAxis}\n" +
                                                         $"     Z: {sensorData.cbAdxlData.zAxis}";
+                                        lblCbAccStatus.Text = $"Counterbalance Accelerometer: {sensorData.cbAdxlStatus}";
+                                    }
+                                    if (chkAzEncInit.Checked)
+                                    {
+                                        lblCurrAz.Text = $"Current azimuth position: {sensorData.orientation.Azimuth}";
+                                        lblAzEncoderStatus.Text = $"Azimuth Encoder: {sensorData.azEncoderStatus}";
+                                    }
+                                    if (chkElEncInit.Checked)
+                                    {
+                                        lblCurrEl.Text = $"Current elevation position: {sensorData.orientation.Elevation}";
+                                    }
+                                    if (ckbLogErrors.Checked)
+                                    {
+                                        // Only log the self test status once since it is only done during the initialization of the embeded system
+                                        if (logSelfTest)
+                                        {
+                                            logSelfTest = false;
+                                            lsbErrorLogging.Items[0] = ($"Elevation ADXL Self-Test: {sensorData.adxlSelfTestState[(int)AdxlSensors.ELEVATION].ToString()}" + "\r\n");
+                                            lsbErrorLogging.Items[1] = ($"Azimuth ADXL Self-Test: {sensorData.adxlSelfTestState[(int)AdxlSensors.AZIMUTH].ToString()}" + "\r\n");
+                                            lsbErrorLogging.Items[2] = ($"Counterbalance ADXL Self-Test: {sensorData.adxlSelfTestState[(int)AdxlSensors.COUNTERBALANCE].ToString()}" + "\r\n");
+                                        }
+                                        lsbErrorLogging.Items[3] = ($"Elevation ADXL Error: {sensorData.adxlErrors[(int)AdxlSensors.ELEVATION].ToString()}" + "\r\n");
 
-                                    if(chkAzEncInit.Checked) lblCurrAz.Text = $"Current azimuth position: {sensorData.orientation.Azimuth}";
-                                    if(chkElEncInit.Checked) lblCurrEl.Text = $"Current elevation position: {sensorData.orientation.Elevation}";
+                                        lsbErrorLogging.Items[4] = ($"Azimuth ADXL Error: {sensorData.adxlErrors[(int)AdxlSensors.AZIMUTH].ToString()}" + "\r\n");
+
+                                        lsbErrorLogging.Items[5] = ($"Counterbalance ADXL Error: {sensorData.adxlErrors[(int)AdxlSensors.COUNTERBALANCE].ToString()}" + "\r\n");
+
+                                        lsbErrorLogging.Items[6] = ($"Azimuth Encoder Error: {sensorData.azEncderError.ToString()}" + "\r\n");
+
+                                        lsbErrorLogging.Items[7] = ($"Elevation Temp1 Error: {sensorData.temperatureErrors[(int)TemperatureSensors.ELEVATION1].ToString()}" + "\r\n");
+
+                                        lsbErrorLogging.Items[8] = ($"Elevation Temp2 Error: {sensorData.temperatureErrors[(int)TemperatureSensors.ELEVATION2].ToString()}" + "\r\n");
+
+                                        lsbErrorLogging.Items[9] = ($"Azimuth Temp1 Error: {sensorData.temperatureErrors[(int)TemperatureSensors.AZIMUTH1].ToString()}" + "\r\n");
+
+                                        lsbErrorLogging.Items[10] = ($"Azimuth Temp2 Error: {sensorData.temperatureErrors[(int)TemperatureSensors.AZIMUTH2].ToString()}" + "\r\n");
+
+                                    }
                                 }
                             });
                         }
@@ -308,7 +380,8 @@ namespace EmbeddedSystemsTest
                     stream.Close();
                     stream.Dispose();
                 }
-                catch (Exception e) {
+                catch (Exception e)
+                {
                     Console.WriteLine(e);
                 }
             }
@@ -435,7 +508,7 @@ namespace EmbeddedSystemsTest
             if (runListenerThread) lblSensorInitChanged.Text += "Please click \"Update Sensor Init\" to update.";
             else lblSensorInitChanged.Text += "Connect to the Teensy to update.";
             return true;
-            
+
         }
 
         private byte[] GetBytesFromInitCheckboxes()

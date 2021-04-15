@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace EmbeddedSystemsTest.SensorNetwork
         private int[] elEncoder { get; set; }
         private int[] azEncoder { get; set; }
         private string transmitId { get; set; }
+        private BitArray sensorStatuses { get; set; }
+        private UInt32 sensorErrors { get; set; }
 
         public void ParseSensorData(byte[] bytes, int buffer, bool logData, string fileName)
         {
@@ -44,17 +47,19 @@ namespace EmbeddedSystemsTest.SensorNetwork
             // Get transmit ID and data sizes from byte array
             transmitId = bytes[0].ToString();
             UInt32 dataSize = (UInt32)(bytes[1] << 24 | bytes[2] << 16 | bytes[3] << 8 | bytes[4]);
-            UInt16 elAdxlSize = (UInt16)(bytes[5] << 8 | bytes[6]);
-            UInt16 azAdxlSize = (UInt16)(bytes[7] << 8 | bytes[8]);
-            UInt16 cbAdxlSize = (UInt16)(bytes[9] << 8 | bytes[10]);
-            UInt16 elTempSensorSize = (UInt16)(bytes[11] << 8 | bytes[12]);
-            UInt16 azTempSensorSize = (UInt16)(bytes[13] << 8 | bytes[14]);
-            UInt16 elEncoderSize = (UInt16)(bytes[15] << 8 | bytes[16]);
-            UInt16 azEncoderSize = (UInt16)(bytes[17] << 8 | bytes[18]);
+            sensorStatuses = new BitArray(new byte[] { bytes[5] }); // sensor statuses 
+            sensorErrors = (UInt32)(bytes[6] << 16 | bytes[7] << 8 | bytes[8]); // sensor self-tests | adxl error codes and azimuth encoder error code | temp sensor error codes
+            UInt16 elAdxlSize = (UInt16)(bytes[9] << 8 | bytes[10]);
+            UInt16 azAdxlSize = (UInt16)(bytes[11] << 8 | bytes[12]);
+            UInt16 cbAdxlSize = (UInt16)(bytes[13] << 8 | bytes[14]);
+            UInt16 elTempSensorSize = (UInt16)(bytes[15] << 8 | bytes[16]);
+            UInt16 azTempSensorSize = (UInt16)(bytes[17] << 8 | bytes[18]);
+            UInt16 elEncoderSize = (UInt16)(bytes[19] << 8 | bytes[20]);
+            UInt16 azEncoderSize = (UInt16)(bytes[21] << 8 | bytes[22]);
 
             if (buffer >= dataSize)
             {
-                int k = 19;
+                int k = 23;
 
                 // Accelerometer 1 (elevation)
                 if (elAdxlSize > 0)
@@ -199,21 +204,21 @@ namespace EmbeddedSystemsTest.SensorNetwork
                         encoderData.AppendLine();
                     }
 
-                    if(adxlData.Length != 0)
+                    if (adxlData.Length != 0)
                     {
                         using (StreamWriter sw = File.AppendText(fileName + "_AdxlData.csv"))
                         {
                             sw.Write(adxlData.ToString());
                         }
                     }
-                    if(tempData.Length != 0)
+                    if (tempData.Length != 0)
                     {
                         using (StreamWriter sw = File.AppendText(fileName + "_TempData.csv"))
                         {
                             sw.Write(tempData.ToString());
                         }
                     }
-                    if(encoderData.Length != 0)
+                    if (encoderData.Length != 0)
                     {
                         using (StreamWriter sw = File.AppendText(fileName + "_EncoderData.csv"))
                         {
@@ -262,6 +267,32 @@ namespace EmbeddedSystemsTest.SensorNetwork
             {
                 s.cbAdxlData = cbAdxlData[cbAdxlData.Length - 1];
             }
+            if (sensorStatuses != null && sensorStatuses.Length != 0)
+            {
+                s.azEncoderStatus = sensorStatuses[0] ? SensorStatus.OKAY : SensorStatus.ERROR;
+                s.azTemp2Status = sensorStatuses[1] ? SensorStatus.OKAY : SensorStatus.ERROR;
+                s.azTemp1Status = sensorStatuses[2] ? SensorStatus.OKAY : SensorStatus.ERROR;
+                s.elTemp2Status = sensorStatuses[3] ? SensorStatus.OKAY : SensorStatus.ERROR;
+                s.elTemp1Status = sensorStatuses[4] ? SensorStatus.OKAY : SensorStatus.ERROR;
+                s.cbAdxlStatus = sensorStatuses[5] ? SensorStatus.OKAY : SensorStatus.ERROR;
+                s.azAdxlStatus = sensorStatuses[6] ? SensorStatus.OKAY : SensorStatus.ERROR;
+                s.elAdxlStatus = sensorStatuses[7] ? SensorStatus.OKAY : SensorStatus.ERROR;
+            }
+
+            s.adxlSelfTestState = new AdxlSelfTestState[3];
+            s.adxlSelfTestState[(int)AdxlSensors.ELEVATION] = (AdxlSelfTestState)((sensorErrors & 0x040000) >> 18);
+            s.adxlSelfTestState[(int)AdxlSensors.AZIMUTH] = (AdxlSelfTestState)((sensorErrors & 0x020000) >> 17);
+            s.adxlSelfTestState[(int)AdxlSensors.COUNTERBALANCE] = (AdxlSelfTestState)((sensorErrors & 0x010000) >> 16);
+            s.adxlErrors = new AdxlError_Codes[3];
+            s.adxlErrors[(int)AdxlSensors.ELEVATION] = (AdxlError_Codes)((sensorErrors & 0xC000) >> 14);
+            s.adxlErrors[(int)AdxlSensors.AZIMUTH] = (AdxlError_Codes)((sensorErrors & 0x3000) >> 12);
+            s.adxlErrors[(int)AdxlSensors.COUNTERBALANCE] = (AdxlError_Codes)((sensorErrors & 0x0C00) >> 10);
+            s.azEncderError = (AzEncoderError_Codes)((sensorErrors & 0x0300) >> 8);
+            s.temperatureErrors = new TemperatureError_Codes[4];
+            s.temperatureErrors[(int)TemperatureSensors.ELEVATION1] = (TemperatureError_Codes)((sensorErrors & 0xC0) >> 6);
+            s.temperatureErrors[(int)TemperatureSensors.ELEVATION2] = (TemperatureError_Codes)((sensorErrors & 0x30) >> 4);
+            s.temperatureErrors[(int)TemperatureSensors.AZIMUTH1] = (TemperatureError_Codes)((sensorErrors & 0x0C) >> 2);
+            s.temperatureErrors[(int)TemperatureSensors.AZIMUTH2] = (TemperatureError_Codes)(sensorErrors & 0x03);
 
             double az = 0;
             double el = 0;

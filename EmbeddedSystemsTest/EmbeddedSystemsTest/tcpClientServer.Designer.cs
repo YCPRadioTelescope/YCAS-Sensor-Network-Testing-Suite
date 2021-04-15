@@ -87,10 +87,24 @@ namespace EmbeddedSystemsTest
             this.btnStartDataLogging = new System.Windows.Forms.Button();
             this.lblDataFileName = new System.Windows.Forms.Label();
             this.txtDataFileName = new System.Windows.Forms.TextBox();
+            this.gbSensorStatuses = new System.Windows.Forms.GroupBox();
+            this.lblAzEncoderStatus = new System.Windows.Forms.Label();
+            this.lblElEncoderStatus = new System.Windows.Forms.Label();
+            this.lblCbAccStatus = new System.Windows.Forms.Label();
+            this.lblAzAccStatus = new System.Windows.Forms.Label();
+            this.lblElAccStatus = new System.Windows.Forms.Label();
+            this.lblAzTempSensor2Status = new System.Windows.Forms.Label();
+            this.lblAzTempSensor1Status = new System.Windows.Forms.Label();
+            this.lblElTempSensor2Status = new System.Windows.Forms.Label();
+            this.lblElTempSensor1Status = new System.Windows.Forms.Label();
+            this.lblErrorLogging = new System.Windows.Forms.Label();
+            this.ckbLogErrors = new System.Windows.Forms.CheckBox();
+            this.lsbErrorLogging = new System.Windows.Forms.ListBox();
             this.grpStats.SuspendLayout();
             this.grpTempUnit.SuspendLayout();
             this.grpSensorInit.SuspendLayout();
             this.gbDataLogging.SuspendLayout();
+            this.gbSensorStatuses.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnStartListen
@@ -454,7 +468,7 @@ namespace EmbeddedSystemsTest
             this.grpTempUnit.Controls.Add(this.radKelvin);
             this.grpTempUnit.Location = new System.Drawing.Point(738, 49);
             this.grpTempUnit.Name = "grpTempUnit";
-            this.grpTempUnit.Size = new System.Drawing.Size(200, 100);
+            this.grpTempUnit.Size = new System.Drawing.Size(208, 100);
             this.grpTempUnit.TabIndex = 20;
             this.grpTempUnit.TabStop = false;
             this.grpTempUnit.Text = "Temperature Unit";
@@ -502,7 +516,7 @@ namespace EmbeddedSystemsTest
             this.grpSensorInit.Controls.Add(this.chkElTemp1Init);
             this.grpSensorInit.Location = new System.Drawing.Point(738, 158);
             this.grpSensorInit.Name = "grpSensorInit";
-            this.grpSensorInit.Size = new System.Drawing.Size(200, 156);
+            this.grpSensorInit.Size = new System.Drawing.Size(208, 156);
             this.grpSensorInit.TabIndex = 6;
             this.grpSensorInit.TabStop = false;
             this.grpSensorInit.Text = "Sensor Initialization";
@@ -696,11 +710,143 @@ namespace EmbeddedSystemsTest
             this.txtDataFileName.Size = new System.Drawing.Size(131, 20);
             this.txtDataFileName.TabIndex = 0;
             // 
+            // gbSensorStatuses
+            // 
+            this.gbSensorStatuses.Controls.Add(this.lblAzEncoderStatus);
+            this.gbSensorStatuses.Controls.Add(this.lblElEncoderStatus);
+            this.gbSensorStatuses.Controls.Add(this.lblCbAccStatus);
+            this.gbSensorStatuses.Controls.Add(this.lblAzAccStatus);
+            this.gbSensorStatuses.Controls.Add(this.lblElAccStatus);
+            this.gbSensorStatuses.Controls.Add(this.lblAzTempSensor2Status);
+            this.gbSensorStatuses.Controls.Add(this.lblAzTempSensor1Status);
+            this.gbSensorStatuses.Controls.Add(this.lblElTempSensor2Status);
+            this.gbSensorStatuses.Controls.Add(this.lblElTempSensor1Status);
+            this.gbSensorStatuses.Location = new System.Drawing.Point(738, 320);
+            this.gbSensorStatuses.Name = "gbSensorStatuses";
+            this.gbSensorStatuses.Size = new System.Drawing.Size(208, 208);
+            this.gbSensorStatuses.TabIndex = 40;
+            this.gbSensorStatuses.TabStop = false;
+            this.gbSensorStatuses.Text = "Sensor Statuses";
+            // 
+            // lblAzEncoderStatus
+            // 
+            this.lblAzEncoderStatus.AutoSize = true;
+            this.lblAzEncoderStatus.Location = new System.Drawing.Point(11, 181);
+            this.lblAzEncoderStatus.Name = "lblAzEncoderStatus";
+            this.lblAzEncoderStatus.Size = new System.Drawing.Size(90, 13);
+            this.lblAzEncoderStatus.TabIndex = 8;
+            this.lblAzEncoderStatus.Text = "Azimuth Encoder:";
+            // 
+            // lblElEncoderStatus
+            // 
+            this.lblElEncoderStatus.AutoSize = true;
+            this.lblElEncoderStatus.Location = new System.Drawing.Point(11, 159);
+            this.lblElEncoderStatus.Name = "lblElEncoderStatus";
+            this.lblElEncoderStatus.Size = new System.Drawing.Size(97, 13);
+            this.lblElEncoderStatus.TabIndex = 7;
+            this.lblElEncoderStatus.Text = "Elevation Encoder:";
+            // 
+            // lblCbAccStatus
+            // 
+            this.lblCbAccStatus.AutoSize = true;
+            this.lblCbAccStatus.Location = new System.Drawing.Point(11, 140);
+            this.lblCbAccStatus.Name = "lblCbAccStatus";
+            this.lblCbAccStatus.Size = new System.Drawing.Size(156, 13);
+            this.lblCbAccStatus.TabIndex = 6;
+            this.lblCbAccStatus.Text = "Counterbalance Accelerometer:";
+            // 
+            // lblAzAccStatus
+            // 
+            this.lblAzAccStatus.AutoSize = true;
+            this.lblAzAccStatus.Location = new System.Drawing.Point(11, 121);
+            this.lblAzAccStatus.Name = "lblAzAccStatus";
+            this.lblAzAccStatus.Size = new System.Drawing.Size(118, 13);
+            this.lblAzAccStatus.TabIndex = 5;
+            this.lblAzAccStatus.Text = "Azimuth Accelerometer:";
+            // 
+            // lblElAccStatus
+            // 
+            this.lblElAccStatus.AutoSize = true;
+            this.lblElAccStatus.Location = new System.Drawing.Point(11, 102);
+            this.lblElAccStatus.Name = "lblElAccStatus";
+            this.lblElAccStatus.Size = new System.Drawing.Size(125, 13);
+            this.lblElAccStatus.TabIndex = 4;
+            this.lblElAccStatus.Text = "Elevation Accelerometer:";
+            // 
+            // lblAzTempSensor2Status
+            // 
+            this.lblAzTempSensor2Status.AutoSize = true;
+            this.lblAzTempSensor2Status.Location = new System.Drawing.Point(11, 82);
+            this.lblAzTempSensor2Status.Name = "lblAzTempSensor2Status";
+            this.lblAzTempSensor2Status.Size = new System.Drawing.Size(119, 13);
+            this.lblAzTempSensor2Status.TabIndex = 3;
+            this.lblAzTempSensor2Status.Text = "Azimuth Temperature 2:";
+            // 
+            // lblAzTempSensor1Status
+            // 
+            this.lblAzTempSensor1Status.AutoSize = true;
+            this.lblAzTempSensor1Status.Location = new System.Drawing.Point(11, 64);
+            this.lblAzTempSensor1Status.Name = "lblAzTempSensor1Status";
+            this.lblAzTempSensor1Status.Size = new System.Drawing.Size(119, 13);
+            this.lblAzTempSensor1Status.TabIndex = 2;
+            this.lblAzTempSensor1Status.Text = "Azimuth Temperature 1:";
+            // 
+            // lblElTempSensor2Status
+            // 
+            this.lblElTempSensor2Status.AutoSize = true;
+            this.lblElTempSensor2Status.Location = new System.Drawing.Point(11, 46);
+            this.lblElTempSensor2Status.Name = "lblElTempSensor2Status";
+            this.lblElTempSensor2Status.Size = new System.Drawing.Size(126, 13);
+            this.lblElTempSensor2Status.TabIndex = 1;
+            this.lblElTempSensor2Status.Text = "Elevation Temperature 2:";
+            // 
+            // lblElTempSensor1Status
+            // 
+            this.lblElTempSensor1Status.AutoSize = true;
+            this.lblElTempSensor1Status.Location = new System.Drawing.Point(11, 27);
+            this.lblElTempSensor1Status.Name = "lblElTempSensor1Status";
+            this.lblElTempSensor1Status.Size = new System.Drawing.Size(126, 13);
+            this.lblElTempSensor1Status.TabIndex = 0;
+            this.lblElTempSensor1Status.Text = "Elevation Temperature 1:";
+            // 
+            // lblErrorLogging
+            // 
+            this.lblErrorLogging.AutoSize = true;
+            this.lblErrorLogging.Location = new System.Drawing.Point(21, 515);
+            this.lblErrorLogging.Name = "lblErrorLogging";
+            this.lblErrorLogging.Size = new System.Drawing.Size(73, 13);
+            this.lblErrorLogging.TabIndex = 42;
+            this.lblErrorLogging.Text = "Error Logging:";
+            // 
+            // ckbLogErrors
+            // 
+            this.ckbLogErrors.AutoSize = true;
+            this.ckbLogErrors.Checked = true;
+            this.ckbLogErrors.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckbLogErrors.Location = new System.Drawing.Point(143, 514);
+            this.ckbLogErrors.Name = "ckbLogErrors";
+            this.ckbLogErrors.Size = new System.Drawing.Size(74, 17);
+            this.ckbLogErrors.TabIndex = 44;
+            this.ckbLogErrors.Text = "Log Errors";
+            this.ckbLogErrors.UseVisualStyleBackColor = true;
+            // 
+            // lsbErrorLogging
+            // 
+            this.lsbErrorLogging.FormattingEnabled = true;
+            this.lsbErrorLogging.Location = new System.Drawing.Point(16, 532);
+            this.lsbErrorLogging.Name = "lsbErrorLogging";
+            this.lsbErrorLogging.Size = new System.Drawing.Size(410, 147);
+            this.lsbErrorLogging.TabIndex = 45;
+            // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 507);
+            this.ClientSize = new System.Drawing.Size(950, 695);
+            this.Controls.Add(this.lsbErrorLogging);
+            this.Controls.Add(this.ckbLogErrors);
+            this.Controls.Add(this.lblErrorLogging);
+            this.Controls.Add(this.gbSensorStatuses);
             this.Controls.Add(this.gbDataLogging);
             this.Controls.Add(this.btnCsvDrawing);
             this.Controls.Add(this.btnCustPacket);
@@ -753,6 +899,8 @@ namespace EmbeddedSystemsTest
             this.grpSensorInit.PerformLayout();
             this.gbDataLogging.ResumeLayout(false);
             this.gbDataLogging.PerformLayout();
+            this.gbSensorStatuses.ResumeLayout(false);
+            this.gbSensorStatuses.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -817,6 +965,19 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.Button btnStartDataLogging;
         private System.Windows.Forms.Label lblDataFileName;
         private System.Windows.Forms.TextBox txtDataFileName;
+        private System.Windows.Forms.GroupBox gbSensorStatuses;
+        private System.Windows.Forms.Label lblElTempSensor1Status;
+        private System.Windows.Forms.Label lblAzEncoderStatus;
+        private System.Windows.Forms.Label lblElEncoderStatus;
+        private System.Windows.Forms.Label lblCbAccStatus;
+        private System.Windows.Forms.Label lblAzAccStatus;
+        private System.Windows.Forms.Label lblElAccStatus;
+        private System.Windows.Forms.Label lblAzTempSensor2Status;
+        private System.Windows.Forms.Label lblAzTempSensor1Status;
+        private System.Windows.Forms.Label lblElTempSensor2Status;
+        private System.Windows.Forms.Label lblErrorLogging;
+        private System.Windows.Forms.CheckBox ckbLogErrors;
+        private System.Windows.Forms.ListBox lsbErrorLogging;
     }
 }
 

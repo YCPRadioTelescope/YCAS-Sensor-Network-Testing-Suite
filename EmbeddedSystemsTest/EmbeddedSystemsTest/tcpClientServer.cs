@@ -308,7 +308,7 @@ namespace EmbeddedSystemsTest
                                     {
                                         lblAz1Temp.Text = $"Azimuth Temperature 1: {sensorData.azTemp1} {tempUnitSym}";
                                         lblAzTempSensor1Status.Text = $"Azimuth Temperature 1: {sensorData.azTemp1Status}";
-                                        lblAzTempSensor2Status.Text = $"Azimuth Temperature 1: {sensorData.azTemp2Status}";
+                                        lblAzTempSensor2Status.Text = $"Azimuth Temperature 2: {sensorData.azTemp2Status}";
                                     }
                                     if (chkAzAdxlInit.Checked)
                                     {

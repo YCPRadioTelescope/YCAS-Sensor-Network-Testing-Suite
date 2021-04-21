@@ -32,6 +32,15 @@ namespace EmbeddedSystemsTest
 
             PreviousButton = btnCustPacket;
             PreviousForm = previousForm;
+
+            cboElTemp1Status.SelectedIndex = 1;
+            cboElTemp2Status.SelectedIndex = 1;
+            cboAzTemp1Status.SelectedIndex = 1;
+            cboAzTemp2Status.SelectedIndex = 1;
+            cboAzEncStatus.SelectedIndex = 1;
+            cboAzAccStatus.SelectedIndex = 1;
+            cboElAccStatus.SelectedIndex = 1;
+            cboCbAccStatus.SelectedIndex = 1;
         }
 
         private void chkElTemp1Init_CheckedChanged(object sender, EventArgs e)
@@ -198,7 +207,7 @@ namespace EmbeddedSystemsTest
                 CounterbalanceAccelerometerStatus = (SensorStatus)cboCbAccStatus.SelectedIndex
             };
             
-            return new SensorStatuses();
+            return s;
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)

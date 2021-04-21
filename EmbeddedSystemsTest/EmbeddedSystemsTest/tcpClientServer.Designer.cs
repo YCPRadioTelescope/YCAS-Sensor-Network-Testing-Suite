@@ -642,7 +642,7 @@ namespace EmbeddedSystemsTest
             // 
             // btnCustPacket
             // 
-            this.btnCustPacket.Location = new System.Drawing.Point(308, 418);
+            this.btnCustPacket.Location = new System.Drawing.Point(814, 534);
             this.btnCustPacket.Name = "btnCustPacket";
             this.btnCustPacket.Size = new System.Drawing.Size(120, 23);
             this.btnCustPacket.TabIndex = 24;
@@ -652,7 +652,7 @@ namespace EmbeddedSystemsTest
             // 
             // btnCsvDrawing
             // 
-            this.btnCsvDrawing.Location = new System.Drawing.Point(308, 447);
+            this.btnCsvDrawing.Location = new System.Drawing.Point(687, 534);
             this.btnCsvDrawing.Name = "btnCsvDrawing";
             this.btnCsvDrawing.Size = new System.Drawing.Size(120, 23);
             this.btnCsvDrawing.TabIndex = 23;
@@ -666,7 +666,7 @@ namespace EmbeddedSystemsTest
             this.gbDataLogging.Controls.Add(this.btnStartDataLogging);
             this.gbDataLogging.Controls.Add(this.lblDataFileName);
             this.gbDataLogging.Controls.Add(this.txtDataFileName);
-            this.gbDataLogging.Location = new System.Drawing.Point(17, 395);
+            this.gbDataLogging.Location = new System.Drawing.Point(443, 414);
             this.gbDataLogging.Name = "gbDataLogging";
             this.gbDataLogging.Size = new System.Drawing.Size(274, 100);
             this.gbDataLogging.TabIndex = 39;
@@ -812,7 +812,7 @@ namespace EmbeddedSystemsTest
             // lblErrorLogging
             // 
             this.lblErrorLogging.AutoSize = true;
-            this.lblErrorLogging.Location = new System.Drawing.Point(21, 515);
+            this.lblErrorLogging.Location = new System.Drawing.Point(21, 384);
             this.lblErrorLogging.Name = "lblErrorLogging";
             this.lblErrorLogging.Size = new System.Drawing.Size(73, 13);
             this.lblErrorLogging.TabIndex = 42;
@@ -823,7 +823,7 @@ namespace EmbeddedSystemsTest
             this.ckbLogErrors.AutoSize = true;
             this.ckbLogErrors.Checked = true;
             this.ckbLogErrors.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbLogErrors.Location = new System.Drawing.Point(143, 514);
+            this.ckbLogErrors.Location = new System.Drawing.Point(143, 383);
             this.ckbLogErrors.Name = "ckbLogErrors";
             this.ckbLogErrors.Size = new System.Drawing.Size(74, 17);
             this.ckbLogErrors.TabIndex = 44;
@@ -833,7 +833,7 @@ namespace EmbeddedSystemsTest
             // lsbErrorLogging
             // 
             this.lsbErrorLogging.FormattingEnabled = true;
-            this.lsbErrorLogging.Location = new System.Drawing.Point(16, 532);
+            this.lsbErrorLogging.Location = new System.Drawing.Point(16, 401);
             this.lsbErrorLogging.Name = "lsbErrorLogging";
             this.lsbErrorLogging.Size = new System.Drawing.Size(410, 147);
             this.lsbErrorLogging.TabIndex = 45;
@@ -842,7 +842,7 @@ namespace EmbeddedSystemsTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(950, 695);
+            this.ClientSize = new System.Drawing.Size(950, 567);
             this.Controls.Add(this.lsbErrorLogging);
             this.Controls.Add(this.ckbLogErrors);
             this.Controls.Add(this.lblErrorLogging);

@@ -48,14 +48,14 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
             }
 
             bool[] sensorStatusBoolArray = new bool[] {
-                statuses.AzimuthAbsoluteEncoderStatus == SensorStatus.OKAY,
-                statuses.AzimuthTemperature2Status == SensorStatus.OKAY,
-                statuses.AzimuthTemperature1Status == SensorStatus.OKAY,
-                statuses.ElevationTemperature2Status == SensorStatus.OKAY,
-                statuses.ElevationTemperature1Status == SensorStatus.OKAY,
-                statuses.CounterbalanceAccelerometerStatus == SensorStatus.OKAY,
+                statuses.ElevationAccelerometerStatus == SensorStatus.OKAY,
                 statuses.AzimuthAccelerometerStatus == SensorStatus.OKAY,
-                statuses.ElevationAccelerometerStatus == SensorStatus.OKAY
+                statuses.CounterbalanceAccelerometerStatus == SensorStatus.OKAY,
+                statuses.ElevationTemperature1Status == SensorStatus.OKAY,
+                statuses.ElevationTemperature2Status == SensorStatus.OKAY,
+                statuses.AzimuthTemperature1Status == SensorStatus.OKAY,
+                statuses.AzimuthTemperature2Status == SensorStatus.OKAY,
+                statuses.AzimuthAbsoluteEncoderStatus == SensorStatus.OKAY,
             };
 
             int errors = 0; // TODO: implement conversion

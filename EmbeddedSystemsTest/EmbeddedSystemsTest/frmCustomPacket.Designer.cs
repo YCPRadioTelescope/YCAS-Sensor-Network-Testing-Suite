@@ -627,7 +627,7 @@
             this.btnSendOverTcp.Name = "btnSendOverTcp";
             this.btnSendOverTcp.Size = new System.Drawing.Size(101, 23);
             this.btnSendOverTcp.TabIndex = 17;
-            this.btnSendOverTcp.Text = "Send Over TCP";
+            this.btnSendOverTcp.Text = "Send To Listener";
             this.btnSendOverTcp.UseVisualStyleBackColor = true;
             this.btnSendOverTcp.Click += new System.EventHandler(this.btnSendOverTcp_Click);
             // 
@@ -928,8 +928,8 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Items.AddRange(new object[] {
             "No Error",
-            "No Data",
-            "CRC Invalid"});
+            "Bad Data",
+            "Stale Data"});
             this.listBox1.Location = new System.Drawing.Point(189, 44);
             this.listBox1.Name = "listBox1";
             this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
@@ -976,8 +976,8 @@
             this.lstAzAccErr.FormattingEnabled = true;
             this.lstAzAccErr.Items.AddRange(new object[] {
             "No Error",
-            "No Data",
-            "CRC Invalid"});
+            "No Samples",
+            "WF Missed"});
             this.lstAzAccErr.Location = new System.Drawing.Point(659, 61);
             this.lstAzAccErr.Name = "lstAzAccErr";
             this.lstAzAccErr.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
@@ -998,8 +998,8 @@
             this.lstElAccErr.FormattingEnabled = true;
             this.lstElAccErr.Items.AddRange(new object[] {
             "No Error",
-            "No Data",
-            "CRC Invalid"});
+            "No Samples",
+            "WF Missed"});
             this.lstElAccErr.Location = new System.Drawing.Point(659, 60);
             this.lstElAccErr.Name = "lstElAccErr";
             this.lstElAccErr.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
@@ -1020,8 +1020,8 @@
             this.lstCbAccErr.FormattingEnabled = true;
             this.lstCbAccErr.Items.AddRange(new object[] {
             "No Error",
-            "No Data",
-            "CRC Invalid"});
+            "No Samples",
+            "WF Missed"});
             this.lstCbAccErr.Location = new System.Drawing.Point(659, 60);
             this.lstCbAccErr.Name = "lstCbAccErr";
             this.lstCbAccErr.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;

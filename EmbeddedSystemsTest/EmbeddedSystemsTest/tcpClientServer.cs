@@ -345,7 +345,7 @@ namespace EmbeddedSystemsTest
                                     }
                                     if (ckbLogErrors.Checked)
                                     {
-                                        // Only log the self test status once since it is only done during the initialization of the embeded system
+                                        // Only log the self test status once since it is only done during the initialization of the embedded system
                                         if (logSelfTest)
                                         {
                                             logSelfTest = false;
@@ -469,7 +469,7 @@ namespace EmbeddedSystemsTest
         {
             if (radTCPData.Checked)
             {
-                this.Size = new Size(493, this.Size.Height);
+                this.Size = new Size(493, 430);
                 btnStartClient.Enabled = true;
                 btnStartClient.Text = "Send Data";
                 txtClientData.Enabled = true;
@@ -480,7 +480,7 @@ namespace EmbeddedSystemsTest
         {
             if (radSensorData.Checked)
             {
-                this.Size = new Size(970, this.Size.Height);
+                this.Size = new Size(970, 738);
                 btnStartClient.Enabled = false;
                 btnStartClient.Text = "Update Init Settings";
                 txtClientData.Enabled = false;

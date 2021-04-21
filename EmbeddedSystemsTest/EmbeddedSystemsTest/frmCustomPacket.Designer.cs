@@ -36,15 +36,17 @@
             this.chkElAdxlInit = new System.Windows.Forms.CheckBox();
             this.chkAzTempInit = new System.Windows.Forms.CheckBox();
             this.chkElTempInit = new System.Windows.Forms.CheckBox();
-            this.lblAzTemps = new System.Windows.Forms.Label();
             this.lblElTemps = new System.Windows.Forms.Label();
             this.txtElTemps = new System.Windows.Forms.TextBox();
-            this.txtAzTemps = new System.Windows.Forms.TextBox();
             this.txtAzPositions = new System.Windows.Forms.TextBox();
             this.txtElPositions = new System.Windows.Forms.TextBox();
             this.lblAzEncoderData = new System.Windows.Forms.Label();
             this.lblElEncoderData = new System.Windows.Forms.Label();
             this.grpElAcclData = new System.Windows.Forms.GroupBox();
+            this.cboElAccSelfTest = new System.Windows.Forms.ComboBox();
+            this.lblElAccSelfTest = new System.Windows.Forms.Label();
+            this.cboElAccStatus = new System.Windows.Forms.ComboBox();
+            this.lblElAccStatus = new System.Windows.Forms.Label();
             this.txtElZ = new System.Windows.Forms.TextBox();
             this.lblElZ = new System.Windows.Forms.Label();
             this.txtElY = new System.Windows.Forms.TextBox();
@@ -52,6 +54,10 @@
             this.txtElX = new System.Windows.Forms.TextBox();
             this.lblElX = new System.Windows.Forms.Label();
             this.grpAzAcclData = new System.Windows.Forms.GroupBox();
+            this.cboAzAccSelfTest = new System.Windows.Forms.ComboBox();
+            this.lblAzAccSelfTest = new System.Windows.Forms.Label();
+            this.cboAzAccStatus = new System.Windows.Forms.ComboBox();
+            this.txtAzAccStatus = new System.Windows.Forms.Label();
             this.txtAzZ = new System.Windows.Forms.TextBox();
             this.lblAzZ = new System.Windows.Forms.Label();
             this.txtAzY = new System.Windows.Forms.TextBox();
@@ -59,6 +65,10 @@
             this.txtAzX = new System.Windows.Forms.TextBox();
             this.lblAzX = new System.Windows.Forms.Label();
             this.grpCbAcclData = new System.Windows.Forms.GroupBox();
+            this.cboCbAccSelfTest = new System.Windows.Forms.ComboBox();
+            this.lblCbAccSelfTest = new System.Windows.Forms.Label();
+            this.cboCbAccStatus = new System.Windows.Forms.ComboBox();
+            this.lblCbAccStatus = new System.Windows.Forms.Label();
             this.txtCbZ = new System.Windows.Forms.TextBox();
             this.lblCbZ = new System.Windows.Forms.Label();
             this.txtCbY = new System.Windows.Forms.TextBox();
@@ -70,11 +80,47 @@
             this.txtFilename = new System.Windows.Forms.TextBox();
             this.lblFilename = new System.Windows.Forms.Label();
             this.lblPacketSize = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.lblElTemp1Status = new System.Windows.Forms.Label();
+            this.lblAzEncStatus = new System.Windows.Forms.Label();
+            this.cboElTemp1Status = new System.Windows.Forms.ComboBox();
+            this.cboAzEncStatus = new System.Windows.Forms.ComboBox();
+            this.cboElTemp2Status = new System.Windows.Forms.ComboBox();
+            this.lblTemp2Status = new System.Windows.Forms.Label();
+            this.lstElTemp1Err = new System.Windows.Forms.ListBox();
+            this.lstElTemp2Err = new System.Windows.Forms.ListBox();
+            this.lblElTemp1Err = new System.Windows.Forms.Label();
+            this.lblElTemp2Err = new System.Windows.Forms.Label();
+            this.grpElTemps = new System.Windows.Forms.GroupBox();
+            this.grpAzTemps = new System.Windows.Forms.GroupBox();
+            this.lblAzTemps = new System.Windows.Forms.Label();
+            this.lblAzTemp2Err = new System.Windows.Forms.Label();
+            this.txtAzTemps = new System.Windows.Forms.TextBox();
+            this.lblAzTemp1Err = new System.Windows.Forms.Label();
+            this.lblAzTemp1Status = new System.Windows.Forms.Label();
+            this.lstAzTemp2Err = new System.Windows.Forms.ListBox();
+            this.cboAzTemp1Status = new System.Windows.Forms.ComboBox();
+            this.lstAzTemp1Err = new System.Windows.Forms.ListBox();
+            this.lblAzTemp2Status = new System.Windows.Forms.Label();
+            this.cboAzTemp2Status = new System.Windows.Forms.ComboBox();
+            this.lblAzEncErr = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.grpAzEncoder = new System.Windows.Forms.GroupBox();
+            this.grpElEncoder = new System.Windows.Forms.GroupBox();
+            this.lblAzAccErr = new System.Windows.Forms.Label();
+            this.lstAzAccErr = new System.Windows.Forms.ListBox();
+            this.lblElAccErr = new System.Windows.Forms.Label();
+            this.lstElAccErr = new System.Windows.Forms.ListBox();
+            this.lblCbAccErr = new System.Windows.Forms.Label();
+            this.lstCbAccErr = new System.Windows.Forms.ListBox();
             this.grpSensorInit.SuspendLayout();
             this.grpElAcclData.SuspendLayout();
             this.grpAzAcclData.SuspendLayout();
             this.grpCbAcclData.SuspendLayout();
+            this.grpElTemps.SuspendLayout();
+            this.grpAzTemps.SuspendLayout();
+            this.grpAzEncoder.SuspendLayout();
+            this.grpElEncoder.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpSensorInit
@@ -86,7 +132,7 @@
             this.grpSensorInit.Controls.Add(this.chkElAdxlInit);
             this.grpSensorInit.Controls.Add(this.chkAzTempInit);
             this.grpSensorInit.Controls.Add(this.chkElTempInit);
-            this.grpSensorInit.Location = new System.Drawing.Point(379, 9);
+            this.grpSensorInit.Location = new System.Drawing.Point(541, 12);
             this.grpSensorInit.Name = "grpSensorInit";
             this.grpSensorInit.Size = new System.Drawing.Size(195, 150);
             this.grpSensorInit.TabIndex = 20;
@@ -184,90 +230,122 @@
             this.chkElTempInit.UseVisualStyleBackColor = true;
             this.chkElTempInit.CheckedChanged += new System.EventHandler(this.chkElTemp1Init_CheckedChanged);
             // 
-            // lblAzTemps
-            // 
-            this.lblAzTemps.AutoSize = true;
-            this.lblAzTemps.Location = new System.Drawing.Point(35, 48);
-            this.lblAzTemps.Name = "lblAzTemps";
-            this.lblAzTemps.Size = new System.Drawing.Size(115, 13);
-            this.lblAzTemps.TabIndex = 32;
-            this.lblAzTemps.Text = "Azimuth Temperatures:";
-            // 
             // lblElTemps
             // 
             this.lblElTemps.AutoSize = true;
-            this.lblElTemps.Location = new System.Drawing.Point(28, 12);
+            this.lblElTemps.Location = new System.Drawing.Point(6, 22);
             this.lblElTemps.Name = "lblElTemps";
-            this.lblElTemps.Size = new System.Drawing.Size(122, 13);
+            this.lblElTemps.Size = new System.Drawing.Size(75, 13);
             this.lblElTemps.TabIndex = 31;
-            this.lblElTemps.Text = "Elevation Temperatures:\r\n";
+            this.lblElTemps.Text = "Temperatures:\r\n";
             // 
             // txtElTemps
             // 
-            this.txtElTemps.Location = new System.Drawing.Point(151, 9);
+            this.txtElTemps.Location = new System.Drawing.Point(87, 19);
             this.txtElTemps.Name = "txtElTemps";
-            this.txtElTemps.Size = new System.Drawing.Size(222, 20);
+            this.txtElTemps.Size = new System.Drawing.Size(164, 20);
             this.txtElTemps.TabIndex = 1;
-            // 
-            // txtAzTemps
-            // 
-            this.txtAzTemps.Location = new System.Drawing.Point(151, 45);
-            this.txtAzTemps.Name = "txtAzTemps";
-            this.txtAzTemps.Size = new System.Drawing.Size(222, 20);
-            this.txtAzTemps.TabIndex = 2;
             // 
             // txtAzPositions
             // 
-            this.txtAzPositions.Location = new System.Drawing.Point(151, 117);
+            this.txtAzPositions.Location = new System.Drawing.Point(71, 19);
             this.txtAzPositions.Name = "txtAzPositions";
-            this.txtAzPositions.Size = new System.Drawing.Size(222, 20);
+            this.txtAzPositions.Size = new System.Drawing.Size(183, 20);
             this.txtAzPositions.TabIndex = 4;
             // 
             // txtElPositions
             // 
-            this.txtElPositions.Location = new System.Drawing.Point(151, 81);
+            this.txtElPositions.Location = new System.Drawing.Point(66, 22);
             this.txtElPositions.Name = "txtElPositions";
-            this.txtElPositions.Size = new System.Drawing.Size(222, 20);
+            this.txtElPositions.Size = new System.Drawing.Size(185, 20);
             this.txtElPositions.TabIndex = 3;
             // 
             // lblAzEncoderData
             // 
             this.lblAzEncoderData.AutoSize = true;
-            this.lblAzEncoderData.Location = new System.Drawing.Point(6, 120);
+            this.lblAzEncoderData.Location = new System.Drawing.Point(5, 22);
             this.lblAzEncoderData.Name = "lblAzEncoderData";
-            this.lblAzEncoderData.Size = new System.Drawing.Size(144, 13);
+            this.lblAzEncoderData.Size = new System.Drawing.Size(61, 13);
             this.lblAzEncoderData.TabIndex = 36;
-            this.lblAzEncoderData.Text = "Azimuth Encoder Orientation:";
+            this.lblAzEncoderData.Text = "Orientation:";
             // 
             // lblElEncoderData
             // 
             this.lblElEncoderData.AutoSize = true;
-            this.lblElEncoderData.Location = new System.Drawing.Point(-1, 84);
+            this.lblElEncoderData.Location = new System.Drawing.Point(6, 25);
             this.lblElEncoderData.Name = "lblElEncoderData";
-            this.lblElEncoderData.Size = new System.Drawing.Size(151, 13);
+            this.lblElEncoderData.Size = new System.Drawing.Size(61, 13);
             this.lblElEncoderData.TabIndex = 35;
-            this.lblElEncoderData.Text = "Elevation Encoder Orientation:";
+            this.lblElEncoderData.Text = "Orientation:";
             // 
             // grpElAcclData
             // 
+            this.grpElAcclData.Controls.Add(this.lblElAccErr);
+            this.grpElAcclData.Controls.Add(this.cboElAccSelfTest);
+            this.grpElAcclData.Controls.Add(this.lstElAccErr);
+            this.grpElAcclData.Controls.Add(this.lblElAccSelfTest);
+            this.grpElAcclData.Controls.Add(this.cboElAccStatus);
+            this.grpElAcclData.Controls.Add(this.lblElAccStatus);
             this.grpElAcclData.Controls.Add(this.txtElZ);
             this.grpElAcclData.Controls.Add(this.lblElZ);
             this.grpElAcclData.Controls.Add(this.txtElY);
             this.grpElAcclData.Controls.Add(this.lblElY);
             this.grpElAcclData.Controls.Add(this.txtElX);
             this.grpElAcclData.Controls.Add(this.lblElX);
-            this.grpElAcclData.Location = new System.Drawing.Point(3, 268);
+            this.grpElAcclData.Location = new System.Drawing.Point(3, 369);
             this.grpElAcclData.Name = "grpElAcclData";
-            this.grpElAcclData.Size = new System.Drawing.Size(571, 108);
+            this.grpElAcclData.Size = new System.Drawing.Size(733, 108);
             this.grpElAcclData.TabIndex = 9;
             this.grpElAcclData.TabStop = false;
             this.grpElAcclData.Text = "Elevation Accelerometer Data";
+            // 
+            // cboElAccSelfTest
+            // 
+            this.cboElAccSelfTest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboElAccSelfTest.FormattingEnabled = true;
+            this.cboElAccSelfTest.Items.AddRange(new object[] {
+            "Error",
+            "Okay"});
+            this.cboElAccSelfTest.Location = new System.Drawing.Point(659, 37);
+            this.cboElAccSelfTest.Name = "cboElAccSelfTest";
+            this.cboElAccSelfTest.Size = new System.Drawing.Size(65, 21);
+            this.cboElAccSelfTest.TabIndex = 58;
+            // 
+            // lblElAccSelfTest
+            // 
+            this.lblElAccSelfTest.AutoSize = true;
+            this.lblElAccSelfTest.Location = new System.Drawing.Point(613, 41);
+            this.lblElAccSelfTest.Name = "lblElAccSelfTest";
+            this.lblElAccSelfTest.Size = new System.Drawing.Size(48, 13);
+            this.lblElAccSelfTest.TabIndex = 57;
+            this.lblElAccSelfTest.Text = "Self test:";
+            // 
+            // cboElAccStatus
+            // 
+            this.cboElAccStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboElAccStatus.FormattingEnabled = true;
+            this.cboElAccStatus.Items.AddRange(new object[] {
+            "Error",
+            "Okay"});
+            this.cboElAccStatus.Location = new System.Drawing.Point(659, 14);
+            this.cboElAccStatus.Name = "cboElAccStatus";
+            this.cboElAccStatus.Size = new System.Drawing.Size(65, 21);
+            this.cboElAccStatus.TabIndex = 56;
+            // 
+            // lblElAccStatus
+            // 
+            this.lblElAccStatus.AutoSize = true;
+            this.lblElAccStatus.Location = new System.Drawing.Point(620, 19);
+            this.lblElAccStatus.Name = "lblElAccStatus";
+            this.lblElAccStatus.Size = new System.Drawing.Size(40, 13);
+            this.lblElAccStatus.TabIndex = 55;
+            this.lblElAccStatus.Text = "Status:";
             // 
             // txtElZ
             // 
             this.txtElZ.Location = new System.Drawing.Point(39, 71);
             this.txtElZ.Name = "txtElZ";
-            this.txtElZ.Size = new System.Drawing.Size(520, 20);
+            this.txtElZ.Size = new System.Drawing.Size(569, 20);
             this.txtElZ.TabIndex = 12;
             // 
             // lblElZ
@@ -283,7 +361,7 @@
             // 
             this.txtElY.Location = new System.Drawing.Point(39, 45);
             this.txtElY.Name = "txtElY";
-            this.txtElY.Size = new System.Drawing.Size(520, 20);
+            this.txtElY.Size = new System.Drawing.Size(569, 20);
             this.txtElY.TabIndex = 11;
             // 
             // lblElY
@@ -299,7 +377,7 @@
             // 
             this.txtElX.Location = new System.Drawing.Point(39, 19);
             this.txtElX.Name = "txtElX";
-            this.txtElX.Size = new System.Drawing.Size(520, 20);
+            this.txtElX.Size = new System.Drawing.Size(569, 20);
             this.txtElX.TabIndex = 10;
             // 
             // lblElX
@@ -313,24 +391,72 @@
             // 
             // grpAzAcclData
             // 
+            this.grpAzAcclData.Controls.Add(this.lblAzAccErr);
+            this.grpAzAcclData.Controls.Add(this.cboAzAccSelfTest);
+            this.grpAzAcclData.Controls.Add(this.lstAzAccErr);
+            this.grpAzAcclData.Controls.Add(this.lblAzAccSelfTest);
+            this.grpAzAcclData.Controls.Add(this.cboAzAccStatus);
+            this.grpAzAcclData.Controls.Add(this.txtAzAccStatus);
             this.grpAzAcclData.Controls.Add(this.txtAzZ);
             this.grpAzAcclData.Controls.Add(this.lblAzZ);
             this.grpAzAcclData.Controls.Add(this.txtAzY);
             this.grpAzAcclData.Controls.Add(this.lblAzY);
             this.grpAzAcclData.Controls.Add(this.txtAzX);
             this.grpAzAcclData.Controls.Add(this.lblAzX);
-            this.grpAzAcclData.Location = new System.Drawing.Point(3, 158);
+            this.grpAzAcclData.Location = new System.Drawing.Point(3, 259);
             this.grpAzAcclData.Name = "grpAzAcclData";
-            this.grpAzAcclData.Size = new System.Drawing.Size(571, 108);
+            this.grpAzAcclData.Size = new System.Drawing.Size(733, 108);
             this.grpAzAcclData.TabIndex = 5;
             this.grpAzAcclData.TabStop = false;
             this.grpAzAcclData.Text = "Azimuth Accelerometer Data";
+            // 
+            // cboAzAccSelfTest
+            // 
+            this.cboAzAccSelfTest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboAzAccSelfTest.FormattingEnabled = true;
+            this.cboAzAccSelfTest.Items.AddRange(new object[] {
+            "Error",
+            "Okay"});
+            this.cboAzAccSelfTest.Location = new System.Drawing.Point(659, 38);
+            this.cboAzAccSelfTest.Name = "cboAzAccSelfTest";
+            this.cboAzAccSelfTest.Size = new System.Drawing.Size(65, 21);
+            this.cboAzAccSelfTest.TabIndex = 56;
+            // 
+            // lblAzAccSelfTest
+            // 
+            this.lblAzAccSelfTest.AutoSize = true;
+            this.lblAzAccSelfTest.Location = new System.Drawing.Point(613, 42);
+            this.lblAzAccSelfTest.Name = "lblAzAccSelfTest";
+            this.lblAzAccSelfTest.Size = new System.Drawing.Size(48, 13);
+            this.lblAzAccSelfTest.TabIndex = 55;
+            this.lblAzAccSelfTest.Text = "Self test:";
+            // 
+            // cboAzAccStatus
+            // 
+            this.cboAzAccStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboAzAccStatus.FormattingEnabled = true;
+            this.cboAzAccStatus.Items.AddRange(new object[] {
+            "Error",
+            "Okay"});
+            this.cboAzAccStatus.Location = new System.Drawing.Point(659, 15);
+            this.cboAzAccStatus.Name = "cboAzAccStatus";
+            this.cboAzAccStatus.Size = new System.Drawing.Size(65, 21);
+            this.cboAzAccStatus.TabIndex = 54;
+            // 
+            // txtAzAccStatus
+            // 
+            this.txtAzAccStatus.AutoSize = true;
+            this.txtAzAccStatus.Location = new System.Drawing.Point(620, 19);
+            this.txtAzAccStatus.Name = "txtAzAccStatus";
+            this.txtAzAccStatus.Size = new System.Drawing.Size(40, 13);
+            this.txtAzAccStatus.TabIndex = 53;
+            this.txtAzAccStatus.Text = "Status:";
             // 
             // txtAzZ
             // 
             this.txtAzZ.Location = new System.Drawing.Point(39, 71);
             this.txtAzZ.Name = "txtAzZ";
-            this.txtAzZ.Size = new System.Drawing.Size(520, 20);
+            this.txtAzZ.Size = new System.Drawing.Size(569, 20);
             this.txtAzZ.TabIndex = 8;
             // 
             // lblAzZ
@@ -346,7 +472,7 @@
             // 
             this.txtAzY.Location = new System.Drawing.Point(39, 45);
             this.txtAzY.Name = "txtAzY";
-            this.txtAzY.Size = new System.Drawing.Size(520, 20);
+            this.txtAzY.Size = new System.Drawing.Size(569, 20);
             this.txtAzY.TabIndex = 7;
             // 
             // lblAzY
@@ -362,7 +488,7 @@
             // 
             this.txtAzX.Location = new System.Drawing.Point(39, 19);
             this.txtAzX.Name = "txtAzX";
-            this.txtAzX.Size = new System.Drawing.Size(520, 20);
+            this.txtAzX.Size = new System.Drawing.Size(569, 20);
             this.txtAzX.TabIndex = 6;
             // 
             // lblAzX
@@ -376,24 +502,72 @@
             // 
             // grpCbAcclData
             // 
+            this.grpCbAcclData.Controls.Add(this.lblCbAccErr);
+            this.grpCbAcclData.Controls.Add(this.cboCbAccSelfTest);
+            this.grpCbAcclData.Controls.Add(this.lstCbAccErr);
+            this.grpCbAcclData.Controls.Add(this.lblCbAccSelfTest);
+            this.grpCbAcclData.Controls.Add(this.cboCbAccStatus);
+            this.grpCbAcclData.Controls.Add(this.lblCbAccStatus);
             this.grpCbAcclData.Controls.Add(this.txtCbZ);
             this.grpCbAcclData.Controls.Add(this.lblCbZ);
             this.grpCbAcclData.Controls.Add(this.txtCbY);
             this.grpCbAcclData.Controls.Add(this.lblCbY);
             this.grpCbAcclData.Controls.Add(this.txtCbX);
             this.grpCbAcclData.Controls.Add(this.lblCbX);
-            this.grpCbAcclData.Location = new System.Drawing.Point(3, 378);
+            this.grpCbAcclData.Location = new System.Drawing.Point(3, 479);
             this.grpCbAcclData.Name = "grpCbAcclData";
-            this.grpCbAcclData.Size = new System.Drawing.Size(571, 108);
+            this.grpCbAcclData.Size = new System.Drawing.Size(733, 108);
             this.grpCbAcclData.TabIndex = 13;
             this.grpCbAcclData.TabStop = false;
             this.grpCbAcclData.Text = "Counterbalance Accelerometer Data";
+            // 
+            // cboCbAccSelfTest
+            // 
+            this.cboCbAccSelfTest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCbAccSelfTest.FormattingEnabled = true;
+            this.cboCbAccSelfTest.Items.AddRange(new object[] {
+            "Error",
+            "Okay"});
+            this.cboCbAccSelfTest.Location = new System.Drawing.Point(659, 37);
+            this.cboCbAccSelfTest.Name = "cboCbAccSelfTest";
+            this.cboCbAccSelfTest.Size = new System.Drawing.Size(65, 21);
+            this.cboCbAccSelfTest.TabIndex = 58;
+            // 
+            // lblCbAccSelfTest
+            // 
+            this.lblCbAccSelfTest.AutoSize = true;
+            this.lblCbAccSelfTest.Location = new System.Drawing.Point(613, 41);
+            this.lblCbAccSelfTest.Name = "lblCbAccSelfTest";
+            this.lblCbAccSelfTest.Size = new System.Drawing.Size(48, 13);
+            this.lblCbAccSelfTest.TabIndex = 57;
+            this.lblCbAccSelfTest.Text = "Self test:";
+            // 
+            // cboCbAccStatus
+            // 
+            this.cboCbAccStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCbAccStatus.FormattingEnabled = true;
+            this.cboCbAccStatus.Items.AddRange(new object[] {
+            "Error",
+            "Okay"});
+            this.cboCbAccStatus.Location = new System.Drawing.Point(659, 14);
+            this.cboCbAccStatus.Name = "cboCbAccStatus";
+            this.cboCbAccStatus.Size = new System.Drawing.Size(65, 21);
+            this.cboCbAccStatus.TabIndex = 56;
+            // 
+            // lblCbAccStatus
+            // 
+            this.lblCbAccStatus.AutoSize = true;
+            this.lblCbAccStatus.Location = new System.Drawing.Point(620, 18);
+            this.lblCbAccStatus.Name = "lblCbAccStatus";
+            this.lblCbAccStatus.Size = new System.Drawing.Size(40, 13);
+            this.lblCbAccStatus.TabIndex = 55;
+            this.lblCbAccStatus.Text = "Status:";
             // 
             // txtCbZ
             // 
             this.txtCbZ.Location = new System.Drawing.Point(39, 71);
             this.txtCbZ.Name = "txtCbZ";
-            this.txtCbZ.Size = new System.Drawing.Size(520, 20);
+            this.txtCbZ.Size = new System.Drawing.Size(569, 20);
             this.txtCbZ.TabIndex = 16;
             // 
             // lblCbZ
@@ -409,7 +583,7 @@
             // 
             this.txtCbY.Location = new System.Drawing.Point(39, 45);
             this.txtCbY.Name = "txtCbY";
-            this.txtCbY.Size = new System.Drawing.Size(520, 20);
+            this.txtCbY.Size = new System.Drawing.Size(569, 20);
             this.txtCbY.TabIndex = 15;
             // 
             // lblCbY
@@ -425,7 +599,7 @@
             // 
             this.txtCbX.Location = new System.Drawing.Point(39, 19);
             this.txtCbX.Name = "txtCbX";
-            this.txtCbX.Size = new System.Drawing.Size(520, 20);
+            this.txtCbX.Size = new System.Drawing.Size(569, 20);
             this.txtCbX.TabIndex = 14;
             // 
             // lblCbX
@@ -439,7 +613,7 @@
             // 
             // btnSaveToFile
             // 
-            this.btnSaveToFile.Location = new System.Drawing.Point(501, 550);
+            this.btnSaveToFile.Location = new System.Drawing.Point(658, 220);
             this.btnSaveToFile.Name = "btnSaveToFile";
             this.btnSaveToFile.Size = new System.Drawing.Size(74, 23);
             this.btnSaveToFile.TabIndex = 19;
@@ -449,7 +623,7 @@
             // 
             // btnSendOverTcp
             // 
-            this.btnSendOverTcp.Location = new System.Drawing.Point(394, 550);
+            this.btnSendOverTcp.Location = new System.Drawing.Point(551, 220);
             this.btnSendOverTcp.Name = "btnSendOverTcp";
             this.btnSendOverTcp.Size = new System.Drawing.Size(101, 23);
             this.btnSendOverTcp.TabIndex = 17;
@@ -459,7 +633,7 @@
             // 
             // txtFilename
             // 
-            this.txtFilename.Location = new System.Drawing.Point(445, 524);
+            this.txtFilename.Location = new System.Drawing.Point(609, 194);
             this.txtFilename.Name = "txtFilename";
             this.txtFilename.Size = new System.Drawing.Size(97, 20);
             this.txtFilename.TabIndex = 18;
@@ -468,7 +642,7 @@
             // lblFilename
             // 
             this.lblFilename.AutoSize = true;
-            this.lblFilename.Location = new System.Drawing.Point(392, 527);
+            this.lblFilename.Location = new System.Drawing.Point(556, 197);
             this.lblFilename.Name = "lblFilename";
             this.lblFilename.Size = new System.Drawing.Size(177, 13);
             this.lblFilename.TabIndex = 45;
@@ -477,28 +651,393 @@
             // lblPacketSize
             // 
             this.lblPacketSize.AutoSize = true;
-            this.lblPacketSize.Location = new System.Drawing.Point(337, 510);
+            this.lblPacketSize.Location = new System.Drawing.Point(539, 176);
             this.lblPacketSize.Name = "lblPacketSize";
-            this.lblPacketSize.Size = new System.Drawing.Size(110, 13);
+            this.lblPacketSize.Size = new System.Drawing.Size(72, 13);
             this.lblPacketSize.TabIndex = 46;
-            this.lblPacketSize.Text = "Packet size (in bytes):";
+            this.lblPacketSize.Text = "Packet bytes:";
             // 
-            // label1
+            // lblInfo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 527);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(239, 26);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Type data in separated by comma. Ex: (1, 2, 3, 4)\r\nThe maximum packet size is 204" +
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.Location = new System.Drawing.Point(269, 590);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(239, 26);
+            this.lblInfo.TabIndex = 0;
+            this.lblInfo.Text = "Type data in separated by comma. Ex: (1, 2, 3, 4)\r\nThe maximum packet size is 204" +
     "8 bytes.";
+            // 
+            // lblElTemp1Status
+            // 
+            this.lblElTemp1Status.AutoSize = true;
+            this.lblElTemp1Status.Location = new System.Drawing.Point(5, 47);
+            this.lblElTemp1Status.Name = "lblElTemp1Status";
+            this.lblElTemp1Status.Size = new System.Drawing.Size(49, 13);
+            this.lblElTemp1Status.TabIndex = 47;
+            this.lblElTemp1Status.Text = "Status 1:";
+            // 
+            // lblAzEncStatus
+            // 
+            this.lblAzEncStatus.AutoSize = true;
+            this.lblAzEncStatus.Location = new System.Drawing.Point(17, 56);
+            this.lblAzEncStatus.Name = "lblAzEncStatus";
+            this.lblAzEncStatus.Size = new System.Drawing.Size(40, 13);
+            this.lblAzEncStatus.TabIndex = 49;
+            this.lblAzEncStatus.Text = "Status:";
+            // 
+            // cboElTemp1Status
+            // 
+            this.cboElTemp1Status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboElTemp1Status.FormattingEnabled = true;
+            this.cboElTemp1Status.Items.AddRange(new object[] {
+            "Error",
+            "Okay"});
+            this.cboElTemp1Status.Location = new System.Drawing.Point(57, 44);
+            this.cboElTemp1Status.Name = "cboElTemp1Status";
+            this.cboElTemp1Status.Size = new System.Drawing.Size(65, 21);
+            this.cboElTemp1Status.TabIndex = 50;
+            // 
+            // cboAzEncStatus
+            // 
+            this.cboAzEncStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboAzEncStatus.FormattingEnabled = true;
+            this.cboAzEncStatus.Items.AddRange(new object[] {
+            "Error",
+            "Okay"});
+            this.cboAzEncStatus.Location = new System.Drawing.Point(63, 52);
+            this.cboAzEncStatus.Name = "cboAzEncStatus";
+            this.cboAzEncStatus.Size = new System.Drawing.Size(65, 21);
+            this.cboAzEncStatus.TabIndex = 52;
+            // 
+            // cboElTemp2Status
+            // 
+            this.cboElTemp2Status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboElTemp2Status.FormattingEnabled = true;
+            this.cboElTemp2Status.Items.AddRange(new object[] {
+            "Error",
+            "Okay"});
+            this.cboElTemp2Status.Location = new System.Drawing.Point(186, 44);
+            this.cboElTemp2Status.Name = "cboElTemp2Status";
+            this.cboElTemp2Status.Size = new System.Drawing.Size(65, 21);
+            this.cboElTemp2Status.TabIndex = 54;
+            // 
+            // lblTemp2Status
+            // 
+            this.lblTemp2Status.AutoSize = true;
+            this.lblTemp2Status.Location = new System.Drawing.Point(131, 47);
+            this.lblTemp2Status.Name = "lblTemp2Status";
+            this.lblTemp2Status.Size = new System.Drawing.Size(49, 13);
+            this.lblTemp2Status.TabIndex = 53;
+            this.lblTemp2Status.Text = "Status 2:";
+            // 
+            // lstElTemp1Err
+            // 
+            this.lstElTemp1Err.FormattingEnabled = true;
+            this.lstElTemp1Err.Items.AddRange(new object[] {
+            "No Error",
+            "No Data",
+            "CRC Invalid"});
+            this.lstElTemp1Err.Location = new System.Drawing.Point(57, 71);
+            this.lstElTemp1Err.Name = "lstElTemp1Err";
+            this.lstElTemp1Err.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstElTemp1Err.Size = new System.Drawing.Size(65, 43);
+            this.lstElTemp1Err.TabIndex = 57;
+            // 
+            // lstElTemp2Err
+            // 
+            this.lstElTemp2Err.FormattingEnabled = true;
+            this.lstElTemp2Err.Items.AddRange(new object[] {
+            "No Error",
+            "No Data",
+            "CRC Invalid"});
+            this.lstElTemp2Err.Location = new System.Drawing.Point(186, 71);
+            this.lstElTemp2Err.Name = "lstElTemp2Err";
+            this.lstElTemp2Err.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstElTemp2Err.Size = new System.Drawing.Size(65, 43);
+            this.lstElTemp2Err.TabIndex = 58;
+            // 
+            // lblElTemp1Err
+            // 
+            this.lblElTemp1Err.AutoSize = true;
+            this.lblElTemp1Err.Location = new System.Drawing.Point(13, 71);
+            this.lblElTemp1Err.Name = "lblElTemp1Err";
+            this.lblElTemp1Err.Size = new System.Drawing.Size(41, 13);
+            this.lblElTemp1Err.TabIndex = 59;
+            this.lblElTemp1Err.Text = "Error 1:";
+            // 
+            // lblElTemp2Err
+            // 
+            this.lblElTemp2Err.AutoSize = true;
+            this.lblElTemp2Err.Location = new System.Drawing.Point(139, 71);
+            this.lblElTemp2Err.Name = "lblElTemp2Err";
+            this.lblElTemp2Err.Size = new System.Drawing.Size(41, 13);
+            this.lblElTemp2Err.TabIndex = 60;
+            this.lblElTemp2Err.Text = "Error 2:";
+            // 
+            // grpElTemps
+            // 
+            this.grpElTemps.Controls.Add(this.lblElTemps);
+            this.grpElTemps.Controls.Add(this.lblElTemp2Err);
+            this.grpElTemps.Controls.Add(this.txtElTemps);
+            this.grpElTemps.Controls.Add(this.lblElTemp1Err);
+            this.grpElTemps.Controls.Add(this.lblElTemp1Status);
+            this.grpElTemps.Controls.Add(this.lstElTemp2Err);
+            this.grpElTemps.Controls.Add(this.cboElTemp1Status);
+            this.grpElTemps.Controls.Add(this.lstElTemp1Err);
+            this.grpElTemps.Controls.Add(this.lblTemp2Status);
+            this.grpElTemps.Controls.Add(this.cboElTemp2Status);
+            this.grpElTemps.Location = new System.Drawing.Point(3, 12);
+            this.grpElTemps.Name = "grpElTemps";
+            this.grpElTemps.Size = new System.Drawing.Size(263, 137);
+            this.grpElTemps.TabIndex = 61;
+            this.grpElTemps.TabStop = false;
+            this.grpElTemps.Text = "Elevation Temperature Data";
+            // 
+            // grpAzTemps
+            // 
+            this.grpAzTemps.Controls.Add(this.lblAzTemps);
+            this.grpAzTemps.Controls.Add(this.lblAzTemp2Err);
+            this.grpAzTemps.Controls.Add(this.txtAzTemps);
+            this.grpAzTemps.Controls.Add(this.lblAzTemp1Err);
+            this.grpAzTemps.Controls.Add(this.lblAzTemp1Status);
+            this.grpAzTemps.Controls.Add(this.lstAzTemp2Err);
+            this.grpAzTemps.Controls.Add(this.cboAzTemp1Status);
+            this.grpAzTemps.Controls.Add(this.lstAzTemp1Err);
+            this.grpAzTemps.Controls.Add(this.lblAzTemp2Status);
+            this.grpAzTemps.Controls.Add(this.cboAzTemp2Status);
+            this.grpAzTemps.Location = new System.Drawing.Point(272, 12);
+            this.grpAzTemps.Name = "grpAzTemps";
+            this.grpAzTemps.Size = new System.Drawing.Size(263, 137);
+            this.grpAzTemps.TabIndex = 62;
+            this.grpAzTemps.TabStop = false;
+            this.grpAzTemps.Text = "Azimuth Temperature Data";
+            // 
+            // lblAzTemps
+            // 
+            this.lblAzTemps.AutoSize = true;
+            this.lblAzTemps.Location = new System.Drawing.Point(6, 22);
+            this.lblAzTemps.Name = "lblAzTemps";
+            this.lblAzTemps.Size = new System.Drawing.Size(75, 13);
+            this.lblAzTemps.TabIndex = 31;
+            this.lblAzTemps.Text = "Temperatures:\r\n";
+            // 
+            // lblAzTemp2Err
+            // 
+            this.lblAzTemp2Err.AutoSize = true;
+            this.lblAzTemp2Err.Location = new System.Drawing.Point(139, 71);
+            this.lblAzTemp2Err.Name = "lblAzTemp2Err";
+            this.lblAzTemp2Err.Size = new System.Drawing.Size(41, 13);
+            this.lblAzTemp2Err.TabIndex = 60;
+            this.lblAzTemp2Err.Text = "Error 2:";
+            // 
+            // txtAzTemps
+            // 
+            this.txtAzTemps.Location = new System.Drawing.Point(87, 19);
+            this.txtAzTemps.Name = "txtAzTemps";
+            this.txtAzTemps.Size = new System.Drawing.Size(164, 20);
+            this.txtAzTemps.TabIndex = 1;
+            // 
+            // lblAzTemp1Err
+            // 
+            this.lblAzTemp1Err.AutoSize = true;
+            this.lblAzTemp1Err.Location = new System.Drawing.Point(13, 71);
+            this.lblAzTemp1Err.Name = "lblAzTemp1Err";
+            this.lblAzTemp1Err.Size = new System.Drawing.Size(41, 13);
+            this.lblAzTemp1Err.TabIndex = 59;
+            this.lblAzTemp1Err.Text = "Error 1:";
+            // 
+            // lblAzTemp1Status
+            // 
+            this.lblAzTemp1Status.AutoSize = true;
+            this.lblAzTemp1Status.Location = new System.Drawing.Point(5, 47);
+            this.lblAzTemp1Status.Name = "lblAzTemp1Status";
+            this.lblAzTemp1Status.Size = new System.Drawing.Size(49, 13);
+            this.lblAzTemp1Status.TabIndex = 47;
+            this.lblAzTemp1Status.Text = "Status 1:";
+            // 
+            // lstAzTemp2Err
+            // 
+            this.lstAzTemp2Err.FormattingEnabled = true;
+            this.lstAzTemp2Err.Items.AddRange(new object[] {
+            "No Error",
+            "No Data",
+            "CRC Invalid"});
+            this.lstAzTemp2Err.Location = new System.Drawing.Point(186, 71);
+            this.lstAzTemp2Err.Name = "lstAzTemp2Err";
+            this.lstAzTemp2Err.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstAzTemp2Err.Size = new System.Drawing.Size(65, 43);
+            this.lstAzTemp2Err.TabIndex = 58;
+            // 
+            // cboAzTemp1Status
+            // 
+            this.cboAzTemp1Status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboAzTemp1Status.FormattingEnabled = true;
+            this.cboAzTemp1Status.Items.AddRange(new object[] {
+            "Error",
+            "Okay"});
+            this.cboAzTemp1Status.Location = new System.Drawing.Point(57, 44);
+            this.cboAzTemp1Status.Name = "cboAzTemp1Status";
+            this.cboAzTemp1Status.Size = new System.Drawing.Size(65, 21);
+            this.cboAzTemp1Status.TabIndex = 50;
+            // 
+            // lstAzTemp1Err
+            // 
+            this.lstAzTemp1Err.FormattingEnabled = true;
+            this.lstAzTemp1Err.Items.AddRange(new object[] {
+            "No Error",
+            "No Data",
+            "CRC Invalid"});
+            this.lstAzTemp1Err.Location = new System.Drawing.Point(57, 71);
+            this.lstAzTemp1Err.Name = "lstAzTemp1Err";
+            this.lstAzTemp1Err.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstAzTemp1Err.Size = new System.Drawing.Size(65, 43);
+            this.lstAzTemp1Err.TabIndex = 57;
+            // 
+            // lblAzTemp2Status
+            // 
+            this.lblAzTemp2Status.AutoSize = true;
+            this.lblAzTemp2Status.Location = new System.Drawing.Point(131, 47);
+            this.lblAzTemp2Status.Name = "lblAzTemp2Status";
+            this.lblAzTemp2Status.Size = new System.Drawing.Size(49, 13);
+            this.lblAzTemp2Status.TabIndex = 53;
+            this.lblAzTemp2Status.Text = "Status 2:";
+            // 
+            // cboAzTemp2Status
+            // 
+            this.cboAzTemp2Status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboAzTemp2Status.FormattingEnabled = true;
+            this.cboAzTemp2Status.Items.AddRange(new object[] {
+            "Error",
+            "Okay"});
+            this.cboAzTemp2Status.Location = new System.Drawing.Point(186, 44);
+            this.cboAzTemp2Status.Name = "cboAzTemp2Status";
+            this.cboAzTemp2Status.Size = new System.Drawing.Size(65, 21);
+            this.cboAzTemp2Status.TabIndex = 54;
+            // 
+            // lblAzEncErr
+            // 
+            this.lblAzEncErr.AutoSize = true;
+            this.lblAzEncErr.Location = new System.Drawing.Point(147, 56);
+            this.lblAzEncErr.Name = "lblAzEncErr";
+            this.lblAzEncErr.Size = new System.Drawing.Size(32, 13);
+            this.lblAzEncErr.TabIndex = 62;
+            this.lblAzEncErr.Text = "Error:";
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Items.AddRange(new object[] {
+            "No Error",
+            "No Data",
+            "CRC Invalid"});
+            this.listBox1.Location = new System.Drawing.Point(189, 44);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.listBox1.Size = new System.Drawing.Size(65, 43);
+            this.listBox1.TabIndex = 61;
+            // 
+            // grpAzEncoder
+            // 
+            this.grpAzEncoder.Controls.Add(this.txtAzPositions);
+            this.grpAzEncoder.Controls.Add(this.lblAzEncErr);
+            this.grpAzEncoder.Controls.Add(this.lblAzEncoderData);
+            this.grpAzEncoder.Controls.Add(this.lblAzEncStatus);
+            this.grpAzEncoder.Controls.Add(this.listBox1);
+            this.grpAzEncoder.Controls.Add(this.cboAzEncStatus);
+            this.grpAzEncoder.Location = new System.Drawing.Point(3, 153);
+            this.grpAzEncoder.Name = "grpAzEncoder";
+            this.grpAzEncoder.Size = new System.Drawing.Size(263, 100);
+            this.grpAzEncoder.TabIndex = 63;
+            this.grpAzEncoder.TabStop = false;
+            this.grpAzEncoder.Text = "Azimuth Encoder Data";
+            // 
+            // grpElEncoder
+            // 
+            this.grpElEncoder.Controls.Add(this.txtElPositions);
+            this.grpElEncoder.Controls.Add(this.lblElEncoderData);
+            this.grpElEncoder.Location = new System.Drawing.Point(272, 153);
+            this.grpElEncoder.Name = "grpElEncoder";
+            this.grpElEncoder.Size = new System.Drawing.Size(263, 100);
+            this.grpElEncoder.TabIndex = 64;
+            this.grpElEncoder.TabStop = false;
+            this.grpElEncoder.Text = "Elevation Encoder Data";
+            // 
+            // lblAzAccErr
+            // 
+            this.lblAzAccErr.AutoSize = true;
+            this.lblAzAccErr.Location = new System.Drawing.Point(617, 73);
+            this.lblAzAccErr.Name = "lblAzAccErr";
+            this.lblAzAccErr.Size = new System.Drawing.Size(32, 13);
+            this.lblAzAccErr.TabIndex = 64;
+            this.lblAzAccErr.Text = "Error:";
+            // 
+            // lstAzAccErr
+            // 
+            this.lstAzAccErr.FormattingEnabled = true;
+            this.lstAzAccErr.Items.AddRange(new object[] {
+            "No Error",
+            "No Data",
+            "CRC Invalid"});
+            this.lstAzAccErr.Location = new System.Drawing.Point(659, 61);
+            this.lstAzAccErr.Name = "lstAzAccErr";
+            this.lstAzAccErr.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstAzAccErr.Size = new System.Drawing.Size(65, 43);
+            this.lstAzAccErr.TabIndex = 63;
+            // 
+            // lblElAccErr
+            // 
+            this.lblElAccErr.AutoSize = true;
+            this.lblElAccErr.Location = new System.Drawing.Point(617, 72);
+            this.lblElAccErr.Name = "lblElAccErr";
+            this.lblElAccErr.Size = new System.Drawing.Size(32, 13);
+            this.lblElAccErr.TabIndex = 66;
+            this.lblElAccErr.Text = "Error:";
+            // 
+            // lstElAccErr
+            // 
+            this.lstElAccErr.FormattingEnabled = true;
+            this.lstElAccErr.Items.AddRange(new object[] {
+            "No Error",
+            "No Data",
+            "CRC Invalid"});
+            this.lstElAccErr.Location = new System.Drawing.Point(659, 60);
+            this.lstElAccErr.Name = "lstElAccErr";
+            this.lstElAccErr.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstElAccErr.Size = new System.Drawing.Size(65, 43);
+            this.lstElAccErr.TabIndex = 65;
+            // 
+            // lblCbAccErr
+            // 
+            this.lblCbAccErr.AutoSize = true;
+            this.lblCbAccErr.Location = new System.Drawing.Point(617, 72);
+            this.lblCbAccErr.Name = "lblCbAccErr";
+            this.lblCbAccErr.Size = new System.Drawing.Size(32, 13);
+            this.lblCbAccErr.TabIndex = 68;
+            this.lblCbAccErr.Text = "Error:";
+            // 
+            // lstCbAccErr
+            // 
+            this.lstCbAccErr.FormattingEnabled = true;
+            this.lstCbAccErr.Items.AddRange(new object[] {
+            "No Error",
+            "No Data",
+            "CRC Invalid"});
+            this.lstCbAccErr.Location = new System.Drawing.Point(659, 60);
+            this.lstCbAccErr.Name = "lstCbAccErr";
+            this.lstCbAccErr.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstCbAccErr.Size = new System.Drawing.Size(65, 43);
+            this.lstCbAccErr.TabIndex = 67;
             // 
             // frmCustomPacket
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(586, 582);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(744, 625);
+            this.Controls.Add(this.grpElEncoder);
+            this.Controls.Add(this.grpAzEncoder);
+            this.Controls.Add(this.grpAzTemps);
+            this.Controls.Add(this.grpElTemps);
+            this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.lblPacketSize);
             this.Controls.Add(this.txtFilename);
             this.Controls.Add(this.btnSendOverTcp);
@@ -506,14 +1045,6 @@
             this.Controls.Add(this.grpCbAcclData);
             this.Controls.Add(this.grpAzAcclData);
             this.Controls.Add(this.grpElAcclData);
-            this.Controls.Add(this.txtAzPositions);
-            this.Controls.Add(this.txtElPositions);
-            this.Controls.Add(this.lblAzEncoderData);
-            this.Controls.Add(this.lblElEncoderData);
-            this.Controls.Add(this.txtAzTemps);
-            this.Controls.Add(this.txtElTemps);
-            this.Controls.Add(this.lblAzTemps);
-            this.Controls.Add(this.lblElTemps);
             this.Controls.Add(this.grpSensorInit);
             this.Controls.Add(this.lblFilename);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -528,6 +1059,14 @@
             this.grpAzAcclData.PerformLayout();
             this.grpCbAcclData.ResumeLayout(false);
             this.grpCbAcclData.PerformLayout();
+            this.grpElTemps.ResumeLayout(false);
+            this.grpElTemps.PerformLayout();
+            this.grpAzTemps.ResumeLayout(false);
+            this.grpAzTemps.PerformLayout();
+            this.grpAzEncoder.ResumeLayout(false);
+            this.grpAzEncoder.PerformLayout();
+            this.grpElEncoder.ResumeLayout(false);
+            this.grpElEncoder.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -543,10 +1082,8 @@
         private System.Windows.Forms.CheckBox chkElAdxlInit;
         private System.Windows.Forms.CheckBox chkAzTempInit;
         private System.Windows.Forms.CheckBox chkElTempInit;
-        private System.Windows.Forms.Label lblAzTemps;
         private System.Windows.Forms.Label lblElTemps;
         private System.Windows.Forms.TextBox txtElTemps;
-        private System.Windows.Forms.TextBox txtAzTemps;
         private System.Windows.Forms.TextBox txtAzPositions;
         private System.Windows.Forms.TextBox txtElPositions;
         private System.Windows.Forms.Label lblAzEncoderData;
@@ -577,6 +1114,50 @@
         private System.Windows.Forms.TextBox txtFilename;
         private System.Windows.Forms.Label lblFilename;
         private System.Windows.Forms.Label lblPacketSize;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Label lblElTemp1Status;
+        private System.Windows.Forms.Label lblAzEncStatus;
+        private System.Windows.Forms.ComboBox cboElTemp1Status;
+        private System.Windows.Forms.ComboBox cboAzEncStatus;
+        private System.Windows.Forms.ComboBox cboElTemp2Status;
+        private System.Windows.Forms.Label lblTemp2Status;
+        private System.Windows.Forms.ComboBox cboAzAccStatus;
+        private System.Windows.Forms.Label txtAzAccStatus;
+        private System.Windows.Forms.ListBox lstElTemp1Err;
+        private System.Windows.Forms.ListBox lstElTemp2Err;
+        private System.Windows.Forms.Label lblElTemp1Err;
+        private System.Windows.Forms.Label lblElTemp2Err;
+        private System.Windows.Forms.GroupBox grpElTemps;
+        private System.Windows.Forms.GroupBox grpAzTemps;
+        private System.Windows.Forms.Label lblAzTemps;
+        private System.Windows.Forms.Label lblAzTemp2Err;
+        private System.Windows.Forms.TextBox txtAzTemps;
+        private System.Windows.Forms.Label lblAzTemp1Err;
+        private System.Windows.Forms.Label lblAzTemp1Status;
+        private System.Windows.Forms.ListBox lstAzTemp2Err;
+        private System.Windows.Forms.ComboBox cboAzTemp1Status;
+        private System.Windows.Forms.ListBox lstAzTemp1Err;
+        private System.Windows.Forms.Label lblAzTemp2Status;
+        private System.Windows.Forms.ComboBox cboAzTemp2Status;
+        private System.Windows.Forms.Label lblAzEncErr;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.GroupBox grpAzEncoder;
+        private System.Windows.Forms.GroupBox grpElEncoder;
+        private System.Windows.Forms.ComboBox cboElAccSelfTest;
+        private System.Windows.Forms.Label lblElAccSelfTest;
+        private System.Windows.Forms.ComboBox cboElAccStatus;
+        private System.Windows.Forms.Label lblElAccStatus;
+        private System.Windows.Forms.ComboBox cboAzAccSelfTest;
+        private System.Windows.Forms.Label lblAzAccSelfTest;
+        private System.Windows.Forms.ComboBox cboCbAccSelfTest;
+        private System.Windows.Forms.Label lblCbAccSelfTest;
+        private System.Windows.Forms.ComboBox cboCbAccStatus;
+        private System.Windows.Forms.Label lblCbAccStatus;
+        private System.Windows.Forms.Label lblElAccErr;
+        private System.Windows.Forms.ListBox lstElAccErr;
+        private System.Windows.Forms.Label lblAzAccErr;
+        private System.Windows.Forms.ListBox lstAzAccErr;
+        private System.Windows.Forms.Label lblCbAccErr;
+        private System.Windows.Forms.ListBox lstCbAccErr;
     }
 }

@@ -11,7 +11,7 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
     {
         // This is important for the simulation. This will convert the data arrays we get from CSV files
         // to bytes that we can send to the SensorNetworkServer
-        public static byte[] ConvertDataArraysToBytes(RawAccelerometerData[] elAccl, RawAccelerometerData[] azAccl, RawAccelerometerData[] cbAccl, double[] elTemps, double[] azTemps, double[] elEnc, double[] azEnc)
+        public static byte[] ConvertDataArraysToBytes(RawAccelerometerData[] elAccl, RawAccelerometerData[] azAccl, RawAccelerometerData[] cbAccl, double[] elTemps, double[] azTemps, double[] elEnc, double[] azEnc, SensorStatuses statuses)
         {
             int dataSize = CalcDataSize(elAccl.Length, azAccl.Length, cbAccl.Length, elTemps.Length, azTemps.Length, elEnc.Length, azEnc.Length);
 
@@ -47,11 +47,24 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
                 rawAzEnc[i] = ConvertDegreesToRawAzData(azEnc[i]);
             }
 
-            return EncodeData(dataSize, elAccl, azAccl, cbAccl, rawElTemps, rawAzTemps, rawElEnc, rawAzEnc);
+            bool[] sensorStatusBoolArray = new bool[] {
+                statuses.AzimuthAbsoluteEncoderStatus == SensorStatus.OKAY,
+                statuses.AzimuthTemperature2Status == SensorStatus.OKAY,
+                statuses.AzimuthTemperature1Status == SensorStatus.OKAY,
+                statuses.ElevationTemperature2Status == SensorStatus.OKAY,
+                statuses.ElevationTemperature1Status == SensorStatus.OKAY,
+                statuses.CounterbalanceAccelerometerStatus == SensorStatus.OKAY,
+                statuses.AzimuthAccelerometerStatus == SensorStatus.OKAY,
+                statuses.ElevationAccelerometerStatus == SensorStatus.OKAY
+            };
+
+            int errors = 0; // TODO: implement conversion
+
+            return EncodeData(dataSize, elAccl, azAccl, cbAccl, rawElTemps, rawAzTemps, rawElEnc, rawAzEnc, sensorStatusBoolArray, errors);
         }
 
         // This will take each data array and add it to its proper location in the byte array
-        public static byte[] EncodeData(int dataSize, RawAccelerometerData[] elAcclData, RawAccelerometerData[] azAcclData, RawAccelerometerData[] cbAcclData, short[] elTemp, short[] azTemp, short[] elEnc, short[] azEnc)
+        public static byte[] EncodeData(int dataSize, RawAccelerometerData[] elAcclData, RawAccelerometerData[] azAcclData, RawAccelerometerData[] cbAcclData, short[] elTemp, short[] azTemp, short[] elEnc, short[] azEnc, bool[] statuses, int errors)
         {
             byte[] data = new byte[dataSize];
 
@@ -60,6 +73,12 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
 
             // Store the total data size in 4 bytes
             Add32BitValueToByteArray(ref data, ref i, dataSize);
+
+            // Store the sensor statuses
+            data[i++] = ConvertBoolArrayToByte(statuses);
+
+            // Store the sensor errors in 3 bytes
+            Add24BitValueToByteArray(ref data, ref i, errors);
 
             // Store elevation accelerometer size in 2 bytes
             Add16BitValueToByteArray(ref data, ref i, elAcclData.Length);
@@ -146,8 +165,9 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
         {
             // 1 for the transmit ID
             // 4 for the total data size
+            // 4 for the sensor statuses and errors
             // 14 for each sensor's data size (each sensor size is 2 bytes, with 7 sensors total)
-            int length = 1 + 4 + 14; // TODO: Use sensor number constant-2 for the redundant temp sensors
+            int length = 1 + 4 + 4 + 14;
 
             // Each accelerometer axis is 2 bytes each. With three axes, that's 6 bytes per accelerometer
             length += Acc0Size * 6;
@@ -187,7 +207,15 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
         public static void Add16BitValueToByteArray(ref byte[] dataToAddTo, ref int counter, int dataBeingAdded)
         {
             dataToAddTo[counter++] = (byte)((((short)dataBeingAdded) & 0xFF00) >> 8);
-            dataToAddTo[counter++] = (byte)((((short)dataBeingAdded & 0x00FF)));
+            dataToAddTo[counter++] = (byte)((short)dataBeingAdded & 0x00FF);
+        }
+
+        // A helper function to add 24-bit values to the byte array so we don't have to do this every single time.
+        public static void Add24BitValueToByteArray(ref byte[] dataToAddTo, ref int counter, int dataBeingAdded)
+        {
+            dataToAddTo[counter++] = (byte)((((short)dataBeingAdded) & 0xFF0000) >> 16);
+            dataToAddTo[counter++] = (byte)((((short)dataBeingAdded) & 0x00FF00) >> 8);
+            dataToAddTo[counter++] = (byte)((short)dataBeingAdded & 0x0000FF);
         }
 
         // A helper function to add 32-bit values to the byte array so we don't have to do this every single time.
@@ -196,7 +224,7 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
             dataToAddTo[counter++] = (byte)((((short)dataBeingAdded) & 0xFF000000) >> 24);
             dataToAddTo[counter++] = (byte)((((short)dataBeingAdded) & 0x00FF0000) >> 16);
             dataToAddTo[counter++] = (byte)((((short)dataBeingAdded) & 0x0000FF00) >> 8);
-            dataToAddTo[counter++] = (byte)((((short)dataBeingAdded & 0x000000FF)));
+            dataToAddTo[counter++] = (byte)((short)dataBeingAdded & 0x000000FF);
         }
 
         // This also handles if the numbers are invalid, and will return null if so
@@ -215,6 +243,27 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
             }
 
             return s;
+        }
+        
+        private static byte ConvertBoolArrayToByte(bool[] source)
+        {
+            if (source.Length > 8) throw new ArgumentOutOfRangeException("There can only be 8 bits in a byte array.");
+
+            byte result = 0;
+
+            int index = 8 - source.Length;
+
+            // Loop through the array
+            foreach (bool b in source)
+            {
+                // if the element is 'true' set the bit at that position
+                if (b)
+                    result |= (byte)(1 << (7 - index));
+
+                index++;
+            }
+
+            return result;
         }
 
         // This also handles if the numbers are invalid, and will return null if so.

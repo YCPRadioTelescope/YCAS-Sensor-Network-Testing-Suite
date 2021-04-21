@@ -36,14 +36,14 @@ namespace EmbeddedSystemsTest
 
         private void chkElTemp1Init_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkElTempInit.Checked) txtElTemps.Enabled = true;
-            else txtElTemps.Enabled = false;
+            if (chkElTempInit.Checked) grpElTemps.Enabled = true;
+            else grpElTemps.Enabled = false;
         }
 
         private void chkAzTempInit_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkAzTempInit.Checked) txtAzTemps.Enabled = true;
-            else txtAzTemps.Enabled = false;
+            if (chkAzTempInit.Checked) grpAzTemps.Enabled = true;
+            else grpAzTemps.Enabled = false;
         }
 
         private void chkElAdxlInit_CheckedChanged(object sender, EventArgs e)
@@ -66,14 +66,14 @@ namespace EmbeddedSystemsTest
 
         private void chkElEncInit_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkElEncInit.Checked) txtElPositions.Enabled = true;
-            else txtElPositions.Enabled = false;
+            if (chkElEncInit.Checked) grpElEncoder.Enabled = true;
+            else grpElEncoder.Enabled = false;
         }
 
         private void chkAzEncInit_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkAzEncInit.Checked) txtAzPositions.Enabled = true;
-            else txtAzPositions.Enabled = false;
+            if (chkAzEncInit.Checked) grpAzEncoder.Enabled = true;
+            else grpAzEncoder.Enabled = false;
         }
 
         private void btnSaveToFile_Click(object sender, EventArgs e)
@@ -159,9 +159,11 @@ namespace EmbeddedSystemsTest
             byte[] dataToSend = new byte[0];
             if (errorStr.Equals(""))
             {
+                SensorStatuses statuses = ParseSensorStatuses();
+
                 // This function will eventually be used to convert the arrays gotten from the CSV files
-                dataToSend = PacketEncodingTools.ConvertDataArraysToBytes(elAccl, azAccl, cbAccl, elTemp, azTemp, elEnc, azEnc);
-                lblPacketSize.Text = "Packet size (in bytes): " + dataToSend.Length;
+                dataToSend = PacketEncodingTools.ConvertDataArraysToBytes(elAccl, azAccl, cbAccl, elTemp, azTemp, elEnc, azEnc, statuses);
+                lblPacketSize.Text = "Packet bytes: " + dataToSend.Length;
             }
 
             // Validate data size
@@ -173,6 +175,30 @@ namespace EmbeddedSystemsTest
                 MessageBox.Show(errorStr, "Error");
                 return null;
             }
+        }
+
+        /// <summary>
+        /// This is used to parse the sensor statuses into the SensorStatuses object.
+        /// </summary>
+        /// <param name="statuses">Regular statuses.</param>
+        /// <param name="errors">Various error codes if there are errors.</param>
+        /// <returns></returns>
+        private SensorStatuses ParseSensorStatuses()
+        {
+            SensorStatuses s = new SensorStatuses
+            {
+                // Regular statuses
+                AzimuthAbsoluteEncoderStatus = (SensorStatus)cboAzEncStatus.SelectedIndex,
+                AzimuthTemperature1Status = (SensorStatus)cboAzTemp1Status.SelectedIndex,
+                AzimuthTemperature2Status = (SensorStatus)cboAzTemp2Status.SelectedIndex,
+                ElevationTemperature1Status = (SensorStatus)cboElTemp1Status.SelectedIndex,
+                ElevationTemperature2Status = (SensorStatus)cboElTemp2Status.SelectedIndex,
+                AzimuthAccelerometerStatus = (SensorStatus)cboAzAccStatus.SelectedIndex,
+                ElevationAccelerometerStatus = (SensorStatus)cboElAccStatus.SelectedIndex,
+                CounterbalanceAccelerometerStatus = (SensorStatus)cboCbAccStatus.SelectedIndex
+            };
+            
+            return new SensorStatuses();
         }
 
         protected override void OnFormClosed(FormClosedEventArgs e)

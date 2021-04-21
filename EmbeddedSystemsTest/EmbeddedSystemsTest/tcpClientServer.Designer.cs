@@ -626,7 +626,7 @@ namespace EmbeddedSystemsTest
             // 
             this.lblSensorInitChanged.AutoSize = true;
             this.lblSensorInitChanged.ForeColor = System.Drawing.Color.Red;
-            this.lblSensorInitChanged.Location = new System.Drawing.Point(735, 323);
+            this.lblSensorInitChanged.Location = new System.Drawing.Point(498, 312);
             this.lblSensorInitChanged.Name = "lblSensorInitChanged";
             this.lblSensorInitChanged.Size = new System.Drawing.Size(0, 13);
             this.lblSensorInitChanged.TabIndex = 37;

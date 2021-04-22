@@ -187,14 +187,14 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
         // before being encoded. This is approximate, and may not be exact.
         public static short ConvertDegreesToRawElData(double dataToConvert)
         {
-            return (short)Math.Round((dataToConvert + 20.375) / 0.25);
+            return (short)Math.Round((dataToConvert - 104.375) / -0.25);
         }
 
         // This is so we can give the simulation "real" data, where it will be converted to raw
         // before being encoded. This is approximate, and may not be exact.
         public static short ConvertDegreesToRawAzData(double dataToConvert)
         {
-            return (short)((SensorConversionConstants.AZ_ENCODER_SCALING * dataToConvert) / 360);
+            return (short)(SensorConversionConstants.AZ_ENCODER_SCALING * dataToConvert / 360 * -1);
         }
 
         // This converts the degrees from celsius into raw data. This is approximate.

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCustomPacket));
             this.grpSensorInit = new System.Windows.Forms.GroupBox();
             this.chkAzEncInit = new System.Windows.Forms.CheckBox();
             this.chkElEncInit = new System.Windows.Forms.CheckBox();
@@ -43,7 +44,9 @@
             this.lblAzEncoderData = new System.Windows.Forms.Label();
             this.lblElEncoderData = new System.Windows.Forms.Label();
             this.grpElAcclData = new System.Windows.Forms.GroupBox();
+            this.lblElAccErr = new System.Windows.Forms.Label();
             this.cboElAccSelfTest = new System.Windows.Forms.ComboBox();
+            this.lstElAccErr = new System.Windows.Forms.ListBox();
             this.lblElAccSelfTest = new System.Windows.Forms.Label();
             this.cboElAccStatus = new System.Windows.Forms.ComboBox();
             this.lblElAccStatus = new System.Windows.Forms.Label();
@@ -54,7 +57,9 @@
             this.txtElX = new System.Windows.Forms.TextBox();
             this.lblElX = new System.Windows.Forms.Label();
             this.grpAzAcclData = new System.Windows.Forms.GroupBox();
+            this.lblAzAccErr = new System.Windows.Forms.Label();
             this.cboAzAccSelfTest = new System.Windows.Forms.ComboBox();
+            this.lstAzAccErr = new System.Windows.Forms.ListBox();
             this.lblAzAccSelfTest = new System.Windows.Forms.Label();
             this.cboAzAccStatus = new System.Windows.Forms.ComboBox();
             this.txtAzAccStatus = new System.Windows.Forms.Label();
@@ -65,7 +70,9 @@
             this.txtAzX = new System.Windows.Forms.TextBox();
             this.lblAzX = new System.Windows.Forms.Label();
             this.grpCbAcclData = new System.Windows.Forms.GroupBox();
+            this.lblCbAccErr = new System.Windows.Forms.Label();
             this.cboCbAccSelfTest = new System.Windows.Forms.ComboBox();
+            this.lstCbAccErr = new System.Windows.Forms.ListBox();
             this.lblCbAccSelfTest = new System.Windows.Forms.Label();
             this.cboCbAccStatus = new System.Windows.Forms.ComboBox();
             this.lblCbAccStatus = new System.Windows.Forms.Label();
@@ -107,12 +114,6 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.grpAzEncoder = new System.Windows.Forms.GroupBox();
             this.grpElEncoder = new System.Windows.Forms.GroupBox();
-            this.lblAzAccErr = new System.Windows.Forms.Label();
-            this.lstAzAccErr = new System.Windows.Forms.ListBox();
-            this.lblElAccErr = new System.Windows.Forms.Label();
-            this.lstElAccErr = new System.Windows.Forms.ListBox();
-            this.lblCbAccErr = new System.Windows.Forms.Label();
-            this.lstCbAccErr = new System.Windows.Forms.ListBox();
             this.grpSensorInit.SuspendLayout();
             this.grpElAcclData.SuspendLayout();
             this.grpAzAcclData.SuspendLayout();
@@ -299,6 +300,15 @@
             this.grpElAcclData.TabStop = false;
             this.grpElAcclData.Text = "Elevation Accelerometer Data";
             // 
+            // lblElAccErr
+            // 
+            this.lblElAccErr.AutoSize = true;
+            this.lblElAccErr.Location = new System.Drawing.Point(617, 72);
+            this.lblElAccErr.Name = "lblElAccErr";
+            this.lblElAccErr.Size = new System.Drawing.Size(32, 13);
+            this.lblElAccErr.TabIndex = 66;
+            this.lblElAccErr.Text = "Error:";
+            // 
             // cboElAccSelfTest
             // 
             this.cboElAccSelfTest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -310,6 +320,19 @@
             this.cboElAccSelfTest.Name = "cboElAccSelfTest";
             this.cboElAccSelfTest.Size = new System.Drawing.Size(65, 21);
             this.cboElAccSelfTest.TabIndex = 58;
+            // 
+            // lstElAccErr
+            // 
+            this.lstElAccErr.FormattingEnabled = true;
+            this.lstElAccErr.Items.AddRange(new object[] {
+            "No Error",
+            "No Samples",
+            "WF Missed"});
+            this.lstElAccErr.Location = new System.Drawing.Point(659, 60);
+            this.lstElAccErr.Name = "lstElAccErr";
+            this.lstElAccErr.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstElAccErr.Size = new System.Drawing.Size(65, 43);
+            this.lstElAccErr.TabIndex = 65;
             // 
             // lblElAccSelfTest
             // 
@@ -410,6 +433,15 @@
             this.grpAzAcclData.TabStop = false;
             this.grpAzAcclData.Text = "Azimuth Accelerometer Data";
             // 
+            // lblAzAccErr
+            // 
+            this.lblAzAccErr.AutoSize = true;
+            this.lblAzAccErr.Location = new System.Drawing.Point(617, 73);
+            this.lblAzAccErr.Name = "lblAzAccErr";
+            this.lblAzAccErr.Size = new System.Drawing.Size(32, 13);
+            this.lblAzAccErr.TabIndex = 64;
+            this.lblAzAccErr.Text = "Error:";
+            // 
             // cboAzAccSelfTest
             // 
             this.cboAzAccSelfTest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -421,6 +453,19 @@
             this.cboAzAccSelfTest.Name = "cboAzAccSelfTest";
             this.cboAzAccSelfTest.Size = new System.Drawing.Size(65, 21);
             this.cboAzAccSelfTest.TabIndex = 56;
+            // 
+            // lstAzAccErr
+            // 
+            this.lstAzAccErr.FormattingEnabled = true;
+            this.lstAzAccErr.Items.AddRange(new object[] {
+            "No Error",
+            "No Samples",
+            "WF Missed"});
+            this.lstAzAccErr.Location = new System.Drawing.Point(659, 61);
+            this.lstAzAccErr.Name = "lstAzAccErr";
+            this.lstAzAccErr.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstAzAccErr.Size = new System.Drawing.Size(65, 43);
+            this.lstAzAccErr.TabIndex = 63;
             // 
             // lblAzAccSelfTest
             // 
@@ -521,6 +566,15 @@
             this.grpCbAcclData.TabStop = false;
             this.grpCbAcclData.Text = "Counterbalance Accelerometer Data";
             // 
+            // lblCbAccErr
+            // 
+            this.lblCbAccErr.AutoSize = true;
+            this.lblCbAccErr.Location = new System.Drawing.Point(617, 72);
+            this.lblCbAccErr.Name = "lblCbAccErr";
+            this.lblCbAccErr.Size = new System.Drawing.Size(32, 13);
+            this.lblCbAccErr.TabIndex = 68;
+            this.lblCbAccErr.Text = "Error:";
+            // 
             // cboCbAccSelfTest
             // 
             this.cboCbAccSelfTest.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -532,6 +586,19 @@
             this.cboCbAccSelfTest.Name = "cboCbAccSelfTest";
             this.cboCbAccSelfTest.Size = new System.Drawing.Size(65, 21);
             this.cboCbAccSelfTest.TabIndex = 58;
+            // 
+            // lstCbAccErr
+            // 
+            this.lstCbAccErr.FormattingEnabled = true;
+            this.lstCbAccErr.Items.AddRange(new object[] {
+            "No Error",
+            "No Samples",
+            "WF Missed"});
+            this.lstCbAccErr.Location = new System.Drawing.Point(659, 60);
+            this.lstCbAccErr.Name = "lstCbAccErr";
+            this.lstCbAccErr.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstCbAccErr.Size = new System.Drawing.Size(65, 43);
+            this.lstCbAccErr.TabIndex = 67;
             // 
             // lblCbAccSelfTest
             // 
@@ -962,72 +1029,6 @@
             this.grpElEncoder.TabStop = false;
             this.grpElEncoder.Text = "Elevation Encoder Data";
             // 
-            // lblAzAccErr
-            // 
-            this.lblAzAccErr.AutoSize = true;
-            this.lblAzAccErr.Location = new System.Drawing.Point(617, 73);
-            this.lblAzAccErr.Name = "lblAzAccErr";
-            this.lblAzAccErr.Size = new System.Drawing.Size(32, 13);
-            this.lblAzAccErr.TabIndex = 64;
-            this.lblAzAccErr.Text = "Error:";
-            // 
-            // lstAzAccErr
-            // 
-            this.lstAzAccErr.FormattingEnabled = true;
-            this.lstAzAccErr.Items.AddRange(new object[] {
-            "No Error",
-            "No Samples",
-            "WF Missed"});
-            this.lstAzAccErr.Location = new System.Drawing.Point(659, 61);
-            this.lstAzAccErr.Name = "lstAzAccErr";
-            this.lstAzAccErr.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstAzAccErr.Size = new System.Drawing.Size(65, 43);
-            this.lstAzAccErr.TabIndex = 63;
-            // 
-            // lblElAccErr
-            // 
-            this.lblElAccErr.AutoSize = true;
-            this.lblElAccErr.Location = new System.Drawing.Point(617, 72);
-            this.lblElAccErr.Name = "lblElAccErr";
-            this.lblElAccErr.Size = new System.Drawing.Size(32, 13);
-            this.lblElAccErr.TabIndex = 66;
-            this.lblElAccErr.Text = "Error:";
-            // 
-            // lstElAccErr
-            // 
-            this.lstElAccErr.FormattingEnabled = true;
-            this.lstElAccErr.Items.AddRange(new object[] {
-            "No Error",
-            "No Samples",
-            "WF Missed"});
-            this.lstElAccErr.Location = new System.Drawing.Point(659, 60);
-            this.lstElAccErr.Name = "lstElAccErr";
-            this.lstElAccErr.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstElAccErr.Size = new System.Drawing.Size(65, 43);
-            this.lstElAccErr.TabIndex = 65;
-            // 
-            // lblCbAccErr
-            // 
-            this.lblCbAccErr.AutoSize = true;
-            this.lblCbAccErr.Location = new System.Drawing.Point(617, 72);
-            this.lblCbAccErr.Name = "lblCbAccErr";
-            this.lblCbAccErr.Size = new System.Drawing.Size(32, 13);
-            this.lblCbAccErr.TabIndex = 68;
-            this.lblCbAccErr.Text = "Error:";
-            // 
-            // lstCbAccErr
-            // 
-            this.lstCbAccErr.FormattingEnabled = true;
-            this.lstCbAccErr.Items.AddRange(new object[] {
-            "No Error",
-            "No Samples",
-            "WF Missed"});
-            this.lstCbAccErr.Location = new System.Drawing.Point(659, 60);
-            this.lstCbAccErr.Name = "lstCbAccErr";
-            this.lstCbAccErr.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstCbAccErr.Size = new System.Drawing.Size(65, 43);
-            this.lstCbAccErr.TabIndex = 67;
-            // 
             // frmCustomPacket
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1048,6 +1049,7 @@
             this.Controls.Add(this.grpSensorInit);
             this.Controls.Add(this.lblFilename);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmCustomPacket";
             this.Text = "Custom Packet Form";

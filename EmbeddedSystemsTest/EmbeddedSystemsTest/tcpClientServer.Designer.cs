@@ -888,7 +888,7 @@ namespace EmbeddedSystemsTest
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "frmTcpTest";
-            this.Text = "TCP Server/Client Test";
+            this.Text = "Sensor Network Demo and Test Application";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmTcpTest_Paint);
             this.grpStats.ResumeLayout(false);

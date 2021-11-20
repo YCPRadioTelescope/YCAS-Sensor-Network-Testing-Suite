@@ -81,79 +81,133 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
             Add24BitValueToByteArray(ref data, ref i, errors);
 
             // Store elevation accelerometer size in 2 bytes
-            Add16BitValueToByteArray(ref data, ref i, elAcclData.Length);
+            Add16BitValueToByteArray(ref data, ref i, (short)Math.Ceiling(elAcclData.Length * 1.0 / SensorConversionConstants.elAccelFIFOSize));
 
             // Store azimuth accelerometer size in 2 bytes
-            Add16BitValueToByteArray(ref data, ref i, azAcclData.Length);
+            Add16BitValueToByteArray(ref data, ref i, (short)Math.Ceiling(azAcclData.Length * 1.0 / SensorConversionConstants.azAccelFIFOSize));
 
             // Store counterbalance accelerometer size in 2 bytes
-            Add16BitValueToByteArray(ref data, ref i, cbAcclData.Length);
+            Add16BitValueToByteArray(ref data, ref i, (short)Math.Ceiling(cbAcclData.Length * 1.0 / SensorConversionConstants.cbAccelFIFOSize));
 
             // Store elevation temperature size in 2 bytes
-            Add16BitValueToByteArray(ref data, ref i, elTemp.Length);
+            Add16BitValueToByteArray(ref data, ref i, (short)elTemp.Length);
 
             // Store azimuth temperature size in 2 bytes
-            Add16BitValueToByteArray(ref data, ref i, azTemp.Length);
+            Add16BitValueToByteArray(ref data, ref i, (short)azTemp.Length);
 
             // Store elevation encoder size in 2 bytes
-            Add16BitValueToByteArray(ref data, ref i, elEnc.Length);
+            Add16BitValueToByteArray(ref data, ref i, (short)elEnc.Length);
 
             // Store azimuth encoder size in 2 bytes
-            Add16BitValueToByteArray(ref data, ref i, azEnc.Length);
+            Add16BitValueToByteArray(ref data, ref i, (short)azEnc.Length);
 
             // Store elevation accelerometer data in a variable number of bytes
-            // Each axis occupies 2 bytes, making a total of 6 bytes for each accelerometer data
-            for (uint j = 0; j < elAcclData.Length; j++)
+            for (uint k = 0; k < Math.Ceiling(elAcclData.Length * 1.0 / SensorConversionConstants.elAccelFIFOSize); k++)
             {
-                Add16BitValueToByteArray(ref data, ref i, elAcclData[j].X);
-                Add16BitValueToByteArray(ref data, ref i, elAcclData[j].Y);
-                Add16BitValueToByteArray(ref data, ref i, elAcclData[j].Z);
+                // Add a generated timestamp
+                Add64BitValueToByteArray(ref data, ref i, (ulong)DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+
+                // Set default dump size
+                short dumpSize = SensorConversionConstants.elAccelFIFOSize;
+
+                // Change the dump size to be the remaining data size left if there is not a full dump available
+                if ((k + 1) * SensorConversionConstants.elAccelFIFOSize > elAcclData.Length)
+                {
+                    dumpSize = (short)(elAcclData.Length - (k * SensorConversionConstants.elAccelFIFOSize));
+                }
+
+                // Add dump size of
+                Add16BitValueToByteArray(ref data, ref i, dumpSize);
+
+                // Each axis occupies 2 bytes, making a total of 6 bytes for each accelerometer data
+                for (uint j = k * SensorConversionConstants.elAccelFIFOSize; j < k * SensorConversionConstants.elAccelFIFOSize + dumpSize; j++)
+                {
+                    Add16BitValueToByteArray(ref data, ref i, (short)elAcclData[j].X);
+                    Add16BitValueToByteArray(ref data, ref i, (short)elAcclData[j].Y);
+                    Add16BitValueToByteArray(ref data, ref i, (short)elAcclData[j].Z);
+                }
             }
 
             // Store azimuth accelerometer data in a variable number of bytes
-            // Each axis occupies 2 bytes, making a total of 6 bytes for each accelerometer data
-            for (uint j = 0; j < azAcclData.Length; j++)
+            for (uint k = 0; k < Math.Ceiling(azAcclData.Length * 1.0 / SensorConversionConstants.azAccelFIFOSize); k++)
             {
-                Add16BitValueToByteArray(ref data, ref i, azAcclData[j].X);
-                Add16BitValueToByteArray(ref data, ref i, azAcclData[j].Y);
-                Add16BitValueToByteArray(ref data, ref i, azAcclData[j].Z);
+                // Add a generated timestamp
+                Add64BitValueToByteArray(ref data, ref i, (ulong)DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+
+                // Set default dump size
+                short dumpSize = SensorConversionConstants.azAccelFIFOSize;
+
+                // Change the dump size to be the remaining data size left if there is not a full dump available
+                if ((k + 1) * SensorConversionConstants.azAccelFIFOSize > azAcclData.Length)
+                {
+                    dumpSize = (short)(azAcclData.Length - (k * SensorConversionConstants.azAccelFIFOSize));
+                }
+
+                // Add dump size
+                Add16BitValueToByteArray(ref data, ref i, dumpSize);
+
+                // Each axis occupies 2 bytes, making a total of 6 bytes for each accelerometer data
+                for (uint j = k * SensorConversionConstants.azAccelFIFOSize; j < k * SensorConversionConstants.azAccelFIFOSize + dumpSize; j++)
+                {
+                    Add16BitValueToByteArray(ref data, ref i, (short)azAcclData[j].X);
+                    Add16BitValueToByteArray(ref data, ref i, (short)azAcclData[j].Y);
+                    Add16BitValueToByteArray(ref data, ref i, (short)azAcclData[j].Z);
+                }
             }
 
             // Store counterbalance accelerometer data in a variable number of bytes
-            // Each axis occupies 2 bytes, making a total of 6 bytes for each accelerometer data
-            for (uint j = 0; j < cbAcclData.Length; j++)
+            for (uint k = 0; k < Math.Ceiling(cbAcclData.Length * 1.0 / SensorConversionConstants.cbAccelFIFOSize); k++)
             {
-                Add16BitValueToByteArray(ref data, ref i, cbAcclData[j].X);
-                Add16BitValueToByteArray(ref data, ref i, cbAcclData[j].Y);
-                Add16BitValueToByteArray(ref data, ref i, cbAcclData[j].Z);
+                // Add a generated timestamp
+                Add64BitValueToByteArray(ref data, ref i, (ulong)DateTimeOffset.UtcNow.ToUnixTimeMilliseconds());
+
+                // Set default dump size
+                short dumpSize = SensorConversionConstants.cbAccelFIFOSize;
+
+                // Change the dump size to be the remaining data size left if there is not a full dump available
+                if ((k + 1) * SensorConversionConstants.cbAccelFIFOSize > cbAcclData.Length)
+                {
+                    dumpSize = (short)(cbAcclData.Length - (k * SensorConversionConstants.cbAccelFIFOSize));
+                }
+
+                // Add dump size
+                Add16BitValueToByteArray(ref data, ref i, dumpSize);
+
+                // Each axis occupies 2 bytes, making a total of 6 bytes for each accelerometer data
+                for (uint j = k * SensorConversionConstants.cbAccelFIFOSize; j < k * SensorConversionConstants.cbAccelFIFOSize + dumpSize; j++)
+                {
+                    Add16BitValueToByteArray(ref data, ref i, (short)cbAcclData[j].X);
+                    Add16BitValueToByteArray(ref data, ref i, (short)cbAcclData[j].Y);
+                    Add16BitValueToByteArray(ref data, ref i, (short)cbAcclData[j].Z);
+                }
             }
 
             // Store elevation temperature data in a variable number of bytes
             // Each temperature occupies 2 bytes
             for (uint j = 0; j < elTemp.Length; j++)
             {
-                Add16BitValueToByteArray(ref data, ref i, elTemp[j]);
+                Add16BitValueToByteArray(ref data, ref i, (short)elTemp[j]);
             }
 
             // Store azimuth temperature data in a variable number of bytes
             // Each temperature occupies 2 bytes
             for (uint j = 0; j < azTemp.Length; j++)
             {
-                Add16BitValueToByteArray(ref data, ref i, azTemp[j]);
+                Add16BitValueToByteArray(ref data, ref i, (short)azTemp[j]);
             }
 
             // Store elevation encoder data in a variable number of bytes
             // Each position occupies 2 bytes
             for (uint j = 0; j < elEnc.Length; j++)
             {
-                Add16BitValueToByteArray(ref data, ref i, elEnc[j]);
+                Add16BitValueToByteArray(ref data, ref i, (short)elEnc[j]);
             }
 
             // Store azimuth encoder data in a variable number of bytes
             // Each position occupies 2 bytes
             for (uint j = 0; j < azEnc.Length; j++)
             {
-                Add16BitValueToByteArray(ref data, ref i, azEnc[j]);
+                Add16BitValueToByteArray(ref data, ref i, (short)azEnc[j]);
             }
 
             return data;
@@ -173,6 +227,16 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
             length += Acc0Size * 6;
             length += Acc1Size * 6;
             length += Acc2Size * 6;
+
+            // Each accelerometer dump has a timestamp associated with it of 8 bytes
+            length += (int)Math.Ceiling(Acc0Size * 1.0 / SensorConversionConstants.elAccelFIFOSize) * 8;
+            length += (int)Math.Ceiling(Acc1Size * 1.0 / SensorConversionConstants.azAccelFIFOSize) * 8;
+            length += (int)Math.Ceiling(Acc2Size * 1.0 / SensorConversionConstants.cbAccelFIFOSize) * 8;
+
+            // Each acceleromter dump has a dump size associated with it that takes up 2 bytes
+            length += (int)Math.Ceiling(Acc0Size * 1.0 / SensorConversionConstants.elAccelFIFOSize) * 2;
+            length += (int)Math.Ceiling(Acc1Size * 1.0 / SensorConversionConstants.azAccelFIFOSize) * 2;
+            length += (int)Math.Ceiling(Acc2Size * 1.0 / SensorConversionConstants.elAccelFIFOSize) * 2;
 
             // Each temp and encoder value is 2 bytes
             length += Temp1Size * 2;
@@ -225,6 +289,18 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
             dataToAddTo[counter++] = (byte)((((short)dataBeingAdded) & 0x00FF0000) >> 16);
             dataToAddTo[counter++] = (byte)((((short)dataBeingAdded) & 0x0000FF00) >> 8);
             dataToAddTo[counter++] = (byte)((short)dataBeingAdded & 0x000000FF);
+        }
+
+        /// <summary>
+        /// A helper function to add 64-bit values to the byte array so we don't have to do this every single time.
+        /// </summary>
+        /// <param name="dataToAddTo">The byte array we are modifying.</param>
+        /// <param name="counter">The counter to tell us where in the byte array we are modifying.</param>
+        /// <param name="dataBeingAdded">The data we are adding to the byte array.</param>
+        public static void Add64BitValueToByteArray(ref byte[] dataToAddTo, ref int counter, ulong dataBeingAdded)
+        {
+            Add32BitValueToByteArray(ref dataToAddTo, ref counter, (int)((dataBeingAdded & 0xFFFFFFFF00000000) >> 32));
+            Add32BitValueToByteArray(ref dataToAddTo, ref counter, (int)(dataBeingAdded & 0x00000000FFFFFFFF));
         }
 
         // This also handles if the numbers are invalid, and will return null if so

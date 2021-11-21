@@ -64,45 +64,69 @@ namespace EmbeddedSystemsTest.SensorNetwork
                 // Accelerometer 1 (elevation)
                 if (elAdxlSize > 0)
                 {
-                    elAdxlData = new AdxlData[elAdxlSize];
+                    List<AdxlData> acceleration = new List<AdxlData>();
                     for (int j = 0; j < elAdxlSize; j++)
                     {
-                        elAdxlData[j] = new AdxlData()
+                        long timeStamp = (bytes[k++] << 56 | bytes[k++] << 48 | bytes[k++] << 40 | bytes[k++] << 32
+                            | bytes[k++] << 24 | bytes[k++] << 16 | bytes[k++] << 8 | bytes[k++]);
+
+                        short dumpSize = (short)(bytes[k++] << 8 | bytes[k++]);
+
+                        for (int i = 0; i < dumpSize; i++)
                         {
-                            xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                            yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                            zAxis = (short)(bytes[k++] << 8 | bytes[k++])
-                        };
+                            acceleration.Add(new AdxlData()
+                            {
+                                xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                                yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                                zAxis = (short)(bytes[k++] << 8 | bytes[k++])
+                            });
+                        }
                     }
                 }
 
                 // Accelerometer 2 (azimuth)
                 if (azAdxlSize > 0)
                 {
-                    azAdxlData = new AdxlData[azAdxlSize];
+                    List<AdxlData> acceleration = new List<AdxlData>();
                     for (int j = 0; j < azAdxlSize; j++)
                     {
-                        azAdxlData[j] = new AdxlData()
+                        long timeStamp = (bytes[k++] << 56 | bytes[k++] << 48 | bytes[k++] << 40 | bytes[k++] << 32
+                            | bytes[k++] << 24 | bytes[k++] << 16 | bytes[k++] << 8 | bytes[k++]);
+
+                        short dumpSize = (short)(bytes[k++] << 8 | bytes[k++]);
+
+                        for (int i = 0; i < dumpSize; i++)
                         {
-                            xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                            yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                            zAxis = (short)(bytes[k++] << 8 | bytes[k++])
-                        };
+                            acceleration.Add(new AdxlData()
+                            {
+                                xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                                yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                                zAxis = (short)(bytes[k++] << 8 | bytes[k++])
+                            });
+                        }
                     }
                 }
 
                 // Accelerometer 3
                 if (cbAdxlSize > 0)
                 {
-                    cbAdxlData = new AdxlData[cbAdxlSize];
+                    List<AdxlData> acceleration = new List<AdxlData>();
                     for (int j = 0; j < cbAdxlSize; j++)
                     {
-                        cbAdxlData[j] = new AdxlData()
+                        long timeStamp = (bytes[k++] << 56 | bytes[k++] << 48 | bytes[k++] << 40 | bytes[k++] << 32
+                            | bytes[k++] << 24 | bytes[k++] << 16 | bytes[k++] << 8 | bytes[k++]);
+
+                        short dumpSize = (short)(bytes[k++] << 8 | bytes[k++]);
+
+                        for (int i = 0; i < dumpSize; i++)
                         {
-                            xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                            yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                            zAxis = (short)(bytes[k++] << 8 | bytes[k++])
-                        };
+                            acceleration.Add(new AdxlData()
+                            {
+                                xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                                yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                                zAxis = (short)(bytes[k++] << 8 | bytes[k++])
+                            });
+                        }
                     }
                 }
 

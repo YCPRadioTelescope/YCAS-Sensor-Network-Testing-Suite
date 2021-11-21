@@ -10,9 +10,9 @@ namespace EmbeddedSystemsTest.SensorNetwork
 {
     class SensorDataParser
     {
-        private AdxlData[] elAdxlData { get; set; }
-        private AdxlData[] azAdxlData { get; set; }
-        private AdxlData[] cbAdxlData { get; set; }
+        private List<AdxlData> elAdxlData { get; set; }
+        private List<AdxlData> azAdxlData { get; set; }
+        private List<AdxlData> cbAdxlData { get; set; }
         private int[] elTemp1 { get; set; }
         private int[] elTemp2 { get; set; }
         private int[] azTemp1 { get; set; }
@@ -64,7 +64,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
                 // Accelerometer 1 (elevation)
                 if (elAdxlSize > 0)
                 {
-                    List<AdxlData> acceleration = new List<AdxlData>();
+                    elAdxlData = new List<AdxlData>();
                     for (int j = 0; j < elAdxlSize; j++)
                     {
                         long timeStamp = (bytes[k++] << 56 | bytes[k++] << 48 | bytes[k++] << 40 | bytes[k++] << 32
@@ -74,7 +74,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
 
                         for (int i = 0; i < dumpSize; i++)
                         {
-                            acceleration.Add(new AdxlData()
+                            elAdxlData.Add(new AdxlData()
                             {
                                 xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
                                 yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
@@ -87,7 +87,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
                 // Accelerometer 2 (azimuth)
                 if (azAdxlSize > 0)
                 {
-                    List<AdxlData> acceleration = new List<AdxlData>();
+                    azAdxlData = new List<AdxlData>();
                     for (int j = 0; j < azAdxlSize; j++)
                     {
                         long timeStamp = (bytes[k++] << 56 | bytes[k++] << 48 | bytes[k++] << 40 | bytes[k++] << 32
@@ -97,7 +97,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
 
                         for (int i = 0; i < dumpSize; i++)
                         {
-                            acceleration.Add(new AdxlData()
+                            azAdxlData.Add(new AdxlData()
                             {
                                 xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
                                 yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
@@ -110,7 +110,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
                 // Accelerometer 3
                 if (cbAdxlSize > 0)
                 {
-                    List<AdxlData> acceleration = new List<AdxlData>();
+                    cbAdxlData = new List<AdxlData>();
                     for (int j = 0; j < cbAdxlSize; j++)
                     {
                         long timeStamp = (bytes[k++] << 56 | bytes[k++] << 48 | bytes[k++] << 40 | bytes[k++] << 32
@@ -120,7 +120,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
 
                         for (int i = 0; i < dumpSize; i++)
                         {
-                            acceleration.Add(new AdxlData()
+                            cbAdxlData.Add(new AdxlData()
                             {
                                 xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
                                 yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
@@ -173,21 +173,21 @@ namespace EmbeddedSystemsTest.SensorNetwork
 
                 if (logData)
                 {
-                    UInt16[] adxlDataSizes = new UInt16[3] { elAdxlSize, azAdxlSize, cbAdxlSize };
+                    int[] adxlDataSizes = new int[3] { elAdxlData.Count, azAdxlData.Count, cbAdxlData.Count };
                     int maxAdxlSize = adxlDataSizes.Max();
                     for (int i = 0; i < maxAdxlSize; i++)
                     {
                         adxlData.Append(DateTime.Now.ToString("MM/dd/yyyy hh:mm:ss.fff") + ",");
 
-                        if (i < elAdxlSize)
+                        if (i < elAdxlData.Count)
                         {
                             adxlData.Append(elAdxlData[i].xAxis.ToString() + "," + elAdxlData[i].yAxis.ToString() + "," + elAdxlData[i].zAxis.ToString() + ",");
                         }
-                        if (i < azAdxlSize)
+                        if (i < azAdxlData.Count)
                         {
                             adxlData.Append(azAdxlData[i].xAxis.ToString() + "," + azAdxlData[i].yAxis.ToString() + "," + azAdxlData[i].zAxis.ToString() + ",");
                         }
-                        if (i < cbAdxlSize)
+                        if (i < cbAdxlData.Count)
                         {
                             adxlData.Append(cbAdxlData[i].xAxis.ToString() + "," + cbAdxlData[i].yAxis.ToString() + "," + cbAdxlData[i].zAxis.ToString());
                         }
@@ -279,17 +279,17 @@ namespace EmbeddedSystemsTest.SensorNetwork
             {
                 s.elTemp2 = Math.Round(ConvertRawTempToUnit(elTemp2[elTemp2.Length - 1], tempUnit), 2);
             }
-            if (azAdxlData != null && azAdxlData.Length != 0)
+            if (azAdxlData != null && azAdxlData.Count != 0)
             {
-                s.azAdxlData = azAdxlData[azAdxlData.Length - 1];
+                s.azAdxlData = azAdxlData[azAdxlData.Count - 1];
             }
-            if (elAdxlData != null && elAdxlData.Length != 0)
+            if (elAdxlData != null && elAdxlData.Count != 0)
             {
-                s.elAdxlData = elAdxlData[elAdxlData.Length - 1];
+                s.elAdxlData = elAdxlData[elAdxlData.Count - 1];
             }
-            if (cbAdxlData != null && cbAdxlData.Length != 0)
+            if (cbAdxlData != null && cbAdxlData.Count != 0)
             {
-                s.cbAdxlData = cbAdxlData[cbAdxlData.Length - 1];
+                s.cbAdxlData = cbAdxlData[cbAdxlData.Count - 1];
             }
             if (sensorStatuses != null && sensorStatuses.Length != 0)
             {

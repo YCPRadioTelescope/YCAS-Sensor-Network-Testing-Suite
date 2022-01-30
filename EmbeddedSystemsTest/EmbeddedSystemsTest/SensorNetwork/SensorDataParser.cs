@@ -65,69 +65,21 @@ namespace EmbeddedSystemsTest.SensorNetwork
                 if (elAdxlSize > 0)
                 {
                     elAdxlData = new List<AdxlData>();
-                    for (int j = 0; j < elAdxlSize; j++)
-                    {
-                        long timeStamp = (bytes[k++] << 56 | bytes[k++] << 48 | bytes[k++] << 40 | bytes[k++] << 32
-                            | bytes[k++] << 24 | bytes[k++] << 16 | bytes[k++] << 8 | bytes[k++]);
-
-                        short dumpSize = (short)(bytes[k++] << 8 | bytes[k++]);
-
-                        for (int i = 0; i < dumpSize; i++)
-                        {
-                            elAdxlData.Add(new AdxlData()
-                            {
-                                xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                                yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                                zAxis = (short)(bytes[k++] << 8 | bytes[k++])
-                            });
-                        }
-                    }
+                    ParseAdxlData(ref bytes, ref k, elAdxlData, elAdxlSize);
                 }
 
                 // Accelerometer 2 (azimuth)
                 if (azAdxlSize > 0)
                 {
                     azAdxlData = new List<AdxlData>();
-                    for (int j = 0; j < azAdxlSize; j++)
-                    {
-                        long timeStamp = (bytes[k++] << 56 | bytes[k++] << 48 | bytes[k++] << 40 | bytes[k++] << 32
-                            | bytes[k++] << 24 | bytes[k++] << 16 | bytes[k++] << 8 | bytes[k++]);
-
-                        short dumpSize = (short)(bytes[k++] << 8 | bytes[k++]);
-
-                        for (int i = 0; i < dumpSize; i++)
-                        {
-                            azAdxlData.Add(new AdxlData()
-                            {
-                                xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                                yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                                zAxis = (short)(bytes[k++] << 8 | bytes[k++])
-                            });
-                        }
-                    }
+                    ParseAdxlData(ref bytes, ref k, azAdxlData, azAdxlSize);
                 }
 
                 // Accelerometer 3
                 if (cbAdxlSize > 0)
                 {
                     cbAdxlData = new List<AdxlData>();
-                    for (int j = 0; j < cbAdxlSize; j++)
-                    {
-                        long timeStamp = (bytes[k++] << 56 | bytes[k++] << 48 | bytes[k++] << 40 | bytes[k++] << 32
-                            | bytes[k++] << 24 | bytes[k++] << 16 | bytes[k++] << 8 | bytes[k++]);
-
-                        short dumpSize = (short)(bytes[k++] << 8 | bytes[k++]);
-
-                        for (int i = 0; i < dumpSize; i++)
-                        {
-                            cbAdxlData.Add(new AdxlData()
-                            {
-                                xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                                yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
-                                zAxis = (short)(bytes[k++] << 8 | bytes[k++])
-                            });
-                        }
-                    }
+                    ParseAdxlData(ref bytes, ref k, cbAdxlData, cbAdxlSize);
                 }
 
                 // Elevation temperature 1
@@ -342,6 +294,34 @@ namespace EmbeddedSystemsTest.SensorNetwork
             if (tempUnit == TemperatureUnitEnum.CELSIUS) return rawTemp / 16.0;
             else if (tempUnit == TemperatureUnitEnum.FAHRENHEIT) return rawTemp / 16.0 * 1.8 + 32.0;
             else return rawTemp / 16.0 + 273.15;
+        }
+
+        /// <summary>
+        /// A helper function to parse acceleration data.
+        /// </summary>
+        /// <param name="bytes">The byte array to parse from.</param>
+        /// <param name="k">Index to keep track of byte array position.</param>
+        /// <param name="adxlData">List to store the parse acceleration data in.</param>
+        /// <param name="numDumps">Number of acceleration fifo dumps to parse.</param>
+        private void ParseAdxlData(ref byte[] bytes, ref int k, List<AdxlData> adxlData, int numDumps)
+        {
+            for (int j = 0; j < numDumps; j++)
+            {
+                long timeStamp = (bytes[k++] << 56 | bytes[k++] << 48 | bytes[k++] << 40 | bytes[k++] << 32
+                    | bytes[k++] << 24 | bytes[k++] << 16 | bytes[k++] << 8 | bytes[k++]);
+
+                short dumpSize = (short)(bytes[k++] << 8 | bytes[k++]);
+
+                for (int i = 0; i < dumpSize; i++)
+                {
+                    adxlData.Add(new AdxlData()
+                    {
+                        xAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                        yAxis = (short)(bytes[k++] << 8 | bytes[k++]),
+                        zAxis = (short)(bytes[k++] << 8 | bytes[k++])
+                    });
+                }
+            }
         }
     }
 }

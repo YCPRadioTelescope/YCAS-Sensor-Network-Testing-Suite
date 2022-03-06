@@ -11,9 +11,9 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
     {
         // This is important for the simulation. This will convert the data arrays we get from CSV files
         // to bytes that we can send to the SensorNetworkServer
-        public static byte[] ConvertDataArraysToBytes(RawAccelerometerData[] elAccl, RawAccelerometerData[] azAccl, RawAccelerometerData[] cbAccl, double[] elTemps, double[] azTemps, double[] elEnc, double[] azEnc, SensorStatuses statuses)
+        public static byte[] ConvertDataArraysToBytes(RawAccelerometerData[] elAccl, RawAccelerometerData[] azAccl, RawAccelerometerData[] cbAccl, double[] elTemps, double[] azTemps, double[] elEnc, double[] azEnc, float[] ambTemps, float[] ambHumidity, SensorStatuses statuses)
         {
-            int dataSize = CalcDataSize(elAccl.Length, azAccl.Length, cbAccl.Length, elTemps.Length, azTemps.Length, elEnc.Length, azEnc.Length);
+            int dataSize = CalcDataSize(elAccl.Length, azAccl.Length, cbAccl.Length, elTemps.Length, azTemps.Length, elEnc.Length, azEnc.Length, ambTemps.Length, ambHumidity.Length);
 
             // If you want to input raw data instead, just comment out the next few loops.
             // They exist so that we can input data into our CSV files that make sense to us, since
@@ -56,15 +56,16 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
                 statuses.AzimuthTemperature1Status == SensorStatus.OKAY,
                 statuses.AzimuthTemperature2Status == SensorStatus.OKAY,
                 statuses.AzimuthAbsoluteEncoderStatus == SensorStatus.OKAY,
+                statuses.AmbientTemperatureAndHumidityStatus == SensorStatus.OKAY
             };
 
             int errors = 0; // TODO: implement conversion
 
-            return EncodeData(dataSize, elAccl, azAccl, cbAccl, rawElTemps, rawAzTemps, rawElEnc, rawAzEnc, sensorStatusBoolArray, errors);
+            return EncodeData(dataSize, elAccl, azAccl, cbAccl, rawElTemps, rawAzTemps, rawElEnc, rawAzEnc, ambTemps, ambHumidity, sensorStatusBoolArray, errors);
         }
 
         // This will take each data array and add it to its proper location in the byte array
-        public static byte[] EncodeData(int dataSize, RawAccelerometerData[] elAcclData, RawAccelerometerData[] azAcclData, RawAccelerometerData[] cbAcclData, short[] elTemp, short[] azTemp, short[] elEnc, short[] azEnc, bool[] statuses, int errors)
+        public static byte[] EncodeData(int dataSize, RawAccelerometerData[] elAcclData, RawAccelerometerData[] azAcclData, RawAccelerometerData[] cbAcclData, short[] elTemp, short[] azTemp, short[] elEnc, short[] azEnc, float[] ambTemps, float[] ambHumidity, bool[] statuses, int errors)
         {
             byte[] data = new byte[dataSize];
 
@@ -75,7 +76,9 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
             Add32BitValueToByteArray(ref data, ref i, dataSize);
 
             // Store the sensor statuses
-            data[i++] = ConvertBoolArrayToByte(statuses);
+            // To avoid changing the code too much, store the first 8 statuses, and then the remaining status
+            data[i++] = ConvertBoolArrayToByte(statuses.Take(8).ToArray());
+            data[i++] = ConvertBoolArrayToByte(statuses.Skip(8).ToArray());
 
             // Store the sensor errors in 3 bytes
             Add24BitValueToByteArray(ref data, ref i, errors);
@@ -100,6 +103,12 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
 
             // Store azimuth encoder size in 2 bytes
             Add16BitValueToByteArray(ref data, ref i, (short)azEnc.Length);
+
+            // Store ambeint temp size in 2 bytes
+            Add16BitValueToByteArray(ref data, ref i, (short)ambTemps.Length);
+
+            // Store ambient humidity size in 2 bytes
+            Add16BitValueToByteArray(ref data, ref i, (short)ambHumidity.Length);
 
             // Store elevation accelerometer data in a variable number of bytes
             AddAcclDataToByteArray(ref data, ref i, ref elAcclData, SensorConversionConstants.elAccelFIFOSize);
@@ -131,11 +140,25 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
                 Add16BitValueToByteArray(ref data, ref i, (short)elEnc[j]);
             }
 
-            // Store azimuth encoder data in a variable number of bytes
-            // Each position occupies 2 bytes
-            for (uint j = 0; j < azEnc.Length; j++)
+            // Store ambient temp data in a variable number of bytes
+            // Each sample occupies 4 bytes
+            for (uint j = 0; j < ambTemps.Length; j++)
             {
-                Add16BitValueToByteArray(ref data, ref i, (short)azEnc[j]);
+                byte[] bytes = BitConverter.GetBytes(ambTemps[j]);
+                for (int k = 0; k < bytes.Length; k++)
+                {
+                    data[i++] = bytes[k];
+                }
+            }
+            // Store ambient humidity data in a variable number of bytes
+            // Each sample occupies 4 bytes
+            for (uint j = 0; j < ambHumidity.Length; j++)
+            {
+                byte[] bytes = BitConverter.GetBytes(ambHumidity[j]);
+                for (int k = 0; k < bytes.Length; k++)
+                {
+                    data[i++] = bytes[k];
+                }
             }
 
             return data;
@@ -143,13 +166,13 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
 
         // Calculates the size of the packet that will be sent to the sensor network
         // This value will be used to create the byte array
-        public static int CalcDataSize(int Acc0Size, int Acc1Size, int Acc2Size, int Temp1Size, int Temp2Size, int ElEnSize, int AzEnSize)
+        public static int CalcDataSize(int Acc0Size, int Acc1Size, int Acc2Size, int Temp1Size, int Temp2Size, int ElEnSize, int AzEnSize, int ambTempSize, int ambHumiditySize)
         {
             // 1 for the transmit ID
-            // 4 for the total data size
+            // 5 for the total data size
             // 4 for the sensor statuses and errors
-            // 14 for each sensor's data size (each sensor size is 2 bytes, with 7 sensors total)
-            int length = 1 + 4 + 4 + 14;
+            // 18 for each sensor's data size (each sensor size is 2 bytes, with 9 sensors total)
+            int length = 1 + 4 + 5 + 18;
 
             // Each accelerometer axis is 2 bytes each. With three axes, that's 6 bytes per accelerometer
             length += Acc0Size * 6;
@@ -171,6 +194,10 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
             length += Temp2Size * 2;
             length += ElEnSize * 2;
             length += AzEnSize * 2;
+
+            // Each ambient temp and humidity value is 4 bytes
+            length += ambTempSize * 4;
+            length += ambHumiditySize * 4;
 
             return length;
         }
@@ -290,7 +317,23 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
 
             return s;
         }
-        
+
+        public static float[] ConvertStringToFloatArray(string text)
+        {
+            float[] s;
+
+            try
+            {
+                s = text.Split(',').Select(float.Parse).ToArray();
+            }
+            catch
+            {
+                return null;
+            }
+
+            return s;
+        }
+
         private static byte ConvertBoolArrayToByte(bool[] source)
         {
             if (source.Length > 8) throw new ArgumentOutOfRangeException("There can only be 8 bits in a byte array.");

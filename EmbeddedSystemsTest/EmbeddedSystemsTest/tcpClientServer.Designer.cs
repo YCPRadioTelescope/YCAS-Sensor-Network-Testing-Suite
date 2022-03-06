@@ -644,7 +644,7 @@ namespace EmbeddedSystemsTest
             // 
             this.lblSensorInitChanged.AutoSize = true;
             this.lblSensorInitChanged.ForeColor = System.Drawing.Color.Red;
-            this.lblSensorInitChanged.Location = new System.Drawing.Point(498, 312);
+            this.lblSensorInitChanged.Location = new System.Drawing.Point(500, 350);
             this.lblSensorInitChanged.Name = "lblSensorInitChanged";
             this.lblSensorInitChanged.Size = new System.Drawing.Size(0, 13);
             this.lblSensorInitChanged.TabIndex = 37;
@@ -863,7 +863,7 @@ namespace EmbeddedSystemsTest
             this.lsbErrorLogging.FormattingEnabled = true;
             this.lsbErrorLogging.Location = new System.Drawing.Point(16, 407);
             this.lsbErrorLogging.Name = "lsbErrorLogging";
-            this.lsbErrorLogging.Size = new System.Drawing.Size(410, 147);
+            this.lsbErrorLogging.Size = new System.Drawing.Size(410, 160);
             this.lsbErrorLogging.TabIndex = 45;
             // 
             // lblAmbientHumidity

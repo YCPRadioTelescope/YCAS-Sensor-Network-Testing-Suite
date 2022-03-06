@@ -29,7 +29,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
         public SensorStatus elTemp2Status { get; set; }
         public SensorStatus azTemp1Status { get; set; }
         public SensorStatus azTemp2Status { get; set; }
-        public SensorStatus ambTempStatus { get; set; }
+        public SensorStatus ambTempHumidityStatus { get; set; }
         public SensorStatus elAdxlStatus { get; set; }
         public SensorStatus azAdxlStatus { get; set; }
         public SensorStatus cbAdxlStatus { get; set; }

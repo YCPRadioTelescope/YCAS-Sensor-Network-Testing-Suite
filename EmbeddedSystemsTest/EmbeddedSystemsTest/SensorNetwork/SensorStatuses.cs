@@ -55,5 +55,10 @@ namespace EmbeddedSystemsTest.SensorNetwork
         /// The error state of the counterbalance accelerometer status.
         /// </summary>
         public SensorStatus CounterbalanceAccelerometerStatus { get; set; }
+
+        /// <summary>
+        /// The error state of the DHT22 temperature and humidity status.
+        /// </summary>
+        public SensorStatus AmbientTemperatureAndHumidityStatus { get; set; }
     }
 }

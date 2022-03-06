@@ -52,6 +52,12 @@ namespace EmbeddedSystemsTest.SensorNetwork
         /// Counterbalance accelerometer initialization. This corresponds to the index of this sensor in the
         /// sensor initialization byte array.
         /// </summary>
-        CounterbalanceAccelerometer
+        CounterbalanceAccelerometer,
+
+        /// <summary>
+        /// Ambient temperature and humidity initialization. This corresponds to the index of this sensor in the
+        /// sensor initialization byte array.
+        /// </summary>
+        AmbientTempAndHumidity,
     }
 }

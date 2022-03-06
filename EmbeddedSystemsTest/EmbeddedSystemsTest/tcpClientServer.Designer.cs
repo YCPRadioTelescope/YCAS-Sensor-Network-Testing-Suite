@@ -70,6 +70,7 @@ namespace EmbeddedSystemsTest
             this.radCelsius = new System.Windows.Forms.RadioButton();
             this.radKelvin = new System.Windows.Forms.RadioButton();
             this.grpSensorInit = new System.Windows.Forms.GroupBox();
+            this.chkAmbTempHumid = new System.Windows.Forms.CheckBox();
             this.chkAzEncInit = new System.Windows.Forms.CheckBox();
             this.chkElEncInit = new System.Windows.Forms.CheckBox();
             this.chkCbAdxlInit = new System.Windows.Forms.CheckBox();
@@ -88,6 +89,7 @@ namespace EmbeddedSystemsTest
             this.lblDataFileName = new System.Windows.Forms.Label();
             this.txtDataFileName = new System.Windows.Forms.TextBox();
             this.gbSensorStatuses = new System.Windows.Forms.GroupBox();
+            this.lblAmbTempHumidStatus = new System.Windows.Forms.Label();
             this.lblAzEncoderStatus = new System.Windows.Forms.Label();
             this.lblElEncoderStatus = new System.Windows.Forms.Label();
             this.lblCbAccStatus = new System.Windows.Forms.Label();
@@ -100,6 +102,8 @@ namespace EmbeddedSystemsTest
             this.lblErrorLogging = new System.Windows.Forms.Label();
             this.ckbLogErrors = new System.Windows.Forms.CheckBox();
             this.lsbErrorLogging = new System.Windows.Forms.ListBox();
+            this.lblAmbientHumidity = new System.Windows.Forms.Label();
+            this.lblAmbientTemp = new System.Windows.Forms.Label();
             this.grpStats.SuspendLayout();
             this.grpTempUnit.SuspendLayout();
             this.grpSensorInit.SuspendLayout();
@@ -507,6 +511,7 @@ namespace EmbeddedSystemsTest
             // 
             // grpSensorInit
             // 
+            this.grpSensorInit.Controls.Add(this.chkAmbTempHumid);
             this.grpSensorInit.Controls.Add(this.chkAzEncInit);
             this.grpSensorInit.Controls.Add(this.chkElEncInit);
             this.grpSensorInit.Controls.Add(this.chkCbAdxlInit);
@@ -516,10 +521,23 @@ namespace EmbeddedSystemsTest
             this.grpSensorInit.Controls.Add(this.chkElTemp1Init);
             this.grpSensorInit.Location = new System.Drawing.Point(738, 158);
             this.grpSensorInit.Name = "grpSensorInit";
-            this.grpSensorInit.Size = new System.Drawing.Size(208, 156);
+            this.grpSensorInit.Size = new System.Drawing.Size(208, 167);
             this.grpSensorInit.TabIndex = 6;
             this.grpSensorInit.TabStop = false;
             this.grpSensorInit.Text = "Sensor Initialization";
+            // 
+            // chkAmbTempHumid
+            // 
+            this.chkAmbTempHumid.AutoSize = true;
+            this.chkAmbTempHumid.Checked = true;
+            this.chkAmbTempHumid.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAmbTempHumid.Location = new System.Drawing.Point(11, 142);
+            this.chkAmbTempHumid.Name = "chkAmbTempHumid";
+            this.chkAmbTempHumid.Size = new System.Drawing.Size(158, 17);
+            this.chkAmbTempHumid.TabIndex = 15;
+            this.chkAmbTempHumid.Text = "Ambient Temp and Humidity";
+            this.chkAmbTempHumid.UseVisualStyleBackColor = true;
+            this.chkAmbTempHumid.CheckedChanged += new System.EventHandler(this.chkAmbTempHumid_CheckedChanged);
             // 
             // chkAzEncInit
             // 
@@ -642,7 +660,7 @@ namespace EmbeddedSystemsTest
             // 
             // btnCustPacket
             // 
-            this.btnCustPacket.Location = new System.Drawing.Point(814, 534);
+            this.btnCustPacket.Location = new System.Drawing.Point(814, 577);
             this.btnCustPacket.Name = "btnCustPacket";
             this.btnCustPacket.Size = new System.Drawing.Size(120, 23);
             this.btnCustPacket.TabIndex = 24;
@@ -652,7 +670,7 @@ namespace EmbeddedSystemsTest
             // 
             // btnCsvDrawing
             // 
-            this.btnCsvDrawing.Location = new System.Drawing.Point(687, 534);
+            this.btnCsvDrawing.Location = new System.Drawing.Point(687, 577);
             this.btnCsvDrawing.Name = "btnCsvDrawing";
             this.btnCsvDrawing.Size = new System.Drawing.Size(120, 23);
             this.btnCsvDrawing.TabIndex = 23;
@@ -712,6 +730,7 @@ namespace EmbeddedSystemsTest
             // 
             // gbSensorStatuses
             // 
+            this.gbSensorStatuses.Controls.Add(this.lblAmbTempHumidStatus);
             this.gbSensorStatuses.Controls.Add(this.lblAzEncoderStatus);
             this.gbSensorStatuses.Controls.Add(this.lblElEncoderStatus);
             this.gbSensorStatuses.Controls.Add(this.lblCbAccStatus);
@@ -721,12 +740,21 @@ namespace EmbeddedSystemsTest
             this.gbSensorStatuses.Controls.Add(this.lblAzTempSensor1Status);
             this.gbSensorStatuses.Controls.Add(this.lblElTempSensor2Status);
             this.gbSensorStatuses.Controls.Add(this.lblElTempSensor1Status);
-            this.gbSensorStatuses.Location = new System.Drawing.Point(738, 320);
+            this.gbSensorStatuses.Location = new System.Drawing.Point(738, 341);
             this.gbSensorStatuses.Name = "gbSensorStatuses";
-            this.gbSensorStatuses.Size = new System.Drawing.Size(208, 208);
+            this.gbSensorStatuses.Size = new System.Drawing.Size(208, 230);
             this.gbSensorStatuses.TabIndex = 40;
             this.gbSensorStatuses.TabStop = false;
             this.gbSensorStatuses.Text = "Sensor Statuses";
+            // 
+            // lblAmbTempHumidStatus
+            // 
+            this.lblAmbTempHumidStatus.AutoSize = true;
+            this.lblAmbTempHumidStatus.Location = new System.Drawing.Point(11, 205);
+            this.lblAmbTempHumidStatus.Name = "lblAmbTempHumidStatus";
+            this.lblAmbTempHumidStatus.Size = new System.Drawing.Size(142, 13);
+            this.lblAmbTempHumidStatus.TabIndex = 9;
+            this.lblAmbTempHumidStatus.Text = "Ambient Temp and Humidity:";
             // 
             // lblAzEncoderStatus
             // 
@@ -838,11 +866,31 @@ namespace EmbeddedSystemsTest
             this.lsbErrorLogging.Size = new System.Drawing.Size(410, 147);
             this.lsbErrorLogging.TabIndex = 45;
             // 
+            // lblAmbientHumidity
+            // 
+            this.lblAmbientHumidity.AutoSize = true;
+            this.lblAmbientHumidity.Location = new System.Drawing.Point(512, 320);
+            this.lblAmbientHumidity.Name = "lblAmbientHumidity";
+            this.lblAmbientHumidity.Size = new System.Drawing.Size(114, 13);
+            this.lblAmbientHumidity.TabIndex = 47;
+            this.lblAmbientHumidity.Text = "Ambient Humidity: N/A";
+            // 
+            // lblAmbientTemp
+            // 
+            this.lblAmbientTemp.AutoSize = true;
+            this.lblAmbientTemp.Location = new System.Drawing.Point(505, 307);
+            this.lblAmbientTemp.Name = "lblAmbientTemp";
+            this.lblAmbientTemp.Size = new System.Drawing.Size(134, 13);
+            this.lblAmbientTemp.TabIndex = 46;
+            this.lblAmbientTemp.Text = "Ambient Temperature: N/A\r\n";
+            // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 687);
+            this.Controls.Add(this.lblAmbientHumidity);
+            this.Controls.Add(this.lblAmbientTemp);
             this.Controls.Add(this.lsbErrorLogging);
             this.Controls.Add(this.ckbLogErrors);
             this.Controls.Add(this.lblErrorLogging);
@@ -978,6 +1026,10 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.Label lblErrorLogging;
         private System.Windows.Forms.CheckBox ckbLogErrors;
         private System.Windows.Forms.ListBox lsbErrorLogging;
+        private System.Windows.Forms.Label lblAmbTempHumidStatus;
+        private System.Windows.Forms.Label lblAmbientHumidity;
+        private System.Windows.Forms.Label lblAmbientTemp;
+        private System.Windows.Forms.CheckBox chkAmbTempHumid;
     }
 }
 

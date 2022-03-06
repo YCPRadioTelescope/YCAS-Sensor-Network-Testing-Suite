@@ -17,6 +17,8 @@ namespace EmbeddedSystemsTest.SensorNetwork
         private int[] elTemp2 { get; set; }
         private int[] azTemp1 { get; set; }
         private int[] azTemp2 { get; set; }
+        private float[] ambientTemp { get; set; }
+        private float[] ambientHumidity { get; set; }
         private int[] elEncoder { get; set; }
         private int[] azEncoder { get; set; }
         private string transmitId { get; set; }
@@ -37,7 +39,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
                 }
                 if (!File.Exists(fileName + "_TempData.csv"))
                 {
-                    tempData.AppendLine("Date Time" + "," + "EL Temp °F" + "," + "AZ Temp °F");
+                    tempData.AppendLine("Date Time" + "," + "EL Temp °F" + "," + "AZ Temp °F" + "," + "Ambient Temp °F" + "Humidity %");
                 }
                 if (!File.Exists(fileName + "_EncoderData.csv"))
                 {

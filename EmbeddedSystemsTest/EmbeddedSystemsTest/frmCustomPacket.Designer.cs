@@ -1127,11 +1127,11 @@
             this.lstAmbTempHumidityErr.Items.AddRange(new object[] {
             "No Error",
             "Bad Data",
-            "Stale Data"});
+            "Out of Range"});
             this.lstAmbTempHumidityErr.Location = new System.Drawing.Point(181, 79);
             this.lstAmbTempHumidityErr.Name = "lstAmbTempHumidityErr";
             this.lstAmbTempHumidityErr.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstAmbTempHumidityErr.Size = new System.Drawing.Size(65, 43);
+            this.lstAmbTempHumidityErr.Size = new System.Drawing.Size(70, 43);
             this.lstAmbTempHumidityErr.TabIndex = 65;
             // 
             // cboAmbTempHumidityStatus

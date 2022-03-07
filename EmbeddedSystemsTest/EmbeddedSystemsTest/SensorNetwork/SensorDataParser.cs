@@ -133,7 +133,8 @@ namespace EmbeddedSystemsTest.SensorNetwork
                     ambientTemp = new float[ambientTempSize];
                     for (int j = 0; j < ambientTempSize; j++)
                     {
-                        ambientTemp[j] = (bytes[k++] << 8 | bytes[k++]);
+                        ambientTemp[j] = BitConverter.ToSingle(bytes, k);
+                        k += 4;
                     }
                 }
 
@@ -143,7 +144,8 @@ namespace EmbeddedSystemsTest.SensorNetwork
                     ambientHumidity = new float[ambientHumiditySize];
                     for (int j = 0; j < ambientHumiditySize; j++)
                     {
-                        ambientHumidity[j] = (bytes[k++] << 8 | bytes[k++]);
+                        ambientHumidity[j] = BitConverter.ToSingle(bytes, k);
+                        k += 4;
                     }
                 }
 

@@ -140,6 +140,13 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
                 Add16BitValueToByteArray(ref data, ref i, (short)elEnc[j]);
             }
 
+            // Store azimuth encoder data in a variable number of bytes
+            // Each position occupies 2 bytes
+            for (uint j = 0; j < azEnc.Length; j++)
+            {
+                Add16BitValueToByteArray(ref data, ref i, (short)azEnc[j]);
+            }
+
             // Store ambient temp data in a variable number of bytes
             // Each sample occupies 4 bytes
             for (uint j = 0; j < ambTemps.Length; j++)

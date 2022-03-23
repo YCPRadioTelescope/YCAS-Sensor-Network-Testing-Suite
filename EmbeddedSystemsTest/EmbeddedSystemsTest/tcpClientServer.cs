@@ -346,8 +346,9 @@ namespace EmbeddedSystemsTest
                                     }
                                     if (chkAmbTempHumid.Checked)
                                     {
-                                        lblAmbientTemp.Text = $"Ambient Temperature: {sensorData.ambTemp}";
-                                        lblAmbientHumidity.Text = $"Ambient Humidity: {sensorData.ambHumidity}";
+                                        lblAmbientTemp.Text = $"Ambient Temperature: {sensorData.ambTemp} {tempUnitSym}";
+                                        lblAmbientHumidity.Text = $"Ambient Humidity: {sensorData.ambHumidity} %";
+                                        lblAmbTempHumidStatus.Text = $"Ambient Temp and Humidity: {sensorData.ambTempHumidityStatus}";
                                     }
                                     if (ckbLogErrors.Checked)
                                     {

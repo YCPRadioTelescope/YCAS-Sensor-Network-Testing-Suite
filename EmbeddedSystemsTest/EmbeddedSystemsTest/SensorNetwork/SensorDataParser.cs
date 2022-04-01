@@ -138,7 +138,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
                     }
                 }
 
-                // Elevation Ambient Temperature
+                // Elevation Ambient Humidity
                 if (ambientHumiditySize > 0)
                 {
                     ambientHumidity = new float[ambientHumiditySize];

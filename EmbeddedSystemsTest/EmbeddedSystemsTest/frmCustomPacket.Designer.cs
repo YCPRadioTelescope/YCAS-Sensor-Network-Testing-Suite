@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCustomPacket));
             this.grpSensorInit = new System.Windows.Forms.GroupBox();
+            this.chkAmbTempHumidity = new System.Windows.Forms.CheckBox();
             this.chkAzEncInit = new System.Windows.Forms.CheckBox();
             this.chkElEncInit = new System.Windows.Forms.CheckBox();
             this.chkCbAdxlInit = new System.Windows.Forms.CheckBox();
@@ -114,16 +115,17 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.grpAzEncoder = new System.Windows.Forms.GroupBox();
             this.grpElEncoder = new System.Windows.Forms.GroupBox();
-            this.chkAmbTempHumidity = new System.Windows.Forms.CheckBox();
             this.lblAmbHumidity = new System.Windows.Forms.Label();
             this.txtAmbHumidity = new System.Windows.Forms.TextBox();
             this.grpAmbientTemperatureHumidity = new System.Windows.Forms.GroupBox();
-            this.lblAmbTemps = new System.Windows.Forms.Label();
-            this.txtAmbTemps = new System.Windows.Forms.TextBox();
             this.lblAmbTempHumidityErr = new System.Windows.Forms.Label();
             this.lblAmbTempHumidityStatus = new System.Windows.Forms.Label();
             this.lstAmbTempHumidityErr = new System.Windows.Forms.ListBox();
             this.cboAmbTempHumidityStatus = new System.Windows.Forms.ComboBox();
+            this.lblAmbTemps = new System.Windows.Forms.Label();
+            this.txtAmbTemps = new System.Windows.Forms.TextBox();
+            this.grpFanToggle = new System.Windows.Forms.GroupBox();
+            this.chkFanToggle = new System.Windows.Forms.CheckBox();
             this.grpSensorInit.SuspendLayout();
             this.grpElAcclData.SuspendLayout();
             this.grpAzAcclData.SuspendLayout();
@@ -133,6 +135,7 @@
             this.grpAzEncoder.SuspendLayout();
             this.grpElEncoder.SuspendLayout();
             this.grpAmbientTemperatureHumidity.SuspendLayout();
+            this.grpFanToggle.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpSensorInit
@@ -151,6 +154,19 @@
             this.grpSensorInit.TabIndex = 20;
             this.grpSensorInit.TabStop = false;
             this.grpSensorInit.Text = "Sensor Initialization";
+            // 
+            // chkAmbTempHumidity
+            // 
+            this.chkAmbTempHumidity.AutoSize = true;
+            this.chkAmbTempHumidity.Checked = true;
+            this.chkAmbTempHumidity.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAmbTempHumidity.Location = new System.Drawing.Point(11, 141);
+            this.chkAmbTempHumidity.Name = "chkAmbTempHumidity";
+            this.chkAmbTempHumidity.Size = new System.Drawing.Size(158, 17);
+            this.chkAmbTempHumidity.TabIndex = 28;
+            this.chkAmbTempHumidity.Text = "Ambient Temp and Humidity";
+            this.chkAmbTempHumidity.UseVisualStyleBackColor = true;
+            this.chkAmbTempHumidity.CheckedChanged += new System.EventHandler(this.chkAmbTempHumidity_CheckedChanged);
             // 
             // chkAzEncInit
             // 
@@ -1041,19 +1057,6 @@
             this.grpElEncoder.TabStop = false;
             this.grpElEncoder.Text = "Elevation Encoder Data";
             // 
-            // chkAmbTempHumidity
-            // 
-            this.chkAmbTempHumidity.AutoSize = true;
-            this.chkAmbTempHumidity.Checked = true;
-            this.chkAmbTempHumidity.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkAmbTempHumidity.Location = new System.Drawing.Point(11, 141);
-            this.chkAmbTempHumidity.Name = "chkAmbTempHumidity";
-            this.chkAmbTempHumidity.Size = new System.Drawing.Size(158, 17);
-            this.chkAmbTempHumidity.TabIndex = 28;
-            this.chkAmbTempHumidity.Text = "Ambient Temp and Humidity";
-            this.chkAmbTempHumidity.UseVisualStyleBackColor = true;
-            this.chkAmbTempHumidity.CheckedChanged += new System.EventHandler(this.chkAmbTempHumidity_CheckedChanged);
-            // 
             // lblAmbHumidity
             // 
             this.lblAmbHumidity.AutoSize = true;
@@ -1086,22 +1089,6 @@
             this.grpAmbientTemperatureHumidity.TabIndex = 65;
             this.grpAmbientTemperatureHumidity.TabStop = false;
             this.grpAmbientTemperatureHumidity.Text = "Ambient Temperature and Humidity Data";
-            // 
-            // lblAmbTemps
-            // 
-            this.lblAmbTemps.AutoSize = true;
-            this.lblAmbTemps.Location = new System.Drawing.Point(6, 22);
-            this.lblAmbTemps.Name = "lblAmbTemps";
-            this.lblAmbTemps.Size = new System.Drawing.Size(75, 13);
-            this.lblAmbTemps.TabIndex = 31;
-            this.lblAmbTemps.Text = "Temperatures:\r\n";
-            // 
-            // txtAmbTemps
-            // 
-            this.txtAmbTemps.Location = new System.Drawing.Point(87, 19);
-            this.txtAmbTemps.Name = "txtAmbTemps";
-            this.txtAmbTemps.Size = new System.Drawing.Size(164, 20);
-            this.txtAmbTemps.TabIndex = 1;
             // 
             // lblAmbTempHumidityErr
             // 
@@ -1146,11 +1133,50 @@
             this.cboAmbTempHumidityStatus.Size = new System.Drawing.Size(65, 21);
             this.cboAmbTempHumidityStatus.TabIndex = 64;
             // 
+            // lblAmbTemps
+            // 
+            this.lblAmbTemps.AutoSize = true;
+            this.lblAmbTemps.Location = new System.Drawing.Point(6, 22);
+            this.lblAmbTemps.Name = "lblAmbTemps";
+            this.lblAmbTemps.Size = new System.Drawing.Size(75, 13);
+            this.lblAmbTemps.TabIndex = 31;
+            this.lblAmbTemps.Text = "Temperatures:\r\n";
+            // 
+            // txtAmbTemps
+            // 
+            this.txtAmbTemps.Location = new System.Drawing.Point(87, 19);
+            this.txtAmbTemps.Name = "txtAmbTemps";
+            this.txtAmbTemps.Size = new System.Drawing.Size(164, 20);
+            this.txtAmbTemps.TabIndex = 1;
+            // 
+            // grpFanToggle
+            // 
+            this.grpFanToggle.Controls.Add(this.chkFanToggle);
+            this.grpFanToggle.Location = new System.Drawing.Point(272, 259);
+            this.grpFanToggle.Name = "grpFanToggle";
+            this.grpFanToggle.Size = new System.Drawing.Size(263, 142);
+            this.grpFanToggle.TabIndex = 66;
+            this.grpFanToggle.TabStop = false;
+            this.grpFanToggle.Text = "Fan Toggle";
+            // 
+            // chkFanToggle
+            // 
+            this.chkFanToggle.AutoSize = true;
+            this.chkFanToggle.Checked = true;
+            this.chkFanToggle.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkFanToggle.Location = new System.Drawing.Point(11, 19);
+            this.chkFanToggle.Name = "chkFanToggle";
+            this.chkFanToggle.Size = new System.Drawing.Size(61, 17);
+            this.chkFanToggle.TabIndex = 21;
+            this.chkFanToggle.Text = "Fan On";
+            this.chkFanToggle.UseVisualStyleBackColor = true;
+            // 
             // frmCustomPacket
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(744, 789);
+            this.Controls.Add(this.grpFanToggle);
             this.Controls.Add(this.grpAmbientTemperatureHumidity);
             this.Controls.Add(this.grpElEncoder);
             this.Controls.Add(this.grpAzEncoder);
@@ -1189,6 +1215,8 @@
             this.grpElEncoder.PerformLayout();
             this.grpAmbientTemperatureHumidity.ResumeLayout(false);
             this.grpAmbientTemperatureHumidity.PerformLayout();
+            this.grpFanToggle.ResumeLayout(false);
+            this.grpFanToggle.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1291,5 +1319,7 @@
         private System.Windows.Forms.Label lblAmbTempHumidityStatus;
         private System.Windows.Forms.ListBox lstAmbTempHumidityErr;
         private System.Windows.Forms.ComboBox cboAmbTempHumidityStatus;
+        private System.Windows.Forms.GroupBox grpFanToggle;
+        private System.Windows.Forms.CheckBox chkFanToggle;
     }
 }

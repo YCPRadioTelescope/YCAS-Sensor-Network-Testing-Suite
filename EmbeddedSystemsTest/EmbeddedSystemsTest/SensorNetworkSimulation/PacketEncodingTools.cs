@@ -11,7 +11,7 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
     {
         // This is important for the simulation. This will convert the data arrays we get from CSV files
         // to bytes that we can send to the SensorNetworkServer
-        public static byte[] ConvertDataArraysToBytes(RawAccelerometerData[] elAccl, RawAccelerometerData[] azAccl, RawAccelerometerData[] cbAccl, double[] elTemps, double[] azTemps, double[] elEnc, double[] azEnc, float[] ambTemps, float[] ambHumidity, SensorStatuses statuses)
+        public static byte[] ConvertDataArraysToBytes(RawAccelerometerData[] elAccl, RawAccelerometerData[] azAccl, RawAccelerometerData[] cbAccl, double[] elTemps, double[] azTemps, double[] elEnc, double[] azEnc, float[] ambTemps, float[] ambHumidity, SensorStatuses statuses, bool isFanOn)
         {
             int dataSize = CalcDataSize(elAccl.Length, azAccl.Length, cbAccl.Length, elTemps.Length, azTemps.Length, elEnc.Length, azEnc.Length, ambTemps.Length, ambHumidity.Length);
 
@@ -56,6 +56,7 @@ namespace EmbeddedSystemsTest.SensorNetworkSimulation
                 statuses.AzimuthTemperature1Status == SensorStatus.OKAY,
                 statuses.AzimuthTemperature2Status == SensorStatus.OKAY,
                 statuses.AzimuthAbsoluteEncoderStatus == SensorStatus.OKAY,
+                isFanOn,
                 statuses.AmbientTemperatureAndHumidityStatus == SensorStatus.OKAY
             };
 

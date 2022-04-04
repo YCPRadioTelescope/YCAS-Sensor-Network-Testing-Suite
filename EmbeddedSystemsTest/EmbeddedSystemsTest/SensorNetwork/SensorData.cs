@@ -40,6 +40,8 @@ namespace EmbeddedSystemsTest.SensorNetwork
         public AzEncoderError_Codes azEncderError { get; set; }
         public TemperatureError_Codes[] temperatureErrors { get; set; }
         public AmbientError_Code ambientTempHumidityError { get; set; }
+
+        public bool isFanOn { get; set; }
     }
     /// <summary>Names of the temperature sensors</summary>
     public enum TemperatureSensors

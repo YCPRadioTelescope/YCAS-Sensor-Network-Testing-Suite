@@ -106,11 +106,67 @@ namespace EmbeddedSystemsTest
             this.lblAmbientTemp = new System.Windows.Forms.Label();
             this.lblFanState = new System.Windows.Forms.Label();
             this.btnFanToggle = new System.Windows.Forms.Button();
+            this.txtElZ = new System.Windows.Forms.TextBox();
+            this.txtElY = new System.Windows.Forms.TextBox();
+            this.txtElX = new System.Windows.Forms.TextBox();
+            this.lblElZ = new System.Windows.Forms.Label();
+            this.lblElY = new System.Windows.Forms.Label();
+            this.lblElX = new System.Windows.Forms.Label();
+            this.lblElOffsets = new System.Windows.Forms.Label();
+            this.chkElBitResolution = new System.Windows.Forms.CheckBox();
+            this.numElFIFOSize = new System.Windows.Forms.NumericUpDown();
+            this.lblElFIFOSize = new System.Windows.Forms.Label();
+            this.lblElGRange = new System.Windows.Forms.Label();
+            this.comboElGRange = new System.Windows.Forms.ComboBox();
+            this.lblElSamplingSpeed = new System.Windows.Forms.Label();
+            this.comboElSamplingSpeed = new System.Windows.Forms.ComboBox();
+            this.lblElAccelSettings = new System.Windows.Forms.Label();
+            this.txtAzZ = new System.Windows.Forms.TextBox();
+            this.txtAzY = new System.Windows.Forms.TextBox();
+            this.txtAzX = new System.Windows.Forms.TextBox();
+            this.lblAzZ = new System.Windows.Forms.Label();
+            this.lblAzY = new System.Windows.Forms.Label();
+            this.lblAzX = new System.Windows.Forms.Label();
+            this.lblAzOffsets = new System.Windows.Forms.Label();
+            this.chkAzBitResolution = new System.Windows.Forms.CheckBox();
+            this.numAzFIFOSize = new System.Windows.Forms.NumericUpDown();
+            this.lblAzFIFOSize = new System.Windows.Forms.Label();
+            this.lblAzGRange = new System.Windows.Forms.Label();
+            this.comboAzGRange = new System.Windows.Forms.ComboBox();
+            this.lblAzSamplingSpeed = new System.Windows.Forms.Label();
+            this.comboAzSamplingSpeed = new System.Windows.Forms.ComboBox();
+            this.lblAzAccelSettings = new System.Windows.Forms.Label();
+            this.txtCbZ = new System.Windows.Forms.TextBox();
+            this.txtCbY = new System.Windows.Forms.TextBox();
+            this.txtCbX = new System.Windows.Forms.TextBox();
+            this.lblCbZ = new System.Windows.Forms.Label();
+            this.lblCbY = new System.Windows.Forms.Label();
+            this.lblCbX = new System.Windows.Forms.Label();
+            this.lblCbOffsets = new System.Windows.Forms.Label();
+            this.chkCbBitResolution = new System.Windows.Forms.CheckBox();
+            this.numCbFIFOSize = new System.Windows.Forms.NumericUpDown();
+            this.lblCbFIFOSize = new System.Windows.Forms.Label();
+            this.lblCbGRange = new System.Windows.Forms.Label();
+            this.comboCbGRange = new System.Windows.Forms.ComboBox();
+            this.lblCbSamplingSpeed = new System.Windows.Forms.Label();
+            this.comboCbSamplingSpeed = new System.Windows.Forms.ComboBox();
+            this.lblCbAccelSettings = new System.Windows.Forms.Label();
+            this.txtTimerPeriod = new System.Windows.Forms.TextBox();
+            this.lblTimerPeriod = new System.Windows.Forms.Label();
+            this.txtEthernetPeriod = new System.Windows.Forms.TextBox();
+            this.lblEthernetPeriod = new System.Windows.Forms.Label();
+            this.txtTempPeriod = new System.Windows.Forms.TextBox();
+            this.lblTempPeriod = new System.Windows.Forms.Label();
+            this.txtEncoderPeriod = new System.Windows.Forms.TextBox();
+            this.lblEncoderPeriod = new System.Windows.Forms.Label();
             this.grpStats.SuspendLayout();
             this.grpTempUnit.SuspendLayout();
             this.grpSensorInit.SuspendLayout();
             this.gbDataLogging.SuspendLayout();
             this.gbSensorStatuses.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numElFIFOSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAzFIFOSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCbFIFOSize)).BeginInit();
             this.SuspendLayout();
             // 
             // btnStartListen
@@ -513,6 +569,59 @@ namespace EmbeddedSystemsTest
             // 
             // grpSensorInit
             // 
+            this.grpSensorInit.Controls.Add(this.txtEncoderPeriod);
+            this.grpSensorInit.Controls.Add(this.lblEncoderPeriod);
+            this.grpSensorInit.Controls.Add(this.txtTempPeriod);
+            this.grpSensorInit.Controls.Add(this.lblTempPeriod);
+            this.grpSensorInit.Controls.Add(this.txtEthernetPeriod);
+            this.grpSensorInit.Controls.Add(this.lblEthernetPeriod);
+            this.grpSensorInit.Controls.Add(this.txtTimerPeriod);
+            this.grpSensorInit.Controls.Add(this.lblTimerPeriod);
+            this.grpSensorInit.Controls.Add(this.txtCbZ);
+            this.grpSensorInit.Controls.Add(this.txtCbY);
+            this.grpSensorInit.Controls.Add(this.txtCbX);
+            this.grpSensorInit.Controls.Add(this.lblCbZ);
+            this.grpSensorInit.Controls.Add(this.lblCbY);
+            this.grpSensorInit.Controls.Add(this.lblCbX);
+            this.grpSensorInit.Controls.Add(this.lblCbOffsets);
+            this.grpSensorInit.Controls.Add(this.chkCbBitResolution);
+            this.grpSensorInit.Controls.Add(this.numCbFIFOSize);
+            this.grpSensorInit.Controls.Add(this.lblCbFIFOSize);
+            this.grpSensorInit.Controls.Add(this.lblCbGRange);
+            this.grpSensorInit.Controls.Add(this.comboCbGRange);
+            this.grpSensorInit.Controls.Add(this.lblCbSamplingSpeed);
+            this.grpSensorInit.Controls.Add(this.comboCbSamplingSpeed);
+            this.grpSensorInit.Controls.Add(this.lblCbAccelSettings);
+            this.grpSensorInit.Controls.Add(this.txtAzZ);
+            this.grpSensorInit.Controls.Add(this.txtAzY);
+            this.grpSensorInit.Controls.Add(this.txtAzX);
+            this.grpSensorInit.Controls.Add(this.lblAzZ);
+            this.grpSensorInit.Controls.Add(this.lblAzY);
+            this.grpSensorInit.Controls.Add(this.lblAzX);
+            this.grpSensorInit.Controls.Add(this.lblAzOffsets);
+            this.grpSensorInit.Controls.Add(this.chkAzBitResolution);
+            this.grpSensorInit.Controls.Add(this.numAzFIFOSize);
+            this.grpSensorInit.Controls.Add(this.lblAzFIFOSize);
+            this.grpSensorInit.Controls.Add(this.lblAzGRange);
+            this.grpSensorInit.Controls.Add(this.comboAzGRange);
+            this.grpSensorInit.Controls.Add(this.lblAzSamplingSpeed);
+            this.grpSensorInit.Controls.Add(this.comboAzSamplingSpeed);
+            this.grpSensorInit.Controls.Add(this.lblAzAccelSettings);
+            this.grpSensorInit.Controls.Add(this.txtElZ);
+            this.grpSensorInit.Controls.Add(this.txtElY);
+            this.grpSensorInit.Controls.Add(this.txtElX);
+            this.grpSensorInit.Controls.Add(this.lblElZ);
+            this.grpSensorInit.Controls.Add(this.lblElY);
+            this.grpSensorInit.Controls.Add(this.lblElX);
+            this.grpSensorInit.Controls.Add(this.lblElOffsets);
+            this.grpSensorInit.Controls.Add(this.chkElBitResolution);
+            this.grpSensorInit.Controls.Add(this.numElFIFOSize);
+            this.grpSensorInit.Controls.Add(this.lblElFIFOSize);
+            this.grpSensorInit.Controls.Add(this.lblElGRange);
+            this.grpSensorInit.Controls.Add(this.comboElGRange);
+            this.grpSensorInit.Controls.Add(this.lblElSamplingSpeed);
+            this.grpSensorInit.Controls.Add(this.comboElSamplingSpeed);
+            this.grpSensorInit.Controls.Add(this.lblElAccelSettings);
             this.grpSensorInit.Controls.Add(this.chkAmbTempHumid);
             this.grpSensorInit.Controls.Add(this.chkAzEncInit);
             this.grpSensorInit.Controls.Add(this.chkElEncInit);
@@ -521,9 +630,9 @@ namespace EmbeddedSystemsTest
             this.grpSensorInit.Controls.Add(this.chkElAdxlInit);
             this.grpSensorInit.Controls.Add(this.chkAzTemp1Init);
             this.grpSensorInit.Controls.Add(this.chkElTemp1Init);
-            this.grpSensorInit.Location = new System.Drawing.Point(738, 158);
+            this.grpSensorInit.Location = new System.Drawing.Point(479, 390);
             this.grpSensorInit.Name = "grpSensorInit";
-            this.grpSensorInit.Size = new System.Drawing.Size(208, 167);
+            this.grpSensorInit.Size = new System.Drawing.Size(467, 266);
             this.grpSensorInit.TabIndex = 6;
             this.grpSensorInit.TabStop = false;
             this.grpSensorInit.Text = "Sensor Initialization";
@@ -662,7 +771,7 @@ namespace EmbeddedSystemsTest
             // 
             // btnCustPacket
             // 
-            this.btnCustPacket.Location = new System.Drawing.Point(814, 577);
+            this.btnCustPacket.Location = new System.Drawing.Point(752, 662);
             this.btnCustPacket.Name = "btnCustPacket";
             this.btnCustPacket.Size = new System.Drawing.Size(120, 23);
             this.btnCustPacket.TabIndex = 24;
@@ -672,7 +781,7 @@ namespace EmbeddedSystemsTest
             // 
             // btnCsvDrawing
             // 
-            this.btnCsvDrawing.Location = new System.Drawing.Point(687, 577);
+            this.btnCsvDrawing.Location = new System.Drawing.Point(625, 662);
             this.btnCsvDrawing.Name = "btnCsvDrawing";
             this.btnCsvDrawing.Size = new System.Drawing.Size(120, 23);
             this.btnCsvDrawing.TabIndex = 23;
@@ -742,7 +851,7 @@ namespace EmbeddedSystemsTest
             this.gbSensorStatuses.Controls.Add(this.lblAzTempSensor1Status);
             this.gbSensorStatuses.Controls.Add(this.lblElTempSensor2Status);
             this.gbSensorStatuses.Controls.Add(this.lblElTempSensor1Status);
-            this.gbSensorStatuses.Location = new System.Drawing.Point(738, 341);
+            this.gbSensorStatuses.Location = new System.Drawing.Point(738, 155);
             this.gbSensorStatuses.Name = "gbSensorStatuses";
             this.gbSensorStatuses.Size = new System.Drawing.Size(208, 230);
             this.gbSensorStatuses.TabIndex = 40;
@@ -905,6 +1014,591 @@ namespace EmbeddedSystemsTest
             this.btnFanToggle.UseVisualStyleBackColor = true;
             this.btnFanToggle.Click += new System.EventHandler(this.btnFanToggle_Click);
             // 
+            // txtElZ
+            // 
+            this.txtElZ.Location = new System.Drawing.Point(441, 57);
+            this.txtElZ.Name = "txtElZ";
+            this.txtElZ.Size = new System.Drawing.Size(22, 20);
+            this.txtElZ.TabIndex = 111;
+            this.txtElZ.Text = "0";
+            // 
+            // txtElY
+            // 
+            this.txtElY.Location = new System.Drawing.Point(399, 57);
+            this.txtElY.Name = "txtElY";
+            this.txtElY.Size = new System.Drawing.Size(22, 20);
+            this.txtElY.TabIndex = 110;
+            this.txtElY.Text = "0";
+            // 
+            // txtElX
+            // 
+            this.txtElX.Location = new System.Drawing.Point(358, 57);
+            this.txtElX.Name = "txtElX";
+            this.txtElX.Size = new System.Drawing.Size(22, 20);
+            this.txtElX.TabIndex = 109;
+            this.txtElX.Text = "0";
+            // 
+            // lblElZ
+            // 
+            this.lblElZ.AutoSize = true;
+            this.lblElZ.ForeColor = System.Drawing.Color.Black;
+            this.lblElZ.Location = new System.Drawing.Point(425, 60);
+            this.lblElZ.Name = "lblElZ";
+            this.lblElZ.Size = new System.Drawing.Size(14, 13);
+            this.lblElZ.TabIndex = 108;
+            this.lblElZ.Text = "Z";
+            // 
+            // lblElY
+            // 
+            this.lblElY.AutoSize = true;
+            this.lblElY.ForeColor = System.Drawing.Color.Black;
+            this.lblElY.Location = new System.Drawing.Point(382, 60);
+            this.lblElY.Name = "lblElY";
+            this.lblElY.Size = new System.Drawing.Size(14, 13);
+            this.lblElY.TabIndex = 107;
+            this.lblElY.Text = "Y";
+            // 
+            // lblElX
+            // 
+            this.lblElX.AutoSize = true;
+            this.lblElX.ForeColor = System.Drawing.Color.Black;
+            this.lblElX.Location = new System.Drawing.Point(342, 60);
+            this.lblElX.Name = "lblElX";
+            this.lblElX.Size = new System.Drawing.Size(14, 13);
+            this.lblElX.TabIndex = 106;
+            this.lblElX.Text = "X";
+            // 
+            // lblElOffsets
+            // 
+            this.lblElOffsets.AutoSize = true;
+            this.lblElOffsets.ForeColor = System.Drawing.Color.Black;
+            this.lblElOffsets.Location = new System.Drawing.Point(300, 60);
+            this.lblElOffsets.Name = "lblElOffsets";
+            this.lblElOffsets.Size = new System.Drawing.Size(43, 13);
+            this.lblElOffsets.TabIndex = 105;
+            this.lblElOffsets.Text = "Offsets:";
+            // 
+            // chkElBitResolution
+            // 
+            this.chkElBitResolution.AutoSize = true;
+            this.chkElBitResolution.Checked = true;
+            this.chkElBitResolution.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkElBitResolution.Location = new System.Drawing.Point(298, 13);
+            this.chkElBitResolution.Name = "chkElBitResolution";
+            this.chkElBitResolution.Size = new System.Drawing.Size(110, 17);
+            this.chkElBitResolution.TabIndex = 104;
+            this.chkElBitResolution.Text = "Full Bit Resolution";
+            this.chkElBitResolution.UseVisualStyleBackColor = true;
+            // 
+            // numElFIFOSize
+            // 
+            this.numElFIFOSize.Location = new System.Drawing.Point(244, 57);
+            this.numElFIFOSize.Maximum = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.numElFIFOSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numElFIFOSize.Name = "numElFIFOSize";
+            this.numElFIFOSize.Size = new System.Drawing.Size(43, 20);
+            this.numElFIFOSize.TabIndex = 103;
+            this.numElFIFOSize.Value = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            // 
+            // lblElFIFOSize
+            // 
+            this.lblElFIFOSize.AutoSize = true;
+            this.lblElFIFOSize.ForeColor = System.Drawing.Color.Black;
+            this.lblElFIFOSize.Location = new System.Drawing.Point(182, 60);
+            this.lblElFIFOSize.Name = "lblElFIFOSize";
+            this.lblElFIFOSize.Size = new System.Drawing.Size(56, 13);
+            this.lblElFIFOSize.TabIndex = 102;
+            this.lblElFIFOSize.Text = "FIFO Size:";
+            // 
+            // lblElGRange
+            // 
+            this.lblElGRange.AutoSize = true;
+            this.lblElGRange.ForeColor = System.Drawing.Color.Black;
+            this.lblElGRange.Location = new System.Drawing.Point(356, 37);
+            this.lblElGRange.Name = "lblElGRange";
+            this.lblElGRange.Size = new System.Drawing.Size(53, 13);
+            this.lblElGRange.TabIndex = 101;
+            this.lblElGRange.Text = "G-Range:";
+            // 
+            // comboElGRange
+            // 
+            this.comboElGRange.BackColor = System.Drawing.SystemColors.Window;
+            this.comboElGRange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboElGRange.FormattingEnabled = true;
+            this.comboElGRange.Items.AddRange(new object[] {
+            "±16",
+            "±8",
+            "±4",
+            "±2"});
+            this.comboElGRange.Location = new System.Drawing.Point(412, 34);
+            this.comboElGRange.Name = "comboElGRange";
+            this.comboElGRange.Size = new System.Drawing.Size(51, 21);
+            this.comboElGRange.TabIndex = 100;
+            // 
+            // lblElSamplingSpeed
+            // 
+            this.lblElSamplingSpeed.AutoSize = true;
+            this.lblElSamplingSpeed.ForeColor = System.Drawing.Color.Black;
+            this.lblElSamplingSpeed.Location = new System.Drawing.Point(182, 37);
+            this.lblElSamplingSpeed.Name = "lblElSamplingSpeed";
+            this.lblElSamplingSpeed.Size = new System.Drawing.Size(109, 13);
+            this.lblElSamplingSpeed.TabIndex = 99;
+            this.lblElSamplingSpeed.Text = "Sampling Speed (Hz):";
+            // 
+            // comboElSamplingSpeed
+            // 
+            this.comboElSamplingSpeed.BackColor = System.Drawing.SystemColors.Window;
+            this.comboElSamplingSpeed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboElSamplingSpeed.FormattingEnabled = true;
+            this.comboElSamplingSpeed.Items.AddRange(new object[] {
+            "800",
+            "400",
+            "200",
+            "100",
+            "50",
+            "25"});
+            this.comboElSamplingSpeed.Location = new System.Drawing.Point(297, 34);
+            this.comboElSamplingSpeed.Name = "comboElSamplingSpeed";
+            this.comboElSamplingSpeed.Size = new System.Drawing.Size(51, 21);
+            this.comboElSamplingSpeed.TabIndex = 98;
+            // 
+            // lblElAccelSettings
+            // 
+            this.lblElAccelSettings.AutoSize = true;
+            this.lblElAccelSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.lblElAccelSettings.ForeColor = System.Drawing.Color.Black;
+            this.lblElAccelSettings.Location = new System.Drawing.Point(182, 14);
+            this.lblElAccelSettings.Name = "lblElAccelSettings";
+            this.lblElAccelSettings.Size = new System.Drawing.Size(107, 13);
+            this.lblElAccelSettings.TabIndex = 96;
+            this.lblElAccelSettings.Text = "El Accelerometer:";
+            // 
+            // txtAzZ
+            // 
+            this.txtAzZ.Location = new System.Drawing.Point(441, 127);
+            this.txtAzZ.Name = "txtAzZ";
+            this.txtAzZ.Size = new System.Drawing.Size(22, 20);
+            this.txtAzZ.TabIndex = 126;
+            this.txtAzZ.Text = "0";
+            // 
+            // txtAzY
+            // 
+            this.txtAzY.Location = new System.Drawing.Point(399, 127);
+            this.txtAzY.Name = "txtAzY";
+            this.txtAzY.Size = new System.Drawing.Size(22, 20);
+            this.txtAzY.TabIndex = 125;
+            this.txtAzY.Text = "0";
+            // 
+            // txtAzX
+            // 
+            this.txtAzX.Location = new System.Drawing.Point(358, 127);
+            this.txtAzX.Name = "txtAzX";
+            this.txtAzX.Size = new System.Drawing.Size(22, 20);
+            this.txtAzX.TabIndex = 124;
+            this.txtAzX.Text = "0";
+            // 
+            // lblAzZ
+            // 
+            this.lblAzZ.AutoSize = true;
+            this.lblAzZ.ForeColor = System.Drawing.Color.Black;
+            this.lblAzZ.Location = new System.Drawing.Point(425, 130);
+            this.lblAzZ.Name = "lblAzZ";
+            this.lblAzZ.Size = new System.Drawing.Size(14, 13);
+            this.lblAzZ.TabIndex = 123;
+            this.lblAzZ.Text = "Z";
+            // 
+            // lblAzY
+            // 
+            this.lblAzY.AutoSize = true;
+            this.lblAzY.ForeColor = System.Drawing.Color.Black;
+            this.lblAzY.Location = new System.Drawing.Point(382, 130);
+            this.lblAzY.Name = "lblAzY";
+            this.lblAzY.Size = new System.Drawing.Size(14, 13);
+            this.lblAzY.TabIndex = 122;
+            this.lblAzY.Text = "Y";
+            // 
+            // lblAzX
+            // 
+            this.lblAzX.AutoSize = true;
+            this.lblAzX.ForeColor = System.Drawing.Color.Black;
+            this.lblAzX.Location = new System.Drawing.Point(342, 130);
+            this.lblAzX.Name = "lblAzX";
+            this.lblAzX.Size = new System.Drawing.Size(14, 13);
+            this.lblAzX.TabIndex = 121;
+            this.lblAzX.Text = "X";
+            // 
+            // lblAzOffsets
+            // 
+            this.lblAzOffsets.AutoSize = true;
+            this.lblAzOffsets.ForeColor = System.Drawing.Color.Black;
+            this.lblAzOffsets.Location = new System.Drawing.Point(300, 130);
+            this.lblAzOffsets.Name = "lblAzOffsets";
+            this.lblAzOffsets.Size = new System.Drawing.Size(43, 13);
+            this.lblAzOffsets.TabIndex = 120;
+            this.lblAzOffsets.Text = "Offsets:";
+            // 
+            // chkAzBitResolution
+            // 
+            this.chkAzBitResolution.AutoSize = true;
+            this.chkAzBitResolution.Checked = true;
+            this.chkAzBitResolution.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkAzBitResolution.Location = new System.Drawing.Point(298, 83);
+            this.chkAzBitResolution.Name = "chkAzBitResolution";
+            this.chkAzBitResolution.Size = new System.Drawing.Size(110, 17);
+            this.chkAzBitResolution.TabIndex = 119;
+            this.chkAzBitResolution.Text = "Full Bit Resolution";
+            this.chkAzBitResolution.UseVisualStyleBackColor = true;
+            // 
+            // numAzFIFOSize
+            // 
+            this.numAzFIFOSize.Location = new System.Drawing.Point(244, 127);
+            this.numAzFIFOSize.Maximum = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.numAzFIFOSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numAzFIFOSize.Name = "numAzFIFOSize";
+            this.numAzFIFOSize.Size = new System.Drawing.Size(43, 20);
+            this.numAzFIFOSize.TabIndex = 118;
+            this.numAzFIFOSize.Value = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            // 
+            // lblAzFIFOSize
+            // 
+            this.lblAzFIFOSize.AutoSize = true;
+            this.lblAzFIFOSize.ForeColor = System.Drawing.Color.Black;
+            this.lblAzFIFOSize.Location = new System.Drawing.Point(182, 130);
+            this.lblAzFIFOSize.Name = "lblAzFIFOSize";
+            this.lblAzFIFOSize.Size = new System.Drawing.Size(56, 13);
+            this.lblAzFIFOSize.TabIndex = 117;
+            this.lblAzFIFOSize.Text = "FIFO Size:";
+            // 
+            // lblAzGRange
+            // 
+            this.lblAzGRange.AutoSize = true;
+            this.lblAzGRange.ForeColor = System.Drawing.Color.Black;
+            this.lblAzGRange.Location = new System.Drawing.Point(356, 107);
+            this.lblAzGRange.Name = "lblAzGRange";
+            this.lblAzGRange.Size = new System.Drawing.Size(53, 13);
+            this.lblAzGRange.TabIndex = 116;
+            this.lblAzGRange.Text = "G-Range:";
+            // 
+            // comboAzGRange
+            // 
+            this.comboAzGRange.BackColor = System.Drawing.SystemColors.Window;
+            this.comboAzGRange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboAzGRange.FormattingEnabled = true;
+            this.comboAzGRange.Items.AddRange(new object[] {
+            "±16",
+            "±8",
+            "±4",
+            "±2"});
+            this.comboAzGRange.Location = new System.Drawing.Point(412, 104);
+            this.comboAzGRange.Name = "comboAzGRange";
+            this.comboAzGRange.Size = new System.Drawing.Size(51, 21);
+            this.comboAzGRange.TabIndex = 115;
+            // 
+            // lblAzSamplingSpeed
+            // 
+            this.lblAzSamplingSpeed.AutoSize = true;
+            this.lblAzSamplingSpeed.ForeColor = System.Drawing.Color.Black;
+            this.lblAzSamplingSpeed.Location = new System.Drawing.Point(182, 107);
+            this.lblAzSamplingSpeed.Name = "lblAzSamplingSpeed";
+            this.lblAzSamplingSpeed.Size = new System.Drawing.Size(109, 13);
+            this.lblAzSamplingSpeed.TabIndex = 114;
+            this.lblAzSamplingSpeed.Text = "Sampling Speed (Hz):";
+            // 
+            // comboAzSamplingSpeed
+            // 
+            this.comboAzSamplingSpeed.BackColor = System.Drawing.SystemColors.Window;
+            this.comboAzSamplingSpeed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboAzSamplingSpeed.FormattingEnabled = true;
+            this.comboAzSamplingSpeed.Items.AddRange(new object[] {
+            "800",
+            "400",
+            "200",
+            "100",
+            "50",
+            "25"});
+            this.comboAzSamplingSpeed.Location = new System.Drawing.Point(297, 104);
+            this.comboAzSamplingSpeed.Name = "comboAzSamplingSpeed";
+            this.comboAzSamplingSpeed.Size = new System.Drawing.Size(51, 21);
+            this.comboAzSamplingSpeed.TabIndex = 113;
+            // 
+            // lblAzAccelSettings
+            // 
+            this.lblAzAccelSettings.AutoSize = true;
+            this.lblAzAccelSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.lblAzAccelSettings.ForeColor = System.Drawing.Color.Black;
+            this.lblAzAccelSettings.Location = new System.Drawing.Point(182, 84);
+            this.lblAzAccelSettings.Name = "lblAzAccelSettings";
+            this.lblAzAccelSettings.Size = new System.Drawing.Size(110, 13);
+            this.lblAzAccelSettings.TabIndex = 112;
+            this.lblAzAccelSettings.Text = "Az Accelerometer:";
+            // 
+            // txtCbZ
+            // 
+            this.txtCbZ.Location = new System.Drawing.Point(441, 195);
+            this.txtCbZ.Name = "txtCbZ";
+            this.txtCbZ.Size = new System.Drawing.Size(22, 20);
+            this.txtCbZ.TabIndex = 141;
+            this.txtCbZ.Text = "0";
+            // 
+            // txtCbY
+            // 
+            this.txtCbY.Location = new System.Drawing.Point(399, 195);
+            this.txtCbY.Name = "txtCbY";
+            this.txtCbY.Size = new System.Drawing.Size(22, 20);
+            this.txtCbY.TabIndex = 140;
+            this.txtCbY.Text = "0";
+            // 
+            // txtCbX
+            // 
+            this.txtCbX.Location = new System.Drawing.Point(358, 195);
+            this.txtCbX.Name = "txtCbX";
+            this.txtCbX.Size = new System.Drawing.Size(22, 20);
+            this.txtCbX.TabIndex = 139;
+            this.txtCbX.Text = "0";
+            // 
+            // lblCbZ
+            // 
+            this.lblCbZ.AutoSize = true;
+            this.lblCbZ.ForeColor = System.Drawing.Color.Black;
+            this.lblCbZ.Location = new System.Drawing.Point(425, 198);
+            this.lblCbZ.Name = "lblCbZ";
+            this.lblCbZ.Size = new System.Drawing.Size(14, 13);
+            this.lblCbZ.TabIndex = 138;
+            this.lblCbZ.Text = "Z";
+            // 
+            // lblCbY
+            // 
+            this.lblCbY.AutoSize = true;
+            this.lblCbY.ForeColor = System.Drawing.Color.Black;
+            this.lblCbY.Location = new System.Drawing.Point(382, 198);
+            this.lblCbY.Name = "lblCbY";
+            this.lblCbY.Size = new System.Drawing.Size(14, 13);
+            this.lblCbY.TabIndex = 137;
+            this.lblCbY.Text = "Y";
+            // 
+            // lblCbX
+            // 
+            this.lblCbX.AutoSize = true;
+            this.lblCbX.ForeColor = System.Drawing.Color.Black;
+            this.lblCbX.Location = new System.Drawing.Point(342, 198);
+            this.lblCbX.Name = "lblCbX";
+            this.lblCbX.Size = new System.Drawing.Size(14, 13);
+            this.lblCbX.TabIndex = 136;
+            this.lblCbX.Text = "X";
+            // 
+            // lblCbOffsets
+            // 
+            this.lblCbOffsets.AutoSize = true;
+            this.lblCbOffsets.ForeColor = System.Drawing.Color.Black;
+            this.lblCbOffsets.Location = new System.Drawing.Point(300, 198);
+            this.lblCbOffsets.Name = "lblCbOffsets";
+            this.lblCbOffsets.Size = new System.Drawing.Size(43, 13);
+            this.lblCbOffsets.TabIndex = 135;
+            this.lblCbOffsets.Text = "Offsets:";
+            // 
+            // chkCbBitResolution
+            // 
+            this.chkCbBitResolution.AutoSize = true;
+            this.chkCbBitResolution.Checked = true;
+            this.chkCbBitResolution.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkCbBitResolution.Location = new System.Drawing.Point(298, 151);
+            this.chkCbBitResolution.Name = "chkCbBitResolution";
+            this.chkCbBitResolution.Size = new System.Drawing.Size(110, 17);
+            this.chkCbBitResolution.TabIndex = 134;
+            this.chkCbBitResolution.Text = "Full Bit Resolution";
+            this.chkCbBitResolution.UseVisualStyleBackColor = true;
+            // 
+            // numCbFIFOSize
+            // 
+            this.numCbFIFOSize.Location = new System.Drawing.Point(244, 195);
+            this.numCbFIFOSize.Maximum = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            this.numCbFIFOSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numCbFIFOSize.Name = "numCbFIFOSize";
+            this.numCbFIFOSize.Size = new System.Drawing.Size(43, 20);
+            this.numCbFIFOSize.TabIndex = 133;
+            this.numCbFIFOSize.Value = new decimal(new int[] {
+            32,
+            0,
+            0,
+            0});
+            // 
+            // lblCbFIFOSize
+            // 
+            this.lblCbFIFOSize.AutoSize = true;
+            this.lblCbFIFOSize.ForeColor = System.Drawing.Color.Black;
+            this.lblCbFIFOSize.Location = new System.Drawing.Point(182, 198);
+            this.lblCbFIFOSize.Name = "lblCbFIFOSize";
+            this.lblCbFIFOSize.Size = new System.Drawing.Size(56, 13);
+            this.lblCbFIFOSize.TabIndex = 132;
+            this.lblCbFIFOSize.Text = "FIFO Size:";
+            // 
+            // lblCbGRange
+            // 
+            this.lblCbGRange.AutoSize = true;
+            this.lblCbGRange.ForeColor = System.Drawing.Color.Black;
+            this.lblCbGRange.Location = new System.Drawing.Point(356, 175);
+            this.lblCbGRange.Name = "lblCbGRange";
+            this.lblCbGRange.Size = new System.Drawing.Size(53, 13);
+            this.lblCbGRange.TabIndex = 131;
+            this.lblCbGRange.Text = "G-Range:";
+            // 
+            // comboCbGRange
+            // 
+            this.comboCbGRange.BackColor = System.Drawing.SystemColors.Window;
+            this.comboCbGRange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCbGRange.FormattingEnabled = true;
+            this.comboCbGRange.Items.AddRange(new object[] {
+            "±16",
+            "±8",
+            "±4",
+            "±2"});
+            this.comboCbGRange.Location = new System.Drawing.Point(412, 172);
+            this.comboCbGRange.Name = "comboCbGRange";
+            this.comboCbGRange.Size = new System.Drawing.Size(51, 21);
+            this.comboCbGRange.TabIndex = 130;
+            // 
+            // lblCbSamplingSpeed
+            // 
+            this.lblCbSamplingSpeed.AutoSize = true;
+            this.lblCbSamplingSpeed.ForeColor = System.Drawing.Color.Black;
+            this.lblCbSamplingSpeed.Location = new System.Drawing.Point(182, 175);
+            this.lblCbSamplingSpeed.Name = "lblCbSamplingSpeed";
+            this.lblCbSamplingSpeed.Size = new System.Drawing.Size(109, 13);
+            this.lblCbSamplingSpeed.TabIndex = 129;
+            this.lblCbSamplingSpeed.Text = "Sampling Speed (Hz):";
+            // 
+            // comboCbSamplingSpeed
+            // 
+            this.comboCbSamplingSpeed.BackColor = System.Drawing.SystemColors.Window;
+            this.comboCbSamplingSpeed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCbSamplingSpeed.FormattingEnabled = true;
+            this.comboCbSamplingSpeed.Items.AddRange(new object[] {
+            "800",
+            "400",
+            "200",
+            "100",
+            "50",
+            "25"});
+            this.comboCbSamplingSpeed.Location = new System.Drawing.Point(297, 172);
+            this.comboCbSamplingSpeed.Name = "comboCbSamplingSpeed";
+            this.comboCbSamplingSpeed.Size = new System.Drawing.Size(51, 21);
+            this.comboCbSamplingSpeed.TabIndex = 128;
+            // 
+            // lblCbAccelSettings
+            // 
+            this.lblCbAccelSettings.AutoSize = true;
+            this.lblCbAccelSettings.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.lblCbAccelSettings.ForeColor = System.Drawing.Color.Black;
+            this.lblCbAccelSettings.Location = new System.Drawing.Point(182, 152);
+            this.lblCbAccelSettings.Name = "lblCbAccelSettings";
+            this.lblCbAccelSettings.Size = new System.Drawing.Size(111, 13);
+            this.lblCbAccelSettings.TabIndex = 127;
+            this.lblCbAccelSettings.Text = "Cb Accelerometer:";
+            // 
+            // txtTimerPeriod
+            // 
+            this.txtTimerPeriod.Location = new System.Drawing.Point(121, 161);
+            this.txtTimerPeriod.Name = "txtTimerPeriod";
+            this.txtTimerPeriod.Size = new System.Drawing.Size(36, 20);
+            this.txtTimerPeriod.TabIndex = 143;
+            this.txtTimerPeriod.Text = "1";
+            // 
+            // lblTimerPeriod
+            // 
+            this.lblTimerPeriod.AutoSize = true;
+            this.lblTimerPeriod.ForeColor = System.Drawing.Color.Black;
+            this.lblTimerPeriod.Location = new System.Drawing.Point(14, 164);
+            this.lblTimerPeriod.Name = "lblTimerPeriod";
+            this.lblTimerPeriod.Size = new System.Drawing.Size(91, 13);
+            this.lblTimerPeriod.TabIndex = 142;
+            this.lblTimerPeriod.Text = "Timer Period (ms):";
+            // 
+            // txtEthernetPeriod
+            // 
+            this.txtEthernetPeriod.Location = new System.Drawing.Point(121, 182);
+            this.txtEthernetPeriod.Name = "txtEthernetPeriod";
+            this.txtEthernetPeriod.Size = new System.Drawing.Size(36, 20);
+            this.txtEthernetPeriod.TabIndex = 145;
+            this.txtEthernetPeriod.Text = "250";
+            // 
+            // lblEthernetPeriod
+            // 
+            this.lblEthernetPeriod.AutoSize = true;
+            this.lblEthernetPeriod.ForeColor = System.Drawing.Color.Black;
+            this.lblEthernetPeriod.Location = new System.Drawing.Point(14, 185);
+            this.lblEthernetPeriod.Name = "lblEthernetPeriod";
+            this.lblEthernetPeriod.Size = new System.Drawing.Size(105, 13);
+            this.lblEthernetPeriod.TabIndex = 144;
+            this.lblEthernetPeriod.Text = "Ethernet Period (ms):";
+            // 
+            // txtTempPeriod
+            // 
+            this.txtTempPeriod.Location = new System.Drawing.Point(121, 203);
+            this.txtTempPeriod.Name = "txtTempPeriod";
+            this.txtTempPeriod.Size = new System.Drawing.Size(36, 20);
+            this.txtTempPeriod.TabIndex = 147;
+            this.txtTempPeriod.Text = "1000";
+            // 
+            // lblTempPeriod
+            // 
+            this.lblTempPeriod.AutoSize = true;
+            this.lblTempPeriod.ForeColor = System.Drawing.Color.Black;
+            this.lblTempPeriod.Location = new System.Drawing.Point(14, 206);
+            this.lblTempPeriod.Name = "lblTempPeriod";
+            this.lblTempPeriod.Size = new System.Drawing.Size(92, 13);
+            this.lblTempPeriod.TabIndex = 146;
+            this.lblTempPeriod.Text = "Temp Period (ms):";
+            // 
+            // txtEncoderPeriod
+            // 
+            this.txtEncoderPeriod.Location = new System.Drawing.Point(121, 224);
+            this.txtEncoderPeriod.Name = "txtEncoderPeriod";
+            this.txtEncoderPeriod.Size = new System.Drawing.Size(36, 20);
+            this.txtEncoderPeriod.TabIndex = 149;
+            this.txtEncoderPeriod.Text = "20";
+            // 
+            // lblEncoderPeriod
+            // 
+            this.lblEncoderPeriod.AutoSize = true;
+            this.lblEncoderPeriod.ForeColor = System.Drawing.Color.Black;
+            this.lblEncoderPeriod.Location = new System.Drawing.Point(14, 227);
+            this.lblEncoderPeriod.Name = "lblEncoderPeriod";
+            this.lblEncoderPeriod.Size = new System.Drawing.Size(105, 13);
+            this.lblEncoderPeriod.TabIndex = 148;
+            this.lblEncoderPeriod.Text = "Encoder Period (ms):";
+            // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -972,6 +1666,9 @@ namespace EmbeddedSystemsTest
             this.gbDataLogging.PerformLayout();
             this.gbSensorStatuses.ResumeLayout(false);
             this.gbSensorStatuses.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numElFIFOSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAzFIFOSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCbFIFOSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1055,6 +1752,59 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.CheckBox chkAmbTempHumid;
         private System.Windows.Forms.Label lblFanState;
         private System.Windows.Forms.Button btnFanToggle;
+        private System.Windows.Forms.TextBox txtEncoderPeriod;
+        private System.Windows.Forms.Label lblEncoderPeriod;
+        private System.Windows.Forms.TextBox txtTempPeriod;
+        private System.Windows.Forms.Label lblTempPeriod;
+        private System.Windows.Forms.TextBox txtEthernetPeriod;
+        private System.Windows.Forms.Label lblEthernetPeriod;
+        private System.Windows.Forms.TextBox txtTimerPeriod;
+        private System.Windows.Forms.Label lblTimerPeriod;
+        private System.Windows.Forms.TextBox txtCbZ;
+        private System.Windows.Forms.TextBox txtCbY;
+        private System.Windows.Forms.TextBox txtCbX;
+        private System.Windows.Forms.Label lblCbZ;
+        private System.Windows.Forms.Label lblCbY;
+        private System.Windows.Forms.Label lblCbX;
+        private System.Windows.Forms.Label lblCbOffsets;
+        private System.Windows.Forms.CheckBox chkCbBitResolution;
+        private System.Windows.Forms.NumericUpDown numCbFIFOSize;
+        private System.Windows.Forms.Label lblCbFIFOSize;
+        private System.Windows.Forms.Label lblCbGRange;
+        private System.Windows.Forms.ComboBox comboCbGRange;
+        private System.Windows.Forms.Label lblCbSamplingSpeed;
+        private System.Windows.Forms.ComboBox comboCbSamplingSpeed;
+        private System.Windows.Forms.Label lblCbAccelSettings;
+        private System.Windows.Forms.TextBox txtAzZ;
+        private System.Windows.Forms.TextBox txtAzY;
+        private System.Windows.Forms.TextBox txtAzX;
+        private System.Windows.Forms.Label lblAzZ;
+        private System.Windows.Forms.Label lblAzY;
+        private System.Windows.Forms.Label lblAzX;
+        private System.Windows.Forms.Label lblAzOffsets;
+        private System.Windows.Forms.CheckBox chkAzBitResolution;
+        private System.Windows.Forms.NumericUpDown numAzFIFOSize;
+        private System.Windows.Forms.Label lblAzFIFOSize;
+        private System.Windows.Forms.Label lblAzGRange;
+        private System.Windows.Forms.ComboBox comboAzGRange;
+        private System.Windows.Forms.Label lblAzSamplingSpeed;
+        private System.Windows.Forms.ComboBox comboAzSamplingSpeed;
+        private System.Windows.Forms.Label lblAzAccelSettings;
+        private System.Windows.Forms.TextBox txtElZ;
+        private System.Windows.Forms.TextBox txtElY;
+        private System.Windows.Forms.TextBox txtElX;
+        private System.Windows.Forms.Label lblElZ;
+        private System.Windows.Forms.Label lblElY;
+        private System.Windows.Forms.Label lblElX;
+        private System.Windows.Forms.Label lblElOffsets;
+        private System.Windows.Forms.CheckBox chkElBitResolution;
+        private System.Windows.Forms.NumericUpDown numElFIFOSize;
+        private System.Windows.Forms.Label lblElFIFOSize;
+        private System.Windows.Forms.Label lblElGRange;
+        private System.Windows.Forms.ComboBox comboElGRange;
+        private System.Windows.Forms.Label lblElSamplingSpeed;
+        private System.Windows.Forms.ComboBox comboElSamplingSpeed;
+        private System.Windows.Forms.Label lblElAccelSettings;
     }
 }
 

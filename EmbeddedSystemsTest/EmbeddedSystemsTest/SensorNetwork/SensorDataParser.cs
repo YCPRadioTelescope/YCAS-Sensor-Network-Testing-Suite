@@ -17,6 +17,8 @@ namespace EmbeddedSystemsTest.SensorNetwork
         private int[] elTemp2 { get; set; }
         private int[] azTemp1 { get; set; }
         private int[] azTemp2 { get; set; }
+        private float[] ambientTemp { get; set; }
+        private float[] ambientHumidity { get; set; }
         private int[] elEncoder { get; set; }
         private int[] azEncoder { get; set; }
         private string transmitId { get; set; }
@@ -37,7 +39,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
                 }
                 if (!File.Exists(fileName + "_TempData.csv"))
                 {
-                    tempData.AppendLine("Date Time" + "," + "EL Temp °F" + "," + "AZ Temp °F");
+                    tempData.AppendLine("Date Time" + "," + "EL Temp °F" + "," + "AZ Temp °F" + "," + "Ambient Temp °F" + "Humidity %");
                 }
                 if (!File.Exists(fileName + "_EncoderData.csv"))
                 {
@@ -47,19 +49,21 @@ namespace EmbeddedSystemsTest.SensorNetwork
             // Get transmit ID and data sizes from byte array
             transmitId = bytes[0].ToString();
             UInt32 dataSize = (UInt32)(bytes[1] << 24 | bytes[2] << 16 | bytes[3] << 8 | bytes[4]);
-            sensorStatuses = new BitArray(new byte[] { bytes[5] }); // sensor statuses 
-            sensorErrors = (UInt32)(bytes[6] << 16 | bytes[7] << 8 | bytes[8]); // sensor self-tests | adxl error codes and azimuth encoder error code | temp sensor error codes
-            UInt16 elAdxlSize = (UInt16)(bytes[9] << 8 | bytes[10]);
-            UInt16 azAdxlSize = (UInt16)(bytes[11] << 8 | bytes[12]);
-            UInt16 cbAdxlSize = (UInt16)(bytes[13] << 8 | bytes[14]);
-            UInt16 elTempSensorSize = (UInt16)(bytes[15] << 8 | bytes[16]);
-            UInt16 azTempSensorSize = (UInt16)(bytes[17] << 8 | bytes[18]);
-            UInt16 elEncoderSize = (UInt16)(bytes[19] << 8 | bytes[20]);
-            UInt16 azEncoderSize = (UInt16)(bytes[21] << 8 | bytes[22]);
+            sensorStatuses = new BitArray(new byte[] { bytes[5], bytes[6] }); // sensor statuses 
+            sensorErrors = (UInt32)(bytes[7] << 16 | bytes[8] << 8 | bytes[9]); // sensor self-tests | adxl error codes and azimuth encoder error code | temp sensor error codes
+            UInt16 elAdxlSize = (UInt16)(bytes[10] << 8 | bytes[11]);
+            UInt16 azAdxlSize = (UInt16)(bytes[12] << 8 | bytes[13]);
+            UInt16 cbAdxlSize = (UInt16)(bytes[14] << 8 | bytes[15]);
+            UInt16 elTempSensorSize = (UInt16)(bytes[16] << 8 | bytes[17]);
+            UInt16 azTempSensorSize = (UInt16)(bytes[18] << 8 | bytes[19]);
+            UInt16 elEncoderSize = (UInt16)(bytes[20] << 8 | bytes[21]);
+            UInt16 azEncoderSize = (UInt16)(bytes[22] << 8 | bytes[23]);
+            UInt16 ambientTempSize = (UInt16)(bytes[24] << 8 | bytes[25]);
+            UInt16 ambientHumiditySize = (UInt16)(bytes[26] << 8 | bytes[27]);
 
             if (buffer >= dataSize)
             {
-                int k = 23;
+                int k = 28;
 
                 // Accelerometer 1 (elevation)
                 if (elAdxlSize > 0)
@@ -123,6 +127,28 @@ namespace EmbeddedSystemsTest.SensorNetwork
                     }
                 }
 
+                // Elevation Ambient Temperature
+                if (ambientTempSize > 0)
+                {
+                    ambientTemp = new float[ambientTempSize];
+                    for (int j = 0; j < ambientTempSize; j++)
+                    {
+                        ambientTemp[j] = BitConverter.ToSingle(bytes, k);
+                        k += 4;
+                    }
+                }
+
+                // Elevation Ambient Humidity
+                if (ambientHumiditySize > 0)
+                {
+                    ambientHumidity = new float[ambientHumiditySize];
+                    for (int j = 0; j < ambientHumiditySize; j++)
+                    {
+                        ambientHumidity[j] = BitConverter.ToSingle(bytes, k);
+                        k += 4;
+                    }
+                }
+
                 if (logData)
                 {
                     int[] adxlDataSizes = new int[3] { elAdxlData.Count, azAdxlData.Count, cbAdxlData.Count };
@@ -147,7 +173,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
 
                     }
 
-                    UInt16[] tempDataSizes = new UInt16[2] { elTempSensorSize, azTempSensorSize };
+                    UInt16[] tempDataSizes = new UInt16[4] { elTempSensorSize, azTempSensorSize, ambientTempSize, ambientHumiditySize };
                     int maxTempSize = tempDataSizes.Max();
                     for (int i = 0; i < maxTempSize; i++)
                     {
@@ -160,6 +186,14 @@ namespace EmbeddedSystemsTest.SensorNetwork
                         if (i < azTempSensorSize)
                         {
                             tempData.Append(ConvertRawTempToUnit(azTemp1[i], TemperatureUnitEnum.FAHRENHEIT).ToString());
+                        }
+                        if (i < ambientTempSize)
+                        {
+                            tempData.Append(ambientTemp[i].ToString());
+                        }
+                        if (i < ambientHumiditySize)
+                        {
+                            tempData.Append(ambientHumidity[i].ToString());
                         }
                         tempData.AppendLine();
                     }
@@ -231,6 +265,25 @@ namespace EmbeddedSystemsTest.SensorNetwork
             {
                 s.elTemp2 = Math.Round(ConvertRawTempToUnit(elTemp2[elTemp2.Length - 1], tempUnit), 2);
             }
+            if (ambientTemp != null && ambientTemp.Length != 0)
+            {
+                if (tempUnit == TemperatureUnitEnum.CELSIUS)
+                {
+                    s.ambTemp = (ambientTemp[ambientTemp.Length - 1] - 32) * 5 / 9;
+                }
+                else if (tempUnit == TemperatureUnitEnum.FAHRENHEIT)
+                {
+                    s.ambTemp = ambientTemp[ambientTemp.Length - 1];
+                }
+                else
+                {
+                    s.ambTemp = ((ambientTemp[ambientTemp.Length - 1] - 32) * 5 / 9) + 273;
+                }
+            }
+            if (ambientTemp != null && ambientTemp.Length != 0)
+            {
+                s.ambHumidity = ambientHumidity[ambientHumidity.Length - 1];
+            }
             if (azAdxlData != null && azAdxlData.Count != 0)
             {
                 s.azAdxlData = azAdxlData[azAdxlData.Count - 1];
@@ -253,6 +306,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
                 s.cbAdxlStatus = sensorStatuses[5] ? SensorStatus.OKAY : SensorStatus.ERROR;
                 s.azAdxlStatus = sensorStatuses[6] ? SensorStatus.OKAY : SensorStatus.ERROR;
                 s.elAdxlStatus = sensorStatuses[7] ? SensorStatus.OKAY : SensorStatus.ERROR;
+                s.ambTempHumidityStatus = sensorStatuses[8] ? SensorStatus.OKAY : SensorStatus.ERROR;
             }
 
             s.adxlSelfTestState = new AdxlSelfTestState[3];
@@ -269,6 +323,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
             s.temperatureErrors[(int)TemperatureSensors.ELEVATION2] = (TemperatureError_Codes)((sensorErrors & 0x30) >> 4);
             s.temperatureErrors[(int)TemperatureSensors.AZIMUTH1] = (TemperatureError_Codes)((sensorErrors & 0x0C) >> 2);
             s.temperatureErrors[(int)TemperatureSensors.AZIMUTH2] = (TemperatureError_Codes)(sensorErrors & 0x03);
+            s.ambientTempHumidityError = (AmbientError_Code)((sensorErrors & 0x180000) >> 19);
 
             double az = 0;
             double el = 0;

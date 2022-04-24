@@ -41,6 +41,7 @@ namespace EmbeddedSystemsTest
             cboAzAccStatus.SelectedIndex = 1;
             cboElAccStatus.SelectedIndex = 1;
             cboCbAccStatus.SelectedIndex = 1;
+            cboAmbTempHumidityStatus.SelectedIndex = 1;
         }
 
         private void chkElTemp1Init_CheckedChanged(object sender, EventArgs e)
@@ -85,6 +86,12 @@ namespace EmbeddedSystemsTest
             else grpAzEncoder.Enabled = false;
         }
 
+        private void chkAmbTempHumidity_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmbTempHumidity.Checked) grpAmbientTemperatureHumidity.Enabled = true;
+            else grpAmbientTemperatureHumidity.Enabled = false;
+        }
+
         private void btnSaveToFile_Click(object sender, EventArgs e)
         {
             byte[] dataToSave = CheckAndProcessAllTextboxes();
@@ -122,6 +129,8 @@ namespace EmbeddedSystemsTest
             double[] azTemp = new double[0];
             double[] elEnc = new double[0];
             double[] azEnc = new double[0];
+            float[] ambTemp = new float[0];
+            float[] ambHumidity = new float[0];
             RawAccelerometerData[] elAccl = new RawAccelerometerData[0];
             RawAccelerometerData[] azAccl = new RawAccelerometerData[0];
             RawAccelerometerData[] cbAccl = new RawAccelerometerData[0];
@@ -164,6 +173,17 @@ namespace EmbeddedSystemsTest
                 errorStr += "Error in counterbalance accelerometer data.\n";
             }
 
+            // Ambient temp and humidity validating
+            if (chkAmbTempHumidity.Checked && (ambTemp = PacketEncodingTools.ConvertStringToFloatArray(txtAmbTemps.Text)) == null)
+            {
+                errorStr += "Error in ambient temperature data.\n";
+            }
+
+            if (chkAmbTempHumidity.Checked && (ambHumidity = PacketEncodingTools.ConvertStringToFloatArray(txtAmbHumidity.Text)) == null)
+            {
+                errorStr += "Error in ambient humidity data.\n";
+            }
+
             // We only want to do this if no errors were found in the data strings
             byte[] dataToSend = new byte[0];
             if (errorStr.Equals(""))
@@ -171,7 +191,7 @@ namespace EmbeddedSystemsTest
                 SensorStatuses statuses = ParseSensorStatuses();
 
                 // This function will eventually be used to convert the arrays gotten from the CSV files
-                dataToSend = PacketEncodingTools.ConvertDataArraysToBytes(elAccl, azAccl, cbAccl, elTemp, azTemp, elEnc, azEnc, statuses);
+                dataToSend = PacketEncodingTools.ConvertDataArraysToBytes(elAccl, azAccl, cbAccl, elTemp, azTemp, elEnc, azEnc, ambTemp, ambHumidity, statuses);
                 lblPacketSize.Text = "Packet bytes: " + dataToSend.Length;
             }
 
@@ -204,7 +224,8 @@ namespace EmbeddedSystemsTest
                 ElevationTemperature2Status = (SensorStatus)cboElTemp2Status.SelectedIndex,
                 AzimuthAccelerometerStatus = (SensorStatus)cboAzAccStatus.SelectedIndex,
                 ElevationAccelerometerStatus = (SensorStatus)cboElAccStatus.SelectedIndex,
-                CounterbalanceAccelerometerStatus = (SensorStatus)cboCbAccStatus.SelectedIndex
+                CounterbalanceAccelerometerStatus = (SensorStatus)cboCbAccStatus.SelectedIndex,
+                AmbientTemperatureAndHumidityStatus = (SensorStatus)cboCbAccStatus.SelectedIndex
             };
             
             return s;

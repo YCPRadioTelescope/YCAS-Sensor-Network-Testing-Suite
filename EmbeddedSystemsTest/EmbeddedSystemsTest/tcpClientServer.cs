@@ -82,7 +82,8 @@ namespace EmbeddedSystemsTest
                 "Elevation Temp1 Error:",
                 "Elevation Temp2 Error:",
                 "Azimuth Temp1 Error:",
-                "Azimuth Temp2 Error:"
+                "Azimuth Temp2 Error:",
+                "Ambient Temp and Humidity Error:"
             });
         }
 
@@ -343,6 +344,12 @@ namespace EmbeddedSystemsTest
                                     {
                                         lblCurrEl.Text = $"Current elevation position: {sensorData.orientation.Elevation}";
                                     }
+                                    if (chkAmbTempHumid.Checked)
+                                    {
+                                        lblAmbientTemp.Text = $"Ambient Temperature: {sensorData.ambTemp} {tempUnitSym}";
+                                        lblAmbientHumidity.Text = $"Ambient Humidity: {sensorData.ambHumidity} %";
+                                        lblAmbTempHumidStatus.Text = $"Ambient Temp and Humidity: {sensorData.ambTempHumidityStatus}";
+                                    }
                                     if (ckbLogErrors.Checked)
                                     {
                                         // Only log the self test status once since it is only done during the initialization of the embedded system
@@ -368,6 +375,8 @@ namespace EmbeddedSystemsTest
                                         lsbErrorLogging.Items[9] = ($"Azimuth Temp1 Error: {sensorData.temperatureErrors[(int)TemperatureSensors.AZIMUTH1].ToString()}" + "\r\n");
 
                                         lsbErrorLogging.Items[10] = ($"Azimuth Temp2 Error: {sensorData.temperatureErrors[(int)TemperatureSensors.AZIMUTH2].ToString()}" + "\r\n");
+
+                                        lsbErrorLogging.Items[11] = ($"Ambient Temp and Humidity Error: {sensorData.ambientTempHumidityError.ToString()}" + "\r\n");
 
                                     }
                                 }
@@ -450,6 +459,9 @@ namespace EmbeddedSystemsTest
             lblCurrAz.Text = $"Current azimuth position: N/A";
             lblCurrEl.Text = $"Current elevation position: N/A";
 
+            lblAmbientTemp.Text = $"Ambient Temperature: N/A";
+            lblAmbientHumidity.Text = $"Ambient Humidity: N/A";
+
             // Stopwatch
             if (stopWatch.IsRunning) stopWatch.Stop();
             stopWatch.Reset();
@@ -497,7 +509,8 @@ namespace EmbeddedSystemsTest
                     Convert.ToBoolean(sensorInit[(int)SensorInitializationEnum.AzimuthEncoder]) == chkAzEncInit.Checked &&
                     Convert.ToBoolean(sensorInit[(int)SensorInitializationEnum.AzimuthAccelerometer]) == chkAzAdxlInit.Checked &&
                     Convert.ToBoolean(sensorInit[(int)SensorInitializationEnum.ElevationAccelerometer]) == chkElAdxlInit.Checked &&
-                    Convert.ToBoolean(sensorInit[(int)SensorInitializationEnum.CounterbalanceAccelerometer]) == chkCbAdxlInit.Checked
+                    Convert.ToBoolean(sensorInit[(int)SensorInitializationEnum.CounterbalanceAccelerometer]) == chkCbAdxlInit.Checked &&
+                    Convert.ToBoolean(sensorInit[(int)SensorInitializationEnum.AmbientTempAndHumidity]) == chkAmbTempHumid.Checked
                )
             {
                 lblSensorInitChanged.Text = "";
@@ -520,7 +533,8 @@ namespace EmbeddedSystemsTest
                 chkAzEncInit.Checked ?      (byte)1 : (byte)0,
                 chkAzAdxlInit.Checked ?     (byte)1 : (byte)0,
                 chkElAdxlInit.Checked ?     (byte)1 : (byte)0,
-                chkCbAdxlInit.Checked ?     (byte)1 : (byte)0
+                chkCbAdxlInit.Checked ?     (byte)1 : (byte)0,
+                chkAmbTempHumid.Checked ?   (byte)1 : (byte)0
             };
 
             return init;
@@ -607,6 +621,11 @@ namespace EmbeddedSystemsTest
             logData = false;
             txtDataFileName.Enabled = true;
 
+        }
+
+        private void chkAmbTempHumid_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckIfSensorInitHasChanged();
         }
     }
 }

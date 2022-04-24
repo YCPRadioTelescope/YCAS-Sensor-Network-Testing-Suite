@@ -134,6 +134,7 @@ namespace EmbeddedSystemsTest
             RawAccelerometerData[] elAccl = new RawAccelerometerData[0];
             RawAccelerometerData[] azAccl = new RawAccelerometerData[0];
             RawAccelerometerData[] cbAccl = new RawAccelerometerData[0];
+            bool isFanOn = chkFanToggle.Checked;
 
             // Motor temp validating
             if (chkElTempInit.Checked && (elTemp = PacketEncodingTools.ConvertStringToDoubleArray(txtElTemps.Text)) == null)
@@ -191,7 +192,7 @@ namespace EmbeddedSystemsTest
                 SensorStatuses statuses = ParseSensorStatuses();
 
                 // This function will eventually be used to convert the arrays gotten from the CSV files
-                dataToSend = PacketEncodingTools.ConvertDataArraysToBytes(elAccl, azAccl, cbAccl, elTemp, azTemp, elEnc, azEnc, ambTemp, ambHumidity, statuses);
+                dataToSend = PacketEncodingTools.ConvertDataArraysToBytes(elAccl, azAccl, cbAccl, elTemp, azTemp, elEnc, azEnc, ambTemp, ambHumidity, statuses, isFanOn);
                 lblPacketSize.Text = "Packet bytes: " + dataToSend.Length;
             }
 

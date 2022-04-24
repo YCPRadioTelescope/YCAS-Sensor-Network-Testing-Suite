@@ -307,6 +307,7 @@ namespace EmbeddedSystemsTest.SensorNetwork
                 s.azAdxlStatus = sensorStatuses[6] ? SensorStatus.OKAY : SensorStatus.ERROR;
                 s.elAdxlStatus = sensorStatuses[7] ? SensorStatus.OKAY : SensorStatus.ERROR;
                 s.ambTempHumidityStatus = sensorStatuses[8] ? SensorStatus.OKAY : SensorStatus.ERROR;
+                s.isFanOn = sensorStatuses[9];
             }
 
             s.adxlSelfTestState = new AdxlSelfTestState[3];

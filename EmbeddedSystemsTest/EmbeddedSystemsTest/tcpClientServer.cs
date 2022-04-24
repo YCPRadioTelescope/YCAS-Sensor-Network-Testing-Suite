@@ -40,6 +40,7 @@ namespace EmbeddedSystemsTest
 
         bool logData = false;
         bool logSelfTest = true;
+        bool setFanOnOff = false;
         public frmTcpTest()
         {
             InitializeComponent();
@@ -259,6 +260,8 @@ namespace EmbeddedSystemsTest
                             }
                             stopWatch.Start();
 
+                            stream.WriteByte(Convert.ToByte(setFanOnOff));
+
                             // Interpret received data
                             sensorNetwork.ParseSensorData(bytes, i, logData, txtDataFileName.Text);
 
@@ -379,6 +382,8 @@ namespace EmbeddedSystemsTest
                                         lsbErrorLogging.Items[11] = ($"Ambient Temp and Humidity Error: {sensorData.ambientTempHumidityError.ToString()}" + "\r\n");
 
                                     }
+
+                                    lblFanState.Text = $"Fan State: {sensorData.isFanOn} %";
                                 }
                             });
                         }
@@ -461,6 +466,8 @@ namespace EmbeddedSystemsTest
 
             lblAmbientTemp.Text = $"Ambient Temperature: N/A";
             lblAmbientHumidity.Text = $"Ambient Humidity: N/A";
+
+            lblFanState.Text = $"Fan State: N/A";
 
             // Stopwatch
             if (stopWatch.IsRunning) stopWatch.Stop();
@@ -626,6 +633,11 @@ namespace EmbeddedSystemsTest
         private void chkAmbTempHumid_CheckedChanged(object sender, EventArgs e)
         {
             CheckIfSensorInitHasChanged();
+        }
+
+        private void btnFanToggle_Click(object sender, EventArgs e)
+        {
+            setFanOnOff = !sensorNetwork.getLatestSensorData(TemperatureUnitEnum.FAHRENHEIT).isFanOn;
         }
     }
 }

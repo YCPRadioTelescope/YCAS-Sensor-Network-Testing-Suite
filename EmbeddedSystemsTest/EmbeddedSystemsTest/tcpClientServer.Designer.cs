@@ -104,6 +104,8 @@ namespace EmbeddedSystemsTest
             this.lsbErrorLogging = new System.Windows.Forms.ListBox();
             this.lblAmbientHumidity = new System.Windows.Forms.Label();
             this.lblAmbientTemp = new System.Windows.Forms.Label();
+            this.lblFanState = new System.Windows.Forms.Label();
+            this.btnFanToggle = new System.Windows.Forms.Button();
             this.grpStats.SuspendLayout();
             this.grpTempUnit.SuspendLayout();
             this.grpSensorInit.SuspendLayout();
@@ -884,11 +886,32 @@ namespace EmbeddedSystemsTest
             this.lblAmbientTemp.TabIndex = 46;
             this.lblAmbientTemp.Text = "Ambient Temperature: N/A\r\n";
             // 
+            // lblFanState
+            // 
+            this.lblFanState.AutoSize = true;
+            this.lblFanState.Location = new System.Drawing.Point(493, 341);
+            this.lblFanState.Name = "lblFanState";
+            this.lblFanState.Size = new System.Drawing.Size(79, 13);
+            this.lblFanState.TabIndex = 48;
+            this.lblFanState.Text = "Fan State: N/A";
+            // 
+            // btnFanToggle
+            // 
+            this.btnFanToggle.Location = new System.Drawing.Point(612, 336);
+            this.btnFanToggle.Name = "btnFanToggle";
+            this.btnFanToggle.Size = new System.Drawing.Size(120, 23);
+            this.btnFanToggle.TabIndex = 49;
+            this.btnFanToggle.Text = "Toggle Fan On/Off";
+            this.btnFanToggle.UseVisualStyleBackColor = true;
+            this.btnFanToggle.Click += new System.EventHandler(this.btnFanToggle_Click);
+            // 
             // frmTcpTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(950, 687);
+            this.Controls.Add(this.btnFanToggle);
+            this.Controls.Add(this.lblFanState);
             this.Controls.Add(this.lblAmbientHumidity);
             this.Controls.Add(this.lblAmbientTemp);
             this.Controls.Add(this.lsbErrorLogging);
@@ -1030,6 +1053,8 @@ namespace EmbeddedSystemsTest
         private System.Windows.Forms.Label lblAmbientHumidity;
         private System.Windows.Forms.Label lblAmbientTemp;
         private System.Windows.Forms.CheckBox chkAmbTempHumid;
+        private System.Windows.Forms.Label lblFanState;
+        private System.Windows.Forms.Button btnFanToggle;
     }
 }
 

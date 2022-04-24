@@ -57,6 +57,15 @@ namespace EmbeddedSystemsTest
             totalPackets = 0;
             stopWatch = new Stopwatch();
 
+            comboElSamplingSpeed.Text = "800";
+            comboElGRange.Text = "±16";
+
+            comboAzSamplingSpeed.Text = "800";
+            comboAzGRange.Text = "±16";
+
+            comboCbSamplingSpeed.Text = "800";
+            comboCbGRange.Text = "±16";
+
             // Init the sensor initialization w/ checkboxes
             sensorInit = GetBytesFromInitCheckboxes();
         }
@@ -543,6 +552,186 @@ namespace EmbeddedSystemsTest
                 chkCbAdxlInit.Checked ?     (byte)1 : (byte)0,
                 chkAmbTempHumid.Checked ?   (byte)1 : (byte)0
             };
+
+            // Build rest of init packet
+            init = init.Concat(BitConverter.GetBytes(int.Parse(txtTimerPeriod.Text)))
+                .Concat(BitConverter.GetBytes(int.Parse(txtEthernetPeriod.Text)))
+                .Concat(BitConverter.GetBytes(int.Parse(txtTempPeriod.Text)))
+                .Concat(BitConverter.GetBytes(int.Parse(txtEncoderPeriod.Text)))
+                .ToArray();
+
+            byte samplingFrequency = 0, gRange = 0;
+
+            switch (int.Parse(comboElSamplingSpeed.Text))
+            {
+                case 800:
+                    samplingFrequency = 0xD;
+                    break;
+
+                case 400:
+                    samplingFrequency = 0xC;
+                    break;
+
+                case 200:
+                    samplingFrequency = 0xB;
+                    break;
+
+                case 100:
+                    samplingFrequency = 0xA;
+                    break;
+
+                case 50:
+                    samplingFrequency = 0x9;
+                    break;
+
+                case 25:
+                    samplingFrequency = 0x8;
+                    break;
+            }
+
+            switch (int.Parse(comboElGRange.Text.Substring(1)))
+            {
+                case 16:
+                    gRange = 0x3;
+                    break;
+
+                case 8:
+                    gRange = 0x2;
+                    break;
+
+                case 4:
+                    gRange = 0x1;
+                    break;
+
+                case 2:
+                    gRange = 0x0;
+                    break;
+            }
+
+            init = init.Concat(new byte[]
+            {
+                samplingFrequency,
+                gRange,
+                (byte)(numElFIFOSize.Value - 1),
+                (byte)int.Parse(txtElX.Text),
+                (byte)int.Parse(txtElX.Text),
+                (byte)int.Parse(txtElX.Text),
+                BitConverter.GetBytes(chkElBitResolution.Checked)[0]
+            }).ToArray();
+
+            switch (int.Parse(comboAzSamplingSpeed.Text))
+            {
+                case 800:
+                    samplingFrequency = 0xD;
+                    break;
+
+                case 400:
+                    samplingFrequency = 0xC;
+                    break;
+
+                case 200:
+                    samplingFrequency = 0xB;
+                    break;
+
+                case 100:
+                    samplingFrequency = 0xA;
+                    break;
+
+                case 50:
+                    samplingFrequency = 0x9;
+                    break;
+
+                case 25:
+                    samplingFrequency = 0x8;
+                    break;
+            }
+
+            switch (int.Parse(comboAzGRange.Text.Substring(1)))
+            {
+                case 16:
+                    gRange = 0x3;
+                    break;
+
+                case 8:
+                    gRange = 0x2;
+                    break;
+
+                case 4:
+                    gRange = 0x1;
+                    break;
+
+                case 2:
+                    gRange = 0x0;
+                    break;
+            }
+
+            init = init.Concat(new byte[]
+            {
+                samplingFrequency,
+                gRange,
+                (byte)(numAzFIFOSize.Value - 1),
+                (byte)int.Parse(txtAzX.Text),
+                (byte)int.Parse(txtAzX.Text),
+                (byte)int.Parse(txtAzX.Text),
+                BitConverter.GetBytes(chkAzBitResolution.Checked)[0]
+            }).ToArray();
+
+            switch (int.Parse(comboCbSamplingSpeed.Text))
+            {
+                case 800:
+                    samplingFrequency = 0xD;
+                    break;
+
+                case 400:
+                    samplingFrequency = 0xC;
+                    break;
+
+                case 200:
+                    samplingFrequency = 0xB;
+                    break;
+
+                case 100:
+                    samplingFrequency = 0xA;
+                    break;
+
+                case 50:
+                    samplingFrequency = 0x9;
+                    break;
+
+                case 25:
+                    samplingFrequency = 0x8;
+                    break;
+            }
+
+            switch (int.Parse(comboCbGRange.Text.Substring(1)))
+            {
+                case 16:
+                    gRange = 0x3;
+                    break;
+
+                case 8:
+                    gRange = 0x2;
+                    break;
+
+                case 4:
+                    gRange = 0x1;
+                    break;
+
+                case 2:
+                    gRange = 0x0;
+                    break;
+            }
+
+            init = init.Concat(new byte[]
+            {
+                samplingFrequency,
+                gRange,
+                (byte)(numCbFIFOSize.Value - 1),
+                (byte)int.Parse(txtCbX.Text),
+                (byte)int.Parse(txtCbX.Text),
+                (byte)int.Parse(txtCbX.Text),
+                BitConverter.GetBytes(chkCbBitResolution.Checked)[0]
+            }).ToArray();
 
             return init;
         }
